@@ -1,0 +1,17 @@
+sets.exported={
+    main={ name="Aettir", augments={'Accuracy+70','Mag. Evasion+50','Weapon skill damage +10%',}},
+    sub="Refined Grip +1",
+    ammo="Staunch Tathlum",
+    head={ name="Adhemar Bonnet +1", augments={'HP+105','Attack+13','Phys. dmg. taken -4',}},
+    body="Ayanmo Corazza +2",
+    hands="Turms Mittens +1",
+    legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},
+    feet="Turms Leggings",
+    neck="Futhark Torque",
+    waist="Flume Belt +1",
+    left_ear="Odnowa Earring",
+    right_ear="Odnowa Earring +1",
+    left_ring="Moonbeam Ring",
+    right_ring="Warp Ring",
+    back={ name="Ogma's cape", augments={'STR+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},
+}

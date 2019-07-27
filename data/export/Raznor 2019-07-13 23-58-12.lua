@@ -1,0 +1,18 @@
+sets.exported={
+    main="Naegling",
+    sub="Lanun Knife",
+    range={ name="Compensator", augments={'----------------',}},
+    ammo="Bronze Bullet",
+    head="Meghanada Visor +1",
+    body="Laksa. Frac +3",
+    hands="Meg. Gloves +2",
+    legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},
+    feet="Meg. Jam. +1",
+    neck="Loricate Torque",
+    waist="Flume Belt +1",
+    left_ear="Enervating Earring",
+    right_ear="Telos Earring",
+    left_ring="Defending Ring",
+    right_ring="Petrov Ring",
+    back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Weapon skill damage +10%',}},
+}

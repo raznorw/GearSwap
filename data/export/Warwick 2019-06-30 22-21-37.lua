@@ -1,0 +1,16 @@
+sets.exported={
+    main={ name="Gridarvor", augments={'Pet: Accuracy+70','Pet: Attack+70','Pet: "Dbl. Atk."+15',}},
+    sub="Alber Strap",
+    ammo="Sancus Sachet +1",
+    head="Beckoner's Horn +1",
+    body="Con. Doublet +2",
+    hands="Tali'ah Gages +1",
+    legs={ name="Merlinic Shalwar", augments={'Pet: Accuracy+14 Pet: Rng. Acc.+14','Blood Pact Dmg.+6','Pet: DEX+2','Pet: Mag. Acc.+7','Pet: "Mag.Atk.Bns."+13',}},
+    feet={ name="Apogee Pumps +1", augments={'Pet: Attack+25','Pet: "Mag.Atk.Bns."+25','Blood Pact Dmg.+8',}},
+    neck="Subtlety Spec.",
+    waist="Lucidity Sash",
+    left_ear="Heartseeker Earring",
+    left_ring="Varar Ring",
+    right_ring="Varar Ring",
+    back={ name="Campestres's Cape", augments={'Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20',}},
+}
