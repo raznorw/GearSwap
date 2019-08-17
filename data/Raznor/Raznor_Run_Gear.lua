@@ -8,7 +8,7 @@ function user_setup()
 	state.MagicalDefenseMode:options('MDT','MDT_HP','BDT','BDT_HP')
 	state.ResistDefenseMode:options('MEVA','MEVA_HP','Death','Charm','DTCharm')
 	state.IdleMode:options('Normal','Tank','KiteTank','Sphere')
-	state.Weapons:options('Aettir','Lionheart','DualWeapons')
+	state.Weapons:options('Epeolatry', 'Aettir','Lionheart','DualWeapons')
 	
 	state.ExtraDefenseMode = M{['description']='Extra Defense Mode','None','MP'}
 
@@ -332,6 +332,7 @@ function init_gear_sets()
 	
 	-- Weapons sets
 	sets.weapons.Aettir = {main="Aettir",sub="Refined Grip +1"}
+	sets.weapons.Epeolatry = {main="Epeolatry",sub="Refined Grip +1"}
 	sets.weapons.Lionheart = {main="Lionheart",sub="Utu Grip"}
 	sets.weapons.DualWeapons = {main="Naegling"} -- {main="Firangi",sub="Reikiko"}
 	
@@ -485,20 +486,34 @@ function init_gear_sets()
       ear2="Zennaroi Earring",
     })
 	
-    sets.engaged.Tank = {ammo="Staunch Tathlum",
-      head="Meghanada Visor +1",
-	  neck="Loricate Torque",
-	  ear1="Genmei Earring",
-	  ear2="Ethereal Earring",
-      body="Futhark Coat +1",
-	  hands=gear.herculean_dt_hands,
-	  ring1="Defending Ring",
-	  ring2="Shadow Ring",
-      back="Shadow Mantle",
-	  waist="Engraved Belt",
-	  legs=gear.herculean_dt_legs,
+    sets.engaged.Tank = {
+      ammo="Staunch Tathlum",       -- 2/2
+      head="Fu. Bandeau +2",        -- 5/0     -- "Meghanada Visor +2",
+	  neck="Loricate Torque",        -- 3/3 (current futhark torque) 5/5**
+	  ear1="Odnawa Earring +1",        -- odnawa+1 0/2
+	  ear2="Odnawa Earring",      -- odnawa   0/1
+      body="Futhark Coat +1",      --  7/7
+	  hands="Turms Mittens +1", -- gear.herculean_dt_hands,
+	  ring1="Moonbeam Ring",       --  4/4
+	  ring2="Defending Ring",      -- 10/10
+      back=gear.enmity_jse_back,   -- "Shadow Mantle",
+	  waist="Flume Belt +1",       --  4/0
+	  legs="Eri. Leg Guards +1",   --  7/0
 	  feet="Erilaz Greaves +1"
+	  
+	  -- -- "Turms Leggings"        --    5/0   "Erilaz Greaves +1"
+	  -- ear1="Genmei Earring",
+	  -- ear2="Ethereal Earring",
+      -- body="Futhark Coat +1",
+	  -- hands=gear.herculean_dt_hands,
+	  -- ring1="Defending Ring",
+	  -- ring2="Shadow Ring",
+      -- back="Shadow Mantle",
+	  -- waist="Engraved Belt",
+	  -- legs=gear.herculean_dt_legs,
+	  -- feet="Erilaz Greaves +1"
 	}
+    
     
 	sets.engaged.SomeAcc.Tank = sets.engaged.Tank
 	sets.engaged.Acc.Tank = sets.engaged.Tank

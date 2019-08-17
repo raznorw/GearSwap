@@ -220,7 +220,7 @@ function init_gear_sets()
       hands={ name="Merlinic Dastanas", augments={'Blood Pact Dmg.+9','Pet: Mag. Acc.+3','Pet: "Mag.Atk.Bns."+7',}},
       legs={ name="Merlinic Shalwar", augments={'Pet: Accuracy+14 Pet: Rng. Acc.+14','Blood Pact Dmg.+6','Pet: DEX+2','Pet: Mag. Acc.+7','Pet: "Mag.Atk.Bns."+13',}},
       feet={ name="Apogee Pumps +1", augments={'Pet: Attack+25','Pet: "Mag.Atk.Bns."+25','Blood Pact Dmg.+8',}},      
-      waist="Lucidity Sash",
+      waist="Incarnation Sash",
       left_ring={name="Varar Ring", bag="wardrobe2"},      
 	  right_ring={name="Varar Ring", bag="wardrobe"},      
       back=gear.phys_jse_back,
@@ -251,7 +251,7 @@ function init_gear_sets()
       -- neck="Adad Amulet",	  
       -- hands=gear.merlinic_magpact_hands,	  
       -- back=gear.magic_jse_back,
-	  -- waist="Regal Belt",
+	  waist="Incarnation Sash", -- "Regal Belt",
 	  -- legs="Enticer's Pants"
 	  back=gear.magic_jse_back,
 	})

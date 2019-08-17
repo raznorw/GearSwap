@@ -301,7 +301,7 @@ function get_sets()
     	head="Jhakri Coronal +1",
 		body="Jhakri Robe +1",
 		hands="Amalric Gages +1",
-		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+6 "Mag.Atk.Bns."+6','Magic burst dmg.+11%','INT+6','Mag. Acc.+15',}},
+		legs="Merlinic Shalwar",  -- currently 20+14 macc, 15+28 MAB, 43 int, 11 MBB
 		-- legs="Jhakri Slops +1",		
 		feet="Amalric Nails +1",
 		neck="Sanctity Necklace",

@@ -1,4 +1,4 @@
-afunction user_setup()
+function user_setup()
 	-- Options: Override default values
 	state.CastingMode:options('Normal','Resistant','Fodder','Proc','OccultAcumen')
 	state.OffenseMode:options('Normal')
@@ -17,7 +17,7 @@ afunction user_setup()
 	send_command('bind ~^` gs c cycleback ElementalMode') --Robbiewobbie's idea
 	send_command('bind ^q gs c weapons Khatvanga;gs c set CastingMode OccultAcumen')
 	send_command('bind !q gs c weapons Default;gs c reset CastingMode;gs c reset DeathMode;gs c reset MagicBurstMode')
-	send_command('bind !r gs c set DeathMode Single;gs c set MagicBurstMode Single')
+	-- send_command('bind !r gs c set DeathMode Single;gs c set MagicBurstMode Single')
 	send_command('bind !\\\\ input /ja "Manawell" <me>')
 	send_command('bind !` input /ma "Aspir III" <t>')
 	send_command('bind @` gs c cycle MagicBurstMode')
@@ -234,7 +234,7 @@ function init_gear_sets()
 		ring1="Jhakri Ring", -- "Shiva Ring +1",
 		ring2="Vertigo Ring", -- "Shiva Ring +1",
         -- back=gear.nuke_jse_back,
-		-- waist=gear.ElementalObi,
+		waist=gear.ElementalObi,
 		legs="Merlinic Shalwar",
 		feet="Amalric Nails +1" -- gear.merlinic_nuke_feet
 		}
@@ -265,7 +265,7 @@ function init_gear_sets()
 		-- Minimal damage gear, maximum recast gear for procs.
     sets.midcast['Elemental Magic'].Proc = {main=empty,sub=empty,ammo="Impatiens",
         head="Nahtirah Hat",neck="Loricate Torque +1",ear1="Gifted Earring",ear2="Loquacious Earring",
-        body="Spaekona's Coat +3",hands="Hagondes Cuffs +1",ring1="Kishar Ring",ring2="Prolix Ring",
+        body="Spae. Coat +1",hands="Hagondes Cuffs +1",ring1="Kishar Ring",ring2="Prolix Ring",
         back="Swith Cape +1",waist="Witful Belt",legs="Assid. Pants +1",feet="Regal Pumps +1"}
 		
     sets.midcast['Elemental Magic'].OccultAcumen = {main="Khatvanga",sub="Bloodrain Strap",ammo="Seraphic Ampulla",
@@ -348,21 +348,28 @@ function init_gear_sets()
     sets.buff['Mana Wall'] = {back=gear.nuke_jse_back,feet="Wicce Sabots +1"}
 	
 	-- Gear that converts elemental damage done to recover MP.	
-	sets.RecoverMP = {body="Spaekona's Coat +3"}
+	sets.RecoverMP = {body="Spae. Coat +1"}
 	-- Gear for Magic Burst mode.
-    sets.MagicBurst = {
+    sets.MagicBurst = set_combine(sets.midcast['Elemental Magic'], {
 	    head="Merlinic Hood", -- "Ea Hat",
 		neck="Mizu. Kubikazari",
 		body="Ea Houppelande",
 		hands="Amalric Gages +1",
 		ring1="Mujin Band",
 		ring2="Locus Ring",
+		waist=gear.ElementalObi,
 		legs="Merlinic Shalwar", -- "Ea Slops",
 		feet="Amalric Nails +1", -- "Jhakri Pigaches +2"
-	}
+	})
+	
 	sets.ResistantMagicBurst = set_combine(sets.MagicBurst, {})	
-	sets.RecoverBurst = set_combine(sets.MagicBurst, {}) -- {head="Ea Hat",neck="Mizu. Kubikazari",body="Spaekona's Coat +3",hands="Amalric Gages +1",ring1="Mujin Band",legs="Ea Slops",feet="Jhakri Pigaches +2"}
-	sets.ResistantRecoverBurst = set_combine(sets.MagicBurst, {}) -- {head="Ea Hat",neck="Mizu. Kubikazari",body="Spaekona's Coat +3",hands="Amalric Gages +1",ring1="Mujin Band",legs="Ea Slops",feet="Jhakri Pigaches +2"}
+	sets.RecoverBurst = set_combine(sets.MagicBurst, {
+	   body="Spae. Coat +1",
+	})
+	sets.ResistantRecoverBurst = set_combine(sets.MagicBurst, {
+	  body="Spae. Coat +1",
+	  feet="Jhakri Pigaches +2"
+	})
 	
 	-- Gear for specific elemental nukes.
 	sets.element.Wind = {main="Marin Staff +1"}
@@ -392,5 +399,5 @@ end
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
-    set_macro_page(1, 7)
+    set_macro_page(2, 2)
 end

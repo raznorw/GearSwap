@@ -1,4 +1,6 @@
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
+-- Cole is Albert
+
 function user_setup()
     state.OffenseMode:options('Normal','Acc','FullAcc','Fodder')
     state.HybridMode:options('Pet','DT','Normal')
@@ -10,9 +12,9 @@ function user_setup()
     -- Default/Automatic maneuvers for each pet mode.  Define at least 3.
 	defaultManeuvers = {
 		Melee = {
-			{Name='Fire Maneuver', 	  Amount=0},
-			{Name='Thunder Maneuver', Amount=1},
-			{Name='Wind Maneuver', 	  Amount=1},
+			{Name='Fire Maneuver', 	  Amount=1},
+			{Name='Water Maneuver',   Amount=1}, -- for poroggo
+			{Name='Wind Maneuver', 	  Amount=0},
 			{Name='Light Maneuver',	  Amount=1},
 		},
 		Ranged = {
@@ -30,9 +32,10 @@ function user_setup()
 			{Name='Thunder Maneuver', Amount=0},
 		},
 		Tank = {
-			{Name='Earth Maneuver',	  Amount=1},
+			{Name='Earth Maneuver',	  Amount=0},
 			{Name='Fire Maneuver',	  Amount=1},
 			{Name='Light Maneuver',	  Amount=1},
+			{Name='Water Maneuver',	  Amount=1},
 			{Name='Dark Maneuver',	  Amount=0},
 		},
 		LightTank = {
@@ -92,8 +95,12 @@ function init_gear_sets()
 	sets.precast.JA['Maintenance'] = {ammo="Automat. Oil +3"}
 
     sets.precast.JA.Maneuver = {
-	  main="Midnights",
-	  back="Visucius's Mantle"} --neck="Buffoon's Collar",hands="Foire Dastanas",body="Cirque Farsetto +2",
+	  -- main="Midnights",
+	  back="Visucius's Mantle",
+	  --neck="Buffoon's Collar",
+	  -- hands="Foire Dastanas",
+	  body="Karagoz Farsetto",
+	  }
 
     -- Waltz set (chr and vit)
     sets.precast.Waltz = {

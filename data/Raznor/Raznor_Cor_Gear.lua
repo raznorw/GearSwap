@@ -13,10 +13,10 @@ function user_setup()
 	state.Weapons:options('Default','DualWeapons','DualSavageWeapons','DualLeadenRanged','DualLeadenMelee','DualLeadenMeleeAcc','DualKustawi','None')
 	state.CompensatorMode:options('300','1000','Never','Always')
 
-    gear.RAbullet = "Bronze Bullet" -- "Chrono Bullet"
-    gear.WSbullet = "Eminent Bullet" -- "Chrono Bullet"
-    gear.MAbullet = "Bronze Bullet" -- "Orichalc. Bullet" --For MAB WS, do not put single-use bullets here.
-    gear.QDbullet = "Bronze Bullet" -- "Animikii Bullet"
+    gear.RAbullet = "Chrono Bullet"
+    gear.WSbullet = "Chrono Bullet"
+    gear.MAbullet = "Chrono Bullet" -- "Orichalc. Bullet" --For MAB WS, do not put single-use bullets here.
+    gear.QDbullet = "Chrono Bullet" -- "Animikii Bullet"
 	
     options.ammo_warning_limit = 15
 
@@ -422,13 +422,13 @@ function init_gear_sets()
 	sets.DWMax = {ear1="Dudgeon Earring",ear2="Heartseeker Earring",body="Adhemar Jacket +1",hands="Floral Gauntlets",waist="Reiki Yotai"}
 
 	-- Weapons sets
-	sets.weapons.Default = {main="Naegling",sub="Nusku Shield",range="Fomalhaut"}
-	sets.weapons.DualWeapons = {main="Kaja Sword",sub="Blurred Knife +1",range="Fomalhaut"}
+	sets.weapons.Default = {main="Lanun Knife",sub="Nusku Shield",range="Fomalhaut"}
+	sets.weapons.DualWeapons = {main="Naegling",sub="Lanun Knife",range="Fomalhaut"}
 	sets.weapons.DualSavageWeapons = {main="Naegling",sub="Kaja Knife",range="Anarchy +2"}
-	sets.weapons.DualLeadenRanged = {main="Kaja Knife",sub="Naegling",range="Anarchy +2"}
+	sets.weapons.DualLeadenRanged = {main="Lanun Knife",sub="Naegling",range="Anarchy +2"}
 	sets.weapons.DualLeadenMelee = {main="Naegling",sub="Atoyac",range="Fomalhaut"}
-	sets.weapons.DualLeadenMeleeAcc = {main="Naegling",sub="Blurred Knife +1",range="Fomalhaut"}
-	sets.weapons.DualKustawi = {main="Lanun Knife",sub="Nusku Shield",range="Compensator"} -- "Fomalhaut"} -- "Kustawi +1"
+	sets.weapons.DualLeadenMeleeAcc = {main="Naegling",sub="Lanun Knife",range="Fomalhaut"}
+	sets.weapons.DualKustawi = {main="Lanun Knife",sub="Nusku Shield",range="Fomalhaut"} -- "Fomalhaut"} -- "Kustawi +1"
 	
     -- Engaged sets
 
