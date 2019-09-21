@@ -6,6 +6,7 @@
 function user_setup()
     state.OffenseMode:options('Normal','Acc')
     state.RangedMode:options('Normal', 'Acc')
+	state.HybridMode:options('Normal', 'Hybrid')
     state.WeaponskillMode:options('Match','Normal', 'Acc','Proc')
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'PDT', 'Refresh')
@@ -97,17 +98,28 @@ function init_gear_sets()
     sets.precast.CorsairRoll["Tactician's Roll"] = set_combine(sets.precast.CorsairRoll, {body="Chasseur's Frac +1"})
     sets.precast.CorsairRoll["Allies' Roll"] = set_combine(sets.precast.CorsairRoll, {hands="Chasseur's Gants +1"})
     
-	-- TODO
-    sets.precast.CorsairShot = {ammo=gear.QDbullet,
-        head=gear.herculean_nuke_head,neck="Iskur Gorget",ear1="Dedition Earring",ear2="Telos Earring",
-        body="Mummu Jacket +2",hands="Adhemar Wristbands +1",ring1="Ilabrat Ring",ring2="Petrov Ring",
-        back=gear.tp_ranger_jse_back,waist="Goading Belt",legs="Chas. Culottes +1",feet="Carmine Greaves +1"}
+	-- TODO -- STP version
+    sets.precast.CorsairShot = {
+	  ammo=gear.QDbullet,
+      head=gear.herculean_nuke_head,
+	  neck="Iskur Gorget",
+	  ear1="Dedition Earring",
+	  ear2="Telos Earring",
+      body="Mummu Jacket +2",
+	  hands="Adhemar Wristbands +1",
+	  ring1="Ilabrat Ring",
+	  ring2="Petrov Ring",
+      back=gear.tp_ranger_jse_back,
+	  waist="Goading Belt",
+	  legs="Chas. Culottes +1",
+	  feet="Carmine Greaves +1"
+	}
 		
 	-- TODO
-	sets.precast.CorsairShot.Damage = {ammo=gear.QDbullet,
+	sets.precast.CorsairShot.Damage = set_combine(sets.precast.CorsairShot, {
         head=gear.herculean_nuke_head,neck="Sanctity Necklace",ear1="Friomisi Earring",ear2="Crematio Earring",
         body="Samnuha Coat",hands="Leyline Gloves",ring1="Shiva Ring +1",ring2="Dingir Ring",
-        back=gear.ranger_wsd_jse_back,waist="Eschan Stone",legs="Mummu Kecks +2",feet="Chass. Bottes +1"}
+        back=gear.ranger_wsd_jse_back,waist="Eschan Stone",legs="Mummu Kecks +2",feet="Chass. Bottes +1"})
 	
 	-- TODO
     sets.precast.CorsairShot.Proc = {ammo=gear.RAbullet,
@@ -498,7 +510,7 @@ function init_gear_sets()
 		ring1="Rajas Ring", -- "Epona's Ring",
 		ring2="Petrov Ring",
 		back=gear.tp_jse_back,
-		waist="Windbuffet Belt +1",
+		waist="Windbuffet Belt +1",  -- "Reiki Yotai"-- needDW somewhere
 		legs="Samnuha Tights",
 		feet="Herculean Boots", -- gear.herculean_ta_feet
 	}
@@ -517,6 +529,13 @@ function init_gear_sets()
 		legs=gear.meg_legs,      -- "Malignance Tights",
 		-- feet=gear.herculean_acc_feet
 	}
+
+    sets.engaged.Hybrid = set_combine(sets.engaged, {	
+	   hands="Malignance Gloves",
+	   legs="Malignance Tights",
+		-- body="Adhemar Jacket +1",
+		-- waist="Reiki Yotai" 
+	})
 
     sets.engaged.DW = set_combine(sets.engaged, {	
 		-- body="Adhemar Jacket +1",
