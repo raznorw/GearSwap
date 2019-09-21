@@ -231,6 +231,8 @@ function get_sets()
     sets.precast.casting = {
 	  range="Dunna",                --  3/0 
 	  head="Merlinic Hood",         --  8/6  -- Augment with up to +7
+	  ear1="Malignance Earring",    -- 4
+	  ear2="Loquacious Earring",    -- 2
 	  body="Zendik Robe",           -- 13/4  
 	  hands=gear.Merl_FC_hands,     --  3/3  -- Can get +7 (4 missing)
 	  neck="Voltsurge Torque",      --  4    -- Orunmila's is 5 (1 missing)
@@ -238,7 +240,7 @@ function get_sets()
 	  legs="Psycloth Lappas",       --  7/5  --  "Geomancy Pants +3" is 15
       feet="Chelona Boots",         --  4/0  -- Merlinic Crackows - 12 max
 	  back="Lifestream Cape",       --  7/0  -- Ambuscade can get 10 
-    }   -- Current fast cast: 52  (goal: 80/65) need 28/13
+    }   -- Current fast cast: 58  (goal: 80/65) need 22/7
 	
     sets.precast.geomancy = set_combine(sets.precast.casting,{	  
       back="Lifestream Cape", -- 14 skill, 20 duration
@@ -307,7 +309,7 @@ function get_sets()
 		neck="Sanctity Necklace",
 		waist="Eschan Stone", -- "Searing Sash",
 		left_ear="Regal Earring",
-		right_ear="Friomisi Earring",
+		right_ear="Malignance Earring",
 		left_ring="Vertigo Ring",
 		right_ring="Jhakri Ring",
 		back="Refraction Cape",
@@ -331,14 +333,14 @@ function get_sets()
 	}
 	
 	-- Nuking
-    sets.midcast.nuking = set_combine(sets.midcast.casting,{
-
+    sets.midcast.nuking = set_combine(sets.midcast.casting,{        
     })
+	
 	sets.midcast.MB = set_combine(sets.midcast.nuking, {
 	    head="Merlinic Hood",
 	    neck="Mizu. Kubikazari",
 		body="ea houppelande",
-		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+6 "Mag.Atk.Bns."+6','Magic burst dmg.+11%','INT+6','Mag. Acc.+15',}},
+		legs="Merlinic Shalwar",
 		left_ring="Locus Ring",
 		right_ring="Mujin Band",
 		feet="Amalric Nails +1",

@@ -190,25 +190,27 @@ function init_gear_sets()
     sets.precast.WS = {
 	    ammo=gear.WSbullet,
         head=gear.meg_head,
-		neck="Fotia Gorget",
-		ear1="Moonshade Earring",
-		ear2="Telos Earring",
+		neck="Comm. Charm +1",    -- "Fotia Gorget",
+		ear1="Moonshade Earring",    
+		ear2="Ishvara Earring",
         body="Laksa. Frac +3",
 		hands=gear.meg_hands,
-		ring1="Regal Ring",
-		ring2="Ifrit Ring +1",
+		ring1="Petrov Ring",      -- "Regal Ring",
+		ring2="Dingir Ring",      -- "Ifrit Ring +1",
         back=gear.str_wsd_jse_back,
-		waist="Fotia Belt",
+		waist="Grunfeld Rope",    -- "Fotia Belt",
 		legs=gear.meg_legs,
-		feet="Lanun Bottes +3"}
+		feet="Herculean Boots",   -- "Lanun Bottes +3"
+	}
 		
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
-        head="Carmine Mask +1",
-		neck="Combatant's Torque",
-		ear1="Digni. Earring",
-		body=gear.meg_body,
+        -- head="Carmine Mask +1",
+		-- neck="Combatant's Torque",
+		-- ear1="Digni. Earring",
+		ear1="Telos Earring",
+		-- body=gear.meg_body,
 		ring2="Ilabrat Ring",
-        waist="Grunfeld Rope",
+        -- waist="Grunfeld Rope",
 		legs="Carmine Cuisses +1",
 		})		
 		
@@ -224,6 +226,22 @@ function init_gear_sets()
 	
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
 
+    sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
+	    -- ammo=gear.WSbullet,
+        -- head="Adhemar Bonnet +1",
+		-- neck="Fotia Gorget",
+		-- ear1="Moonshade Earring",
+		-- ear2="Telos Earring",        
+		-- body=gear.meg_body,
+		-- hands="Adhemar Wrist. +1",
+		-- ring1="Regal Ring",
+		-- ring2="Ifrit Ring +1",
+        -- back=gear.str_wsd_jse_back,
+		-- waist="Fotia Belt",
+		-- legs=gear.meg_legs,
+		-- feet="Lanun Bottes +3"
+	})
+
     sets.precast.WS['Requiescat'] = set_combine(sets.precast.WS, {
 	    head="Carmine Mask +1",
 		ring2="Rufescent Ring",
@@ -231,10 +249,19 @@ function init_gear_sets()
 		feet="Carmine Greaves +1"})
 	
 	sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
+	    head="Herculean Helm",
+		ear1="Mooonshade Earring",
+		ear2="Ishvara Earring",
+        hands="Meg. Gloves +2",
+        -- legs=gear.Herc_WS_legs,
+        -- ring1="Regal Ring",
+        -- ring2="Shukuyu Ring",
+        back=gear.COR_WS2_Cape,
+        -- waist="Prosilio Belt +1",
 	    -- ammo=gear.WSbullet,
         -- head="Lilitu Headpiece",
 		-- neck="Caro Necklace",
-		-- ear2="Ishvara Earring",
+		
 		-- waist="Grunfeld Rope",
 		-- legs=gear.herculean_wsd_legs,
 	})
@@ -251,7 +278,7 @@ function init_gear_sets()
 	    ammo=gear.WSbullet,
         head=gear.meg_head, 
 		neck="Iskur Gorget", -- "Fotia Gorget",
-		ear1="Enervating Earring", -- "Moonshade Earring",
+		ear1="Moonshade Earring",
 		ear2="Telos Earring",
         body="Laksa. Frac +3",
 		hands=gear.meg_hands,
@@ -281,8 +308,8 @@ function init_gear_sets()
 	
     sets.precast.WS['Leaden Salute'] = {ammo=gear.MAbullet,
         head="Pixie Hairpin +1",
-		neck="Sanctity Necklace", -- TODO: "Baetyl Pendant",
-		ear1="Sortiarius Earring", -- TODO: "Moonshade Earring",
+		neck="Comm. Charm +1", -- TODO: "Baetyl Pendant",
+		ear1="Moonshade Earring",
 		ear2="Friomisi Earring",
         body="Laksa. Frac +3",
 		hands="Carmine Fin. Ga. +1",
@@ -348,7 +375,7 @@ function init_gear_sets()
 		ear2="Telos Earring",
         body="Laksa. Frac +3", -- "Nisroch Jerkin",
 		hands="Carmine Fin. Ga. +1",
-		ring1="Rajas Ring",
+		ring1="Dingir Ring",
 		ring2="Ilabrat Ring",
         back=gear.tp_ranger_jse_back,
 		waist="Eschan Stone", -- "Yemaya Belt",
@@ -359,7 +386,7 @@ function init_gear_sets()
     sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {           		
         body="Laksa. Frac +3",
 		hands=gear.meg_hands,
-		ring2="Dingir Ring",
+		-- ring2="Dingir Ring",
         -- legs="Laksa. Trews +3"
 		})
 		
@@ -377,10 +404,21 @@ function init_gear_sets()
     
 
     -- Idle sets
-    sets.idle = {ammo=gear.RAbullet,
-        head="Meghanada Visor +2",neck="Loricate Torque",ear1="Genmei Earring",ear2="Sanare Earring",
-        body="Meg. Cuirie +2",hands=gear.herculean_dt_hands,ring1="Defending Ring",ring2="Dark Ring",
-        back="Moonlight Cape",waist="Flume Belt +1",legs="Carmine Cuisses +1",feet=gear.herculean_dt_feet}
+    sets.idle = {
+	  ammo=gear.RAbullet,
+      head=gear.meg_head,             --  4/0
+	  neck="Loricate Torque",         --  5/5
+	  ear1="Odnowa earring",          --  0/1   "Genmei Earring",
+	  ear2="Odnowa earring +1",       --  0/2  "Sanare Earring",
+      body=gear.meg_body,             --  7/0
+	  hands="Malignance Gloves",      --  5/5   112 Meva
+	  ring1="Defending Ring",         -- 10/10
+	  ring2="meghanada Ring",         --  2/0    "Dark Ring",
+      back=gear.str_wsd_jse_back,     -- 10/0    "Moonlight Cape",
+	  waist="Flume Belt +1",          --  4/0
+	  legs="Carmine Cuisses +1",
+	  feet=gear.herculean_dt_feet
+	}
 		
     sets.idle.Refresh = {ammo=gear.RAbullet,
         head="Rawhide Mask",neck="Loricate Torque",ear1="Genmei Earring",ear2="Ethereal Earring",
@@ -390,32 +428,44 @@ function init_gear_sets()
     -- Defense sets
     sets.defense.PDT = {
 	    ammo=gear.RAbullet,
+        head=gear.meg_head,             --  4/0  (+1)
+		neck="Loricate Torque",         --  5/5  (NQ)
+	    
+        body=gear.meg_body,             --  7/0  (+1)
+		hands="Malignance Gloves",      --  5/5  112 Meva
+		ring1="Defending Ring",         -- 10/10
+		ring2="meghanada Ring",         --  2/0    "Dark Ring",   
+        back=gear.str_wsd_jse_back,     -- 10/0    "Moonlight Cape",
+		waist="Flume Belt +1",          --  4/0
+		legs=gear.meg_legs,             --  6/0  (+2)
+		feet="Ahosi Leggings"           --  4/0  107 meva
+	}  -- overcap on PDT  57/23
+
+    sets.defense.MDT = set_combine(sets.defense.PDT, {
+	   ammo=gear.RAbullet,
         head=gear.meg_head,
 		neck="Loricate Torque",
-		ear1="Genmei Earring",
-		ear2="Sanare Earring",
-        body=gear.meg_body,
-		hands=gear.herculean_dt_hands,
-		ring1="Defending Ring",
+		ear1="Odnowa earring",          --  0/1   "Etiolation Earring",
+	    ear2="Odnowa earring +1",       --  0/2  "Sanare Earring"
+        body=gear.meg_body,		
 		ring2="Dark Ring",
         back="Moonlight Cape",
-		waist="Flume Belt +1",
-		legs=gear.meg_legs,
-		feet=gear.herculean_dt_feet
-	}
-
-    sets.defense.MDT = {ammo=gear.RAbullet,
+		waist="Flume Belt +1", 
+		legs="Malignance Tights",       -- 7/7  150 meva
+		feet="Ahosi Leggings"
+    })
+		
+    sets.defense.MEVA = set_combine(sets.defense.PDT, {
         head=gear.meg_head,
 		neck="Loricate Torque",
 		ear1="Etiolation Earring",
 		ear2="Sanare Earring",
-        body=gear.meg_body,hands=gear.herculean_dt_hands,ring1="Defending Ring",ring2="Dark Ring",
-        back="Moonlight Cape",waist="Flume Belt +1",legs=gear.meg_legs,feet="Ahosi Leggings"}
-		
-    sets.defense.MEVA = {ammo=gear.RAbullet,
-        head=gear.meg_head,neck="Loricate Torque",ear1="Etiolation Earring",ear2="Sanare Earring",
-        body=gear.meg_body,hands=gear.herculean_dt_hands,ring1="Defending Ring",ring2="Dark Ring",
-        back="Moonlight Cape",waist="Flume Belt +1",legs="Oshosi Trousers",feet="Ahosi Leggings"}
+        body=gear.meg_body,
+		ring2="Dark Ring",
+        back="Moonlight Cape",
+		waist="Flume Belt +1",	
+		feet="Ahosi Leggings"
+    })
 
     sets.Kiting = {legs="Carmine Cuisses +1"}
 	sets.TreasureHunter = set_combine(sets.TreasureHunter, {})
@@ -425,10 +475,10 @@ function init_gear_sets()
 	sets.weapons.Default = {main="Lanun Knife",sub="Nusku Shield",range="Fomalhaut"}
 	sets.weapons.DualWeapons = {main="Naegling",sub="Lanun Knife",range="Fomalhaut"}
 	sets.weapons.DualSavageWeapons = {main="Naegling",sub="Kaja Knife",range="Anarchy +2"}
-	sets.weapons.DualLeadenRanged = {main="Lanun Knife",sub="Naegling",range="Anarchy +2"}
+	sets.weapons.DualLeadenRanged = {main="Lanun Knife",sub="Naegling",range="Fomalhaut"}
 	sets.weapons.DualLeadenMelee = {main="Naegling",sub="Atoyac",range="Fomalhaut"}
 	sets.weapons.DualLeadenMeleeAcc = {main="Naegling",sub="Lanun Knife",range="Fomalhaut"}
-	sets.weapons.DualKustawi = {main="Lanun Knife",sub="Nusku Shield",range="Fomalhaut"} -- "Fomalhaut"} -- "Kustawi +1"
+	sets.weapons.DualKustawi = {main="Kaja Knife",sub="Naegling",range="Anarchy +2"} -- "Fomalhaut"} -- "Kustawi +1"
 	
     -- Engaged sets
 
@@ -464,7 +514,7 @@ function init_gear_sets()
 		ring2="Petrov Ring",
 		-- back=gear.tp_jse_back,
 		-- waist="Olseni Belt",
-		-- legs="Carmine Cuisses +1",
+		legs=gear.meg_legs,      -- "Malignance Tights",
 		-- feet=gear.herculean_acc_feet
 	}
 

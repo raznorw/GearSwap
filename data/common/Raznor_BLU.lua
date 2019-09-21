@@ -53,7 +53,7 @@ function get_sets()
 		ear1 = "Impregnable Earring",  -- Genmei Earring
 		ear2 = "Brutal Earring",       -- Etiolation Earring
 		body = "Jhakri Robe +1",       -- Jhakri Robe +2 (refresh)
-		hands = "Adhemar Wrist. +1",   -- heculeanGloves.refresh
+		hands = "Malignance Gloves",   -- heculeanGloves.refresh
 		ring1 = "Defending Ring",      -- Karieyh Ring +1 -- regain?
 		ring2 = "Sheltered Ring",
 		back = "Moonbeam Cape",
@@ -93,12 +93,12 @@ function get_sets()
 		ear1 = "Telos Earring",
 		ear2 = "Brutal Earring",
 		body = "Ayanmo Corazza +2", -- RawhideVest.TP,
-		hands = gear.Adhemar_B_hands,
+		hands = "Malignance Gloves", -- gear.Adhemar_B_hands,
 		ring1 = "Defending Ring", -- "Rajas Ring",
 		ring2 = "Petrov Ring",
 		back = Rosmerta.STP, --gear.BLU_TP_Cape,
 		waist = "Kentarch Belt",
-		legs = "Carmine Cuisses +1", -- "Herculean Trousers",
+		legs = "Malignance Tights", -- "Carmine Cuisses +1", -- "Herculean Trousers",
 		feet = "Herculean Boots", -- "Aya. Gambieras +1" -- TaeonBoots.TP
 	}
 	
@@ -114,14 +114,14 @@ function get_sets()
 		ear1 = "Impregnable Earring",  
 		ear2 = "Brutal Earring",
 		body = "Ayanmo Corazza +2",    --  6/6
-		-- hands = "Meg. Gloves +1",  -- blue can't wear
+		hands = "Malignance Gloves",   --  5/5
 		ring1 = "Defending Ring",      -- 10/10
 		ring2 = "Rajas Ring",             -- todo: gelatinous ring +1, would make 50/30 with current set
 		back = Rosmerta.STP,           -- 10/0 -- "Moonbeam cape", -- 5/5
 		waist = "Flume Belt +1",       --  4/0
-		legs = "Ayanmo Cosciales",     --  3/3
+		legs = "Malignance Tights",    --  7/7
 		feet = "Ahosi Leggings"        --  4/0
-	}  -- 48/26
+	}  -- 57/34
 	
 	--Weaponskill Sets--
 	sets.WS = {}
@@ -180,6 +180,7 @@ function get_sets()
 	    head="Herculean Helm",
 		neck="Mirage Stole +1",
 		right_ear="Ishvara Earring",
+		left_ear="Moonshade Earring",
 		body = "Assim. Jubbah +2",
 	    hands="Jhakri cuffs +2",	 
 		back=Rosmerta.WSD,
@@ -584,18 +585,21 @@ function get_sets()
 
 	sets.precast.FastCast.Standard = {
 		-- ammo = "Impatiens", -- don't have
-		head = "Herculean Helm",   -- 7, no augments, can aug w/6 -- Carmine Mask +1 Path 4 - 14 (4 on augment)/
-		neck = "Voltsurge Torque", -- 4 -- "Orunmila's Torque",
-		ear1 = "Loquac. Earring",  -- 2
+		head = "Herculean Helm",                                                               -- 7
+		-- , no augments, can aug w/6 -- Carmine Mask +1 Path 4 - 14 (4 on augment)/
+		neck = "Voltsurge Torque",                                                             -- 4 
+		-- "Orunmila's Torque",
+		ear1 = "Loquac. Earring",                                                              -- 2
 		-- ear2 = "Etiolation Earring", -- don't have
-		body = "Pinga Tunic",      -- 13
-		hands = "Leyline Gloves", -- 6, only +1 aug, can get better aug'd version
+		body = "Pinga Tunic",                                                                  -- 13
+		hands = "Leyline Gloves",                                                              -- 6, 
+		-- only +1 aug, can get better aug'd version
 		-- ring1 = "Kishar Ring",  -- 4 - don't have
 		-- ring2 = "Prolix Ring",  -- don't have		
-		back = Rosmerta.FC,        -- 10
+		back = Rosmerta.FC,                                                                    -- 10
 		-- waist = "Witful Belt", -- occ. quickens is BAD for DD spells
         legs = { name="Psycloth Lappas", augments={'MP+80','Mag. Acc.+15','"Fast Cast"+7',}},  -- 7
-		feet = "Chelona Boots"     -- 4
+		feet = "Chelona Boots"                                                                 -- 4
 	} -- @53, +15(20) from Fast Cast Trait
 	  -- carmine mask +1 is +7, 25 left
 

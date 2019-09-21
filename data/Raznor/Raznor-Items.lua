@@ -1,7 +1,7 @@
 --Gearsets your character will use among multiple jobs.
 
 sets.Sheltered = {ring2="Sheltered Ring"}
-sets.Capacity = {back="Mecisto. Mantle"}
+sets.Capacity = {back="Aptitude Mantle" } -- "Mecisto. Mantle"}
 
 sets.buff.Doom = {waist="Gishdubar Sash",ring1="Eshmun's Ring",ring2="Eshmun's Ring"}
 sets.TreasureHunter = {head="Wh. Rarab Cap +1",waist="Chaac Belt"}
@@ -18,6 +18,8 @@ gear.meg_body  = "Meg. Cuirie +1"
 gear.meg_hands = "Meg. Gloves +2"
 gear.meg_legs  = "Meg. Chausses +2"
 gear.meg_feet  = "Meg. Jam. +1" -- TODO: +2
+
+gear.jhakri_body = "Jhakri Robe +1"
 
 gear.gada_enhancing_club = {name="Gada",augments={'Enh. Mag. eff. dur. +6','STR+3','Mag. Acc.+8','"Mag.Atk.Bns."+17','DMG:+7',}}
 gear.gada_healing_club = {name="Gada",augments={'"Cure" potency +9%','Mag. Acc.+11','"Mag.Atk.Bns."+13','DMG:+3',}}

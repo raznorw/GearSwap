@@ -17,7 +17,7 @@ function user_setup()
 	send_command('bind !backspace input /ja "Bounty Shot" <t>')
 	send_command('bind @f7 gs c toggle RngHelper')
 	send_command('bind @` gs c cycle SkillchainMode')
-	send_command('bind !r gs c weapons MagicWeapons;gs c update')
+	-- send_command('bind !r gs c weapons MagicWeapons;gs c update')
 	send_command('bind ^q gs c weapons SingleWeapon;gs c update')
 	
 	select_default_macro_book()
@@ -56,8 +56,13 @@ function init_gear_sets()
 	
 	sets.precast.RA = {
 		head="Amini Gapette",
-		body="Amini Caban +1",hands="Carmine Fin. Ga. +1",
-		back=gear.tp_ranger_jse_back,waist="Impulse Belt",legs="Nahtirah Trousers",feet="Amini Bottillons"}
+		body="Amini Caban +1",
+		hands="Carmine Fin. Ga. +1",
+		back=gear.tp_ranger_jse_back,
+		waist="Impulse Belt",
+		legs="Nahtirah Trousers",
+		feet="Amini Bottillons"
+	}
 		
 	sets.precast.RA.Flurry = set_combine(sets.precast.RA, {})
 	sets.precast.RA.Flurry2 = set_combine(sets.precast.RA, {})

@@ -252,26 +252,26 @@ function init_gear_sets()
     Empy_Karagoz.Feet_Tatical = "Karagoz Scarpe +1"
 
     Visucius = {}
-    Visucius.PetDT = {
-        name = "Visucius's Mantle",
-        augments = {
-            "Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20",
-            "Accuracy+20 Attack+20",
-            "Pet: Accuracy+4 Pet: Rng. Acc.+4",
-            'Pet: "Regen"+10',
-            "Pet: Damage taken -5%"
-        }
-    }
-    Visucius.PetMagic = {
-        name = "Visucius's Mantle",
-        augments = {
-            "Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20",
-            "Accuracy+20 Attack+20",
-            "Pet: Accuracy+4 Pet: Rng. Acc.+4",
-            'Pet: "Regen"+10',
-            "Pet: Damage taken -5%"
-        }
-    }
+    Visucius.PetDT = "Visucius's Mantle" --{
+        -- name = "Visucius's Mantle",
+        -- augments = {
+            -- "Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20",
+            -- "Accuracy+20 Attack+20",
+            -- "Pet: Accuracy+4 Pet: Rng. Acc.+4",
+            -- 'Pet: "Regen"+10',
+            -- "Pet: Damage taken -5%"
+        -- }
+    -- }
+    Visucius.PetMagic = "Visucius's Mantle" --{
+        -- name = "Visucius's Mantle",
+        -- augments = {
+            -- "Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20",
+            -- "Accuracy+20 Attack+20",
+            -- "Pet: Accuracy+4 Pet: Rng. Acc.+4",
+            -- 'Pet: "Regen"+10',
+            -- "Pet: Damage taken -5%"
+        -- }
+    -- }
 
     --------------------------------------------------------------------------------
     --  __  __           _               ____        _          _____      _
@@ -287,7 +287,9 @@ function init_gear_sets()
     --[[
         Will be activated when Pet is not active, otherwise refer to sets.idle.Pet
     ]]
-    sets.idle = {}
+    sets.idle = {
+	  feet="Hermes' Sandals"
+	}
 
     -------------------------------------Fastcast
     sets.precast.FC = {
@@ -531,7 +533,7 @@ function init_gear_sets()
        body="Taeon Tabard", 
        hands="Taeon Gloves",
        legs="Tali'ah Sera. +2",
-       feet="Taeon Boots",
+       feet="Hermes' Sandals",
        -- neck="Adad Amulet",
        waist="Isa Belt",
        -- left_ear="Handler's Earring +1",
@@ -608,18 +610,19 @@ function init_gear_sets()
         Hybrid Mode = Normal
     ]]
     sets.idle.Pet.Engaged = {
-       main="Condemners",
+       main="Pitre Fists",
        head="Anwig Salade",
+	   neck="Shulmanu Collar",
        body="Taeon Tabard", 
        hands="Taeon Gloves",
        legs="Taeon Tights",
        feet="Taeon Boots",
        -- neck="Adad Amulet",
-       waist="Isa Belt",
+       waist="Klouskap Sash", -- "Isa Belt",
        -- left_ear="Handler's Earring +1",
        -- right_ear="Enmerkar Earring",
        left_ring="Thurandaut Ring",
-       -- right_ring="Overbearing Ring",
+       right_ring="Varar Ring", -- "Overbearing Ring",
        back="Visucius's Mantle",        
     }
 

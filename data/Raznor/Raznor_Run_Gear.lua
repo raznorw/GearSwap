@@ -42,41 +42,42 @@ end
 
 function init_gear_sets()
 
-    sets.Enmity = {ammo="Staunch Tathlum",
-	     head="Fu. Bandeau +2",
-		 neck="Furthark Torque", -- "Unmoving Collar +1",
-		 ear1="Friomisi Earring",
-		 -- ear2="Trux Earring",
-	     -- body="Emet Harness +1",
-		 -- hands="Kurys Gloves",
-		 ring1="Petrov Ring",
-		 -- ring2="Vengeful Ring",
-		 back=gear.enmity_jse_back,
-		 waist="Sulla Belt",
-		 -- legs="Eri. Leg Guards +1",
-		 feet="Ahosi Leggings"}
+    sets.Enmity = {
+	  ammo="Staunch Tathlum",
+	  head="Fu. Bandeau +2",
+	  neck="Furthark Torque", -- "Unmoving Collar +1",
+	  ear1="Friomisi Earring",
+	  -- ear2="Trux Earring",
+	  -- body="Emet Harness +1",
+	  -- hands="Kurys Gloves", -- TODO: upgrade futhark mitons
+	  ring1="Petrov Ring",
+	  -- ring2="Vengeful Ring",
+	  back=gear.enmity_jse_back,
+	  waist="Sulla Belt",
+	  -- legs="Eri. Leg Guards +1",
+	  feet="Ahosi Leggings"
+    }
 		 
-    sets.Enmity.SIRD = {ammo="Staunch Tathlum",
-		head="Meghanada Visor +1",neck="Loricate Torque",
-		-- ear1="Genmei Earring",ear2="Trux Earring",
-		-- dy="Emet Harness +1",hands=gear.herculean_dt_hands,
-		ring1="Defending Ring",
-		ring2="Moonbeam Ring",
-		-- back=gear.enmity_jse_back,waist="Rumination Sash",
+    sets.Enmity.SIRD = set_combine(sets.Enmity, {	
+		head="Meghanada Visor +1",		
+		-- ear1="Genmei Earring",
+		hands=gear.herculean_dt_hands,
+		-- back=gear.enmity_jse_back,
+		-- waist="Rumination Sash",
 		legs="Carmine Cuisses +1",
 		-- feet="Erilaz Greaves +1"
-		}
+		})
 
-    sets.Enmity.DT = {ammo="Staunch Tathlum",
-        head="Fu. Bandeau +2",neck="Loricate Torque",ear1="Odnowa Earring +1",ear2="Odnowa Earring",
-        -- body="Runeist's Coat +3",hands=gear.herculean_dt_hands,
-		ring1="Defending Ring", -- "Moonbeam Ring",
-		ring2="Moonbeam Ring",
-        back="Moonbeam Cape", -- "Moonlight Cape",
-		waist="Flume Belt +1",
-		-- legs="Eri. Leg Guards +1",
-		-- feet="Erilaz Greaves +1"
-		}
+    sets.Enmity.DT = set_combine(sets.Enmity, {	
+        ear1="Odnowa Earring +1",
+		ear2="Odnowa Earring",
+      -- body="Runeist's Coat +3",
+	  ring1="Defending Ring", -- "Moonbeam Ring",
+	  ring2="Moonbeam Ring",
+      waist="Flume Belt +1",
+	  -- legs="Eri. Leg Guards +1",
+	  -- feet="Erilaz Greaves +1"
+	})
 
 	--------------------------------------
 	-- Precast sets
@@ -86,7 +87,7 @@ function init_gear_sets()
 
 	-- Precast sets to enhance JAs
     sets.precast.JA['Vallation'] = set_combine(sets.Enmity,{
-	   body="Ruseist Coat", -- TODO: "Runeist's Coat +3",
+	   body="Runeist's Coat +2", -- TODO: "Runeist's Coat +3",
 	   legs="Futhark Trousers"})
     sets.precast.JA['Valiance'] = sets.precast.JA['Vallation']
     sets.precast.JA['Pflug'] = set_combine(sets.Enmity,{
@@ -341,7 +342,7 @@ function init_gear_sets()
 	sets.defense.PDT = {            -- 3/3 grip
 	  ammo="Staunch Tathlum",       -- 2/2
       head="Fu. Bandeau +2",        -- 5/0     -- "Meghanada Visor +2",
-	  neck="Loricate Torque",        -- 3/3 (current futhark torque) 5/5**
+	  neck="Futhark Torque",        -- 4/4 (current futhark torque) 5/5**
 	  ear1="Genmei Earring",        -- odnawa+1 0/2
 	  ear2="Ethereal Earring",      -- odnawa   0/1
       body="Futhark Coat +1",      --  7/7
@@ -351,8 +352,7 @@ function init_gear_sets()
       back=gear.enmity_jse_back,   -- "Shadow Mantle",
 	  waist="Flume Belt +1",       --  4/0
 	  legs="Eri. Leg Guards +1",   --  7/0
-	  feet="Erilaz Greaves +1"
-	  -- "Turms Leggings"        --    5/0   "Erilaz Greaves +1"
+	  feet="Erilaz Greaves +1"     --  5/0 -- "Turms Leggings"    -- None
 	 }
 		
 		
@@ -379,10 +379,21 @@ function init_gear_sets()
         body="Runeist's Coat +3",hands=gear.herculean_dt_hands,ring1="Moonbeam Ring",ring2="Moonbeam Ring",
         back="Moonlight Cape",waist="Engraved Belt",legs="Eri. Leg Guards +1",feet="Erilaz Greaves +1"}
 	
-	sets.defense.MEVA = {ammo="Staunch Tathlum",
-        head="Erilaz Galea +1",neck="Warder's Charm +1",ear1="Odnowa Earring +1",ear2="Sanare Earring",
-        body="Runeist's Coat +3",hands="Turms Mittens +1",ring1="Purity Ring",ring2="Vengeful Ring",
-        back=gear.enmity_jse_back,waist="Engraved Belt",legs="Rune. Trousers +3",feet="Erilaz Greaves +1"}
+	sets.defense.MEVA = {
+	  ammo="Staunch Tathlum",
+      head="Erilaz Galea +1",
+	  neck="Warder's Charm +1",
+	  ear1="Odnowa Earring +1",
+	  ear2="Sanare Earring",
+      body="Runeist's Coat +2",
+	  hands="Turms Mittens +1",
+	  ring1="Purity Ring",
+	  ring2="Vengeful Ring",
+      back=gear.enmity_jse_back,
+	  waist="Engraved Belt",
+	  legs="Rune. Trousers +3",
+	  feet="Erilaz Greaves +1"
+	}
 	sets.defense.MEVA_HP = {ammo="Staunch Tathlum",
         head="Erilaz Galea +1",neck="Warder's Charm +1",ear1="Odnowa Earring +1",ear2="Sanare Earring",
         body="Runeist's Coat +3",hands="Erilaz Gauntlets +1",ring1="Moonbeam Ring",ring2="Moonbeam Ring",

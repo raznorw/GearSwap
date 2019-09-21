@@ -48,11 +48,11 @@ function init_gear_sets()
 	  -- ear1="Andoaa Earring",
 	  -- ear2="Evans Earring",
       body="Con. Doublet +2",
-	  -- hands="Baayami Cuffs",
+	  hands="Baayami Cuffs",
 	  -- ring1="Evoker's Ring",
 	  -- ring2="Stikini Ring",
       -- back="Conveyance Cape",
-	  -- waist="Kobo Obi",
+	  waist="Lucidity Sash",          -- "Kobo Obi",
 	  -- legs="Baayami Slops",
 	  -- feet="Baayami Sabots"
 	}
@@ -246,14 +246,15 @@ function init_gear_sets()
 		
     sets.midcast.Pet.PhysicalBloodPactRage.Acc = {feet="Convo. Pigaches +3"}
 
-    sets.midcast.Pet.MagicalBloodPactRage = set_combine(sets.midcast.Pet.PhysicalBloodPactRage, {
-	  main="Espiritus", -- gear.grioavolr_pet_staff,	  
-      -- neck="Adad Amulet",	  
-      -- hands=gear.merlinic_magpact_hands,	  
-      -- back=gear.magic_jse_back,
-	  waist="Incarnation Sash", -- "Regal Belt",
-	  -- legs="Enticer's Pants"
-	  back=gear.magic_jse_back,
+    sets.midcast.Pet.MagicalBloodPactRage = 
+	  set_combine(sets.midcast.Pet.PhysicalBloodPactRage, {
+	    main="Espiritus", -- gear.grioavolr_pet_staff,	  
+        -- neck="Adad Amulet",	  
+        -- hands=gear.merlinic_magpact_hands,	  
+        -- back=gear.magic_jse_back,
+	    waist="Regal Belt",
+	    -- legs="Enticer's Pants"
+	    back=gear.magic_jse_back,
 	})
 
     sets.midcast.Pet.MagicalBloodPactRage.Acc = {feet="Convo. Pigaches +3"}
@@ -415,7 +416,7 @@ function init_gear_sets()
 	  sub="Alber Strap", -- "Bloodrain Strap",
 	  ammo="Sancus Sachet +1",
       head="Beckoner's Horn +1",
-	  neck="Subtlety Spec.", -- "Shulmanu Collar",
+	  neck="Shulmanu Collar",
 	  ear1="Heartseeker Earring", -- "Digni. Earring",
 	  -- ear2="Telos Earring",
       body="Con. Doublet +2",
