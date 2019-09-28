@@ -52,7 +52,7 @@ function get_sets()
 		neck = "Loricate Torque",      -- +1
 		ear1 = "Impregnable Earring",  -- Genmei Earring
 		ear2 = "Brutal Earring",       -- Etiolation Earring
-		body = "Jhakri Robe +1",       -- Jhakri Robe +2 (refresh)
+		body = "Jhakri robe +2",       -- Jhakri Robe +2 (refresh)
 		hands = "Malignance Gloves",   -- heculeanGloves.refresh
 		ring1 = "Defending Ring",      -- Karieyh Ring +1 -- regain?
 		ring2 = "Sheltered Ring",
@@ -76,30 +76,30 @@ function get_sets()
 		ear2 = "Brutal Earring",
 		body = "Ayanmo Corazza +2", -- RawhideVest.TP,
 		hands = gear.Adhemar_B_hands,
-		ring1 = "Defending Ring", -- "Rajas Ring",
+		ring1 = "Ilabrat Ring", -- "Rajas Ring",
 		ring2 = "Petrov Ring",
 		back = Rosmerta.STP, -- gear.BLU_TP_Cape,
 		waist = "Windbuffet Belt +1",
 		legs = "Carmine Cuisses +1", -- "Herculean Trousers",
-		feet = "Herculean Boots", -- "Aya. Gambieras +1" -- TaeonBoots.TP
+		feet="Malignance Boots" -- "Aya. Gambieras +1" -- TaeonBoots.TP
 	}
 	
 	-- \todo Make at least a midacc set
 	
 	sets.TP.Acc = {
 		ammo = "Falcon Eye",
-		head = "Aya. Zucchetto +1",
+		head = "Malignance Chapeau",
 		neck = "Mirage Stole +1",  -- or maybe asperity?  att +*, STP 3, DA 2
 		ear1 = "Telos Earring",
 		ear2 = "Brutal Earring",
 		body = "Ayanmo Corazza +2", -- RawhideVest.TP,
 		hands = "Malignance Gloves", -- gear.Adhemar_B_hands,
 		ring1 = "Defending Ring", -- "Rajas Ring",
-		ring2 = "Petrov Ring",
+		ring2 = "Ilabrat Ring",
 		back = Rosmerta.STP, --gear.BLU_TP_Cape,
-		waist = "Kentarch Belt",
+		waist = "Kentarch Belt",  -- grunfeld rope?
 		legs = "Malignance Tights", -- "Carmine Cuisses +1", -- "Herculean Trousers",
-		feet = "Herculean Boots", -- "Aya. Gambieras +1" -- TaeonBoots.TP
+		feet = "Malignance Boots", -- "Aya. Gambieras +1" -- TaeonBoots.TP
 	}
 	
 	--DT Sets--
@@ -137,7 +137,7 @@ function get_sets()
 		neck = "Mirage Stole +1", -- "Soil Gorget"
 		ear1 = "Suppanomimi",
 		ear2 = "Brutal Earring",
-		body = "Jhakri Robe +1",
+		body = "Jhakri robe +2",
 		hands = "Jhakri cuffs +2",
 		ring1 = "Enlivened Ring",
 		ring2 = "Rajas Ring",
@@ -204,14 +204,14 @@ function get_sets()
 		neck = "Sanctity Necklace",
 		ear1 = "Friomisi Earring",
 		ear2 = "Hecate's earring",
-		body = "Jhakri Robe +1",
-		hands = "Jhakri cuffs +2",
+		body = "jhakri robe +2",
+		hands = gear.Amalric_D_hands,
 		ring1 = "Archon Ring",
 		ring2 = "Rufescent Ring",
 		back = Rosmerta.Nuke, 
 		waist = "Eschan Stone", -- todo: don't have
 		legs = "Jhakri Slops +1",
-		feet = "Jhakri Pigaches +1"
+		feet = gear.Amalric_D_feet
 	}
 
 	sets.CircleBlade = set_combine(sets.Expiacion.Attack[sets.Expiacion.index[Expiacion_ind]], {
@@ -282,7 +282,7 @@ function get_sets()
 		neck = "Sanctity Necklace",
 		ear1 = "Regal Earring",
 		ear2 = "Friomisi earring",
-		body = "Jhakri Robe +1",
+		body = "jhakri robe +2",
 		hands = gear.Amalric_D_hands,
 		ring1 = {name = "Diamond Ring", augments={'INT+1','Ice resistance+1',}},
 		ring2 = "Jhakri Ring",
@@ -585,22 +585,21 @@ function get_sets()
 
 	sets.precast.FastCast.Standard = {
 		-- ammo = "Impatiens", -- don't have
-		head = "Herculean Helm",                                                               -- 7
-		-- , no augments, can aug w/6 -- Carmine Mask +1 Path 4 - 14 (4 on augment)/
-		neck = "Voltsurge Torque",                                                             -- 4 
+		head = "Carmine Mask +1",   -- 14		
+		neck = "Voltsurge Torque",  -- 4 
 		-- "Orunmila's Torque",
 		ear1 = "Loquac. Earring",                                                              -- 2
 		-- ear2 = "Etiolation Earring", -- don't have
 		body = "Pinga Tunic",                                                                  -- 13
 		hands = "Leyline Gloves",                                                              -- 6, 
 		-- only +1 aug, can get better aug'd version
-		-- ring1 = "Kishar Ring",  -- 4 - don't have
+		ring1 = "Kishar Ring",  -- 4
 		-- ring2 = "Prolix Ring",  -- don't have		
 		back = Rosmerta.FC,                                                                    -- 10
 		-- waist = "Witful Belt", -- occ. quickens is BAD for DD spells
         legs = { name="Psycloth Lappas", augments={'MP+80','Mag. Acc.+15','"Fast Cast"+7',}},  -- 7
 		feet = "Chelona Boots"                                                                 -- 4
-	} -- @53, +15(20) from Fast Cast Trait
+	} -- @64, +15(20) from Fast Cast Trait - 79/80 -- need 1
 	  -- carmine mask +1 is +7, 25 left
 
 	--Empy body stacks with FC, 80% cap, empy hands must be on at time of casting (mid) for effect--

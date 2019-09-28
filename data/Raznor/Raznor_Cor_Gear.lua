@@ -163,15 +163,15 @@ function init_gear_sets()
     -- Fast cast sets for spells
     
     sets.precast.FC = {
-		-- head="Carmine Mask +1",
+		head="Carmine Mask +1",        -- 14
 		-- neck="Baetyl Pendant",
 		-- ear1="Enchntr. Earring +1",
 		ear2="Loquacious Earring",
         -- body="Dread Jupon",
 		hands="Leyline Gloves",
-		-- ring1="Kishar Ring",
+		ring1="Kishar Ring",
 		-- ring2="Lebeche Ring",
-        back="Moonlight Cape",
+        back="Moonbeam Cape",
 		waist="Flume Belt +1",
 		-- legs="Rawhide Trousers",
 		-- feet="Carmine Greaves +1"
@@ -417,8 +417,8 @@ function init_gear_sets()
 
     -- Idle sets
     sets.idle = {
-	  ammo=gear.RAbullet,
-      head=gear.meg_head,             --  4/0
+	  ammo=gear.RAbullet,      
+	  head="Malignance Chapeau",      -- 6/6	   
 	  neck="Loricate Torque",         --  5/5
 	  ear1="Odnowa earring",          --  0/1   "Genmei Earring",
 	  ear2="Odnowa earring +1",       --  0/2  "Sanare Earring",
@@ -429,7 +429,7 @@ function init_gear_sets()
       back=gear.str_wsd_jse_back,     -- 10/0    "Moonlight Cape",
 	  waist="Flume Belt +1",          --  4/0
 	  legs="Carmine Cuisses +1",
-	  feet=gear.herculean_dt_feet
+	  feet="Malignance Boots"
 	}
 		
     sets.idle.Refresh = {ammo=gear.RAbullet,
@@ -486,7 +486,7 @@ function init_gear_sets()
 	-- Weapons sets
 	sets.weapons.Default = {main="Lanun Knife",sub="Nusku Shield",range="Fomalhaut"}
 	sets.weapons.DualWeapons = {main="Naegling",sub="Lanun Knife",range="Fomalhaut"}
-	sets.weapons.DualSavageWeapons = {main="Naegling",sub="Kaja Knife",range="Anarchy +2"}
+	sets.weapons.DualSavageWeapons = {main="Naegling",sub="Demersal Degen",range="Anarchy +2"}
 	sets.weapons.DualLeadenRanged = {main="Lanun Knife",sub="Naegling",range="Fomalhaut"}
 	sets.weapons.DualLeadenMelee = {main="Naegling",sub="Atoyac",range="Fomalhaut"}
 	sets.weapons.DualLeadenMeleeAcc = {main="Naegling",sub="Lanun Knife",range="Fomalhaut"}
@@ -507,7 +507,7 @@ function init_gear_sets()
 		ear2="Brutal Earring",
 		body="Rawhide Vest", -- "Meg. Cuirie +2", nice PDT, but no multi-attack/STP
 		hands="Adhemar Wrist. +1",
-		ring1="Rajas Ring", -- "Epona's Ring",
+		ring1="Ilabrat Ring", -- "Epona's Ring",
 		ring2="Petrov Ring",
 		back=gear.tp_jse_back,
 		waist="Windbuffet Belt +1",  -- "Reiki Yotai"-- needDW somewhere
@@ -516,23 +516,25 @@ function init_gear_sets()
 	}
     
     sets.engaged.Acc = {
-		head=gear.meg_head, -- "Carmine Mask +1", Lanun Tricore +3
+		head="Malignance Chapeau", -- gear.meg_head, -- "Carmine Mask +1", Lanun Tricore +3
 		neck="Sanctity Necklace", -- "Combatant's Torque",
 		ear1="Matanki Earring", -- "Cessance Earring",
 		ear2="Telos Earring",
 		body=gear.meg_body,
-		hands=gear.meg_hands, -- "Adhemar Wrist. +1",
-		ring1="Meghanada Ring", -- "Epona's Ring",
-		ring2="Petrov Ring",
+		hands="Malignance Gloves", -- gear.meg_hands, -- "Adhemar Wrist. +1",
+		ring1="Ilabrat Ring", -- "Epona's Ring",
+		ring2="Mummu Ring",   -- "Petrov Ring",
 		-- back=gear.tp_jse_back,
 		-- waist="Olseni Belt",
-		legs=gear.meg_legs,      -- "Malignance Tights",
-		-- feet=gear.herculean_acc_feet
+		legs="Malignance Tights",  -- gear.meg_legs, 
+		feet="Malignance Boots"
 	}
 
     sets.engaged.Hybrid = set_combine(sets.engaged, {	
+	   head="Malignance Chapeau",
 	   hands="Malignance Gloves",
 	   legs="Malignance Tights",
+	   feet="Malignance Boots"
 		-- body="Adhemar Jacket +1",
 		-- waist="Reiki Yotai" 
 	})

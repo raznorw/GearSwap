@@ -166,7 +166,7 @@ function get_sets()
 	  -- missing offhand shield - Genmei/Genbu
       ammo="Staunch Tathlum", -- +1
       head="Azimuth Hood +1", 
-      body="Jhakri Robe +1",    -- Telchine w/+3 pet regen (leaf orb), Meva (snow not orb), duskdim (enhancing magic duration)
+      body="jhakri robe +2",    -- Telchine w/+3 pet regen (leaf orb), Meva (snow not orb), duskdim (enhancing magic duration)
       hands="Geo. Mitaines +1", -- +3 these eventually
       legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+6 "Mag.Atk.Bns."+6','Magic burst dmg.+11%','INT+6','Mag. Acc.+15',}},
 	   -- Legs - Telchine
@@ -191,18 +191,38 @@ function get_sets()
 	-- No Luopan out
 	-- they end in [idleMode] so it will derive from either the normal or the dt set depending in which mode you are then add the pieces filled in below.
     sets.me.melee = set_combine(sets.me.idle[idleMode],{
-
+	  head="Jhakri Coronal +1",
+      legs="Jhakri Slops +1",
+	  hands="Jhakri Cuffs +2",
+	  feet="Jhakri Pigaches +1",
+	  waist="Eschan Stone",
     })
 	
     -- Luopan is out
 	sets.pan.melee = set_combine(sets.pan.idle[idleMode],{
-
+	  head="Jhakri Coronal +1",
+      legs="Jhakri Slops +1",
+	  hands="Jhakri Cuffs +2",
+	  feet="Jhakri Pigaches +1",
+	  waist="Eschan Stone",
     }) 
     
     -- Weapon Skill sets
 	-- Example:
     sets.me["Flash Nova"] = {
-
+    	head="Jhakri Coronal +1",
+		body="jhakri robe +2",
+		hands="Amalric Gages +1",
+		legs="Merlinic Shalwar",  -- currently 20+14 macc, 15+28 MAB, 43 int, 11 MBB
+		-- legs="Jhakri Slops +1",		
+		feet="Amalric Nails +1",
+		neck="Sanctity Necklace",
+		waist="Eschan Stone", -- "Searing Sash",
+		left_ear="Regal Earring",
+		right_ear="Malignance Earring",
+		left_ring="Vertigo Ring",
+		right_ring="Jhakri Ring",
+		back="Refraction Cape"
     }
 
     sets.me["Realmrazer"] = {
@@ -301,7 +321,7 @@ function get_sets()
     -- Whatever you want to equip mid-cast as a catch all for all spells, and we'll overwrite later for individual spells
     sets.midcast.casting = {
     	head="Jhakri Coronal +1",
-		body="Jhakri Robe +1",
+		body="jhakri robe +2",
 		hands="Amalric Gages +1",
 		legs="Merlinic Shalwar",  -- currently 20+14 macc, 15+28 MAB, 43 int, 11 MBB
 		-- legs="Jhakri Slops +1",		

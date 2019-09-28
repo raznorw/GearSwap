@@ -88,7 +88,7 @@ function init_gear_sets()
 	-- Precast sets to enhance JAs
     sets.precast.JA['Vallation'] = set_combine(sets.Enmity,{
 	   body="Runeist's Coat +2", -- TODO: "Runeist's Coat +3",
-	   legs="Futhark Trousers"})
+	   legs="Futhark Trousers +1"})
     sets.precast.JA['Valiance'] = sets.precast.JA['Vallation']
     sets.precast.JA['Pflug'] = set_combine(sets.Enmity,{
 	    feet="Runeist Bottes" -- TODO: "Runeist's Boots +3"
@@ -196,7 +196,7 @@ function init_gear_sets()
 			ear2="Sherida Earring",
             body="Ayanmo Corazzo +2", -- TODO: "Adhemar Jacket +1",
 			hands="Meg. Gloves +2",
-			ring1="Moonbeam Ring", --TODO:  "Niqmaddu Ring",
+			ring1="Niqmaddu Ring",
 			ring2="Petrov Ring", -- TODO: "Regal Ring",
             back=gear.da_jse_back,
 			waist="Windbuffet Belt +1", -- TODO: "Fotia Belt",
@@ -430,8 +430,8 @@ function init_gear_sets()
 		ear2="Sherida Earring",
         body="Ayanmo corazza +2", -- "Adhemar Jacket +1",
 		hands="Adhemar Wrist. +1",
-		ring1="Moonbeam Ring",    -- "Niqmaddu Ring",
-		ring2="Petrov Ring",      -- "Epona's Ring",
+		ring1="Moonbeam Ring",    
+		ring2="Niqmaddu Ring",    -- "Petrov Ring",   -- "Epona's Ring",
         back=gear.stp_jse_back,
 		waist="Windbuffet Belt +1",
 		legs="Samnuha Tights",

@@ -131,7 +131,7 @@ function init_gear_sets()
 	  neck="Mizu. Kubikazari",
 	  ear1="Regal Earring",
 	  ear2="Malignance Earring", -- "Friomisi Earring", -- 2 more mab, less macc / int
-	  body="Jhakri Robe +1",
+	  body="jhakri robe +2",
 	  hands="Amalric Gages +1",
 	  ring1="Mujin Band",
 	  ring2="Locus Ring",

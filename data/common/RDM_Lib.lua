@@ -4,6 +4,7 @@
 -- spells all fall under.
 -------------------------------------------------------------------------------------------------------------------
 
+
 spell_maps = {
     ['Cure']='Cure',['Cure II']='Cure',['Cure III']='Cure',['Cure IV']='Cure',['Cure V']='Cure',['Cure VI']='Cure',
     ['Full Cure']='Cure',
@@ -59,10 +60,32 @@ spell_maps = {
     ['Pyrohelix II']='Helix',['Cryohelix II']='Helix',['Anemohelix II']='Helix',['Geohelix II']='Helix',['Ionohelix II']='Helix',['Hydrohelix II']='Helix',['Luminohelix II']='Helix',['Noctohelix II']='DarkHelix',
     ['Firestorm']='Storm',['Hailstorm']='Storm',['Windstorm']='Storm',['Sandstorm']='Storm',['Thunderstorm']='Storm',['Rainstorm']='Storm',['Aurorastorm']='Storm',['Voidstorm']='Storm',
     ['Firestorm II']='Storm',['Hailstorm II']='Storm',['Windstorm II']='Storm',['Sandstorm II']='Storm',['Thunderstorm II']='Storm',['Rainstorm II']='Storm',['Aurorastorm II']='Storm',['Voidstorm II']='Storm',
-    ['Fire Maneuver']='Maneuver',['Ice Maneuver']='Maneuver',['Wind Maneuver']='Maneuver',['Earth Maneuver']='Maneuver',['Thunder Maneuver']='Maneuver',
-    ['Water Maneuver']='Maneuver',['Light Maneuver']='Maneuver',['Dark Maneuver']='Maneuver',
+    ['Fire Maneuver']='Maneuver',['Ice Maneuver']='Maneuver',['Wind Maneuver']='Maneuver',['Earth Maneuver']='Maneuver',['Thunder Maneuver']='Maneuver',['Water Maneuver']='Maneuver',['Light Maneuver']='Maneuver',['Dark Maneuver']='Maneuver',
+	['Enstone']='Enspell',['Enwater']='Enspell',['Enaero']='Enspell',['Enfire']='Enspell',['Enblizzard']='Enspell',['Enthunder']='Enspell',
 }
-                
+
+enfeeb_maps = {
+    ['Dia']='potency', ['Dia II']='potency', ['Dia III']='potency',
+    ['Bio']='potency', ['Bio II']='potency', ['Bio III']='potency',
+    ['Paralyze']='mndpot', ['Paralyze II']='mndpot', 
+    ['Slow']='mndpot', ['Slow II']='mndpot', 
+    ['Adle']='mndpot', ['Adle II']='mndpot',
+    ['Sleep']='macc', ['Sleep II']='macc', ['Sleepga']='macc', 
+    ['Silence']='macc', 
+    ['Inundation']='macc', 
+    ['Dispel']='macc', 
+    ['Break']='macc', 
+    ['Bind']='macc', 
+    ['Blind']='intpot', ['Blind II']='intpot', 
+    ['Gravity']='potency', ['Gravity II']='potency',
+	-- We leave Fazzle and FrazzleII as pure macc to help land it in cases its a high resist. 
+	-- This lets us follow up with a high potency Frazzle3 
+    ['Frazzle']='macc', ['Frazzle II']='macc', ['Frazzle III']='skillmndpot', 
+    ['Distract']='skillmndpot', ['Distract II']='skillmndpot', ['Distract III']='skillmndpot', 
+    ['Poison']='skillpot', ['Poison II']='skillpot', ['Poisonga']='skillpot',
+}
+
+
 -- Set Macros for your SCH's macro page, book.
 function set_macros(sheet,book)
     if book then 
@@ -72,14 +95,11 @@ function set_macros(sheet,book)
     send_command('@input /macro set '..tostring(sheet))
 end
 
-
 hud_padding = 10
 
 pName = player.name
-
 -- Saying hello
-windower.add_to_chat(8,'----- Welcome back to your SCH.lua, '..pName..' -----')
-
+windower.add_to_chat(8,'----- Welcome back to your RDM.lua, '..pName..' -----')
 
 --------------------------------------------------------------------------------------------------------------
 -- HUD STUFF
@@ -122,36 +142,38 @@ time_start = 0
 
 -- Standard Mode
 hub_mode_std = [[\cs(255, 115, 0)Modes: \cr              
-\cs(255, 64, 64)${key_bind_idle} \cs(200, 200, 200)Idle:\cr \cs(125,125,255)${player_current_idle|Refresh}
-\cs(255, 64, 64)${key_bind_casting} \cs(200, 200, 200)Casting:\cr \cs(125,125,255)${player_current_casting|Normal}
-\cs(255, 64, 64)${key_bind_regen} \cs(200, 200, 200)Regen:\cr \cs(125,125,255)${player_current_regen|Hybrid}
+\cs(255, 255, 64)${key_bind_idle} \cs(200, 200, 200)Idle:\cr \cs(125,125,255)${player_current_idle|Refresh}
+\cs(255, 255, 64)${key_bind_melee} \cs(200, 200, 200)Melee:\cr \cs(125,125,255)${player_current_melee|Refresh}
+\cs(255, 255, 64)${key_bind_mainweapon} \cs(200, 200, 200)Main Weapon:\cr \cs(125,125,255)${player_current_mainweapon|Crocea Mors}
+\cs(255, 255, 64)${key_bind_subweapon} \cs(200, 200, 200)Sub Weapon:\cr \cs(125,125,255)${player_current_subweapon|Ammurapi Shield}
+\cs(255, 255, 64)${key_bind_casting} \cs(200, 200, 200)Nuking:\cr \cs(125,125,255)${player_current_casting|Normal}
 ]]
 
-hub_options_std = [[ \cs(255, 115, 0)Options: \cr             
-\cs(255, 64, 64)${key_bind_mburst} \cs(200, 200, 200)Magic Burst:\cr ${player_current_mb}
-\cs(255, 64, 64)${key_bind_matchsc}\cs(200, 200, 200)Match SC Element:\cr ${player_match_sc}
-\cs(255, 64, 64)${key_bind_lock_weapon} \cs(200, 200, 200)Lock Weapon:\cr ${toggle_lock_weapon}
-\cs(255, 64, 64)${key_bind_movespeed_lock}\cs(200, 200, 200)Herald Gaiters Lock:\cr ${toggle_movespeed_lock}
+hub_options_std = [[ \cs(255, 115, 0)Options: \cr         
+\cs(255, 255, 64)${key_bind_matchsc}\cs(200, 200, 200)Match SC Element:\cr ${player_match_sc}
+\cs(255, 255, 64)${key_bind_lock_weapon} \cs(200, 200, 200)Lock Weapon:\cr ${toggle_lock_weapon}
+\cs(255, 255, 64)${key_bind_movespeed_lock}\cs(200, 200, 200)Carm Cuisse:\cr ${toggle_movespeed_lock}
 ]]
 
 hub_job_std = [[ \cs(255, 115, 0)${player_job}: \cr             
-\cs(255, 64, 64)${key_bind_element_cycle} \cs(200, 200, 200)Element:\cr ${element_color|\\cs(0, 204, 204)}${toggle_element_cycle|Ice} \cr           
-\cs(255, 64, 64)${key_bind_sc_level} \cs(200, 200, 200)Skillchain:\cr ${sc_element_color|\\cs(0, 204, 204)}${toggle_sc_level|Induration} 
+\cs(255, 255, 64)${key_bind_element_cycle} \cs(200, 200, 200)Nuking:\cr ${element_color|\\cs(0, 204, 204)}${toggle_element_cycle|Ice} \cr
+\cs(255, 255, 64)${key_bind_enspell_cycle} \cs(200, 200, 200)Enspell:\cr ${enspell_color|\\cs(0, 204, 204)}${toggle_enspell_cycle|Ice} \cr
 ]]
 
 hub_battle_std = [[ \cs(255, 115, 0)Battle: \cr             
         \cs(200, 200, 200)Last SC:\cr ${last_sc_element_color}${last_sc|No SC yet} \cr           
-        \cs(200, 200, 200)Burst Window:\cr ${last_sc_element_color}${burst_window|0} \cr     
+        \cs(200, 200, 200)Burst Window:\cr ${last_sc_element_color}${burst_window|0} \cr
+        \cs(200, 200, 200)Magic Burst:\cr ${player_current_mb}  \cr        
 ]]
 
 -- LITE Mode
-hub_mode_lte = [[ \cs(255, 115, 0)      == Modes: \cr              \cs(255, 64, 64)${key_bind_idle} \cs(200, 200, 200)Idle:\cr \cs(125,125,255)${player_current_idle|Refresh              \cs(255, 64, 64)${key_bind_casting} \cs(200, 200, 200)Casting:\cr \cs(125,125,255)${player_current_casting|Normal}              \cs(255, 64, 64)${key_bind_regen} \cs(200, 200, 200)Regen:\cr \cs(125,125,255)${player_current_regen|Hybrid} ]]
+hub_mode_lte = [[ \cs(255, 115, 0) == Modes: \cr              \cs(255, 255, 64)${key_bind_idle} \cs(200, 200, 200)Idle:\cr \cs(125,125,255)${player_current_idle|Refresh}              \cs(255, 255, 64)${key_bind_melee} \cs(200, 200, 200)Melee:\cr \cs(125,125,255)${player_current_melee|Refresh}              \cs(255, 255, 64)${key_bind_mainweapon} \cs(200, 200, 200)Main Weapon:\cr \cs(125,125,255)${player_current_mainweapon|Crocea Mors}              \cs(255, 255, 64)${key_bind_subweapon} \cs(200, 200, 200)Sub Weapon:\cr \cs(125,125,255)${player_current_subweapon|Ammurapi Shield}            \cs(255, 255, 64)${key_bind_casting} \cs(200, 200, 200)Nuking:\cr \cs(125,125,255)${player_current_casting|Normal} ]]
 
-hub_options_lte = [[ \cs(255, 115, 0)       == Options: \cr              \cs(255, 64, 64)${key_bind_mburst} \cs(200, 200, 200)Magic Burst:\cr \cs(125,125,255)${player_current_mb|OFF}\cs(255, 64, 64)${key_bind_matchsc}\cs(200, 200, 200)Match SC Element:\cr ${player_match_sc}            \cs(255, 64, 64)${key_bind_lock_weapon} \cs(200, 200, 200)Lock Weapon:\cr ${toggle_lock_weapon}            \cs(255, 64, 64)${key_bind_movespeed_lock}\cs(200, 200, 200)Herald Gaiters Lock:\cr ${toggle_movespeed_lock} ]]
+hub_options_lte = [[ \cs(255, 115, 0)== Options: \cr              \cs(255, 255, 64)${key_bind_matchsc}\cs(200, 200, 200)Match SC Element:\cr ${player_match_sc}            \cs(255, 255, 64)${key_bind_lock_weapon} \cs(200, 200, 200)Lock Weapon:\cr ${toggle_lock_weapon}            \cs(255, 255, 64)${key_bind_movespeed_lock}\cs(200, 200, 200)Carm Cuisse:\cr ${toggle_movespeed_lock} ]]
 
-hub_job_lte = [[ \cs(255, 115, 0)       == ${player_job}: \cr             \cs(255, 64, 64)${key_bind_element_cycle} \cs(200, 200, 200)Element:\cr ${element_color|\\cs(0, 204, 204)}${toggle_element_cycle|Ice} \cr           \cs(255, 64, 64)${key_bind_sc_level} \cs(200, 200, 200)Skillchain:\cr ${element_color|\\cs(0, 204, 204)}${toggle_sc_level|Induration} ]]
+hub_job_lte = [[ \cs(255, 115, 0) == ${player_job}: \cr             \cs(255, 255, 64)${key_bind_element_cycle} \cs(200, 200, 200)Nuking:\cr ${element_color|\\cs(0, 204, 204)}${toggle_element_cycle|Ice} \cr             \cs(255, 255, 64)${key_bind_enspell_cycle} \cs(200, 200, 200)Enspell:\cr ${enspell_color|\\cs(0, 204, 204)}${toggle_enspell_cycle|Ice} \cr ]]
 
-hub_battle_lte = [[ \cs(255, 115, 0)        == Battle: \cr             \cs(200, 200, 200)Last SC:\cr ${last_sc_element_color}${last_sc|No SC yet} \cr             \cs(200, 200, 200)Burst Window:\cr ${last_sc_element_color}${burst_window|0} \cr ]]
+hub_battle_lte = [[ \cs(255, 115, 0) == Battle: \cr             \cs(200, 200, 200)Last SC:\cr ${last_sc_element_color}${last_sc|No SC yet} \cr             \cs(200, 200, 200)Burst Window:\cr ${last_sc_element_color}${burst_window|0} \cr             \cs(200, 200, 200)Magic Burst:\cr ${player_current_mb}  \cr ]]
 
 
 -- init style
@@ -166,27 +188,31 @@ hub_battle = hub_battle_std
 ]]
 keybinds_off = {}
 keybinds_off['key_bind_idle'] = '       '
+keybinds_off['key_bind_melee'] = '       '
 keybinds_off['key_bind_casting'] = '       '
 keybinds_off['key_bind_mburst'] = '       '
-keybinds_off['key_bind_regen'] = '       '
+keybinds_on['key_bind_mburst'] = '       '
+keybinds_off['key_bind_mainweapon'] = '       '
+keybinds_off['key_bind_subweapon'] = '       '
+keybinds_on['key_bind_movespeed_lock'] = '        '
+
 keybinds_off['key_bind_element_cycle'] = '       '
 keybinds_off['key_bind_sc_level'] = '       '
 keybinds_off['key_bind_lock_weapon'] = '       '
 keybinds_off['key_bind_movespeed_lock'] = '        '
 keybinds_off['key_bind_matchsc'] = '        '
+keybinds_off['key_bind_enspell_cycle'] = '       '
 
 function validateTextInformation()
 
     --Mode Information
-    if refreshType == "sublimation" then
-        main_text_hub.player_current_idle = tostring(idleModes.current..' + \\cs(32, 255, 32)Sublimation\\cr')
-    else
-        main_text_hub.player_current_idle = idleModes.current
-    end
+    main_text_hub.player_current_idle = idleModes.current
+    main_text_hub.player_current_melee = meleeModes.current
+	main_text_hub.player_current_mainweapon = mainWeapon.current
+	main_text_hub.player_current_subweapon = subWeapon.current
     main_text_hub.player_current_casting = nukeModes.current
     main_text_hub.toggle_element_cycle = elements.current
-    main_text_hub.player_current_regen = regenModes.current    
-    main_text_hub.toggle_sc_level = wantedSc
+    main_text_hub.toggle_enspell_cycle = enspellElements.current
     main_text_hub.player_job = player.job
 
     if last_skillchain ~= nil then
@@ -223,6 +249,7 @@ function validateTextInformation()
         texts.update(main_text_hub, keybinds_off)
     end
     main_text_hub.element_color = Colors[elements.current]
+    main_text_hub.enspell_color = Colors[enspellElements.current]
     main_text_hub.sc_element_color = scColor
 end
 
@@ -338,6 +365,8 @@ function toggleHudStyle( useLightMode )
     texts.stroke_width(main_text_hub, hud_strokewidth)      
     hideTextSections()
 end
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
 
 function hud_command(command)
  
@@ -388,8 +417,9 @@ function hud_command(command)
         end
     end
 end
---------------------------------------------------------------------------------------------------------------
---------------------------------------------------------------------------------------------------------------
+
+
+
 
 nukes = {}
 nukes.t1 = {['Earth']="Stone",      ['Water']="Water",      ['Air']="Aero",     ['Fire']="Fire",    ['Ice']="Blizzard",     ['Lightning']="Thunder", ['Light']="Thunder", ['Dark']="Blizzard"}
@@ -397,32 +427,13 @@ nukes.t2 = {['Earth']="Stone II",   ['Water']="Water II",   ['Air']="Aero II",  
 nukes.t3 = {['Earth']="Stone III",  ['Water']="Water III",  ['Air']="Aero III", ['Fire']="Fire III",['Ice']="Blizzard III", ['Lightning']="Thunder III", ['Light']="Thunder III", ['Dark']="Blizzard III"}
 nukes.t4 = {['Earth']="Stone IV",   ['Water']="Water IV",   ['Air']="Aero IV",  ['Fire']="Fire IV", ['Ice']="Blizzard IV",  ['Lightning']="Thunder IV", ['Light']="Thunder IV", ['Dark']="Blizzard IV"}
 nukes.t5 = {['Earth']="Stone V",    ['Water']="Water V",    ['Air']="Aero V",   ['Fire']="Fire V",  ['Ice']="Blizzard V",   ['Lightning']="Thunder V", ['Light']="Thunder V", ['Dark']="Blizzard V"}
-nukes.helix = {['Earth']="Geohelix II",  ['Water']="Hydrohelix II", ['Air']="Anemohelix II",['Fire']="Pyrohelix II", ['Ice']="Cryohelix II", ['Lightning']="Ionohelix II",    ['Light']="Luminohelix II", ['Dark']="Noctohelix II"}
-nukes.storm = {['Earth']="Sandstorm II", ['Water']="Rainstorm II",  ['Air']="Windstorm II", ['Fire']="Firestorm II", ['Ice']="Hailstorm II", ['Lightning']="Thunderstorm II", ['Light']="Aurorastorm II", ['Dark']="Voidstorm II"}
+nukes.helix = {['Earth']="Geohelix",  ['Water']="Hydrohelix", ['Air']="Anemohelix",['Fire']="Pyrohelix", ['Ice']="Cryohelix", ['Lightning']="Ionohelix",    ['Light']="Luminohelix", ['Dark']="Noctohelix"}
+nukes.storm = {['Earth']="Sandstorm", ['Water']="Rainstorm",  ['Air']="Windstorm", ['Fire']="Firestorm", ['Ice']="Hailstorm", ['Lightning']="Thunderstorm", ['Light']="Aurorastorm", ['Dark']="Voidstorm"}
+nukes.enspell = {['Earth']="Enstone", ['Water']="Enwater",  ['Air']="Enaero", ['Fire']="Enfire", ['Ice']="Enblizzard", ['Lightning']="Enthunder", ['Light']="Enthunder", ['Dark']="Enblizzard"}
 
-elements =  M('Ice', 'Air', 'Dark', 'Light', 'Earth', 'Lightning', 'Water', 'Fire')
+elements =  M('Ice', 'Air', 'Earth', 'Lightning', 'Water', 'Fire')
+enspellElements =  M('Ice', 'Air', 'Earth', 'Lightning', 'Water', 'Fire')
 
-tier1sc =   {}
-tier1sc['Ice'] = 'Induration'
-tier1sc['Air'] ='Detonation'
-tier1sc['Dark'] = 'Compression' 
-tier1sc['Light'] = 'Transfixion'
-tier1sc['Earth'] = 'Scission'
-tier1sc['Lightning'] = 'Impaction'
-tier1sc['Water'] = 'Reverberation'
-tier1sc['Fire'] = 'Liquefaction'
-
-tier2sc =   {}
-tier2sc['Ice'] = 'Distortion'
-tier2sc['Air'] ='Fragmentation'
-tier2sc['Dark'] = 'Gravitation' 
-tier2sc['Light'] = 'Fusion'
-tier2sc['Earth'] = 'Gravitation'
-tier2sc['Lightning'] = 'Fragmentation'
-tier2sc['Water'] = 'Distortion'
-tier2sc['Fire'] = 'Fusion'
-
-wantedSc = tier1sc[elements.current]
 oldElement = elements.current
 
 scTier2 = M(false)
@@ -435,63 +446,40 @@ mBurstOldValue = mBurst.value
 if use_UI == true then
     setupTextWindow()
 else
-    windower.add_to_chat(211,'Nuke now set to element type: '..tostring(elements.current))   
-    windower.add_to_chat(211,'SC now set to: '..tostring(wantedSc))     
-    windower.add_to_chat(211,'Idle mode now set to: '..tostring(idleModes.current))  
-    windower.add_to_chat(211,'Regen mode now set to: '..tostring(regenModes.current))    
+    windower.add_to_chat(211,'Nuke now set to element type: '..tostring(elements.current))    
+    windower.add_to_chat(211,'Idle mode now set to: '..tostring(idleModes.current))    
     windower.add_to_chat(211,'Nuke mode now set to: '..tostring(nukeModes.current))  
 end
 
 Buff = 
     {
-        ['Ebullience'] = false, 
-        ['Rapture'] = false, 
-        ['Perpetuance'] = false,
-        ['Immanence'] = false,
-        ['Penury'] = false,
-        ['Parsimony'] = false,
-        ['Celerity'] = false,
-        ['Alacrity'] = false,
-        ['Klimaform'] = false,
-        ['Sublimation: Activated'] = false
+        ['Composure'] = false, 
+        ['Saboteur'] = false, 
+        ['En-Weather'] = false,
+        ['En-Day'] = false,
+        ['Enspell'] = false,
     }
     
 -- Get a spell mapping for the spell.
 function get_spell_map(spell)
     return spell_maps[spell.name]
 end
-
--- Reset the state vars tracking strategems.
-function update_active_strategems(name, gain)
-    Buff['Ebullience'] = buffactive['Ebullience'] or false
-    Buff['Rapture'] = buffactive['Rapture'] or false
-    Buff['Perpetuance'] = buffactive['Perpetuance'] or false
-    Buff['Immanence'] = buffactive['Immanence'] or false
-    Buff['Penury'] = buffactive['Penury'] or false
-    Buff['Parsimony'] = buffactive['Parsimony'] or false
-    Buff['Celerity'] = buffactive['Celerity'] or false
-    Buff['Alacrity'] = buffactive['Alacrity'] or false
-    Buff['Klimaform'] = buffactive['Klimaform'] or false
+-- Get a spell mapping for the enfeeble.
+function get_enfeeb_map(spell)
+    return enfeeb_maps[spell.name]
 end
-
-function update_sublimation()
-    Buff['Sublimation: Activated'] = buffactive['Sublimation: Activated'] or false
-    if Buff['Sublimation: Activated'] then
-        refreshType = "sublimation"
-    else
-        refreshType = "refresh"
-    end
-    if midaction() then
-        return
-    else
-        idle()
-    end
+-- Reset the state vars tracking strategems.
+function update_active_ja(name, gain)
+    Buff['Composure'] = buffactive['Composure'] or false
+    Buff['Saboteur'] = buffactive['Saboteur'] or false
+    Buff['En-Weather'] = buffactive[nukes.enspell[world.weather_element]] or false
+    Buff['En-Day'] = buffactive[nukes.enspell[world.day_element]] or false
+    Buff['Enspell'] = buffactive[nukes.enspell[1]] or buffactive[nukes.enspell[2]] or buffactive[nukes.enspell[3]] or buffactive[nukes.enspell[4]] or buffactive[nukes.enspell[5]] or buffactive[nukes.enspell[6]] or buffactive[nukes.enspell[7]] or buffactive[nukes.enspell[8]] or false
 end
 
 function buff_refresh(name,buff_details)
     -- Update SCH statagems when a buff refreshes.
-    update_active_strategems()
-    update_sublimation()
+    update_active_ja()
     if use_UI == true then
         validateTextInformation()
     end
@@ -499,20 +487,37 @@ end
 
 function buff_change(name,gain,buff_details)
     -- Update SCH statagems when a buff is gained or lost.
-    update_active_strategems()
-    update_sublimation()
+    update_active_ja()
     if use_UI == true then
         validateTextInformation()
     end
 end
  
 function precast(spell)
+    
+    update_active_ja()
+    local spell_recasts = windower.ffxi.get_spell_recasts()
+
     -- Auto use Echo Drops if you are trying to cast while silenced --    
     if spell.action_type == 'Magic' and buffactive['Silence'] then 
         cancel_spell()
         send_command('input /item "Echo Drops" <me>')     
-        add_to_chat(123, '****** ['..spell.name..' CANCELED - Using Echo Drops] ******')        
-    end         
+        add_to_chat(8, '****** ['..spell.name..' CANCELED - Using Echo Drops] ******')
+        return        
+    end       
+
+    if spell.action_type  == 'Magic' and spell_recasts[spell.recast_id] > 0 then
+        cancel_spell()
+        downgradenuke(spell)
+		add_to_chat(8, '****** ['..spell.name..' CANCELED - Spell on Cooldown, Downgrading spell] ******')
+        return
+    end   
+	-- Auto downgrade Phalanx II to Pahalanx I when casting on self, saves macro space so you can set your phalanx macro to cast phalanx2 on <stpt>
+    if spell.target.type == 'SELF' and spell.name == "Phalanx II" then
+        cancel_spell()
+        send_command('input /ma "Phalanx" <me>')  
+    end
+
     -- Moving on to other types of magic
     if spell.type == 'WhiteMagic' or spell.type == 'BlackMagic' then
      
@@ -527,7 +532,7 @@ function precast(spell)
          
             equip(sets.precast.cure)         
         -- Enhancing Magic
-        elseif spell.skill == 'Magic' then
+        elseif spell.skill == 'Enhancing Magic' then
          
             equip(sets.precast.enhancing)            
             if spell.name == 'Sneak' then
@@ -535,65 +540,84 @@ function precast(spell)
             end
         else       
             -- For everything else we go with max fastcast
-            equip(sets.precast.casting)                   
+            equip(sets.precast.casting)                
         end
     end
     -- Job Abilities
     -- We use a cat
     -- catch all here, if the set exists for an ability, use it
     -- This way we don't need to write a load of different code for different abilities, just make a set
-     
     if sets.precast[spell.name] then
         equip(sets.precast[spell.name])        
-    end
-    -- extends Fast cast set with Grimoire recast aligned 
-    if buffactive['addendum: black'] or buffactive['dark arts'] then
-        if spell.type == 'BlackMagic' then
-            equip(sets.precast.grimoire)            
-        end
-    elseif buffactive['addendum: white'] or buffactive['light arts'] then
-        if spell.type == 'WhiteMagic' then
-            equip(sets.precast.grimoire)            
-        end
     end
 end
  
 function midcast(spell)
     -- Get the spell mapping, since we'll be passing it to various functions and checks.
-    local spellMap = get_spell_map(spell)    
+    local spellMap = get_spell_map(spell)
+    local enfeebMap = get_enfeeb_map(spell)
+
     -- No need to annotate all this, it's fairly logical. Just equips the relevant sets for the relevant magic
+    -- Curing
     if spell.name:match('Cure') or spell.name:match('Cura') then
         if spell.element == world.weather_element or spell.element == world.day_element then
             equip(sets.midcast.cure.weather)
         else
             equip(sets.midcast.cure.normal)
         end
+
+    -- Enhancing
     elseif spell.skill == 'Enhancing Magic' then
-        equip(sets.midcast.enhancing)
-        if spellMap == 'Storm' then
-            equip(sets.midcast.storm)
-        elseif spell.name:match('Protect') or spell.name:match('Shell') then
+
+        if spell.name:match('Protect') or spell.name:match('Shell') then
             equip({rring="Sheltered Ring"})
         elseif spell.name:match('Refresh') then
             equip(sets.midcast.refresh)
         elseif spell.name:match('Regen') then
-            equip(sets.midcast.regen[regenModes.current])
+            equip(sets.midcast.regen)
         elseif spell.name:match('Aquaveil') then
             equip(sets.midcast.aquaveil)
+        elseif spell.name:match('Phalanx') then
+            equip(sets.midcast.phalanx)
         elseif spell.name:match('Stoneskin') then
             equip(sets.midcast.stoneskin)
+        elseif spell.name:match('Temper') or spellMap == "Enspell" then
+            equip(sets.midcast.enhancing.potency)
+        else
+            equip(sets.midcast.enhancing.duration) -- fall back to duration if not specified above 
         end
-    elseif spell.skill == 'Enfeebling Magic' and spell.type == 'BlackMagic' then -- to do: better rule for this.
-        equip(sets.midcast.IntEnfeebling)
-    elseif spell.skill == 'Enfeebling Magic' and spell.type == 'WhiteMagic' then -- to do: better rule for this.
-        equip(sets.midcast.MndEnfeebling)
+
+        -- Casting on others, then we use composure bonus set
+        if Buff['Composure'] then 
+            if  spell.target.type ~= 'SELF' and spell.target.type == 'PLAYER' then
+                equip(sets.midcast.enhancing.composure)
+            end
+        end
+
+    -- Enfeebling
+    elseif spell.skill == 'Enfeebling Magic' then
+        equip(sets.midcast.Enfeebling[enfeebMap])
+        if Buff['Saboteur'] then
+            equip({hands=EMPY.Hands})
+        end 
+
+    -- Nuking
     elseif spell.type == 'BlackMagic' then
         if mBurst.value == true then
             equip(sets.midcast.MB[nukeModes.current])
         else
             equip(sets.midcast.nuking[nukeModes.current])
         end
-    else
+        -- Obi up for matching weather / day
+        if spell.element == world.weather_element and spell.skill ~= 'Enhancing Magic' and spellMap ~= 'Helix' then
+            equip(sets.midcast.Obi)
+        end
+        if spell.element == world.day_element and spell.skill ~= 'Enhancing Magic' and spellMap ~= 'Helix' then
+            equip(sets.midcast.Obi)
+        end
+    
+    -- Fail safe
+    elseif spell.type ~= "WeaponSkill" then
         equip(sets.midcast.casting)
     end
     -- And our catch all, if a set exists for this spell name, use it
@@ -602,24 +626,27 @@ function midcast(spell)
     -- Catch all for tiered spells (use mapping), basically if no set for spell name, check set for spell mapping. AKA Drain works for all Drain tiers.
     elseif sets.midcast[spellMap] then
         equip(sets.midcast[spellMap])
-    -- Remember those WS Sets we defined? :) sets.me["Insert Weaponskill"] are basically how I define any non-magic spells sets, aka, WS, JA, Idles, etc.
-    elseif sets.me[spell.name] then
+    end
+    -- Weapon skills
+    -- sets.me["Insert Weaponskill"] are basically how I define any non-magic spells sets, aka, WS, JA, Idles, etc.
+    if sets.me[spell.name] then
         equip(sets.me[spell.name])
+
+		-- Sanguine BBlade belt optim
+        if spell.name == 'Sanguine Blade' then
+			-- Dark day and dark weather
+            if spell.element == world.day_element and spell.element == world.weather_element then
+                equip(sets.midcast.Obi)
+			-- Double dark weather aka Dynamis
+            elseif spell.element == world.weather_element and get_weather_intensity() == 2 then
+                equip(sets.midcast.Obi)
+			else
+                equip(sets.midcast.Orpheus)                
+            end
+        end
     end
     
-    -- Put the JSE in place.
-    if spell.action_type == 'Magic' then
-        apply_grimoire_bonuses(spell, action, spellMap)
-    end
-
-    -- Obi up for matching weather / day
-    if spell.element == world.weather_element and spell.skill ~= 'Enhancing Magic' and spellMap ~= 'Helix' then
-        equip(sets.midcast.Obi)
-    end
-    if spell.element == world.day_element and spell.skill ~= 'Enhancing Magic' and spellMap ~= 'Helix' then
-        equip(sets.midcast.Obi)
-    end
-
+    -- Prevent Obi by swapping helix stuff last
     -- Dark based Helix gets "pixie hairpin +1"
     if spellMap == 'DarkHelix'then
         equip(sets.midcast.DarkHelix)
@@ -627,40 +654,52 @@ function midcast(spell)
     if spellMap == 'Helix' then
         equip(sets.midcast.Helix)
     end
+
 end
- 
+
 function aftercast(spell) 
+
     -- Then initiate idle function to check which set should be equipped
-    update_active_strategems()
-    update_sublimation()
+    update_active_ja()
     idle()
 end
 
 function idle()
     -- This function is called after every action, and handles which set to equip depending on what we're doing
     -- We check if we're meleeing because we don't want to idle in melee gear when we're only engaged for trusts
-    if (meleeing.current and player.status=='Engaged') then   
-        -- We're engaged and meleeing
-        equip(sets.me.melee)               
+    if player.status=='Engaged' then
+		if subWeapon.current:match('Shield') or subWeapon.current:match('Bulwark') or subWeapon.current:match('Buckler') then
+			equip(sets.me.melee[meleeModes.value..'sw'])
+		else
+			equip(sets.me.melee[meleeModes.value..'dw'])
+		end
+		if mainWeapon.value == "Crocea Mors" or "Vitiation Sword" then
+    		EnspellCheck()
+		end
     else
-        -- If we are building sublimation, then we swap refresh to sublimation style idle.
-        if buffactive['Sublimation: Activated'] then
-            if idleModes.value == 'refresh' then
-                equip(sets.me.idle.sublimation)    
-            else
-                equip(sets.me.idle[idleModes.value])               
-            end
-        -- We don't have sublimation ticking.
-        else
-            equip(sets.me.idle[idleModes.value])             
-        end
+        equip(sets.me.idle[idleModes.value])
+        -- Checks MP for Fucho-no-Obi
+        if player.mpp < 51 then
+            equip(sets.me.latent_refresh)          
+        end       
     end
-    -- Checks MP for Fucho-no-Obi
-    if player.mpp < 51 then
-        equip(sets.me.latent_refresh)          
-    end
+	equip({main = mainWeapon.current, sub = subWeapon.current})
 end
  
+function EnspellCheck()
+
+    -- Enspell matches double weather
+    if Buff['En-Weather'] and get_weather_intensity() == 2 then
+        equip(sets.midcast.Obi)
+	-- Enspell matches day AND weather
+	elseif Buff['En-Weather'] and Buff['En-Day'] then
+        equip(sets.midcast.Obi)
+    -- Enspell is there but doesnt match a double weather
+    elseif Buff['Enspell'] then
+        equip(sets.midcast.Orpheus)
+    end 
+end
+
 function status_change(new,old)
     if new == 'Engaged' then  
         -- If we engage check our meleeing status
@@ -690,11 +729,6 @@ function self_command(command)
                 meleeing:toggle()
                 lockMainHand(meleeing.value)
 
-            elseif commandArgs[2] == 'mb' then
-                -- //gs c toggle mb will toggle mb mode on and off.
-                -- You need to toggle prioritisation yourself
-                mBurst:toggle()
-                updateMB(mBurst.value)
             elseif commandArgs[2] == 'runspeed' then
                 runspeed:toggle()
                 updateRunspeedGear(runspeed.value) 
@@ -702,28 +736,35 @@ function self_command(command)
             elseif commandArgs[2] == 'idlemode' then
                 idleModes:cycle()
                 idle()
-                if buffactive['Sublimation: Activated'] then                 
-                    if use_UI == true then
-                        update_sublimation()
-                        validateTextInformation()
-                    else
-                        windower.add_to_chat(4,"----- Idle mode Now focus on: "..tostring(idleModes.value).." in Sublimation Mode. ----")  
-                    end
-                -- We don't have sublimation ticking.
-                else
-                    if use_UI == true then
-                        validateTextInformation()
-                    else
-                        windower.add_to_chat(4,"----- Idle mode Now focus on: "..tostring(idleModes.value))
-                    end
-                end
-            elseif commandArgs[2] == 'regenmode' then
-                regenModes:cycle()
-                if use_UI == true then                    
+                if use_UI == true then
                     validateTextInformation()
                 else
-                    windower.add_to_chat(8,"----- Regen Mode Now focus on: "..tostring(regenModes.current)) 
-                end     
+                    windower.add_to_chat(4,"----- Idle mode Now focus on: "..tostring(idleModes.value))
+                end
+            elseif commandArgs[2] == 'meleemode' then
+                meleeModes:cycle()
+                idle()
+                if use_UI == true then
+                    validateTextInformation()
+                else
+                    windower.add_to_chat(4,"----- Idle mode Now focus on: "..tostring(idleModes.value))
+                end
+			elseif commandArgs[2] == 'mainweapon' then
+                mainWeapon:cycle()
+                idle()
+                if use_UI == true then
+                    validateTextInformation()
+                else
+                    windower.add_to_chat(4,"----- Main Weapon set now: "..tostring(mainWeapon.value))
+                end
+			elseif commandArgs[2] == 'subweapon' then
+                subWeapon:cycle()
+                idle()
+                if use_UI == true then
+                    validateTextInformation()
+                else
+                    windower.add_to_chat(4,"----- Sub Weapons set now: "..tostring(subWeapon.value))
+                end
             elseif commandArgs[2] == 'nukemode' then
                 nukeModes:cycle()               
                 if use_UI == true then                    
@@ -759,18 +800,26 @@ function self_command(command)
                 elseif nuke == 'cycledown' then 
                     elements:cycleback() 
                     oldElement = elements.current
-                end         
-                updateSC(elements.current, scTier2.value)  
+                end
                 if use_UI == true then                    
                     validateTextInformation()
                 else
-                    windower.add_to_chat(211,'Nuke now set to element type: '..tostring(elements.current))
-                end   
-
+                    windower.add_to_chat(211,'Enspell now set to element type: '..tostring(elements.current))
+                end  
+            elseif (nuke == 'enspellup' or nuke == 'enspelldown') then
+                if nuke == 'enspellup' then
+                    enspellElements:cycle()
+                elseif nuke == 'enspelldown' then 
+                    enspellElements:cycleback()
+                end     
+                if use_UI == true then                    
+                    validateTextInformation()
+                else
+                    windower.add_to_chat(211,'Enspell now set to element type: '..tostring(elements.current))
+                end 
             elseif (nuke == 'air' or nuke == 'ice' or nuke == 'fire' or nuke == 'water' or nuke == 'lightning' or nuke == 'earth' or nuke == 'light' or nuke == 'dark') then
                 local newType = commandArgs[2]
                 elements:set(newType)
-                updateSC(elements.current, scTier2.value)  
                 if use_UI == true then                    
                     validateTextInformation()
                 else
@@ -779,66 +828,16 @@ function self_command(command)
             elseif not nukes[nuke] then
                 windower.add_to_chat(123,'Unknown element type: '..tostring(commandArgs[2]))
                 return              
+            elseif nuke == 'enspell' then
+                send_command('@input /ma "'..nukes[nuke][enspellElements.current]..'"')     
             else        
                 -- Leave out target; let Shortcuts auto-determine it.
+                --recast = windower.ffxi.get_spell_recasts(nukes[nuke][elements.current])
+                --if recast > 0 
                 send_command('@input /ma "'..nukes[nuke][elements.current]..'"')     
-            end
-        elseif commandArgs[1]:lower() == 'sc' then
-            if not commandArgs[2] then
-                windower.add_to_chat(123,'No element type given.')
-                return
-            end
-            
-            local arg = commandArgs[2]:lower()
-            
-            if arg == 'tier' then
-                scTier2:toggle()
-                updateSC(elements.current, scTier2.value )   
-            end
-
-            if arg == 'castsc' then
-                if wantedSc == 'Scission' then
-                    send_command('input /p Opening SC: Scission  MB: Stone; wait .1; input /ja "Immanence" <me>; wait 1.5; input /ma "Fire" <t>; wait 4.0; input /ja "Immanence" <me>; wait 1.5; input /p Closing SC: Scission  MB: Stone; input /ma "Geohelix" <t>')          
-                elseif wantedSc == 'Reverberation' then
-                    send_command('input /p Opening SC: Reverberation  MB: Water; wait .1; input /ja "Immanence" <me>; wait 1.5; input /ma "Stone" <t>; wait 4.0; input /ja "Immanence" <me>; wait 1.5; input /p Closing SC: Reverberation  MB: Water; input /ma "Hydrohelix" <t>')       
-                elseif wantedSc == 'Detonation' then
-                    send_command('input /p Opening SC: Detonation  MB: Air; wait .1; input /ja "Immanence" <me>; wait 1.5; input /ma "Thunder" <t>; wait 4.0; input /ja "Immanence" <me>; wait 1.5; input /p Closing SC: Detonation  MB: Air; input /ma "Anemohelix" <t>')    
-                elseif wantedSc == 'Liquefaction' then
-                    send_command('input /p Opening SC: Liquefaction  MB: Fire; wait .1; input /ja "Immanence" <me>; wait 1.5; input /ma "Thunder" <t>; wait 4.0; input /ja "Immanence" <me>; wait 1.5; input /p Closing SC: Liquefaction  MB: Fire; input /ma "Pyrohelix" <t>')                  
-                elseif wantedSc == 'Induration' then
-                    send_command('input /p Opening SC: Induration  MB: Ice; wait .1; input /ja "Immanence" <me>; wait 1.5; input /ma "Water" <t>; wait 4.0; input /ja "Immanence" <me>; wait 1.5; input /p Closing SC: Induration  MB: Ice; input /ma "Cryohelix" <t>')                  
-                elseif wantedSc == 'Impaction' then
-                    send_command('input /p Opening SC: Impaction  MB: Lightning; wait .1; input /ja "Immanence" <me>; wait 1.5; input /ma "Blizzard" <t>; wait 4.0; input /ja "Immanence" <me>; wait 1.5; input /p Closing SC: Impaction  MB: Lightning; input /ma "Ionohelix" <t>')                  
-                elseif wantedSc == 'Compression' then
-                    send_command('input /p Opening SC: Compression  MB: Dark; wait .1; input /ja "Immanence" <me>; wait 1.5; input /ma "Blizzard" <t>; wait 4.0; input /ja "Immanence" <me>; wait 1.5; input /p Closing SC: Compression  MB: Dark; input /ma "Noctohelix" <t>')                 
-                elseif wantedSc == 'Distortion' then
-                    send_command('input /p Opening SC: Distortion  MB: Water / Ice; wait .1; input /ja "Immanence" <me>; wait 1.5; input /ma "Luminohelix" <t>; wait 6.0; input /ja "Immanence" <me>; wait 1.5; input /p Closing SC: Distortion  MB: Water / Ice; input /ma "Geohelix" <t>')                   
-                elseif wantedSc == 'Fragmentation' then
-                    send_command('input /p Opening SC: Fragmentation  MB: Lightning / Wind; wait .1; input /ja "Immanence" <me>; wait 1.5; input /ma "Blizzard" <t>; wait 4.0; input /ja "Immanence" <me>; wait 1.5; input /p Closing SC: Fragmentation  MB: Wind / Lightning; input /ma "Hydrohelix" <t>')                  
-                elseif wantedSc == 'Fusion' then
-                    send_command('input /p Opening SC: Fusion  MB: Light / Fire; wait .1; input /ja "Immanence" <me>; wait 1.5; input /ma "Fire" <t>; wait 4.0; input /ja "Immanence" <me>; wait 1.5; input /p Closing SC: Fusion  MB: Light / Fire; input /ma "Ionohelix" <t>')                  
-                elseif wantedSc == 'Gravitation' then
-                    send_command('input /p Opening SC: Gravitation  MB: Dark / Stone; wait .1; input /ja "Immanence" <me>; wait 1.5; input /ma "Aero" <t>; wait 4.0; input /ja "Immanence" <me>; wait 1.5; input /p Closing SC: Gravitation  MB: Dark / Stone; input /ma "Noctohelix" <t>')                 
-                elseif wantedSc == 'Transfixion' then
-                    send_command('input /p Opening SC: Transfixion  MB: Light; wait .1; input /ja "Immanence" <me>; wait 1.5; input /ma "Noctohelix" <t>; wait 4.0; input /ja "Immanence" <me>; wait 1.5; input /p Closing SC: Transfixion  MB: Light; input /ma "Luminohelix" <t>')
-                end
             end
         end
     end
-end
-
-function updateSC( element , scTier )   
-    if scTier then
-        wantedSc = tier2sc[element]
-    else
-        wantedSc = tier1sc[element]
-    end
-    scColor = Colors[element]
-    if use_UI == true then                    
-        validateTextInformation()
-    else
-        windower.add_to_chat(211,'SC now set to: '..tostring(wantedSc))
-    end  
 end
 
 function updateMB( mBurst )   
@@ -855,28 +854,28 @@ function updateMB( mBurst )
             windower.add_to_chat(8,"----- Nuking MB Mode ON -----")
         end
     end
-    mBurstOldValue = mBurst
 end
 
 
-function updateRunspeedGear( runspeed )   
+function updateRunspeedGear( value )   
     
-    if not runspeed then
+    if not value then
         if use_UI == true then
             validateTextInformation()
         else
-            windower.add_to_chat(8,"----- Taking Off Herald's Gaiters -----")   
+            windower.add_to_chat(8,"----- Locking Off Carmine Cuisses +1 -----")   
         end
-        enable('feet')
-        idle()
+        enable('legs')
+		idle()
     else
-        if use_UI == true then
+		if use_UI == true then
             validateTextInformation()
         else
-            windower.add_to_chat(8,"----- Locking On Herald's Gaiters -----")
+            windower.add_to_chat(8,"----- Locking On Carmine Cuisses +1 -----")
         end
-        equip({feet="Herald's Gaiters"})
-        disable('feet')                 
+        equip({legs="Carmine Cuisses +1"})
+        disable('legs')
+		idle()
     end
 end
 
@@ -902,34 +901,9 @@ function lockMainHand( meleeing )
 end
 
 
--- Equip sets appropriate to the active buffs, relative to the spell being cast.
-function apply_grimoire_bonuses(spell, action, spellMap)
-    if Buff['Perpetuance'] and spell.type =='WhiteMagic' and spell.skill == 'Enhancing Magic' then
-        equip(sets.buff['Perpetuance'])
-    end
-    if Buff['Rapture'] and (spellMap == 'Cure' or spellMap == 'Curaga') then
-        equip(sets.buff['Rapture'])
-    end
-    if spell.skill == 'Elemental Magic' and spellMap ~= 'ElementalEnfeeble' then
-        if Buff['Ebullience'] and spell.english ~= 'Impact' then
-            equip(sets.buff['Ebullience'])
-        end
-        if Buff['Immanence'] then
-            equip(sets.buff['Immanence'])
-        end
-        if Buff['Klimaform'] and spell.element == world.weather_element then
-            equip(sets.buff['Klimaform'])
-        end
-    end
-
-    if Buff['Penury'] then equip(sets.buff['Penury']) end
-    if Buff['Parsimony'] then equip(sets.buff['Parsimony']) end
-    if Buff['Celerity'] then equip(sets.buff['Celerity']) end
-    if Buff['Alacrity'] then equip(sets.buff['Alacrity']) end
-end
-
 -- General handling of strategems in an Arts-agnostic way.
 -- Format: gs c scholar <strategem>
+-- Copied from SCH lua, gonna leave it as is, still relevant for subbing sch and easy macro
 
 function handle_strategems(cmdParams)
     -- cmdParams[1] == 'scholar'
@@ -1006,77 +980,135 @@ function handle_strategems(cmdParams)
     end
 end
 
--- Gets the current number of available strategems based on the recast remaining
--- and the level of the sch.
-function get_current_strategem_count()
-    -- returns recast in seconds.
-    local allRecasts = windower.ffxi.get_ability_recasts()
-    local stratsRecast = allRecasts[231]
-
-    local maxStrategems = math.floor(player.main_job_level + 10) / 20
-    -- assuming level 90+ and if not 550JP replace 5*33 by 5*45 below
-    local fullRechargeTime = 5*33
-
-    local currentCharges = math.floor(maxStrategems - maxStrategems * stratsRecast / fullRechargeTime)
-
-    return currentCharges
-end
-
 local skillchains = {
-	[288] = {id=288,english='Light',elements={'Light','Fire','Lightning','Wind'}, color=Colors[4]},
-	[289] = {id=289,english='Darkness',elements={'Dark','Earth','Water','Ice'}, color=Colors[8]},
-	[290] = {id=290,english='Gravitation',elements={'Earth', 'Dark'}, color=Colors[5]},
-	[291] = {id=291,english='Fragmentation',elements={'Lightning','Wind'}, color=Colors[7]},
-	[292] = {id=292,english='Distortion',elements={'Ice', 'Water'}, color=Colors[6]},
-	[293] = {id=293,english='Fusion',elements={'Fire', 'Light'}, color=Colors[1]},
-	[294] = {id=294,english='Compression',elements={'Dark'}, color=Colors[8]},
-	[295] = {id=295,english='Liquefaction',elements={'Fire'}, color=Colors[1]},
-	[296] = {id=296,english='Induration',elements={'Ice'}, color=Colors[6]},
-	[297] = {id=297,english='Reverberation',elements={'Water'}, color=Colors[2]},
-	[298] = {id=298,english='Transfixion', elements={'Light'}, color=Colors[4]},
-	[299] = {id=299,english='Scission',elements={'Earth'}, color=Colors[5]},
-	[300] = {id=300,english='Detonation',elements={'Wind'}, color=Colors[3]},
-	[301] = {id=301,english='Impaction',elements={'Lightning'}, color=Colors[7]}
+    [288] = {id=288,english='Light',elements={'Light','Fire','Lightning','Wind'}, color=Colors[4]},
+    [289] = {id=289,english='Darkness',elements={'Dark','Earth','Water','Ice'}, color=Colors[8]},
+    [290] = {id=290,english='Gravitation',elements={'Earth', 'Dark'}, color=Colors[5]},
+    [291] = {id=291,english='Fragmentation',elements={'Lightning','Wind'}, color=Colors[7]},
+    [292] = {id=292,english='Distortion',elements={'Ice', 'Water'}, color=Colors[6]},
+    [293] = {id=293,english='Fusion',elements={'Fire', 'Light'}, color=Colors[1]},
+    [294] = {id=294,english='Compression',elements={'Dark'}, color=Colors[8]},
+    [295] = {id=295,english='Liquefaction',elements={'Fire'}, color=Colors[1]},
+    [296] = {id=296,english='Induration',elements={'Ice'}, color=Colors[6]},
+    [297] = {id=297,english='Reverberation',elements={'Water'}, color=Colors[2]},
+    [298] = {id=298,english='Transfixion', elements={'Light'}, color=Colors[4]},
+    [299] = {id=299,english='Scission',elements={'Earth'}, color=Colors[5]},
+    [300] = {id=300,english='Detonation',elements={'Wind'}, color=Colors[3]},
+    [301] = {id=301,english='Impaction',elements={'Lightning'}, color=Colors[7]}
 }
-windower.register_event('action', function(act)
-	for _, target in pairs(act.targets) do
-		local battle_target = windower.ffxi.get_mob_by_target("t")
-		if battle_target ~= nil and target.id == battle_target.id then
-			for _, action in pairs(target.actions) do
-				if action.add_effect_message > 287 and action.add_effect_message < 302 then
-					last_skillchain = skillchains[action.add_effect_message]
-					mBurstOldValue = mBurst.value
-                    MB_Window = 12
-					MB_Time = os.time()
-					validateTextInformation()
+if player and player.index and windower.ffxi.get_mob_by_index(player.index) then
+
+	windower.register_event('action', function(act)
+		for _, target in pairs(act.targets) do
+			local battle_target = windower.ffxi.get_mob_by_target("t")
+			if battle_target ~= nil and target.id == battle_target.id then
+				for _, action in pairs(target.actions) do
+					if action.add_effect_message > 287 and action.add_effect_message < 302 then
+						last_skillchain = skillchains[action.add_effect_message]
+						mBurstOldValue = mBurst.value
+						MB_Window = 11
+						MB_Time = os.time()
+						validateTextInformation()
+					end
 				end
 			end
 		end
-	end
-end)
+	end)
 
-windower.register_event('prerender', function()
-	--Items we want to check every second
-	if os.time() > time_start then
-		time_start = os.time()
-		if MB_Window > 0 then
-			MB_Window = 10 - (os.time() - MB_Time)
-            if matchsc.value then
-                selectSCElement()
-                mBurst:set(true)
-            end
-			validateTextInformation()
-        else
-            elements:set(oldElement)
-            mBurst:set(mBurstOldValue)
-            validateTextInformation()
+	mov = {counter=0}
+	if player and player.index and windower.ffxi.get_mob_by_index(player.index) then
+		mov.x = windower.ffxi.get_mob_by_index(player.index).x
+		mov.y = windower.ffxi.get_mob_by_index(player.index).y
+		mov.z = windower.ffxi.get_mob_by_index(player.index).z
+	end
+	moving = false
+
+	windower.raw_register_event('prerender',function()
+		mov.counter = mov.counter + 1;
+		if mov.counter>30 then
+			local pl = windower.ffxi.get_mob_by_index(player.index)
+			if pl and pl.x and mov.x then
+				local movement = math.sqrt( (pl.x-mov.x)^2 + (pl.y-mov.y)^2 + (pl.z-mov.z)^2 ) > 0.1
+				if movement and not moving then
+					send_command('gs c toggle runspeed')
+					moving = true
+				elseif not movement and moving then
+					send_command('gs c toggle runspeed')
+					moving = false
+				end
+			end
+
+			if pl and pl.x then
+				mov.x = pl.x
+				mov.y = pl.y
+				mov.z = pl.z
+			end
+			mov.counter = 0
+		end
+	end)
+
+	windower.register_event('prerender', function()
+		--Items we want to check every second
+		if os.time() > time_start then
+			time_start = os.time()
+			auto_cp()
+			if MB_Window > 0 then
+				MB_Window = 11 - (os.time() - MB_Time)
+				if matchsc.value then
+					selectSCElement()
+					mBurst:set(true)
+				end
+				validateTextInformation()
+			else
+				elements:set(oldElement)
+				mBurst:set(false)
+				validateTextInformation()
+			end
+		end
+	end)
+
+	function movingCheck()
+		pSpeed = (player.x+player.y) - (pX+pY)
+		if pSpeed ~= 0.0 or pSpeed > 0.25 or pSpeed < 0.25 then
+			moving = true
+		else
+			moving = false
 		end
 	end
-end)
+
+	function auto_cp()
+
+	--Now we check if we need to lock our back for CP
+		if player and player.index and windower.ffxi.get_mob_by_index(player.index) then
+			jobpoints = windower.ffxi.get_player().job_points[player.main_job:lower()].jp_spent -- check if we are master
+		end
+		if jobpoints ~= 2100 and jobpoints ~= nil then -- Basically if not master
+			monsterToCheck = windower.ffxi.get_mob_by_target('t')
+			if windower.ffxi.get_mob_by_target('t') then -- Sanity Check 
+				if #monsterToCheck.name:split(' ') >= 2 then
+					monsterName = T(monsterToCheck.name:split(' '))
+					if monsterName[1] == "Apex" then
+						if monsterToCheck.hpp < 15 then --Check mobs HP Percentage if below 25 then equip CP cape 
+							equip({ back = CP_CAPE }) 
+							disable("back") --Lock back
+						else
+							enable("back") --Else make sure the back is enabled
+						end 
+					end
+				end
+			else
+				enable("back") --Else make sure the back is enabled
+			end
+		else
+			enable("back") --Else make sure the back is enabled
+		end
+	end
+end
 
 function selectSCElement()
     -- Tier 3 SC we favor element already chosen, then day (our weather likely match our set element as a sch) then swap for bad day. 
     if last_skillchain.english == "Light" then
+        -- First we always prefer the selected element if that element can burst, if not we move on.
         if elements.current == "Fire" or elements.current == "Lightning" or elements.current == "Air" then
             return
         -- Favor Fire if its Fire's Day or Earth's day (thunder weak on E-Day)
@@ -1092,6 +1124,7 @@ function selectSCElement()
             elements:set(selectedElement)
         end
     elseif last_skillchain.english == "Darkness" then
+        -- First we always prefer the selected element if that element can burst, if not we move on.
         if elements.current == "Earth" or elements.current == "Water" or elements.current == "Ice" then
             return
         -- Favor Water if its Water's Day or Fire's day (Ice weak on F-Day)
@@ -1116,7 +1149,7 @@ function selectSCElement()
         selectedElement = "Fire"
         elements:set(selectedElement)
     elseif last_skillchain.english == "Fragmentation" then
-        if elements.current == "Lightning" or elements.current == "Wind" then
+        if elements.current == "Lightning" or elements.current == "Air" then
             return
         -- Favor Wind if its Wind's Day or Earth's day (thunder weak on E-Day)
         elseif world.day_element == "Air" or world.day_element == "Earth" then
@@ -1163,4 +1196,26 @@ function selectSCElement()
         selectedElement = "Lightning"
         elements:set(selectedElement)
     end
+end
+
+-- Function to get the current weather intensity: 0 for none, 1 for single weather, 2 for double weather.
+function get_weather_intensity()
+    return gearswap.res.weather[world.weather_id].intensity
+end
+
+function downgradenuke( spell )
+
+    if spell.name:match(nukes.t1[elements.current]) then   
+        if spell.name == nukes.t5[elements.current] then
+            newspell = nukes.t4[elements.current]
+        elseif spell.name == nukes.t4[elements.current] then
+            newspell = nukes.t3[elements.current]
+        elseif spell.name == nukes.t3[elements.current] then
+            newspell = nukes.t2[elements.current]
+        elseif spell.name == nukes.t2[elements.current] then
+            newspell = nukes.t1[elements.current]
+        end
+        send_command('input /ma "'..newspell..'"')
+    end
+
 end

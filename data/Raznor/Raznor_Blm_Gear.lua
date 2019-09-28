@@ -1,3 +1,13 @@
+-- Grio ties lathi C with: 
+--   8 int (27 total)
+--  33 MAB (63 total)
+--   1 Macc (15 total)
+-- Loses -10 enmity, 1 refresh
+-- Gain ConMP 5, FC 4, whatever bonsu stats
+
+-- Current grio:
+--   int 9, macc 24, mab 14, MBB 7, magic dmg 5
+
 function user_setup()
 	-- Options: Override default values
 	state.CastingMode:options('Normal','Resistant','Fodder','Proc','OccultAcumen')
@@ -240,12 +250,12 @@ function init_gear_sets()
     sets.midcast['Elemental Magic'] = {
 	    main="Lathi", -- gear.grioavolr_nuke_staff,
 		sub="Alber Strap", -- "Zuuxowu Grip",		
-		ammo="Elis Tome", -- "Dosis Tathlum",        
+		ammo="Pamphredo Tathlum", -- "Dosis Tathlum",        
 		head="Jhakri Coronal +1", -- gear.merlinic_nuke_head,
 		neck="Saevus Pendant +1",
 		ear1="Regal Earring", 
 		ear2="Malignance Earring",
-        body="Jhakri Robe +1", -- gear.merlinic_nuke_body,
+        body="jhakri robe +2", -- gear.merlinic_nuke_body,
 		hands="Amalric Gages +1", -- "Mallquis Cuffs +2",
 		ring1="Jhakri Ring", -- "Shiva Ring +1",
 		ring2="Vertigo Ring", -- "Shiva Ring +1",
@@ -258,18 +268,32 @@ function init_gear_sets()
 		-- set_combine(sets.midcast['Enfeebling Magic'], {})
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
 	    sub="Enki Strap", -- "Niobid Strap"
-	    -- ammo="Elis Tome", -- "Pemphredo Tathlum",        
+	    ammo="Pemphredo Tathlum",        
 		neck="Sanctity Necklace",
 		waist="Yamabuki-no-Obi",		
 	})
 	   
 		
-    sets.midcast['Elemental Magic'].Fodder = {main=gear.grioavolr_nuke_staff,sub="Zuuxowu Grip",ammo="Dosis Tathlum",
-        head=gear.merlinic_nuke_head,neck="Saevus Pendant +1",ear1="Malignance Earring",ear2="Friomisi Earring",
-        body=gear.merlinic_nuke_body,hands="Mallquis Cuffs +2",ring1="Shiva Ring +1",ring2="Shiva Ring +1",
-        back=gear.nuke_jse_back,waist=gear.ElementalObi,legs="Merlinic Shalwar",feet=gear.merlinic_nuke_feet}
+    sets.midcast['Elemental Magic'].Fodder = {main=gear.grioavolr_nuke_staff,sub="Zuuxowu Grip",  ammo="Dosis Tathlum",
+      head=gear.merlinic_nuke_head,
+	  neck="Saevus Pendant +1",
+	  ear1="Malignance Earring",
+	  ear2="Friomisi Earring",
+      body=gear.merlinic_nuke_body,
+	  hands="Mallquis Cuffs +2",
+	  ring1="Shiva Ring +1",
+	  ring2="Shiva Ring +1",
+      back=gear.nuke_jse_back,
+	  waist=gear.ElementalObi,
+	  legs="Merlinic Shalwar",
+	  feet=gear.merlinic_nuke_feet
+	}
 
-	sets.midcast['Elemental Magic'].HighTierNuke = set_combine(sets.midcast['Elemental Magic'], {sub="Niobid Strap",ammo="Pemphredo Tathlum",hands="Amalric Gages +1",back=gear.nuke_jse_back,feet=gear.merlinic_nuke_feet})
+	sets.midcast['Elemental Magic'].HighTierNuke = set_combine(sets.midcast['Elemental Magic'], {
+	  sub="Niobid Strap",
+	  ammo="Pemphredo Tathlum",
+	  hands="Amalric Gages +1",
+    })
 	sets.midcast['Elemental Magic'].HighTierNuke.Resistant = set_combine(sets.midcast['Elemental Magic'].Resistant, {sub="Niobid Strap",ammo="Pemphredo Tathlum",hands="Amalric Gages +1",back=gear.nuke_jse_back})
 	sets.midcast['Elemental Magic'].HighTierNuke.Fodder = set_combine(sets.midcast['Elemental Magic'].Fodder, {sub="Alber Strap",ammo="Pemphredo Tathlum",hands="Amalric Gages +1",back=gear.nuke_jse_back,feet=gear.merlinic_nuke_feet})
 	
@@ -365,15 +389,17 @@ function init_gear_sets()
 	sets.RecoverMP = {body="spaekona's coat +2"}
 	-- Gear for Magic Burst mode.
     sets.MagicBurst = set_combine(sets.midcast['Elemental Magic'], {
-	    head="Merlinic Hood", -- "Ea Hat",
+	  -- Grioavolr -- 7 MBB
+	    head="Merlinic Hood", -- "Ea Hat",  11 MBB
 		neck="Mizu. Kubikazari",
-		body="Ea Houppelande",
+		body="Ea Houppelande",           -- 8/8 MBB/2
 		hands="Amalric Gages +1",
 		ring1="Mujin Band",
 		ring2="Locus Ring",
 		waist=gear.ElementalObi,
-		legs="Merlinic Shalwar", -- "Ea Slops",
+		legs="Merlinic Shalwar", -- "Ea Slops",    -- 11 MBB
 		feet="Amalric Nails +1", -- "Jhakri Pigaches +2"
+		-- Taranus's Cape            -- 5 MBB
 	})
 	
 	sets.ResistantMagicBurst = set_combine(sets.MagicBurst, {})	
