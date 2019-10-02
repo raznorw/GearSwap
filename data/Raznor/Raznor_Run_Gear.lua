@@ -433,7 +433,7 @@ function init_gear_sets()
 		ring1="Moonbeam Ring",    
 		ring2="Niqmaddu Ring",    -- "Petrov Ring",   -- "Epona's Ring",
         back=gear.stp_jse_back,
-		waist="Windbuffet Belt +1",
+		waist="Windbuffet belt +1",
 		legs="Samnuha Tights",
 		feet="Herculean Boots", -- "Turms leggings",       -- gear.herculean_ta_feet
 	}
@@ -500,7 +500,7 @@ function init_gear_sets()
     sets.engaged.Tank = {
       ammo="Staunch Tathlum",       -- 2/2
       head="Fu. Bandeau +2",        -- 5/0     -- "Meghanada Visor +2",
-	  neck="Loricate Torque",        -- 3/3 (current futhark torque) 5/5**
+	  neck="Loricate Torque",        -- 4/4 (current futhark torque) 5/5**
 	  ear1="Odnawa Earring +1",        -- odnawa+1 0/2
 	  ear2="Odnawa Earring",      -- odnawa   0/1
       body="Futhark Coat +1",      --  7/7
