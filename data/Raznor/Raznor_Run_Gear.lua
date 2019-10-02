@@ -180,7 +180,7 @@ function init_gear_sets()
 			}
 			
 	sets.precast.FC.DT = {ammo="Staunch Tathlum",
-        head="Rune. Bandeau +3",neck="Loricate Torque",ear1="Odnowa Earring +1",ear2="Odnowa Earring",
+        head="Rune. Bandeau +1",neck="Loricate Torque",ear1="Odnowa Earring +1",ear2="Odnowa Earring",
         body="Runeist's Coat +3",hands=gear.herculean_dt_hands,ring1="Moonbeam Ring",ring2="Moonbeam Ring",
         back="Moonbeam Cape",waist="Flume Belt +1",legs="Eri. Leg Guards +1",feet="Erilaz Greaves +1"}
 			
@@ -268,7 +268,7 @@ function init_gear_sets()
 	  legs="Taeon Tights",
 	  feet="Taeon Boots"}
     )
-    sets.midcast['Regen'] = set_combine(sets.midcast['Enhancing Magic'],{head="Rune. Bandeau +3"}) 
+    sets.midcast['Regen'] = set_combine(sets.midcast['Enhancing Magic'],{head="Rune. Bandeau +1"}) 
 	sets.midcast['Refresh'] = set_combine(sets.midcast['Enhancing Magic'],{head="Erilaz Galea +1"}) 
     sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {ear2="Earthcry Earring",waist="Siegel Sash"})
 	sets.midcast.Flash = set_combine(sets.Enmity, {})
@@ -423,7 +423,7 @@ function init_gear_sets()
 	--------------------------------------
 
     sets.engaged = {
-	    ammo="Ginsen",            -- "Yamarang",
+	    ammo="Yamarang",
         head="Adhemar Bonnet +1", -- "Dampening Tam",
 		neck="Anu Torque",
 		ear1="Telos Earring", -- "Brutal Earring",
@@ -507,10 +507,10 @@ function init_gear_sets()
 	  hands="Turms Mittens +1", -- gear.herculean_dt_hands,
 	  ring1="Moonbeam Ring",       --  4/4
 	  ring2="Defending Ring",      -- 10/10
-      back=gear.enmity_jse_back,   -- "Shadow Mantle",
+      back=gear.enmity_jse_back,   -- 10/0  "Shadow Mantle",
 	  waist="Flume Belt +1",       --  4/0
 	  legs="Eri. Leg Guards +1",   --  7/0
-	  feet="Erilaz Greaves +1"
+	  feet="Erilaz Greaves +1"     --  5/0
 	  
 	  -- -- "Turms Leggings"        --    5/0   "Erilaz Greaves +1"
 	  -- ear1="Genmei Earring",
@@ -522,7 +522,6 @@ function init_gear_sets()
       -- back="Shadow Mantle",
 	  -- waist="Engraved Belt",
 	  -- legs=gear.herculean_dt_legs,
-	  -- feet="Erilaz Greaves +1"
 	}
     
     

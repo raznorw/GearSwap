@@ -45,7 +45,7 @@ function init_gear_sets()
 	sets.DWMax = {ear1="Dudgeon Earring",ear2="Heartseeker Earring",body="Adhemar Jacket +1",hands="Floral Gauntlets",waist="Shetal Stone"}
 	
 	-- Weapons sets
-	sets.weapons.Aeneas = {main="Aeneas",sub="Taming Sari"}
+	sets.weapons.Aeneas = {main="Kaja Knife",sub="Taming Sari"}
 	sets.weapons.LowBuff = {main="Aeneas",sub="Blurred Knife +1"}
 	
     -- Precast Sets
@@ -72,10 +72,21 @@ function init_gear_sets()
 
     sets.precast.Jig = {} --legs="Horos Tights", feet="Maxixi Toe Shoes"
 
-    sets.precast.Step = {ammo="Falcon Eye",
-        head="Dampening Tam",neck="Combatant's Torque",ear1="Telos Earring",ear2="Digni. Earring",
-        body="Mummu Jacket +2",hands="Adhemar Wrist. +1",ring1="Ramuh Ring +1",ring2="Ramuh Ring +1",
-        back=gear.stp_jse_back,waist="Olseni Belt",legs="Meg. Chausses +2",feet=gear.herculean_acc_feet}
+    sets.precast.Step = {
+	  ammo="Falcon Eye",
+      head="Dampening Tam",
+	  neck="Combatant's Torque",
+	  ear1="Telos Earring",
+	  ear2="Digni. Earring",
+      body="Mummu Jacket +2",
+	  hands="Adhemar Wrist. +1",
+	  ring1="Ramuh Ring +1",
+	  ring2="Ramuh Ring +1",
+      back=gear.stp_jse_back,
+	  waist="Olseni Belt",
+	  legs="Meg. Chausses +2",
+	  feet=gear.herculean_acc_feet
+	}
 		
     sets.Enmity = {ammo="Paeapua",
         head="Genmei Kabuto",neck="Unmoving Collar +1",ear1="Friomisi Earring",ear2="Trux Earring",
@@ -261,10 +272,21 @@ function init_gear_sets()
 		feet="Herculean Boots", -- "Turms leggings",       -- gear.herculean_ta_feet
 	}	
 		
-    sets.engaged.DTLite = {ammo="Yamarang",
-        head="Dampening Tam",neck="Loricate Torque +1",ear1="Brutal Earring",ear2="Sherida Earring",
-        body="Adhemar Jacket +1",hands="Adhemar Wrist. +1",ring1="Defending Ring",ring2="Epona's Ring",
-        back=gear.stp_jse_back,waist="Windbuffet Belt +1",legs="Samnuha Tights",feet=gear.herculean_ta_feet}
+    sets.engaged.DTLite = {
+      head="Dampening Tam",
+	  ammo="Yamarang",
+	  neck="Loricate Torque +1",
+	  ear1="Brutal Earring",
+	  ear2="Sherida Earring",
+      body="Adhemar Jacket +1",
+	  hands="Adhemar Wrist. +1",
+	  ring1="Defending Ring",
+	  ring2="Epona's Ring",
+      back=gear.stp_jse_back,
+	  waist="Windbuffet Belt +1",
+	  legs="Samnuha Tights",
+	  feet=gear.herculean_ta_feet
+	}
 		
     sets.engaged.SomeAcc = {ammo="Yamarang",
         head="Dampening Tam",neck="Combatant's Torque",ear1="Brutal Earring",ear2="Sherida Earring",
