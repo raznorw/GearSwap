@@ -192,7 +192,7 @@ function get_sets()
       ammo="Staunch Tathlum", -- +1
       head="Azimuth Hood +1", 
       body="jhakri robe +2",    -- Telchine w/+3 pet regen (leaf orb), Meva (snow not orb), duskdim (enhancing magic duration)
-      hands="Geo. Mitaines +1", -- +3 these eventually
+      hands="Geo. Mitaines +2", -- +3 these eventually
       legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+6 "Mag.Atk.Bns."+6','Magic burst dmg.+11%','INT+6','Mag. Acc.+15',}},
 	   -- Legs - Telchine
       feet={ name="Bagua Sandals +1", augments={'Enhances "Radial Arcana" effect',}}, -- 3 regen, can +3 for 5.. ~10M for +2, more for +3
@@ -366,7 +366,7 @@ function get_sets()
       head="Azimuth Hood +1",  -- 15
 	  neck="Bagua Charm +1",   --  
 	  body="Bagua Tunic",      -- 10 skill
-	  hands="Geo. Mitaines +1",-- 15 skill
+	  hands="Geo. Mitaines +2",-- 15 skill
       back="Lifestream Cape",  -- 14 skill, 20 indi duration
     })
 	-- For Indi Spells
@@ -403,12 +403,17 @@ function get_sets()
 
 	-- Enfeebling
 	sets.midcast.IntEnfeebling = set_combine(sets.midcast.casting,{
+	  main="Grioavolr",
+	  sub="Enki Strap",
 	  head="Jhakri Coronal +1", 
+	  body="Jhakri Robe +2",
       hands="Jhakri cuffs +2", --macc
 	  feet="Jhakri Pigaches +1", --macc
+	  legs="Jhakri Slops +1",
+	  back="Lifestream Cape",
+	  waist="Rumination Sash",
     })
-	sets.midcast.MndEnfeebling = set_combine(sets.midcast.casting,{
-
+	sets.midcast.MndEnfeebling = set_combine(sets.midcast.IntEnfeebling,{	  
     })
 	
     -- Enhancing
