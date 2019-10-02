@@ -431,6 +431,7 @@ function init_gear_sets()
         body="Ayanmo corazza +2", -- "Adhemar Jacket +1",
 		hands="Adhemar Wrist. +1",
 		ring1="Moonbeam Ring",    
+		ring1="Moonbeam Ring",    
 		ring2="Niqmaddu Ring",    -- "Petrov Ring",   -- "Epona's Ring",
         back=gear.stp_jse_back,
 		waist="Windbuffet belt +1",
@@ -500,29 +501,21 @@ function init_gear_sets()
     sets.engaged.Tank = {
       ammo="Staunch Tathlum",       -- 2/2
       head="Fu. Bandeau +2",        -- 5/0     -- "Meghanada Visor +2",
-	  neck="Loricate Torque",        -- 4/4 (current futhark torque) 5/5**
+	  neck="Futhark Torque",        -- 4/4 (current futhark torque) 5/5**
 	  ear1="Odnawa Earring +1",        -- odnawa+1 0/2
 	  ear2="Odnawa Earring",      -- odnawa   0/1
       body="Futhark Coat +1",      --  7/7
 	  hands="Turms Mittens +1", -- gear.herculean_dt_hands,
 	  ring1="Moonbeam Ring",       --  4/4
 	  ring2="Defending Ring",      -- 10/10
-      back=gear.enmity_jse_back,   -- 10/0  "Shadow Mantle",
+      back=gear.enmity_jse_back,   -- (5 parry) "Shadow Mantle",
 	  waist="Flume Belt +1",       --  4/0
 	  legs="Eri. Leg Guards +1",   --  7/0
-	  feet="Erilaz Greaves +1"     --  5/0
-	  
-	  -- -- "Turms Leggings"        --    5/0   "Erilaz Greaves +1"
-	  -- ear1="Genmei Earring",
-	  -- ear2="Ethereal Earring",
-      -- body="Futhark Coat +1",
-	  -- hands=gear.herculean_dt_hands,
-	  -- ring1="Defending Ring",
-	  -- ring2="Shadow Ring",
-      -- back="Shadow Mantle",
-	  -- waist="Engraved Belt",
-	  -- legs=gear.herculean_dt_legs,
-	}
+	  feet="Erilaz Greaves +1"     --  5/0	  
+	  -- -- "Turms Leggings"   
+	} -- assuming refined grip (3/3), and swapping futhark coat for runeist coat (50 meva)
+	-- DT 23, PDT 21 -- 44 total, need 6 to lose coat
+	-- ideally lose 15, cape 10 PDT -> 5 parry.  feet 5 pdt to 4(5) parry
     
     
 	sets.engaged.SomeAcc.Tank = sets.engaged.Tank
