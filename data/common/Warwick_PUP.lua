@@ -688,11 +688,10 @@ function init_gear_sets()
     ]]
     sets.midcast.Pet.WSNoFTP = {
 	    main="Pitre Fists",
-        head = Empy_Karagoz.Head_PTPBonus,
-		feet="Punchinellos",
+        -- head = Empy_Karagoz.Head_PTPBonus,
+		-- feet="Punchinellos",
        -- Add your set here 
-        -- Add your set here
-       -- Add your set here 
+
     }
 
     --[[
@@ -722,7 +721,7 @@ function init_gear_sets()
         sets.midcast.Pet.WSNoFTP,
         {
             -- Add your gear here that would be different from sets.midcast.Pet.WSNoFTP
-            head = Empy_Karagoz.Head_PTPBonus
+            -- head = Empy_Karagoz.Head_PTPBonus
         }
     )
 

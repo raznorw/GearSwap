@@ -280,10 +280,9 @@ function init_gear_sets()
 
     sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {	
         -- head="Carmine Mask +1",
-		ear2="Telos Earring",
-        body=gear.meg_body,
+		ear2="Telos Earring",        
 		-- ring2="Rufescent Ring",
-        legs="Carmine Cuisses +1"
+        -- legs="Carmine Cuisses +1"
 	})
 	
     sets.precast.WS['Last Stand'] = {

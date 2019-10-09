@@ -18,7 +18,8 @@ function user_setup()
 	send_command('bind ^` input /ja "Hasso" <me>')
 	send_command('bind !` input /ja "Seigan" <me>')
 	send_command('bind @` gs c cycle SkillchainMode')
-	send_command('bind !r gs c weapons Greatsword;gs c update')
+	-- send_command('bind PAGEUP gs c cycle weapons') 
+    send_command('bind PAGEDOWN gs c cycle weapons') 		
 	
 	select_default_macro_book()
 end

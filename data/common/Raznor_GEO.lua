@@ -220,14 +220,18 @@ function get_sets()
 	-- they end in [idleMode] so it will derive from either the normal or the dt set depending in which mode you are then add the pieces filled in below.
     sets.me.melee = set_combine(sets.me.idle[idleMode],{
       head="Jhakri Coronal +1",
-      legs="Jhakri Slops +1",
+	  right_ear="Digni. Earring",
+	  body="jhakri robe +2",
 	  hands="Jhakri Cuffs +2",
+	  legs="Jhakri Slops +1",
 	  feet="Jhakri Pigaches +1",
+	  
 	  waist="Eschan Stone",
     })
 	
     -- Luopan is out
 	sets.pan.melee = set_combine(sets.pan.idle[idleMode],{
+	  body="jhakri robe +2",
 	  head="Jhakri Coronal +1",
       legs="Jhakri Slops +1",
 	  hands="Jhakri Cuffs +2",
@@ -253,6 +257,10 @@ function get_sets()
 		back="Refraction Cape"
     }
 
+    sets.me["Seraph Strike"] = set_combine(sets.me["Flash Nova"], {
+	  right_ear="Moonshade Earring",
+	})
+	
     sets.me["Realmrazer"] = {
 
     }

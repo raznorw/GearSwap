@@ -53,7 +53,7 @@ function init_gear_sets()
     -- Fast cast sets for spells
 
     sets.precast.FC = {
-	  -- main=gear.grioavolr_fc_staff,
+	  main="Grioavolr",            -- gear.grioavolr_fc_staff,
 	  sub="Clerisy Strap",         -- 2
 	  ammo="Incantor Stone",       -- 2  -- "Impatiens",
 	  -- ammo="Hasty Pinion +1",  (Haste)				

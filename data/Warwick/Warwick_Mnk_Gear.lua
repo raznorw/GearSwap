@@ -18,6 +18,7 @@ function user_setup()
 	send_command('bind !` input /ja "Perfect Counter" <me>')
 	send_command('bind ^backspace input /ja "Mantra" <me>')
 	send_command('bind @` gs c cycle SkillchainMode')
+	send_command('bind PAGEDOWN gs c cycle weapons') 	
 	
 	select_default_macro_book()
 end
@@ -256,12 +257,12 @@ function init_gear_sets()
 	-- Normal melee sets
 	sets.engaged = {
 	  ammo="Honed Tathlum",      -- "Ginsen",
-	  head="Herculean Helm",     -- "Dampening Tam",
+	  head="Malignance Chapeau",     -- "Dampening Tam",
 	  neck="Anu Torque",         -- "Moonbeam Nodowa",
 	  ear1="Steelflash Earring", -- "Brutal Earring",
 	  ear2="Sherida Earring",
 	  body="Mummu Jacket +1",       -- "Ken. Samue",
-	  hands="Herculean Gloves",  -- "Adhemar Wrist. +1",
+	  hands="Malignance Gloves",  -- "Adhemar Wrist. +1",
 	  ring1="Petrov Ring",       -- "Niqmaddu Ring",
 	  ring2="Mummu Ring",        -- "Epona's Ring",
 	  back="Segomo's Mantle",
@@ -353,7 +354,7 @@ function init_gear_sets()
 
 	sets.buff.Doom = set_combine(sets.buff.Doom, {})
 	sets.buff.Sleep = {head="Frenzy Sallet"}
-	sets.buff.Impetus = {} --body="Bhikku Cyclas +1"
+	sets.buff.Impetus = { body="Bhikku Cyclas +1" }
 	sets.buff.Footwork = {feet="Shukuyu Sune-Ate"}
 	
 	sets.FootworkWS = {feet="Shukuyu Sune-Ate"}

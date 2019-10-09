@@ -269,7 +269,7 @@ function init_gear_sets()
         -- back=gear.stp_jse_back,  "Senuna's Mantle"
 		waist="Windbuffet Belt +1",
 		legs="Samnuha Tights",
-		feet="Herculean Boots", -- "Turms leggings",       -- gear.herculean_ta_feet
+		feet="Malignance Boots", -- "Herculean Boots", -- "Turms leggings",       -- gear.herculean_ta_feet
 	}	
 		
     sets.engaged.DTLite = {
@@ -293,10 +293,10 @@ function init_gear_sets()
         body="Adhemar Jacket +1",hands="Adhemar Wrist. +1",ring1="Petrov Ring",ring2="Epona's Ring",
         back=gear.stp_jse_back,waist="Windbuffet Belt +1",legs="Samnuha Tights",feet=gear.herculean_ta_feet}
     
-	sets.engaged.Acc = {ammo="Yamarang",
+	sets.engaged.Acc = set_combine(sets.engaged, {ammo="Yamarang",
         head="Dampening Tam",neck="Combatant's Torque",ear1="Telos Earring",ear2="Sherida Earring",
         body="Mummu Jacket +2",hands="Floral Gauntlets",ring1="Ilabrat Ring",ring2="Regal Ring",
-        back=gear.stp_jse_back,waist="Reiki Yotai",legs="Meg. Chausses +2",feet=gear.herculean_acc_feet}
+        back=gear.stp_jse_back,waist="Reiki Yotai",legs="Meg. Chausses +2",feet=gear.herculean_acc_feet})
 		
     sets.engaged.FullAcc = {ammo="Falcon Eye",
         head="Dampening Tam",neck="Combatant's Torque",ear1="Telos Earring",ear2="Digni. Earring",
@@ -344,14 +344,14 @@ end
 function select_default_macro_book()
     -- Default macro set/book
     if player.sub_job == 'WAR' then
-        set_macro_page(10, 9)
+        set_macro_page(2, 5)
     elseif player.sub_job == 'NIN' then
-        set_macro_page(1, 9)
+        set_macro_page(2, 5)
     elseif player.sub_job == 'SAM' then
-        set_macro_page(9, 9)
+        set_macro_page(2, 5)
     elseif player.sub_job == 'THF' then
-        set_macro_page(8, 9)
+        set_macro_page(2, 5)
     else
-        set_macro_page(10, 9)
+        set_macro_page(2, 5)
     end
 end

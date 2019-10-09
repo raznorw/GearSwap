@@ -19,7 +19,7 @@ gear.meg_hands = "Meg. Gloves +2"
 gear.meg_legs  = "Meg. Chausses +2"
 gear.meg_feet  = "Meg. Jam. +1" -- TODO: +2
 
-gear.jhakri_body = "Jhakri Robe +1"
+gear.jhakri_body = "jhakri robe +2"
 
 gear.gada_enhancing_club = {name="Gada",augments={'Enh. Mag. eff. dur. +6','STR+3','Mag. Acc.+8','"Mag.Atk.Bns."+17','DMG:+7',}}
 gear.gada_healing_club = {name="Gada",augments={'"Cure" potency +9%','Mag. Acc.+11','"Mag.Atk.Bns."+13','DMG:+3',}}
