@@ -354,6 +354,7 @@ function get_sets()
             
     -- Whatever you want to equip mid-cast as a catch all for all spells, and we'll overwrite later for individual spells
     sets.midcast.casting = {
+	    ammo="Pamphredo Tathlum",
         head="Jhakri Coronal +1",
 		body="jhakri robe +2",
 		hands="Amalric Gages +1",
@@ -391,7 +392,8 @@ function get_sets()
 
     })
 	sets.midcast.MB.normal = set_combine(sets.midcast.nuking.normal, {
-	  -- main="Grioavolr",        -- 7
+	  main="Grioavolr",        -- 7
+	  sub="Enki Strap",
       head="Merlinic Hood",
 	  neck="Mizu. Kubikazari",
 	  body="ea houppelande",      -- 8

@@ -268,11 +268,11 @@ function init_gear_sets()
 	  back="Segomo's Mantle",
 	  waist="Moonbow Belt",
 	  legs="Mummu Kecks +1",        -- "Samnuha Tights",
-	  feet="Herculean Boots",    -- gear.herculean_ta_feet
+	  feet="Mummu Gamash. +1",    -- "Herculean Boots",    -- gear.herculean_ta_feet
 	}
 	
 	sets.engaged.SomeAcc = set_combine(sets.engaged, {
-	  ammo="Falcon Eye",
+	  ammo="Falco//n Eye",
 	  head="Dampening Tam",
 	  neck="Moonbeam Nodowa"
 	})
