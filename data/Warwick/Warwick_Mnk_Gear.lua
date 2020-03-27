@@ -94,7 +94,7 @@ function init_gear_sets()
 	  neck="Fotia Gorget",
 	  ear1="Brutal Earring",
 	  ear2="Sherida Earring",
-	  body="Ken. Samue",
+	  body="Ken. Samue +1",
 	  hands="Adhemar Wrist. +1",
 	  ring1="Niqmaddu Ring",
 	  ring2="Regal Ring",
@@ -255,24 +255,40 @@ function init_gear_sets()
 	-- EG: sets.engaged.Dagger.Accuracy.Evasion
 
 	-- Normal melee sets
-	sets.engaged = {
-	  ammo="Honed Tathlum",      -- "Ginsen",
-	  head="Malignance Chapeau",     -- "Dampening Tam",
-	  neck="Anu Torque",         -- "Moonbeam Nodowa",
-	  ear1="Steelflash Earring", -- "Brutal Earring",
-	  ear2="Sherida Earring",
-	  body="Mummu Jacket +1",       -- "Ken. Samue",
-	  hands="Malignance Gloves",  -- "Adhemar Wrist. +1",
-	  ring1="Petrov Ring",       -- "Niqmaddu Ring",
-	  ring2="Mummu Ring",        -- "Epona's Ring",
-	  back="Segomo's Mantle",
-	  waist="Moonbow Belt",
-	  legs="Mummu Kecks +1",        -- "Samnuha Tights",
-	  feet="Mummu Gamash. +1",    -- "Herculean Boots",    -- gear.herculean_ta_feet
+	sets.engaged={
+		main="Karambit",
+		ammo="Ginsen",
+		head="Ken. Jinpachi +1",
+		body="Ken. Samue +1",
+		hands="Ken. Tekko +1",
+		legs="Ken. Hakama +1",
+		feet="Ken. Sune-Ate +1",
+		neck="Mnk. Nodowa +1",
+		waist="Moonbow Belt +1",
+		left_ear="Steelflash Earring",
+		right_ear="Sherida Earring",
+		left_ring="Petrov Ring",
+		right_ring="Mummu Ring",
+		back={ name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+5','"Store TP"+10','Phys. dmg. taken-10%',}},
 	}
+	-- sets.engaged = {
+	  -- ammo="Honed Tathlum",      -- "Ginsen",
+	  -- head="Malignance Chapeau",     -- "Dampening Tam",
+	  -- neck="Mnk. nodowa +1",         -- "Moonbeam Nodowa",
+	  -- ear1="Steelflash Earring", -- "Brutal Earring",
+	  -- ear2="Sherida Earring",
+	  -- body="Mummu Jacket +1",       -- "Ken. Samue",
+	  -- hands="Malignance Gloves",  -- "Adhemar Wrist. +1",
+	  -- ring1="Petrov Ring",       -- "Niqmaddu Ring",
+	  -- ring2="Mummu Ring",        -- "Epona's Ring",
+	  -- back="Segomo's Mantle",
+	  -- waist="Moonbow Belt",
+	  -- legs="Mummu Kecks +1",        -- "Samnuha Tights",
+	  -- feet="Mummu Gamash. +1",    -- "Herculean Boots",    -- gear.herculean_ta_feet
+	-- }
 	
 	sets.engaged.SomeAcc = set_combine(sets.engaged, {
-	  ammo="Falco//n Eye",
+	  ammo="Falcon Eye",
 	  head="Dampening Tam",
 	  neck="Moonbeam Nodowa"
 	})

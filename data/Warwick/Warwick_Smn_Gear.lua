@@ -102,7 +102,8 @@ function init_gear_sets()
     -- Midcast sets
     --------------------------------------
 
-    sets.midcast.FastRecast = {main=gear.grioavolr_fc_staff,sub="Clerisy Strap +1",ammo="Hasty Pinion +1",
+    sets.midcast.FastRecast = {
+	  main=gear.grioavolr_fc_staff,sub="Clerisy Strap +1",ammo="Hasty Pinion +1",
 		head="Amalric Coif +1",neck="Voltsurge Torque",ear1="Enchntr. Earring +1",ear2="Loquacious Earring",
 		body="Inyanga Jubbah +2",hands="Volte Gloves",ring1="Kishar Ring",ring2="Prolix Ring",
 		back="Swith Cape +1",waist="Witful Belt",legs="Lengo Pants",feet="Regal Pumps +1"}
@@ -214,15 +215,15 @@ function init_gear_sets()
       main="Gridarvor", 
       sub="Elan Strap",
       ammo="Sancus Sachet +1",
-      head={ name="Apogee Crown +1", augments={'Pet: Attack+25','Pet: "Mag.Atk.Bns."+25','Blood Pact Dmg.+8',}},
+      head="Apogee Crown +1",
 	  neck="Smn. Collar +1",
       body="Con. Doublet +2",
       hands={ name="Merlinic Dastanas", augments={'Blood Pact Dmg.+9','Pet: Mag. Acc.+3','Pet: "Mag.Atk.Bns."+7',}},
       legs={ name="Merlinic Shalwar", augments={'Pet: Accuracy+14 Pet: Rng. Acc.+14','Blood Pact Dmg.+6','Pet: DEX+2','Pet: Mag. Acc.+7','Pet: "Mag.Atk.Bns."+13',}},
       feet={ name="Apogee Pumps +1", augments={'Pet: Attack+25','Pet: "Mag.Atk.Bns."+25','Blood Pact Dmg.+8',}},      
-      waist="Incarnation Sash",
+      waist="Regal Belt", -- "Incarnation Sash",
       left_ring={name="Varar Ring", bag="wardrobe2"},      
-	  right_ring={name="Varar Ring", bag="wardrobe"},      
+	  right_ring={name="Varar Ring", bag="wardrobe3"},      
       back=gear.phys_jse_back,
     }
 	
@@ -295,7 +296,9 @@ function init_gear_sets()
         back="Umbra Cape",waist="Fucho-no-obi",legs="Assid. Pants +1",feet="Baayami Sabots"}
     
     -- Idle sets
-    sets.idle = {main="Bolelabunga",sub="Genmei Shield",ammo="Staunch Tathlum",
+    sets.idle = {
+	  main="Bolelabunga",
+	  sub="Genmei Shield",ammo="Staunch Tathlum",
         head="Beckoner's Horn +1",neck="Loricate Torque",ear1="Etiolation Earring",ear2="Ethereal Earring",
         body="Shomonjijoe +1",hands=gear.merlinic_refresh_hands,ring1="Defending Ring",ring2="Dark Ring",
         back="Umbra Cape",waist="Regal Belt",legs="Assid. Pants +1",
@@ -329,12 +332,23 @@ function init_gear_sets()
     
     -- Can make due without either the head or the body, and use +refresh items in those slots.
     
-    sets.idle.Avatar = {main="Gridarvor",sub="Oneiros Grip",ammo="Sancus Sachet +1",
-        head="Beckoner's Horn +1",neck="Caller's Pendant",ear1="Etiolation Earring",ear2="Evans Earring",
-        body="Shomonjijoe +1",hands=gear.merlinic_refresh_hands,ring1="Evoker's Ring",ring2="Dark Ring",
-        back="Conveyance Cape",waist="Lucidity Sash",legs="Assid. Pants +1",
-		feet="Apogee Pumps +1", -- "Convo. Pigaches +3"
-		}
+    sets.idle.Avatar = {
+	  main="Gridarvor",
+	  sub="Oneiros Grip",
+	  ammo="Sancus Sachet +1",
+      head="Beckoner's Horn +1",
+	  neck="Caller's Pendant",
+	  ear1="Etiolation Earring",
+	  ear2="Evans Earring",
+      body="Shomonjijoe +1",
+	  hands=gear.merlinic_refresh_hands,
+	  ring1="Evoker's Ring",
+	  ring2="Dark Ring",
+      back="Conveyance Cape",
+	  waist="Lucidity Sash",
+      legs="Assid. Pants +1",
+	  feet="Apogee Pumps +1", -- "Convo. Pigaches +3"
+	}
 		
     sets.idle.PDT.Avatar = {main="Terra's Staff",sub="Oneiros Grip",ammo="Sancus Sachet +1",
         head="Beckoner's Horn +1",neck="Loricate Torque",ear1="Etiolation Earring",ear2="Evans Earring",

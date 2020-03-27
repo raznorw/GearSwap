@@ -17,6 +17,8 @@
 
     ASCII Art Generator: http://www.network-science.de/ascii/
     
+	
+	--gs c hub keybinds
 ]]
 
 -- Initialization function for this job file.
@@ -328,6 +330,7 @@ function init_gear_sets()
     sets.precast.JA["Maintenance"] = set_combine(sets.precast.JA["Repair"], {})
 
     sets.precast.JA.Maneuver = {
+	    -- main="Midnight",
         neck = "Buffoon's Collar +1",
         body = "Karagoz Farsetto",
         hands = Artifact_Foire.Hands_Mane_Overload,
@@ -387,7 +390,11 @@ function init_gear_sets()
         Hybrid Mode = Normal
     ]]
     sets.engaged.Master = {
-       -- Add your set here 
+      head="Malignance Chapeau",
+      body="Tali'ah Manteel +1",
+      hands="Malignance Gloves",
+      legs="Malignance Tights",
+      feet="Tali'ah Crackows +1",
     }
 
     -------------------------------------Acc
@@ -433,10 +440,9 @@ function init_gear_sets()
         Offense Mode = MasterPet
         Hybrid Mode = Normal
     ]]
-    sets.engaged.MasterPet = {
+    sets.engaged.MasterPet = set_combine(sets.engaged.Master, {
        -- Add your set here 
-	   body="Heyoka Harness",
-    }
+    })
 
     -------------------------------------Acc
     --[[
@@ -528,7 +534,7 @@ function init_gear_sets()
         Idle Mode = Idle
     ]]
     sets.idle.Pet = {
-       main="Condemners",
+       -- main="Condemners",
        head="Anwig Salade",
        body="Taeon Tabard", 
        hands="Taeon Gloves",
@@ -537,7 +543,7 @@ function init_gear_sets()
        -- neck="Adad Amulet",
        waist="Isa Belt",
        -- left_ear="Handler's Earring +1",
-       -- right_ear="Enmerkar Earring",
+       right_ear="Enmerkar Earring",
        left_ring="Thurandaut Ring",
        -- right_ring="Overbearing Ring",
        back="Visucius's Mantle",       
@@ -568,7 +574,7 @@ function init_gear_sets()
       -- neck="Adad Amulet",
       -- waist="Incarnation Sash",
       -- left_ear="Handler's Earring +1",
-      -- right_ear="Enmerkar Earring",
+      right_ear="Enmerkar Earring",
       left_ring="Thurandaut Ring",
       -- right_ring="Overbearing Ring",
       -- back={ name="Visucius's Mantle", augments={'Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20','Accuracy+20 Attack+20','Pet: Attack+10 Pet: Rng.Atk.+10','Pet: Haste+10','Pet: Damage taken -5%',}}
@@ -590,7 +596,7 @@ function init_gear_sets()
        -- neck="Adad Amulet",
        waist="Isa Belt",
        -- left_ear="Handler's Earring +1",
-       -- right_ear="Enmerkar Earring",
+       right_ear="Enmerkar Earring",
        left_ring="Thurandaut Ring",
        -- right_ring="Overbearing Ring",
        back="Visucius's Mantle",       
@@ -611,7 +617,7 @@ function init_gear_sets()
     ]]
     sets.idle.Pet.Engaged = {
        main="Pitre Fists",
-       head="Anwig Salade",
+       head="Heyoka Cap", -- "Anwig Salade",
 	   neck="Shulmanu Collar",
        body="Taeon Tabard", 
        hands="Taeon Gloves",
@@ -620,7 +626,7 @@ function init_gear_sets()
        -- neck="Adad Amulet",
        waist="Klouskap Sash", -- "Isa Belt",
        -- left_ear="Handler's Earring +1",
-       -- right_ear="Enmerkar Earring",
+       right_ear="Enmerkar Earring",
        left_ring="Thurandaut Ring",
        right_ring="Varar Ring", -- "Overbearing Ring",
        back="Visucius's Mantle",        
@@ -647,7 +653,7 @@ function init_gear_sets()
         Hybrid Mode = DT
     ]]
     sets.idle.Pet.Engaged.DT = {
-      main="Condemners",
+      -- main="Condemners",
        head="Anwig Salade",
        body="Taeon Tabard", 
        hands="Taeon Gloves",
@@ -656,7 +662,7 @@ function init_gear_sets()
        -- neck="Adad Amulet",
        waist="Isa Belt",
        -- left_ear="Handler's Earring +1",
-       -- right_ear="Enmerkar Earring",
+       right_ear="Enmerkar Earring",
        left_ring="Thurandaut Ring",
        -- right_ring="Overbearing Ring",
        back="Visucius's Mantle",
@@ -687,7 +693,7 @@ function init_gear_sets()
         WSNoFTP is the default weaponskill set used
     ]]
     sets.midcast.Pet.WSNoFTP = {
-	    main="Pitre Fists",
+	    -- main="Pitre Fists",
         -- head = Empy_Karagoz.Head_PTPBonus,
 		-- feet="Punchinellos",
        -- Add your set here 
@@ -699,7 +705,7 @@ function init_gear_sets()
         then this set will be equipped
     ]]
     sets.midcast.Pet.WSFTP = {
-	    main="Pitre Fists",
+	    -- main="Pitre Fists",
         head = Empy_Karagoz.Head_PTPBonus,
        -- Add your set here 
         -- Add your set here
@@ -710,7 +716,9 @@ function init_gear_sets()
         Base Weapon Skill Set
         Used by default if no modifier is found
     ]]
-    sets.midcast.Pet.WS = {}
+    sets.midcast.Pet.WS = {
+	  feet="Taeon Boots"
+	}
 
     --Chimera Ripper, String Clipper
     sets.midcast.Pet.WS["STR"] = set_combine(sets.midcast.Pet.WSNoFTP, {})
@@ -729,7 +737,9 @@ function init_gear_sets()
     sets.midcast.Pet.WS["MND"] = set_combine(sets.midcast.Pet.WSNoFTP, {})
 
     -- Armor Piercer, Armor Shatterer
-    sets.midcast.Pet.WS["DEX"] = set_combine(sets.midcast.Pet.WSNoFTP, {})
+    sets.midcast.Pet.WS["DEX"] = set_combine(sets.midcast.Pet.WSNoFTP, {
+	  feet="Taeon Boots"
+	})
 
     -- Arcuballista, Daze
     sets.midcast.Pet.WS["DEXFTP"] =

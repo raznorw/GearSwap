@@ -101,18 +101,18 @@ function init_gear_sets()
 	-- TODO -- STP version
     sets.precast.CorsairShot = {
 	  ammo=gear.QDbullet,
-      head=gear.herculean_nuke_head,
+      head="Malignance Chapeau",
 	  neck="Iskur Gorget",
 	  ear1="Dedition Earring",
 	  ear2="Telos Earring",
       body="Mummu Jacket +2",
-	  hands="Adhemar Wristbands +1",
+	  hands="Malignance Gloves",
 	  ring1="Ilabrat Ring",
 	  ring2="Petrov Ring",
       back=gear.tp_ranger_jse_back,
 	  waist="Goading Belt",
-	  legs="Chas. Culottes +1",
-	  feet="Carmine Greaves +1"
+	  legs="Malignance Tights",
+	  feet="Malignance Boots"
 	}
 		
 	-- TODO
@@ -131,7 +131,7 @@ function init_gear_sets()
 	sets.precast.CorsairShot['Light Shot'] = {ammo=gear.QDbullet,
         head="Carmine Mask +1",neck="Sanctity Necklace",ear1="Digni. Earring",ear2="Telos Earring",
         body="Mummu Jacket +2",hands="Leyline Gloves",ring1="Stikini Ring",ring2="Stikini Ring",
-        back=gear.ranger_wsd_jse_back,waist="Eschan Stone",legs="Mummu Kecks +2",feet="Mummu Gamash. +2"}
+        back=gear.ranger_wsd_jse_back,waist="Eschan Stone",legs="Mummu Kecks +2",feet="Malignance Boots"}
 
     sets.precast.CorsairShot['Dark Shot'] = set_combine(sets.precast.CorsairShot['Light Shot'], {feet="Chass. Bottes +1"})
 
@@ -293,11 +293,11 @@ function init_gear_sets()
 		ear2="Telos Earring",
         body="Laksa. Frac +3",
 		hands=gear.meg_hands,
-		ring1="Regal Ring",
+		ring1="Ilabrat Ring", -- "Regal Ring",
 		ring2="Dingir Ring",
         back=gear.ranger_wsd_jse_back,
 		waist="Light Belt", -- "Fotia Belt",
-		legs=gear.meg_legs,
+		legs=gear.herculean_wsd_legs,
 		feet="Herculean Boots", -- "Lanun Bottes +3"
 		}
 
@@ -389,19 +389,21 @@ function init_gear_sets()
 		ring1="Dingir Ring",
 		ring2="Ilabrat Ring",
         back=gear.tp_ranger_jse_back,
-		waist="Eschan Stone", -- "Yemaya Belt",
+		waist="Reiki Yotai", -- "Eschan Stone", -- "Yemaya Belt",
 		legs=gear.meg_legs, -- "Adhemar Kecks",
 		feet=gear.meg_feet
 		}
 
     sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {           		
+	    head="Malignance Chapeau",
         body="Laksa. Frac +3",
-		hands=gear.meg_hands,
+		hands="Malignance Gloves",
+		legs="Malignance Tights",
+		feet="Malignance Boots"
 		-- ring2="Dingir Ring",
-        -- legs="Laksa. Trews +3"
 		})
 		
-	sets.buff['Triple Shot'] = {body="Chasseur's Frac +1"}
+	sets.buff['Triple Shot'] = {body="Chasseur's Frac +1", legs="Oshosi Trousers"}
     
     -- Sets to return to when not performing an action.
 	
@@ -415,21 +417,17 @@ function init_gear_sets()
     
 
     -- Idle sets
-    sets.idle = {
+    sets.idle = set_combine(sets.malignance, {
 	  ammo=gear.RAbullet,      
-	  head="Malignance Chapeau",      -- 6/6	   
 	  neck="Loricate Torque",         --  5/5
 	  ear1="Odnowa earring",          --  0/1   "Genmei Earring",
 	  ear2="Odnowa earring +1",       --  0/2  "Sanare Earring",
-      body=gear.meg_body,             --  7/0
-	  hands="Malignance Gloves",      --  5/5   112 Meva
-	  ring1="Defending Ring",         -- 10/10
+      ring1="Defending Ring",         -- 10/10
 	  ring2="meghanada Ring",         --  2/0    "Dark Ring",
       back=gear.str_wsd_jse_back,     -- 10/0    "Moonlight Cape",
 	  waist="Flume Belt +1",          --  4/0
-	  legs="Carmine Cuisses +1",
-	  feet="Malignance Boots"
-	}
+	  legs="Carmine Cuisses +1"	  
+	})
 		
     sets.idle.Refresh = {ammo=gear.RAbullet,
         head="Rawhide Mask",neck="Loricate Torque",ear1="Genmei Earring",ear2="Ethereal Earring",
@@ -437,20 +435,14 @@ function init_gear_sets()
         back="Moonlight Cape",waist="Flume Belt +1",legs="Rawhide Trousers",feet=gear.herculean_dt_feet}
     
     -- Defense sets
-    sets.defense.PDT = {
+    sets.defense.PDT = set_combine(sets.malignance, {  -- 31 DT
 	    ammo=gear.RAbullet,
-        head=gear.meg_head,             --  4/0  (+1)
-		neck="Loricate Torque",         --  5/5  (NQ)
-	    
-        body=gear.meg_body,             --  7/0  (+1)
-		hands="Malignance Gloves",      --  5/5  112 Meva
-		ring1="Defending Ring",         -- 10/10
+        neck="Loricate Torque",         --  5/5  (NQ)
+	    ring1="Defending Ring",         -- 10/10
 		ring2="meghanada Ring",         --  2/0    "Dark Ring",   
         back=gear.str_wsd_jse_back,     -- 10/0    "Moonlight Cape",
-		waist="Flume Belt +1",          --  4/0
-		legs=gear.meg_legs,             --  6/0  (+2)
-		feet="Ahosi Leggings"           --  4/0  107 meva
-	}  -- overcap on PDT  57/23
+		waist="Flume Belt +1",          --  4/0				
+	})  -- overcap on PDT  57/23
 
     sets.defense.MDT = set_combine(sets.defense.PDT, {
 	   ammo=gear.RAbullet,
@@ -484,12 +476,13 @@ function init_gear_sets()
 
 	-- Weapons sets
 	sets.weapons.Default = {main="Lanun Knife",sub="Nusku Shield",range="Fomalhaut"}
-	sets.weapons.DualWeapons = {main="Naegling",sub="Lanun Knife",range="Fomalhaut"}
-	sets.weapons.DualSavageWeapons = {main="Naegling",sub="Demersal Degen",range="Anarchy +2"}
-	sets.weapons.DualLeadenRanged = {main="Lanun Knife",sub="Naegling",range="Fomalhaut"}
+	sets.weapons.DualWeapons = {main="Lanun Knife",sub="Tauret",range="Fomalhaut"}
+	-- sets.weapons.DualSavageWeapons = {main="Naegling",sub="Demersal Degen",range="Anarchy +2"}
+	sets.weapons.DualSavageWeapons = {main="Naegling",sub="Lanun Knife",range="Anarchy +2"}
+	sets.weapons.DualLeadenRanged = {main="Lanun Knife",sub="Tauret",range="Fomalhaut"}
 	sets.weapons.DualLeadenMelee = {main="Naegling",sub="Atoyac",range="Fomalhaut"}
 	sets.weapons.DualLeadenMeleeAcc = {main="Naegling",sub="Lanun Knife",range="Fomalhaut"}
-	sets.weapons.DualKustawi = {main="Kaja Knife",sub="Naegling",range="Anarchy +2"} -- "Fomalhaut"} -- "Kustawi +1"
+	sets.weapons.DualKustawi = {main="Tauret",sub="Naegling",range="Anarchy +2"} -- "Fomalhaut"} -- "Kustawi +1"
 	
     -- Engaged sets
 
@@ -499,12 +492,11 @@ function init_gear_sets()
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
     
     -- Normal melee group
-    sets.engaged = {
+    sets.engaged = set_combine(sets.malignance, {
 		head="Adhemar Bonnet +1", -- "Dampening Tam",
 		neck="Iskur Gorget",
 		ear1="Telos Earring", -- "Cessance Earring",
 		ear2="Brutal Earring",
-		body="Rawhide Vest", -- "Meg. Cuirie +2", nice PDT, but no multi-attack/STP
 		hands="Adhemar Wrist. +1",
 		ring1="Ilabrat Ring", -- "Epona's Ring",
 		ring2="Petrov Ring",
@@ -512,7 +504,7 @@ function init_gear_sets()
 		waist="Windbuffet Belt +1",  -- "Reiki Yotai"-- needDW somewhere
 		legs="Samnuha Tights",
 		feet="Herculean Boots", -- gear.herculean_ta_feet
-	}
+	})
     
     sets.engaged.Acc = {
 		head="Malignance Chapeau", -- gear.meg_head, -- "Carmine Mask +1", Lanun Tricore +3

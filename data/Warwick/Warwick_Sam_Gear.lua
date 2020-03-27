@@ -18,8 +18,8 @@ function user_setup()
 	send_command('bind !backspace input /ja "Third Eye" <me>')
 	send_command('bind @` gs c cycle SkillchainMode')
 	send_command('bind !@^` gs c cycle Stance')
-	send_command('bind !r gs c set skipprocweapons false;gs c weapons ProcWeapon;gs c set WeaponskillMode Proc;gs c update')
-	send_command('bind ^r gs c set skipprocweapons true;gs c weapons Default;gs c set WeaponskillMode Normal;gs c update')
+	-- send_command('bind !r gs c set skipprocweapons false;gs c weapons ProcWeapon;gs c set WeaponskillMode Proc;gs c update')
+	-- send_ssscommand('bind ^r gs c set skipprocweapons true;gs c weapons Default;gs c set WeaponskillMode Normal;gs c update')
 	send_command('bind ^q gs c weapons Bow;gs c update')
 
     select_default_macro_book()
@@ -65,10 +65,24 @@ function init_gear_sets()
 	   
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
-    sets.precast.WS = {ammo="Knobkierrie",
-        head=gear.valorous_wsd_head,neck="Fotia Gorget",ear1="Lugra Earring +1",ear2="Moonshade Earring",
-        body="Sakonji Domaru +3",hands=gear.valorous_wsd_hands,ring1="Niqmaddu Ring",ring2="Regal Ring",
-        back=gear.ws_jse_back,waist="Fotia Belt",legs="Wakido Haidate +3",feet=gear.valorous_wsd_feet}
+    sets.precast.WS = {
+	  ammo="Knobkierrie",
+      head="Flam. Zucchetto +2",            -- gear.valorous_wsd_head,
+	  neck="Fotia Gorget",
+	  ear1="Lugra Earring +1",
+	  ear2="Moonshade Earring",
+      body="Sakonji Domaru +3",
+	  hands=gear.valorous_wsd_hands,
+	  ring1="Niqmaddu Ring",
+	  ring2="Regal Ring",
+      back=gear.ws_jse_back,
+	  waist="Fotia Belt",
+	  legs="Wakido Haidate +3",
+	  feet=gear.valorous_wsd_feet
+	}
+		
+		
+		
     sets.precast.WS.SomeAcc = set_combine(sets.precast.WS, {feet="Wakido Sune. +3"})
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {head="Wakido Kabuto +3",body="Sakonji Domaru +3",feet="Wakido Sune. +3"})
     sets.precast.WS.FullAcc = set_combine(sets.precast.WS, {head="Wakido Kabuto +3",neck="Moonbeam Nodowa",ear1="Zennaroi Earring",ear2="Telos Earring",body="Sakonji Domaru +3",hands="Wakido Kote +3",ring1="Ramuh Ring +1",feet="Wakido Sune. +3"})
@@ -232,18 +246,39 @@ function init_gear_sets()
     
     -- Normal melee group
     -- Delay 450 GK, 25 Save TP => 65 Store TP for a 5-hit (25 Store TP in gear)
-    sets.engaged = {ammo="Ginsen",
-        head="Flam. Zucchetto +2",neck="Moonbeam Nodowa",ear1="Cessance Earring",ear2="Brutal Earring",
-        body="Kasuga Domaru +1",hands=gear.valorous_acc_hands,ring1="Niqmaddu Ring",ring2="Petrov Ring",
-        back=gear.stp_jse_back,waist="Ioskeha Belt",legs="Wakido Haidate +3",feet="Flam. Gambieras +2"}
-    sets.engaged.SomeAcc = {ammo="Ginsen",
-        head="Flam. Zucchetto +2",neck="Moonbeam Nodowa",ear1="Cessance Earring",ear2="Telos Earring",
-        body="Ken. Samue",hands="Wakido Kote +3",ring1="Niqmaddu Ring",ring2="Flamma Ring",
-        back=gear.stp_jse_back,waist="Ioskeha Belt",legs="Wakido Haidate +3",feet="Flam. Gambieras +2"}
-    sets.engaged.Acc = {ammo="Ginsen",
-        head="Wakido Kabuto +3",neck="Moonbeam Nodowa",ear1="Digni. Earring",ear2="Telos Earring",
-        body="Ken. Samue",hands="Wakido Kote +3",ring1="Niqmaddu Ring",ring2="Regal Ring",
-        back=gear.stp_jse_back,waist="Ioskeha Belt",legs="Wakido Haidate +3",feet="Flam. Gambieras +2"}
+    sets.engaged = {
+	  ammo="Ginsen",
+      head="Flam. Zucchetto +2",
+	  neck="Sam. Nodowa +1",          -- "Moonbeam Nodowa",
+	  ear1="Bladeborn Earring",          -- "Cessance Earring",
+	  ear2="Steelflash Earring",         -- "Brutal Earring",
+	  head="Ken. Jinpachi +1",
+	  body="Ken. Samue +1",
+	  hands="Ken. Tekko +1",
+	  legs="Ken. Hakama +1",
+	  feet="Ken. Sune-Ate +1",
+      -- body="Flamma Korazin +1",          -- "Kasuga Domaru +1",
+	  -- hands="Flam. Manopolas +1",         -- gear.valorous_acc_hands,
+	  ring1="Flamma Ring",               -- "Niqmaddu Ring",
+	  ring2="Petrov Ring",
+      back=gear.stp_jse_back,
+	  waist="Ioskeha Belt",
+	  -- legs="Flamma Dirs +1",             -- "Wakido Haidate +3",
+	  -- feet="Flam. Gambieras +1"
+	}
+		
+		
+		
+    sets.engaged.SomeAcc = set_combine(sets.engaged, {
+        ear2="Telos Earring",
+        body="Ken. Samue",
+		hands="Wakido Kote +3",
+		ring2="Flamma Ring",
+        })
+    sets.engaged.Acc = {
+        head="Wakido Kabuto +3",ear1="Digni. Earring",
+        ring2="Regal Ring"}
+        
     sets.engaged.FullAcc = {ammo="Ginsen",
         head="Wakido Kabuto +3",neck="Moonbeam Nodowa",ear1="Zennaroi Earring",ear2="Telos Earring",
         body="Ken. Samue",hands="Wakido Kote +3",ring1="Ramuh Ring +1",ring2="Regal Ring",
@@ -375,15 +410,15 @@ end
 function select_default_macro_book()
     -- Default macro set/book
     if player.sub_job == 'DNC' then
-        set_macro_page(3, 1)
+        set_macro_page(2, 4)
     elseif player.sub_job == 'WAR' then
-        set_macro_page(1, 1)
+        set_macro_page(2, 4)
     elseif player.sub_job == 'NIN' then
-        set_macro_page(10, 1)
+        set_macro_page(2, 4)
     elseif player.sub_job == 'THF' then
-        set_macro_page(2, 1)
+        set_macro_page(2, 4)
     else
-        set_macro_page(1, 1)
+        set_macro_page(1, 4)
     end
 end
 

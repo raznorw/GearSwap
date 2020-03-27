@@ -75,6 +75,8 @@ function init_gear_sets()
 	sets.precast.FC.Arts = {}
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
+	  main="Pedagogy Staff",
+	  sub="Enki Strap"
 	--   waist="Siegel Sash"
 	})
 
@@ -98,12 +100,12 @@ function init_gear_sets()
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS['Myrkr'] = {
-	    ammo="Staunch Tathlum",
+	    ammo="staunch tathlum +1",
 		head="Pixie Hairpin +1",
 		neck="Sanctity Necklace",
 		ear1="Evans Earring",
 		ear2="Etiolation Earring",
-		body="Amalric Doublet",
+		body="Amalric Doublet +1",
 		hands="Regal Cuffs",
 		ring1="Mephitas's Ring +1",
 		ring2="Mephitas's Ring",
@@ -125,13 +127,13 @@ function init_gear_sets()
 	-- Gear for Magic Burst mode.
     sets.MagicBurst = {
 	  main="Akademos",
-	  sub="Alber Strap",
-	  ammo="Elis Tome",
+	  sub="Enki Strap",
+	  ammo="Pemphredo Tathlum",
 	  head="Merlinic Hood",
 	  neck="Mizu. Kubikazari",
 	  ear1="Regal Earring",
 	  ear2="Malignance Earring", -- "Friomisi Earring", -- 2 more mab, less macc / int
-	  body="jhakri robe +2",
+	  body="Amalric Doublet +1",
 	  hands="Amalric Gages +1",
 	  ring1="Mujin Band",
 	  ring2="Locus Ring",
@@ -181,16 +183,29 @@ function init_gear_sets()
 	  waist="Hachirin-no-Obi"
 	})
 
-    sets.midcast.Curaga = sets.midcast.Cure
+    sets.midcast.Curaga = sets.midcast.LightWeatherCure
 
 	sets.Self_Healing = {neck="Phalaina Locket",ring1="Kunaji Ring",ring2="Asklepian Ring",waist="Gishdubar Sash"}
 	sets.Cure_Received = {neck="Phalaina Locket",ring1="Kunaji Ring",ring2="Asklepian Ring",waist="Gishdubar Sash"}
 	sets.Self_Refresh = {back="Grapevine Cape",waist="Gishdubar Sash",feet="Inspirited Boots"}
 	
-	sets.midcast.Cursna = {main="Oranyan",sub="Clemency Grip",ammo="Hasty Pinion +1",
-		head="Amalric Coif +1",neck="Debilis Medallion",ear1="Enchntr. Earring +1",ear2="Loquacious Earring",
-		body="Zendik Robe",hands="Hieros Mittens",ring1="Haoma's Ring",ring2="Menelaus's Ring",
-		back="Swith Cape +1",waist="Witful Belt",legs="Psycloth Lappas",feet="Vanya Clogs"}
+	sets.midcast.Cursna = {
+	  -- main="Oranyan",
+	  -- sub="Clemency Grip",
+	  -- ammo="Hasty Pinion +1",
+	  head="Merlinic Hood",           -- "Amalric Coif +1",
+	  -- neck="Debilis Medallion",
+	  -- ear1="Enchntr. Earring +1",
+	  -- ear2="Loquacious Earring",
+	  body="Zendik Robe",
+	  -- hands="Hieros Mittens",
+	  -- ring1="Haoma's Ring",
+	  ring2="Menelaus's Ring",
+	  -- back="Swith Cape +1",
+	  -- waist="Witful Belt",
+	  -- legs="Psycloth Lappas",
+	  feet="Vanya Clogs"
+	}
 		
 	sets.midcast.StatusRemoval = set_combine(sets.midcast.FastRecast, {main="Oranyan",sub="Clemency Grip"})
 
@@ -213,6 +228,7 @@ function init_gear_sets()
 	}
 
     sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
+	  main="Pedagogy Staff",
 	  back="Bookworm's Cape",
 	})
 
@@ -321,15 +337,27 @@ function init_gear_sets()
     -- Elemental Magic sets are default for handling low-tier nukes.
     sets.midcast['Elemental Magic'] = {
 	  main="Akademos",
+	  sub="Alber Strap",
+	  ammo="Elis Tome",
+	  head="Merlinic Hood",
+	  neck="Mizu. Kubikazari",
+	  ear1="Regal Earring",
+	  ear2="Malignance Earring", -- "Friomisi Earring", -- 2 more mab, less macc / int
+	  body="Amalric Doublet +1",
+	  hands="Amalric Gages +1",
+	  ring1="Mujin Band",
+	  ring2="Locus Ring",
+	  back="Bookworm's Cape",
+	  waist="Eschan Stone",
+	  legs="Amalric Slops +1",
+	  feet="Amalric Nails +1", -- "Jhakri Pigaches +2"
+	}
 	  -- sub="Zuuxowu Grip",
 	  -- ammo="Dosis Tathlum",
       -- head=gear.merlinic_nuke_head,
 	  -- neck="Saevus Pendant +1",
 	  -- ear1="Crematio Earring",
-	  ear2="Malignance Earring", -- "Friomisi Earring",
-        body=gear.merlinic_nuke_body,hands="Mallquis Cuffs +2",ring1="Shiva Ring +1",ring2="Shiva Ring +1",
-        back=gear.nuke_jse_back,waist=gear.ElementalObi,legs="Merlinic Shalwar",feet=gear.merlinic_nuke_feet}
-
+	
     sets.midcast['Elemental Magic'].Resistant = {main=gear.grioavolr_nuke_staff,sub="Niobid Strap",ammo="Pemphredo Tathlum",
         head=gear.merlinic_nuke_head,neck="Sanctity Necklace",
 		ear1="Malignance Earring", -- "Crematio Earring",
@@ -399,9 +427,9 @@ function init_gear_sets()
     sets.idle = {
 	  main="Bolelabunga",
 	  sub="Genmei Shield",
-	  ammo="Homiliary",
-      head="Befouled Crown",
-	  neck="Loricate Torque +1",
+	  ammo="staunch tathlum +1",  -- "Homiliary",
+      head="Volte Beret",      -- "Befouled Crown",
+	  neck="Loricate Torque",
 	  ear1="Etiolation Earring",
 	  ear2="Ethereal Earring",
       body="Jhakri Robe +2",
@@ -417,7 +445,7 @@ function init_gear_sets()
     sets.idle.PDT = {
 	  main="Malignance Pole",
 	  sub="Oneiros Grip",
-	  ammo="Staunch Tathlum",
+	  ammo="staunch tathlum +1",
         head="Gende. Caubeen +1",
 	  neck="Loricate Torque",
 	    ear1="Etiolation Earring",
@@ -458,7 +486,7 @@ function init_gear_sets()
     sets.defense.MDT = set_combine(sets.defense.PDT, {	
     })
 		
-    sets.defense.MEVA = {main="Oranyan",sub="Umbra Strap",ammo="Staunch Tathlum",
+    sets.defense.MEVA = {main="Oranyan",sub="Umbra Strap",ammo="staunch tathlum +1",
         head=gear.merlinic_nuke_head,neck="Warder's Charm +1",ear1="Etiolation Earring",ear2="Sanare Earring",
         body=gear.merlinic_nuke_body,hands="Gende. Gages +1",ring1="Vengeful Ring",ring2="Purity Ring",
         back=gear.nuke_jse_back,waist="Acuity Belt +1",legs="Merlinic Shalwar",feet=gear.merlinic_nuke_feet}
@@ -481,7 +509,7 @@ function init_gear_sets()
         body="Jhakri Robe +2",hands=gear.merlinic_refresh_hands,ring1="Defending Ring",ring2="Sheltered Ring",
         back="Umbra Cape",waist="Flax Sash",legs="Assid. Pants +1",feet=gear.chironic_refresh_feet}
 		
-	sets.engaged.PDT = {main="Malignance Pole", sub="Oneiros Grip",ammo="Staunch Tathlum",
+	sets.engaged.PDT = {main="Malignance Pole", sub="Oneiros Grip",ammo="staunch tathlum +1",
         head="Gende. Caubeen +1",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="Ethereal Earring",
         body="Vrikodara Jupon",hands="Gende. Gages +1",ring1="Defending Ring",ring2="Dark Ring",
         back="Umbra Cape",waist="Flax Sash",legs="Hagondes Pants +1",feet=gear.chironic_refresh_feet}

@@ -214,39 +214,43 @@ function get_sets()
     })   
     -- Combat Related Sets
       
+	-- https://www.ffxiah.com/forum/topic/41358/bubble-trouble-a-geomancer-guide/55/#3454820
+	  -- Consider TP offhand club with Judgement WS
     -- Melee
     -- Anything you equip here will overwrite the perpetuation/refresh in that slot.
 	-- No Luopan out
 	-- they end in [idleMode] so it will derive from either the normal or the dt set depending in which mode you are then add the pieces filled in below.
     sets.me.melee = set_combine(sets.me.idle[idleMode],{
-      head="Jhakri Coronal +1",
+      head="Jhakri Coronal +2",       -- "Bagua Galero +3"
 	  right_ear="Digni. Earring",
-	  body="jhakri robe +2",
-	  hands="Jhakri Cuffs +2",
-	  legs="Jhakri Slops +1",
-	  feet="Jhakri Pigaches +1",
-	  
-	  waist="Eschan Stone",
+	  body="jhakri robe +2",          -- "Bagua Tunic +3"
+	  hands="Jhakri Cuffs +2",        -- "Raetic Bangles"  -- +1
+	  legs="Jhakri Slops +1",         -- "Jhakri Slops +2"
+	  feet="Jhakri Pigaches +1",      -- "Volte Boots"	 
+	  feet="Jhakri Pigaches +1",      -- "Volte Boots"	 
+	  waist="Eschan Stone",           -- "Goading Belt" (5 haste, 5 stp, +3 enmity)
+	  -- Chirich Ring +1 on fingers?
+	  neck="Clotharius Torque",    -- or mabye sanctity necklaces
+	  -- ammo="Hasty Pinion +1",   -- vanir battery? 
     })
 	
     -- Luopan is out
 	sets.pan.melee = set_combine(sets.pan.idle[idleMode],{
 	  body="jhakri robe +2",
-	  head="Jhakri Coronal +1",
+	  head="Jhakri Coronal +2",
       legs="Jhakri Slops +1",
 	  hands="Jhakri Cuffs +2",
 	  feet="Jhakri Pigaches +1",
-	  waist="Eschan Stone",
+	  waist="Grunfeld Rope",
     }) 
     
     -- Weapon Skill sets
 	-- Example:
     sets.me["Flash Nova"] = {
-        head="Jhakri Coronal +1",
-		body="Jhakri robe +2",
+        head="Jhakri Coronal +2",
+		body="Amalric Doublet +1",
 		hands="Amalric Gages +1",
-		legs="Merlinic Shalwar",  -- currently 20+14 macc, 15+28 MAB, 43 int, 11 MBB
-		-- legs="Jhakri Slops +1",		
+		legs="Amalric Slops +1",  		
 		feet="Amalric Nails +1",
 		neck="Sanctity Necklace",
 		waist="Eschan Stone", -- "Searing Sash",
@@ -325,6 +329,8 @@ function get_sets()
 	-- Fill up with your JSE! 
     sets.precast["Life Cycle"] = {
     	body = "Geomancy Tunic +1",
+    	body = "Geomancy Tunic +1",
+    	body = "Geomancy Tunic +1",
     }
     sets.precast["Bolster"] = {
     	body = "Bagua Tunic +1",
@@ -347,6 +353,10 @@ function get_sets()
     sets.precast["Radial Arcana"] = {
     	feet = "Bagua Sandals +1",
     }
+	
+	sets.precast["Dispelga"] = {
+    	main="Daybreak",
+    }
 
     ----------
     -- Midcast
@@ -356,10 +366,9 @@ function get_sets()
     sets.midcast.casting = {
 	    ammo="Pamphredo Tathlum",
         head="Jhakri Coronal +1",
-		body="jhakri robe +2",
+		body="Amalric Doublet +1",
 		hands="Amalric Gages +1",
-		legs="Merlinic Shalwar",  -- currently 20+14 macc, 15+28 MAB, 43 int, 11 MBB
-		-- legs="Jhakri Slops +1",		
+		legs="Amalric Slops +1", 		
 		feet="Amalric Nails +1",
 		neck="Sanctity Necklace",
 		waist="Eschan Stone", -- "Searing Sash",
@@ -392,13 +401,13 @@ function get_sets()
 
     })
 	sets.midcast.MB.normal = set_combine(sets.midcast.nuking.normal, {
-	  main="Grioavolr",        -- 7
-	  sub="Enki Strap",
-      head="Merlinic Hood",
-	  neck="Mizu. Kubikazari",
-	  body="ea houppelande",      -- 8
-	  legs="Merlinic Shalwar",
-	  left_ring="Locus Ring",
+	  -- main="Grioavolr",           --  7
+	  -- sub="Enki Strap",
+      head="Merlinic Hood",       -- 11
+	  neck="Mizu. Kubikazari",    -- 10
+	  body="ea houppelande",      --  8
+	  legs="Amalric Slops +1",
+	  left_ring="Locus Ring",     --  5
 	  right_ring="Mujin Band",
 	  feet="Amalric Nails +1",
 	})
@@ -413,8 +422,8 @@ function get_sets()
 
 	-- Enfeebling
 	sets.midcast.IntEnfeebling = set_combine(sets.midcast.casting,{
-	  main="Grioavolr",
-	  sub="Enki Strap",
+	  -- main="Grioavolr",
+	  -- sub="Enki Strap",
 	  head="Jhakri Coronal +1", 
 	  body="Jhakri Robe +2",
       hands="Jhakri cuffs +2", --macc
@@ -460,6 +469,8 @@ function get_sets()
     sets.midcast.regen = set_combine(sets.midcast.enhancing,{
 
     }) 
+	
+	sets.midcast['Dispelga'] = set_combine(sets.midcast.IntEnfeebling, {main="Daybreak"})
    
     ------------
     -- Aftercast

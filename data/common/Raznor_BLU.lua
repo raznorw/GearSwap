@@ -1,3 +1,7 @@
+-- 33/57 : 10:18   -- didn't track precise enough
+-- 39.0/66.0 : 10:48 - 5 JP  -- up to 150K gil, 5 JP in 1/2 hour
+-- 46.5/76.8 : 11:20 - 11 JP-
+
 ---Intermediate BLU .lua---
 --Based off of Spicyryan of Asura's .lua https://pastebin.com/u/Spicyryan
 
@@ -11,6 +15,11 @@
 gear = {}                      -- auto-defined when using mote base
 include('Raznor-oldglobals.lua')  -- auto-included if using a mote base
 define_global_sets()           -- auto-called if using a mote base
+
+send_command('bind f6 sellnpc powder')
+send_command('bind @f6 buypowder 3333')               -- win-f6
+send_command('bind !f6 sparks buyall acheron shield') -- alt-f6
+send_command('bind !f input /follow warwick') -- alt-f
 
 -- Set Macros - auto avail when using mote I believe
 function set_macros(sheet,book)
@@ -48,23 +57,23 @@ function get_sets()
 	Idle_ind = 1
 	sets.Idle.Standard = {
 		ammo = "Staunch Tathlum",      -- +1
-		head = gear.Adhemar_D_head,    -- HerculeanHelm.Refresh
+		head = "Malignance Chapeau", 
 		neck = "Loricate Torque",      -- +1
 		ear1 = "Impregnable Earring",  -- Genmei Earring
 		ear2 = "Brutal Earring",       -- Etiolation Earring
 		body = "Jhakri robe +2",       -- Jhakri Robe +2 (refresh)
 		hands = "Malignance Gloves",   -- heculeanGloves.refresh
 		ring1 = "Defending Ring",      -- Karieyh Ring +1 -- regain?
-		ring2 = "Sheltered Ring",
+		ring2 = "Shneddick Ring",
 		back = "Moonbeam Cape",
 		waist = "Flume Belt +1",
-		legs = "Carmine Cuisses +1",
-		feet = "Ahosi Leggings"
+		legs = "Malignance Tights",
+		feet = "Malignance Boots"
 	}
 
 	--TP Sets--
 	sets.TP = {}
-	sets.TP.index = { 'DualWield', 'Acc' }
+	sets.TP.index = { 'DualWield', 'Acc', 'MEva' }
 	TP_ind = 1 --Default set, 1 is DW, 2, Haste, etc
 
 	--DW III, +31 DW needed to cap with only Flutter on--
@@ -79,20 +88,29 @@ function get_sets()
 		ring1 = "Ilabrat Ring", -- "Rajas Ring",
 		ring2 = "Petrov Ring",
 		back = Rosmerta.STP, -- gear.BLU_TP_Cape,
-		waist = "Windbuffet Belt +1",
+		waist = "Reiki Yotai", -- "Windbuffet Belt +1",
 		legs = "Carmine Cuisses +1", -- "Herculean Trousers",
 		feet="Malignance Boots" -- "Aya. Gambieras +1" -- TaeonBoots.TP
 	}
 	
-	-- \todo Make at least a midacc set
+	-- \todo Make at least a midacc set w/adhemar hands, maybe head
 	
-	sets.TP.Acc = {
+	sets.TP.Acc = set_combine(sets.TP.DualWield, {
 		ammo = "Falcon Eye",
 		head = "Malignance Chapeau",
-		neck = "Mirage Stole +1",  -- or maybe asperity?  att +*, STP 3, DA 2
+		ear1 = "Telos Earring",
+		hands = "Malignance Gloves", -- gear.Adhemar_B_hands,
+		waist = "Reiki Yotai",  -- grunfeld rope?
+		legs = "Malignance Tights" -- "Carmine Cuisses +1", -- "Herculean Trousers",
+	})
+	
+	sets.TP.MEva = {
+		ammo = "Falcon Eye",
+		head = "Malignance Chapeau",
+		neck = "Mirage Stole +1",  -- or maybe asperity?  att +8, STP 3, DA 2
 		ear1 = "Telos Earring",
 		ear2 = "Brutal Earring",
-		body = "Ayanmo Corazza +2", -- RawhideVest.TP,
+		body = "Malignance Tabard", -- RawhideVest.TP,
 		hands = "Malignance Gloves", -- gear.Adhemar_B_hands,
 		ring1 = "Defending Ring", -- "Rajas Ring",
 		ring2 = "Ilabrat Ring",
@@ -158,7 +176,7 @@ function get_sets()
 		neck = "Snow Gorget",
 		ear1 = "Telos Earring",
 		ear2 = "Brutal Earring",
-		body = "Ayanmo Corazza +2",
+		body = "Sayadio's Kaftan",     -- "Ayanmo Corazza +2",
 		hands = "Adhemar Wrist. +1",   -- ? maybe jhakri +1 instead for WSD?
 		ring1 = "Enlivened Ring",
 		ring2 = "Rajas Ring",
@@ -181,7 +199,7 @@ function get_sets()
 		neck="Mirage Stole +1",
 		right_ear="Ishvara Earring",
 		left_ear="Moonshade Earring",
-		body = "Assim. Jubbah +2",
+		body = "Assim. Jubbah +3",
 	    hands="Jhakri cuffs +2",	 
 		back=Rosmerta.WSD,
 		waist="Grunfeld Rope", -- Sulla belt? more att, but less str/dex, so prob not
@@ -197,20 +215,19 @@ function get_sets()
 	sets.Expiacion.Attack = set_combine(sets.SavageBlade.Mike, {
 	})
 
-
 	sets.SanguineBlade = {
 		ammo = "Pemphredo Tathlum",
 		head = "Pixie Hairpin +1",
 		neck = "Sanctity Necklace",
 		ear1 = "Friomisi Earring",
-		ear2 = "Hecate's earring",
-		body = "jhakri robe +2",
+		ear2 = "Regal earring",
+		body = "Amalric Doublet +1",
 		hands = gear.Amalric_D_hands,
 		ring1 = "Archon Ring",
-		ring2 = "Rufescent Ring",
+		-- ring2 = "Rufescent Ring",
 		back = Rosmerta.Nuke, 
-		waist = "Eschan Stone", -- todo: don't have
-		legs = "Jhakri Slops +1",
+		waist = "Eschan Stone", 
+		legs = "Amalric Slops +1",
 		feet = gear.Amalric_D_feet
 	}
 
@@ -277,28 +294,30 @@ function get_sets()
 	MAB_ind = 1
 
 	sets.BlueMagic.INT.MAB = {
-		ammo = "Staunch Tathlum", -- "Pemphredo Tathlum",
-		head = "Jhakri Coronal +1",
+		ammo = "Pemphredo Tathlum",
+		head = gear.jhakri_head,
 		neck = "Sanctity Necklace",
 		ear1 = "Regal Earring",
 		ear2 = "Friomisi earring",
-		body = "jhakri robe +2",
+		body = "Amalric Doublet +1",
 		hands = gear.Amalric_D_hands,
-		ring1 = {name = "Diamond Ring", augments={'INT+1','Ice resistance+1',}},
+		ring1 = "Kishar Ring", -- {name = "Diamond Ring", augments={'INT+1','Ice resistance+1',}},
 		ring2 = "Jhakri Ring",
 		back = Rosmerta.Nuke, -- gear.BLU_MAB_Cape,
-		waist = "Hyorin obi",
-		legs = "Jhakri Slops +1",
+		waist = "Eschan Stone", -- "Hyorin obi",
+		legs = "Amalric Slops +1",
 		feet = gear.Amalric_D_feet
 	}
 	
 	sets.BlueMagic.INT.MACC = set_combine(sets.BlueMagic.INT.MAB, {
+	    hands = gear.jhakri_hands,
+		feet = gear.jhakri_feet,
 		-- ammo = "Pemphredo Tathlum",
 		-- neck = "Erra Pendant",
 		-- ear1 = "Hermetic Earring",
 		-- ear2 = "Friomisi earring",
 		-- ring1 = "Shiva Ring +1",
-		-- ring2 = "Acumen Ring",
+		ring2 = "Kishar Ring", -- "Acumen Ring",
 		-- back = "Aptitude Mantle",
 		-- waist = "Eschan Stone",
 	})
@@ -307,10 +326,10 @@ function get_sets()
 	--CP cap 50%, CP Received cap 30%--
 	sets.BlueMagic.Cures = {
 		-- ammo = "Hydrocera",
-		-- head = "Carmine Mask",
+		head = "Carmine Mask +1",
 		-- neck = "Phalaina Locket",
-		-- ear1 = "Mendicant's Earring",
-		-- ear2 = "Calamitous Earring",
+		ear1 = "Mendi. Earring",
+		ear2 = "Regal Earring",  -- "Calamitous Earring",
 		body = "Pinga Tunic", -- "Vrikodara Jupon",
 		-- hands = "Hashishin Bazubands +1",
 		-- ring1 = "Stikini Ring",
@@ -321,21 +340,19 @@ function get_sets()
 		-- feet = "Medium's Sabots"
 	}
 	
-	sets.BlueMagic.SelfCures = {
+	sets.BlueMagic.SelfCures = set_combine(sets.BlueMagic.Cures, {
 		-- ammo = "Hydrocera",
-		-- head = "Carmine Mask",
 		-- neck = "Phalaina Locket",
-		ear1 = "Mendicant's Earring",
 		-- ear2 = "Calamitous Earring",
 		-- body = "Vrikodara Jupon",
 		-- hands = "Telchine Gloves",
 		-- ring1 = "Kunaji Ring",
 		-- ring2 = "Rufescent Ring",
 		-- --back = "Aptitude Mantle",
-		-- waist = "Gishdubar Sash",
+		waist = "Gishdubar Sash",
            -- legs = "Gyve Trousers",
 		-- feet = "Medium's Sabots"
-	}
+	})
 
 	--Conserve MP Gear--
 	sets.BlueMagic.Buffs = {
@@ -412,21 +429,21 @@ function get_sets()
 		feet = "Medium's Sabots"
 	}
 
-	sets.BlueMagic.MagicAccuracy = {
+	sets.BlueMagic.MagicAccuracy = set_combine(sets.BlueMagic.INT.MAB.MACC, {
 		ammo = "Pemphredo Tathlum",
-		head = "Carmine Mask +1",
-		neck = "Erra Pendant",
-		ear1 = "Hermetic earring",
+		head = "Malignance Chapeau",
+		neck = "Mirage Stole +1",
+		ear1 = "Regal earring",
 		ear2 = "Dignitary's earring",
-		body = "Jhakri Robe +2",
-		hands = "Rawhide Gloves",
-		ring1 = "Sangoma Ring",
-		ring2 = "Stikini Ring",
-		back = "Cornflower Cape",
+		body = "Malignance Tabard",
+		hands = "Malignance Gloves",
+		ring1 = "Kishar Ring",  -- "Sangoma Ring",
+		-- ring2 = "Stikini Ring",
+		-- back = "Cornflower Cape",
 		waist = "Eschan Stone",
-		legs = "Jhakri Slops +1",
-		feet = "Jhakri Pigaches +1"
-	}
+		legs = "Malignance Tights",
+		feet = "Malignance Boots"
+	})
 
 	--Occultation is every 50 skill, magic barrier equals skill, rest dont matter
 	---For example diamondhide caps at 500
@@ -436,7 +453,7 @@ function get_sets()
 		neck = "Incanter's Torque",
 		ear1 = "Suppanomimi",
 		ear2 = "Ethereal earring",
-		body = "Assim. Jubbah +2",
+		body = "Assim. Jubbah +3",
 		hands = "Hashishin Bazubands +1",
 		ring1 = "Kishar Ring",
 		ring2 = "Stikini Ring",
@@ -478,7 +495,7 @@ function get_sets()
 		-- head = "Telchine Cap",
 		-- neck = "Incanter's Torque",
 		-- ear1 = "Andoaa Earring",
-		body="Taeon Tabard",
+		body="Herculean Vest", -- "Taeon Tabard",
 		hands="Taeon Gloves",
 		-- back = "Perimede Cape",		
 		legs = "Taeon Tights",
@@ -532,7 +549,7 @@ function get_sets()
 		neck = "Warder's Charm +1",
 		ear1 = "Etiolation Earring",
 		ear2 = "Odnowa Earring +1",
-		body = "Amalric Doublet",
+		body = "Amalric Doublet +1",
 -- 		hands = HerculeanGloves.DT,
 		ring1 = "Defending ring",
 		ring2 = "Shadow Ring",
@@ -584,23 +601,22 @@ function get_sets()
 	sets.precast.FastCast = {}
 
 	sets.precast.FastCast.Standard = {
-		-- ammo = "Impatiens", -- don't have
-		head = "Carmine Mask +1",   -- 14		
-		neck = "Voltsurge Torque",  -- 4 
+		ammo = "Sapience Orb", -- "Impatiens"
+		head = "Carmine Mask +1",                                                              -- 14		
+		neck = "Voltsurge Torque",                                                             --  4 
 		-- "Orunmila's Torque",
-		ear1 = "Loquac. Earring",                                                              -- 2
+		ear1 = "Loquac. Earring",                                                              --  2
 		-- ear2 = "Etiolation Earring", -- don't have
 		body = "Pinga Tunic",                                                                  -- 13
-		hands = "Leyline Gloves",                                                              -- 6, 
+		hands = "Leyline Gloves",                                                              --  6 (39) 
 		-- only +1 aug, can get better aug'd version
-		ring1 = "Kishar Ring",  -- 4
+		ring1 = "Kishar Ring",                                                                 --  4 (43)
 		-- ring2 = "Prolix Ring",  -- don't have		
-		back = Rosmerta.FC,                                                                    -- 10
+		back = Rosmerta.FC,                                                                    -- 10 (53)
 		-- waist = "Witful Belt", -- occ. quickens is BAD for DD spells
-        legs = { name="Psycloth Lappas", augments={'MP+80','Mag. Acc.+15','"Fast Cast"+7',}},  -- 7
-		feet = "Chelona Boots"                                                                 -- 4
-	} -- @64, +15(20) from Fast Cast Trait - 79/80 -- need 1
-	  -- carmine mask +1 is +7, 25 left
+        legs = { name="Psycloth Lappas", augments={'MP+80','Mag. Acc.+15','"Fast Cast"+7',}},  -- 7  (60)
+		feet = "Chelona Boots"                                                                 -- 4  (64)
+	} -- @66, +15(20) from Fast Cast Trait
 
 	--Empy body stacks with FC, 80% cap, empy hands must be on at time of casting (mid) for effect--
 	sets.precast.FastCast.Blue = set_combine(sets.precast.FastCast.Standard, {

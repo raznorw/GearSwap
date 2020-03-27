@@ -9,6 +9,14 @@ sets.TreasureHunter = {head="Wh. Rarab Cap +1",waist="Chaac Belt"}
 sets.precast.Item['Hallowed Water'] = {}
 sets.precast.Item['Holy Water'] = {}
 
+sets.malignance = {
+  head="Malignance Chapeau",
+  body="Malignance Tabard",
+  hands="Malignance Gloves",
+  legs="Malignance Tights",
+  feet="Malignance Boots"  
+}
+
 --Augmented items that you'll use among multiple jobs.
 
 -- Meg gear is included because i'm still upgrading it and that's
@@ -20,6 +28,13 @@ gear.meg_legs  = "Meg. Chausses +2"
 gear.meg_feet  = "Meg. Jam. +1" -- TODO: +2
 
 gear.jhakri_body = "jhakri robe +2"
+gear.jhakri_head = "Jhakri Coronal +2"
+gear.jhakri_legs = "Jhakri Slops +1"
+gear.jhakri_feet = "Jhakri Pigaches +1"
+gear.jhakri_hands = "Jhakri cuffs +2"
+
+gear.Amalric_D_hands = { name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}}
+gear.Amalric_D_feet = { name="Amalric Nails +1", augments={'Mag. Acc.+20','"Mag.Atk.Bns."+20','"Conserve MP"+7',}}
 
 gear.herculean_wsd_feet = { name="Herculean Boots", augments={'"Mag.Atk.Bns."+17','Pet: Attack+2 Pet: Rng.Atk.+2','Weapon skill damage +4%','Accuracy+20 Attack+20',}}
   -- {name="Herculean Boots",augments={'Accuracy+23 Attack+23','Weapon skill damage +5%','DEX+10','Accuracy+10','Attack+1',}}

@@ -507,10 +507,10 @@ function handle_elemental(cmdParams)
 			if not buffactive['Immanence'] then windower.chat.input('/ja "Immanence" <me>') end
 			
 			if state.ElementalMode.value == 'Fire' or state.ElementalMode.value == 'Light' then
-				windower.chat.input('/p '..auto_translate('Fusion')..' -<t>- MB: '..auto_translate('Fire')..' '..auto_translate('Light')..' <scall21> OPEN!')
+				windower.chat.input('/p '..auto_translate('Fusion')..' -<t>- MB: '..auto_translate('Fire')..' '..auto_translate('Light')..' OPEN!')
 				windower.chat.input:schedule(1,'/ma "Fire" <t>')
 				windower.chat.input:schedule(5,'/ja "Immanence" <me>')
-				windower.chat.input:schedule(6,'/p '..auto_translate('Fusion')..' -<t>- MB: '..auto_translate('Fire')..' '..auto_translate('Light')..' <scall21> CLOSE!')
+				windower.chat.input:schedule(6,'/p '..auto_translate('Fusion')..' -<t>- MB: '..auto_translate('Fire')..' '..auto_translate('Light')..' CLOSE!')
 				windower.chat.input:schedule(6,'/ma "Thunder" <t>')
 			elseif state.ElementalMode.value == 'Wind' or state.ElementalMode.value == 'Lightning' then
 				windower.chat.input('/p '..auto_translate('Fragmentation')..' -<t>- MB: '..auto_translate('wind')..' '..auto_translate('Thunder')..' <scall21> OPEN!')

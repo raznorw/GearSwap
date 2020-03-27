@@ -70,7 +70,7 @@ function init_gear_sets()
 
 	sets.precast.FC.SongDebuff = set_combine(sets.precast.FC.BardSong,{range="Marsyas"})
 	sets.precast.FC.SongDebuff.Resistant = set_combine(sets.precast.FC.BardSong,{range="Blurred Harp"})
-	sets.precast.FC.Lullaby = {range="Eminent Flute"}           -- "Marsyas"}
+	sets.precast.FC.Lullaby = {range="Marsyas"} 
 	sets.precast.FC.Lullaby.Resistant = {range="Eminent Flute"} -- "Blurred Harp"}
 	sets.precast.FC['Horde Lullaby'] = {range="Marsyas"}
 	sets.precast.FC['Horde Lullaby'].Resistant = {range="Blurred Harp"}

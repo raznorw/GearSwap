@@ -9,8 +9,8 @@ function user_setup()
 	state.Weapons:options('Default','DualWeapons','DualSavageWeapons','DualLeadenRanged','DualLeadenMelee','DualLeadenMeleeAcc','DualKustawi','None')
 	state.CompensatorMode:options('300','1000','Never','Always')
 
-    gear.RAbullet = "Chrono Bullet"
-    gear.WSbullet = "Chrono Bullet"
+    gear.RAbullet = "Bronze Bullet"
+    gear.WSbullet = "Bronze Bullet"
     gear.MAbullet = "Orichalc. Bullet" --For MAB WS, do not put single-use bullets here.
     gear.QDbullet = "Animikii Bullet"
     options.ammo_warning_limit = 15
@@ -36,7 +36,7 @@ function user_setup()
 	send_command('bind ^@!\\\\ gs c toggle LuzafRing')
 	send_command('bind @f7 gs c toggle RngHelper')
 
-	send_command('bind !r gs c weapons DualSavageWeapons;gs c update')
+	-- send_command('bind !r gs c weapons DualSavageWeapons;gs c update')
 	send_command('bind @q gs c weapons MaccWeapons;gs c update')
 	send_command('bind ^q gs c weapons DualKustawi;gs c update')
 	send_command('bind !q gs c weapons DualLeadenRanged;gs c update')
@@ -290,7 +290,7 @@ function init_gear_sets()
 	sets.weapons.Default = {main="Fettering Blade",sub="Nusku Shield",range="Fomalhaut"}
 	sets.weapons.DualWeapons = {main="Kaja Sword",sub="Blurred Knife +1",range="Fomalhaut"}
 	sets.weapons.DualSavageWeapons = {main="Kaja Sword",sub="Blurred Knife +1",range="Ataktos"}
-	sets.weapons.DualLeadenRanged = {main="Kaja Sword",sub="Kaja Knife",range="Fomalhaut"}
+	sets.weapons.DualLeadenRanged = {main="Kaja Sword",sub="Tauret",range="Fomalhaut"}
 	sets.weapons.DualLeadenMelee = {main="Kaja Sword",sub="Atoyac",range="Fomalhaut"}
 	sets.weapons.DualLeadenMeleeAcc = {main="Kaja Sword",sub="Blurred Knife +1",range="Fomalhaut"}
 	sets.weapons.DualKustawi = {main="Kustawi +1",sub="Kustawi",range="Fomalhaut"}
