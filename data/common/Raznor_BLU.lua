@@ -83,7 +83,7 @@ function get_sets()
 		neck = "Mirage Stole +1",  -- or maybe asperity?  att +*, STP 3, DA 2
 		ear1 = "Suppanomimi",
 		ear2 = "Brutal Earring",
-		body = "Ayanmo Corazza +2", -- RawhideVest.TP,
+		body = "Adhemar Jacket +1", -- "Ayanmo Corazza +2", -- RawhideVest.TP,
 		hands = gear.Adhemar_B_hands,
 		ring1 = "Ilabrat Ring", -- "Rajas Ring",
 		ring2 = "Petrov Ring",

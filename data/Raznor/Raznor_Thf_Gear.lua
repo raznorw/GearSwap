@@ -74,7 +74,7 @@ function init_gear_sets()
 	  ear1="Telos Earring",
 	  ear2="Sherida Earring",   -- "Digni. Earring",
       ring1="Moonbeam Ring",    -- "Ramuh Ring +1",
-	  ring2="Meghanada Ring",   -- "Ramuh Ring +1",
+	  ring2="Mummu Ring",   -- "Ramuh Ring +1",
       back=gear.da_jse_back,
 	  waist="Eschan Stone",     -- "Olseni Belt",	  
 	})

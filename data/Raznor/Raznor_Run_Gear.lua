@@ -43,8 +43,8 @@ function user_setup()
 	send_command('bind ^@!` gs c cycle SkillchainMode')
 	-- send_command('bind !r gs c weapons Lionheart;gs c update')
 	
+	send_command('wait 6;input /lockstyle on;wait 6;input /lockstyle 1')
 	select_default_macro_book()
-	send_command('wait 6;input /lockstyleset 1')
 	-- lockstyleset = 1
 end
 
@@ -214,7 +214,7 @@ function init_gear_sets()
 	  neck="Anu Torque",          -- "Fotia Gorget",
 	  ear1="Telos Earring",       -- TODO: "Moonshade Earring",
 	  ear2="Sherida Earring",
-      body="Ayanmo Corazzo +2",   -- TODO: "Adhemar Jacket +1",
+      body="Adhemar Jacket +1",
 	  hands="Meg. Gloves +2",  -- dimidation
 	  ring1="Niqmaddu Ring",
 	  ring2="Ilabrat Ring",       -- TODO: "Regal Ring",			
@@ -414,7 +414,7 @@ function init_gear_sets()
 	sets.defense.PDT = {            -- 3/3 grip
 	  ammo="staunch tathlum +1",       -- 2/2
       head="Fu. Bandeau +3",        -- 5/0     -- "Meghanada Visor +2",
-	  neck="futhark torque +2",        -- 4/4 (current futhark torque +2) 5/5**
+	  neck="futhark torque +2",        -- 4/4
 	  ear1="Genmei Earring",        -- odnowa+1 0/2
 	  ear2="Ethereal Earring",      -- odnowa   0/1
       body="Futhark Coat +3",      --  7/7
@@ -500,7 +500,7 @@ function init_gear_sets()
 		neck="Anu Torque",
 		ear1="Telos Earring", -- "Brutal Earring",
 		ear2="Sherida Earring",
-        body="Ayanmo corazza +2", -- "Adhemar Jacket +1",
+        body="Adhemar Jacket +1",
 		hands="Adhemar Wrist. +1",
 		ring1="Niqmaddu Ring",    
 		ring2="Moonbeam Ring",    -- "Petrov Ring",   -- "Epona's Ring",

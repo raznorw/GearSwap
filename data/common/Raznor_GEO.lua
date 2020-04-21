@@ -157,9 +157,23 @@ function get_sets()
 
     -- Your idle set when you DON'T have a luopan out
     sets.me.idle.normal = {
-	  feet="Geomancy Sandals", -- movement speed +12%
-	  neck="Loricate Torque",
-      left_ring="Defending Ring",
+	  main="Malignance Pole",     -- 20 DT
+	  sub="Kaja Grip",            -- 5 DT
+	  ammo="Staunch Tathlum +1",  -- 3 DT
+	  head="Volte Beret", 
+	  neck="Loricate Torque",     -- 5 DT      
+	  left_ear="Lugalbanda Earring",  -- Etiolation Earring
+      right_ear="Odnowa Earring +1", -- Genmei Earring
+	  body="jhakri robe +2",    -- Telchine w/+3 pet regen (leaf orb), Meva (snow not orb), duskdim (enhancing magic duration)
+	  left_ring="Defending Ring", -- 10 DT
+	  right_ring="Shneddick Ring",
+	  
+      -- hands="Geo. Mitaines +2", -- +3 these eventually
+      -- legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+6 "Mag.Atk.Bns."+6','Magic burst dmg.+11%','INT+6','Mag. Acc.+15',}},
+	   -- Legs - Telchine
+      -- feet={ name="Bagua Sandals +1", augments={'Enhances "Radial Arcana" effect',}}, -- 3 regen, can +3 for 5.. ~10M for +2, more for +3
+      -- waist="Fucho-no-Obi",    -- Isa Belt      
+      -- back="Nantosuelta's Cape", -- Add HP, 5 DT or 10 PDT, TODO: properly add to globals w/augments
     }
 	
 	-- This or herald gaiters or +1 +2 +3... 
@@ -189,7 +203,7 @@ function get_sets()
     sets.pan.idle.normal = {
       main="Idris",
 	  -- missing offhand shield - Genmei/Genbu
-      ammo="Staunch Tathlum", -- +1
+      ammo="Staunch Tathlum +1",
       head="Azimuth Hood +1", 
       body="jhakri robe +2",    -- Telchine w/+3 pet regen (leaf orb), Meva (snow not orb), duskdim (enhancing magic duration)
       hands="Geo. Mitaines +2", -- +3 these eventually
@@ -197,7 +211,7 @@ function get_sets()
 	   -- Legs - Telchine
       feet={ name="Bagua Sandals +1", augments={'Enhances "Radial Arcana" effect',}}, -- 3 regen, can +3 for 5.. ~10M for +2, more for +3
        neck="Bagua Charm +1", -- "Loricate Torque",  -- +1, replace with Geo JSE Neck +1
-       waist="Fucho-no-Obi",    -- Isa Belt
+      waist="Isa Belt",  -- "Fucho-no-Obi" is another option for master refresh
        left_ear="Regal Earring",  -- Etiolation Earring
        right_ear="Handler's Earring +1", -- Genmei Earring
        left_ring="Defending Ring",       
@@ -364,8 +378,11 @@ function get_sets()
             
     -- Whatever you want to equip mid-cast as a catch all for all spells, and we'll overwrite later for individual spells
     sets.midcast.casting = {
-	    ammo="Pamphredo Tathlum",
-        head="Jhakri Coronal +1",
+		main="Grioavolr",           --  7
+	    sub="Enki Strap",
+		range=empty,
+	    ammo="Pemphredo Tathlum",
+        head="Jhakri Coronal +2",
 		body="Amalric Doublet +1",
 		hands="Amalric Gages +1",
 		legs="Amalric Slops +1", 		

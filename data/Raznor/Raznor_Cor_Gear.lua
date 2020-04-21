@@ -419,14 +419,13 @@ function init_gear_sets()
     -- Idle sets
     sets.idle = set_combine(sets.malignance, {
 	  ammo=gear.RAbullet,      
-	  neck="Loricate Torque",         --  5/5
+	  neck="Commodore Charm +1",     -- neck="Loricate Torque",         --  5/5
 	  ear1="Odnowa earring",          --  0/1   "Genmei Earring",
 	  ear2="Odnowa earring +1",       --  0/2  "Sanare Earring",
       ring1="Defending Ring",         -- 10/10
-	  ring2="meghanada Ring",         --  2/0    "Dark Ring",
+	  ring2="Shneddick Ring",         --  2/0    "Dark Ring",
       back=gear.str_wsd_jse_back,     -- 10/0    "Moonlight Cape",
-	  waist="Flume Belt +1",          --  4/0
-	  legs="Carmine Cuisses +1"	  
+	  waist="Flume Belt +1",          --  4/0	  
 	})
 		
     sets.idle.Refresh = {ammo=gear.RAbullet,
@@ -439,7 +438,7 @@ function init_gear_sets()
 	    ammo=gear.RAbullet,
         neck="Loricate Torque",         --  5/5  (NQ)
 	    ring1="Defending Ring",         -- 10/10
-		ring2="meghanada Ring",         --  2/0    "Dark Ring",   
+		ring2="Schneddick Ring",        
         back=gear.str_wsd_jse_back,     -- 10/0    "Moonlight Cape",
 		waist="Flume Belt +1",          --  4/0				
 	})  -- overcap on PDT  57/23
@@ -470,7 +469,7 @@ function init_gear_sets()
 		feet="Ahosi Leggings"
     })
 
-    sets.Kiting = {legs="Carmine Cuisses +1"}
+    -- sets.Kiting = {legs="Carmine Cuisses +1"}
 	sets.TreasureHunter = set_combine(sets.TreasureHunter, {})
 	sets.DWMax = {ear1="Dudgeon Earring",ear2="Heartseeker Earring",body="Adhemar Jacket +1",hands="Floral Gauntlets",waist="Reiki Yotai"}
 
@@ -497,6 +496,7 @@ function init_gear_sets()
 		neck="Iskur Gorget",
 		ear1="Telos Earring", -- "Cessance Earring",
 		ear2="Brutal Earring",
+		body="Adhemar Jacket +1",
 		hands="Adhemar Wrist. +1",
 		ring1="Ilabrat Ring", -- "Epona's Ring",
 		ring2="Petrov Ring",
@@ -521,19 +521,14 @@ function init_gear_sets()
 		feet="Malignance Boots"
 	}
 
-    sets.engaged.Hybrid = set_combine(sets.engaged, {	
-	   head="Malignance Chapeau",
-	   hands="Malignance Gloves",
-	   legs="Malignance Tights",
-	   feet="Malignance Boots"
-		-- body="Adhemar Jacket +1",
-		-- waist="Reiki Yotai" 
-	})
+    sets.engaged.Hybrid = set_combine(sets.engaged, sets.malignance)
 
     sets.engaged.DW = set_combine(sets.engaged, {	
 		-- body="Adhemar Jacket +1",
 		-- waist="Reiki Yotai"
 	})
+	
+	sets.engaged.DW.Hybrid = set_combine(sets.engaged, sets.malignance)
     
     sets.engaged.DW.Acc = set_combine(sets.engaged.Acc, {
 		-- ear1="Digni. Earring",

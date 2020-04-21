@@ -129,7 +129,7 @@ function init_gear_sets()
 	sets.midcast['Horde Lullaby II'].AoE = {range="Blurred Harp"}
 	sets.midcast.Madrigal = {head="Fili Calot +1"}
 	sets.midcast.Paeon = {}
-	sets.midcast.March = {hands="Fili Manchettes +1"}
+	sets.midcast.March = {hands="Fili Manchettes"}
 	sets.midcast['Honor March'] = set_combine(sets.midcast.March,{range="Marsyas"})
 	sets.midcast.Minuet = {body="Fili Hongreline +1"}
 	sets.midcast.Minne = {}
@@ -140,10 +140,24 @@ function init_gear_sets()
 	
 
 	-- For song buffs (duration and AF3 set bonus)
-	sets.midcast.SongEffect = {main="Kali",sub="Genmei Shield",range="Blurred Harp",ammo=empty,
-		head="Fili Calot +1",neck="Moonbow Whistle",ear1="Enchntr. Earring +1",ear2="Loquacious Earring",
-		body="Fili Hongreline +1",hands="Inyan. Dastanas +2",ring1="Stikini Ring",ring2="Stikini Ring",
-		back="Intarabus's Cape",waist="Kobo Obi",legs="Inyanga Shalwar +2",feet="Brioso Slippers +1"}
+	sets.midcast.SongEffect = {
+	  main="Legato Dagger",     -- "Kali",
+	  -- sub="Genmei Shield",
+	  range="Eminent Flute",    -- "Blurred Harp",
+	  ammo=empty,
+	  head="Fili Calot +1",
+	  neck="Moonbow Whistle",
+	  ear1="Enchntr. Earring +1",
+	  ear2="Loquacious Earring",
+	  body="Fili Hongreline +1",
+	  hands="Inyan. Dastanas +1",
+	  ring1="Stikini Ring",
+	  ring2="Stikini Ring",
+	  back="Intarabus's Cape",
+	  waist="Kobo Obi",
+	  legs="Inyanga Shalwar +1",
+	  feet="Brioso Slippers +1"
+	}
 		
 	sets.midcast.SongEffect.DW = {}
 
