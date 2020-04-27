@@ -229,6 +229,7 @@ function init_gear_sets()
 
     sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
 	  main="Pedagogy Staff",
+	  head="Arbatel Bonnet +1",
 	  back="Bookworm's Cape",
 	})
 

@@ -1,3 +1,15 @@
+-- Blm Modes:
+--   * OccultAcumen - don't swap weapon/sub/ranged to preserve TP
+--                  - Used with Myrkr / Other MP tools to cast indefinitely (needs testing)
+--                  - Consider a Khatvanga - less damage, more TP
+--                  - Use "Oneiros Rope" for more TP
+--                  - Perdition Slops are aother possibility, but at a very large MAB/Macc cost
+--   * Refresh Idle - Max refresh/sublimation
+--   * Defensive Idle - Max DT/MEva -- could separate into two defense poses I suppose
+
+-- Lathi C   - 27 int, 15 Macc, 63 MAB, 232 Magic Damage, Enmity -10, Refresh +1
+-- Khatvanga - Magic Damage 279, Occult Acument 30, Macc 30 if R15
+
 -- Grio ties lathi C with: 
 --   8 int (27 total)
 --  33 MAB (63 total)
@@ -126,10 +138,31 @@ function init_gear_sets()
 		body="Zendik Robe",hands="Hagondes Cuffs +1",ring1="Shiva Ring +1",ring2="Shiva Ring +1",
 		back=gear.nuke_jse_back,waist="Fotia Belt",legs="Hagondes Pants +1",feet=gear.merlinic_nuke_feet}
 
-    sets.precast.WS['Myrkr'] = {ammo="staunch tathlum +1",
-		head="Pixie Hairpin +1",neck="Sanctity Necklace",ear1="Moonshade Earring",ear2="Etiolation Earring",
-		body="Amalric Doublet",hands="Regal Cuffs",ring1="Mephitas's Ring +1",ring2="Mephitas's Ring",
-		back="Aurist's Cape +1",waist="Yamabuki-no-Obi",legs="Psycloth Lappas",feet="Medium's Sabots"}
+
+    -- went from 860 to 1317 at abotu 1000 TP (457)
+	-- currently have 1695 max MP in myrkr set with locked main/sub lathi
+	--   1715 - swapped ammo
+	--   1868 - fixed body to +1
+	--   1886 - swapped gloves to vanya, don't have regal
+	--   1956 - changed ring2 to sangoma, don't have either mephitas's
+	--   1974 - changed feet to telchine pigaches, no medium's sabots
+	--   2004 - changed waist to Fucho-no-Obi, don't have other options
+	-- ** 1000 TP should be work 500ish base, plus another 5% from moonshade, so 600 mp return
+    sets.precast.WS['Myrkr'] = {
+	  ammo="Vanir Battery",
+	  head="Pixie Hairpin +1",
+	  neck="Sanctity Necklace",
+	  ear1="Moonshade Earring",
+	  ear2="Loquacious earring",  -- "Etiolation Earring",
+	  body="Amalric Doublet +1",
+	  hands="Vanya Cuffs",     -- "Regal Cuffs",
+	  ring1="Mephitas's Ring +1",
+	  ring2="Sangoma Ring",      -- "Mephitas's Ring",
+	  back="Aurist's Cape +1",  -- "Bane Cape" -- 90 MP
+	  waist="Fucho-no-Obi",      -- "Yamabuki-no-Obi",  -- "Shinjutsu-no-obi +1" -- 85 MP vs 35 for yamabuki
+	  legs="Amalric Slops +1", 
+	  feet="Telchine Pigaches",  -- "Medium's Sabots"    -- Max Aug +50 MP, for 70 mp total, Amalric NAils +1 (A) is 106 mp total
+	}
 		
 	sets.MaxTPMyrkr = {ear1="Evans Earring",ear2="Etiolation Earring"}
     
@@ -251,17 +284,17 @@ function init_gear_sets()
 	    main="Lathi", -- gear.grioavolr_nuke_staff,
 		sub="Alber Strap", -- "Zuuxowu Grip",		
 		ammo="Pamphredo Tathlum", -- "Dosis Tathlum",        
-		head="Jhakri Coronal +1", -- gear.merlinic_nuke_head,
+		head="Jhakri Coronal +2", -- gear.merlinic_nuke_head,
 		neck="Saevus Pendant +1",
 		ear1="Regal Earring", 
 		ear2="Malignance Earring",
-        body="jhakri robe +2", -- gear.merlinic_nuke_body,
+        body="Amalric Doublet +1",  -- gear.merlinic_nuke_body,
 		hands="Amalric Gages +1", -- "Mallquis Cuffs +2",
 		ring1="Jhakri Ring", -- "Shiva Ring +1",
 		ring2="Vertigo Ring", -- "Shiva Ring +1",
         -- back=gear.nuke_jse_back,
 		waist=gear.ElementalObi,
-		legs="Merlinic Shalwar",
+		legs="Amalric Slops +1",   -- legs="Merlinic Shalwar",
 		feet="Amalric Nails +1" -- gear.merlinic_nuke_feet
 		}
 		
@@ -305,11 +338,27 @@ function init_gear_sets()
         head="Nahtirah Hat",neck="Loricate Torque +1",ear1="Gifted Earring",ear2="Loquacious Earring",
         body="spaekona's coat +2",hands="Hagondes Cuffs +1",ring1="Kishar Ring",ring2="Prolix Ring",
         back="Swith Cape +1",waist="Witful Belt",legs="Assid. Pants +1",feet="Regal Pumps +1"}
-		
-    sets.midcast['Elemental Magic'].OccultAcumen = {main="Khatvanga",sub="Bloodrain Strap",ammo="Seraphic Ampulla",
-        head="Mall. Chapeau +2",neck="Combatant's Torque",ear1="Dedition Earring",ear2="Telos Earring",
-        body=gear.merlinic_occult_body,hands=gear.merlinic_occult_hands,ring1="Rajas Ring",ring2="Petrov Ring",
-        back=gear.stp_jse_back,waist="Oneiros Rope",legs="Perdition Slops",feet=gear.merlinic_occult_feet}
+	
+    -- Benefits from STP	
+	-- thunder 6 - 437 base MP, 394 Dark Arts MP, 214 TP (in regular gear)
+	-- Expected:  Blm has 50% OA base - so would have expected 218 TP
+    sets.midcast['Elemental Magic'].OccultAcumen = {
+	  main="Khatvanga",
+	  sub="Bloodrain Strap",
+	  ammo="Seraphic Ampulla",
+      head="Mall. Chapeau +2",
+	  neck="Combatant's Torque",
+	  ear1="Dedition Earring",
+	  ear2="Telos Earring",
+      body=gear.merlinic_occult_body,
+	  hands=gear.merlinic_occult_hands,
+	  ring1="Rajas Ring",
+	  ring2="Petrov Ring",
+      back=gear.stp_jse_back,
+	  waist="Oneiros Rope",
+	  legs="Perdition Slops",
+	  feet=gear.merlinic_occult_feet
+	}
 		
     sets.midcast.Impact.OccultAcumen = set_combine(sets.midcast['Elemental Magic'].OccultAcumen, {head=empty,body="Twilight Cloak"})
 	
@@ -325,16 +374,42 @@ function init_gear_sets()
     -- Idle sets
     
     -- Normal refresh idle set
-    sets.idle = {main="Bolelabunga",sub="Genmei Shield",ammo="staunch tathlum +1",
-		head="Befouled Crown",neck="Loricate Torque +1",ear1="Ethereal Earring",ear2="Etiolation Earring",
-		body="Jhakri Robe +2",hands=gear.merlinic_refresh_hands,ring1="Defending Ring",ring2="Schneddick Ring",
-		back="Umbra Cape",waist="Flax Sash",legs="Assid. Pants +1",feet=gear.merlinic_refresh_feet}
+    sets.idle = {
+	  main="Bolelabunga",
+	  sub="Genmei Shield",
+	  ammo="staunch tathlum +1",
+	  head="Volte Beret", -- "Befouled Crown",
+	  neck="Loricate Torque",
+	  ear1="Ethereal Earring",
+	  ear2="Etiolation Earring",
+	  body="Jhakri Robe +2",
+	  hands=gear.merlinic_refresh_hands,
+	  ring1="Defending Ring",
+	  ring2="Schneddick Ring",
+	  back="Umbra Cape",
+	  waist="Flax Sash",
+	  legs="Assid. Pants +1",
+	  feet=gear.merlinic_refresh_feet
+	}
 
     -- Idle mode that keeps PDT gear on, but doesn't prevent normal gear swaps for precast/etc.
-    sets.idle.PDT = {main="Terra's Staff",sub="Oneiros Grip",ammo="staunch tathlum +1",
-        head="Hagondes Hat +1",neck="Loricate Torque +1",ear1="Genmei Earring",ear2="Etiolation Earring",
-        body="Vrikodara Jupon",hands=gear.merlinic_refresh_hands,ring1="Defending Ring",ring2="Dark Ring",
-        back="Shadow Mantle",waist="Flax Sash",legs="Assid. Pants +1",feet="Mallquis Clogs +2"}
+    sets.idle.PDT = {
+	  main="Terra's Staff",
+	  sub="Oneiros Grip",
+	  ammo="staunch tathlum +1",
+      head="Hagondes Hat +1",
+	  neck="Loricate Torque +1",
+	  ear1="Genmei Earring",
+	  ear2="Etiolation Earring",
+      body="Vrikodara Jupon",
+	  hands=gear.merlinic_refresh_hands,
+	  ring1="Defending Ring",
+	  ring2="Dark Ring",
+      back="Shadow Mantle",
+	  waist="Flax Sash",
+	  legs="Assid. Pants +1",
+	  feet="Mallquis Clogs +2"
+	}
 		
     sets.idle.TPEat = set_combine(sets.idle, {neck="Chrys. Torque"})
 	sets.idle.DTHippo = set_combine(sets.idle.PDT, {feet="Hippo. Socks +1"})
@@ -391,7 +466,7 @@ function init_gear_sets()
     sets.MagicBurst = set_combine(sets.midcast['Elemental Magic'], {
 	  -- Grioavolr -- 7 MBB
 	    head="Merlinic Hood", -- "Ea Hat",  11 MBB
-		neck="Mizu. Kubikazari",
+		neck="Mizu. Kubikazari",          -- 10 MBB
 		body="Ea Houppelande",           -- 8/8 MBB/2
 		hands="Amalric Gages +1",
 		ring1="Mujin Band",
