@@ -103,11 +103,11 @@ function init_gear_sets()
 	  legs="Tatena. Haidate +1",
 	  feet=gear.herculean_ta_feet
 	}
-	
+	 
 	sets.precast.WSSomeAcc = set_combine(sets.precast.WS, {
-	  ammo="Falcon Eye",
-	  head="Dampening Tam",
-	  legs="Hiza. Hizayoroi +2"
+	  -- ammo="Falcon Eye",
+	  -- head="Dampening Tam",
+	  -- legs="Hiza. Hizayoroi +2"
 	})
 	
 	sets.precast.WSAcc = set_combine(sets.precast.WSSomeAcc, {	
@@ -288,9 +288,11 @@ function init_gear_sets()
 	-- }
 	
 	sets.engaged.SomeAcc = set_combine(sets.engaged, {
-	  ammo="Falcon Eye",
-	  head="Dampening Tam",
-	  neck="Moonbeam Nodowa"
+	  -- ammo="Falcon Eye",
+	  head="Malignance Chapeau",     -- "Dampening Tam",
+	  -- neck="Moonbeam Nodowa"
+	  hands="Malignance Gloves",  -- "Adhemar Wrist. +1",
+	  legs="Malignance Tights", 
 	})
 		
 	sets.engaged.Acc = set_combine(sets.engaged.SomeAcc, {

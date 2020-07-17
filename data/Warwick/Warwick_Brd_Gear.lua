@@ -155,7 +155,7 @@ function init_gear_sets()
 	  ring2="Stikini Ring",
 	  back="Intarabus's Cape",
 	  waist="Kobo Obi",
-	  legs="Inyanga Shalwar +1",
+	  legs="Inyanga Shalwar +2",
 	  feet="Brioso Slippers +1"
 	}
 		
@@ -176,7 +176,7 @@ function init_gear_sets()
 	  ring2="Inyanga Ring", -- "Stikini Ring",
 	  back="Refraction Cape",  -- "Intarabus's Cape",
 	  waist="Eschan Stone", -- "Luminary Sash",
-	  legs="Inyanga Shalwar +1",
+	  legs="Inyanga Shalwar +2",
 	  feet="Inyan. Crackows +1" -- "Brioso Slippers +1"
 	  }
 

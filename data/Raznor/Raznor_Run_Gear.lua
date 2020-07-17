@@ -1,6 +1,17 @@
 -- Gear Options:
 --    Turms Harness +1 - 52 acc, 12 STP, 128 MEva as an alternative to ayanmo corazza, but DT deficient
 
+-- TODO: Midcast - want 3k hpaw
+
+-- Enmity:  caps at 100 and crusade gives 30
+--           Epeolatry: 23
+--   futhark torque +2: 10
+
+
+-- HP: 
+--            Utu Grip: 70 hp
+--   futhark torque +2: 60
+
 function user_setup()
 
 	state.OffenseMode:options('Normal','SomeAcc','Acc','HighAcc','FullAcc')
@@ -50,20 +61,21 @@ end
 
 function init_gear_sets()
 
-    sets.Enmity = {
-	  ammo="staunch tathlum +1",
+    sets.Enmity = {  -- currently 2885 HP
+	  -- Epeolotry:               -- 23 Enmity
+	  ammo="Sapience Orb",        --  2 Enmity -- "staunch tathlum +1",
 	  head="Fu. Bandeau +3",  -- Rabid Visor is +6 enmity
-	  neck="Furthark Torque", -- "Unmoving Collar +1",
-	  ear1="Friomisi Earring",
+	  neck="Futhark Torque +2",   -- 10 enmity, 60 hp -- "Unmoving Collar +1",
+	  ear1="Friomisi Earring",    --  2 enmity, 0 hp
 	  -- ear2="Trux Earring",
 	  -- body="Emet Harness +1",
 	  -- hands="Kurys Gloves", -- TODO: upgrade futhark mitons
-	  ring1="Petrov Ring",
+	  ring1="Petrov Ring",        --  4 enmity
 	  -- ring2="Vengeful Ring",
-	  back=gear.enmity_pdt_back,
-	  waist="Sulla Belt",
-	  legs="Eri. Leg Guards +1",
-	  feet="Ahosi Leggings"
+	  back=gear.enmity_pdt_back,  -- 10 enmity
+	  waist="Sulla Belt",         --  3 enmity
+	  legs="Eri. Leg Guards +1",  -- 11 enmity
+	  feet="Ahosi Leggings"       --  7 enmity
     }
 		 
     sets.Enmity.SIRD = set_combine(sets.Enmity, {	
@@ -212,17 +224,18 @@ function init_gear_sets()
 	  ammo="Knobkierrie",
       head="Herculean Helm",      -- "Lilitu Headpiece",
 	  neck="Anu Torque",          -- "Fotia Gorget",
-	  ear1="Telos Earring",       -- TODO: "Moonshade Earring",
+	  ear1="Moonshade Earring",
 	  ear2="Sherida Earring",
       body="Adhemar Jacket +1",
 	  hands="Meg. Gloves +2",  -- dimidation
 	  ring1="Niqmaddu Ring",
 	  ring2="Ilabrat Ring",       -- TODO: "Regal Ring",			
       back=gear.da_jse_back,
-	  waist="Windbuffet Belt +1", -- TODO: "Fotia Belt",
+	  waist="Fotia Belt",
 	  legs="Meg. Chausses +2",
-	  feet="Herculean Boots", --TODO: gear.herculean_ta_feet
+	  feet=gear.herculean_wsd_feet, --TODO: gear.herculean_ta_feet
 	}
+	
 	sets.precast.WS.SomeAcc = set_combine(sets.precast.WS, {
 	        -- ammo="Seeth. Bomblet +1",
             -- head="Adhemar Bonnet +1",									
@@ -251,7 +264,9 @@ function init_gear_sets()
     sets.precast.WS['Resolution'] = set_combine(sets.precast.WS,{
 	  ammo="Yamarang",
 	  head="Adhemar Bonnet +1", 
+	  neck="Futhark Torque +2",   -- TODO: "Fotia Gorget"	  
 	  hands="Adhemar Wrist. +1",
+	  ring2="Petrov Ring",        -- for the str 3, or ilabat for the attack and higehr dex?
 	   legs="Meg. Chausses +2",
 	})
     sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS.Acc,{})
@@ -315,7 +330,7 @@ function init_gear_sets()
 	sets.midcast['Phalanx'] = set_combine(sets.midcast['Enhancing Magic'],{
 	  head="Fu. Bandeau +3", -- 7 
 	  body="Herculean Vest", -- +4 "Taeon Tabard",
-	  hands="Taeon Gloves",
+	  hands={ name="Herculean Gloves", augments={'"Mag.Atk.Bns."+25','Attack+7','Phalanx +5',}},
 	  legs="Taeon Tights",
 	  feet="Taeon Boots"}
     )

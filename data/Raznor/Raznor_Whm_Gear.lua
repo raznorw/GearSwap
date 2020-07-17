@@ -429,10 +429,23 @@ function init_gear_sets()
 		back="Umbra Cape",waist="Fucho-no-obi",legs="Assid. Pants +1",feet=gear.chironic_refresh_feet}
 
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
-	sets.idle = {main="Bolelabunga",sub="Genmei Shield",ammo="Homiliary",
-		head="Befouled Crown",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="Ethereal Earring",
-		body="Witching Robe",hands=gear.chironic_refresh_hands,ring1="Defending Ring",ring2="Dark Ring",
-		back="Moonlight Cape",waist="Flax Sash",legs="Assid. Pants +1",feet=gear.chironic_refresh_feet}
+	sets.idle = {
+	  main="Bolelabunga",
+	  sub="Genmei Shield",
+	  ammo="Homiliary",
+	  head="Volte beret",
+	  neck="Loricate Torque",
+	  ear1="Etiolation Earring",
+	  ear2="Ethereal Earring",
+	  body="Zendik Robe",
+	  hands=gear.chironic_refresh_hands,
+	  ring1="Defending Ring",
+	  ring2="Dark Ring",
+	  back="Moonbeam Cape",
+	  waist="Flax Sash",
+	  legs="Assid. Pants +1",
+	  feet=gear.chironic_refresh_feet
+	}
 
 	sets.idle.PDT = {main="Bolelabunga",sub="Genmei Shield",ammo="staunch tathlum +1",
 		head="Gende. Caubeen +1",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="Ethereal Earring",

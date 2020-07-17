@@ -60,7 +60,7 @@ function init_gear_sets()
 	sets.Ambush = {} --body="Plunderer's Vest +1"
 	
 	-- Weapons sets
-	sets.weapons.Aeneas = {main="Tauret",sub="Taming Sari"} -- {main="Aeneas",sub="Taming Sari"}
+	sets.weapons.Aeneas = {main="Tauret",sub="Shijo"} -- {main="Aeneas",sub="Taming Sari"}
 	sets.weapons.LowBuff = {main="Aeneas",sub="Blurred Knife +1"}
 	sets.weapons.MagicWeapons = {main="Malevolence",sub="Malevolence"}
 	sets.weapons.Throwing = {main="Aeneas",sub="Taming Sari",
@@ -298,17 +298,17 @@ function init_gear_sets()
     -- Normal melee group
     sets.engaged = set_combine(sets.malignance, {
 	  ammo="Yamarang",
-      -- head=gear.meg_head,          -- "Dampening Tam",
+      head="Adhemar Bonnet +1",        -- "Dampening Tam",
 	  neck="Anu Torque",
 	  ear1="Suppanomimi",
 	  ear2="Sherida Earring",
-      -- body=gear.meg_body,          -- "Adhemar Jacket +1",
+      body="Adhemar Jacket +1",
 	  hands="Adhemar Wrist. +1",
 	  ring1="Petrov Ring",
 	  ring2="Ilabrat Ring",        -- "Epona's Ring",
       back=gear.da_jse_back,
 	  waist="Windbuffet Belt +1",
-	  -- legs="Samnuha Tights",
+	  legs="Samnuha Tights",
 	  -- feet="Herculean Boots",
 	})
 		

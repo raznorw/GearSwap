@@ -151,7 +151,7 @@ function get_sets()
 
 	sets.Requiescat.Attack = {
 		ammo = "Vanir Battery",
-		head = "Jhakri Coronal +1",
+		head = "Jhakri Coronal +2",
 		neck = "Mirage Stole +1", -- "Soil Gorget"
 		ear1 = "Suppanomimi",
 		ear2 = "Brutal Earring",
@@ -295,7 +295,7 @@ function get_sets()
 
 	sets.BlueMagic.INT.MAB = {
 		ammo = "Pemphredo Tathlum",
-		head = gear.jhakri_head,
+		head = "Jhakri Coronal +2",
 		neck = "Sanctity Necklace",
 		ear1 = "Regal Earring",
 		ear2 = "Friomisi earring",

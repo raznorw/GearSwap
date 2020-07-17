@@ -378,8 +378,10 @@ function get_sets()
             
     -- Whatever you want to equip mid-cast as a catch all for all spells, and we'll overwrite later for individual spells
     sets.midcast.casting = {
-		main="Grioavolr",           --  7
-	    sub="Enki Strap",
+	    main="Idris",
+		sub="Ammurapi Shield", 
+		-- main="Grioavolr",           --  7
+	    -- sub="Enki Strap",
 		range=empty,
 	    ammo="Pemphredo Tathlum",
         head="Jhakri Coronal +2",
@@ -475,6 +477,8 @@ function get_sets()
     sets.midcast.cure = {} -- Leave This Empty
     -- Cure Potency
     sets.midcast.cure.normal = set_combine(sets.midcast.casting,{
+	   main="Daybreak",
+	   sub = "Genmei Shield",  -- ?
 	   body="Vanya Robe",
 	   hands="Vanya Cuffs",
 	   legs="Vanya Slops",

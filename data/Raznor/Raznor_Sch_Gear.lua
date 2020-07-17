@@ -1,3 +1,13 @@
+-- Missing Sets:
+--   sets.ResistantMagicBurst   -- cycles with Win-f11 (generic casting mode cycle)
+--  aspir/drain sets
+-- Sets to test / experiment with:
+--   Fodder    - How high can we crank fire 1-6? with and w/o weather/day
+--   Resistant - Are these swapping as expected?
+--   Do we have different low tier / high tier sets?
+-- How to: Lock Weapons?
+--   Will cycling weapons lock and prevent from swapping?
+
 ----- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     state.OffenseMode:options('Normal')
@@ -6,7 +16,7 @@ function user_setup()
 	state.HybridMode:options('Normal','PDT')
 	state.Weapons:options('None','Akademos','Khatvanga')
 
-	gear.nuke_jse_back = {name="Lugh's Cape",augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10'}}
+	gear.nuke_jse_back = "Lugh's Cape" -- {name="Lugh's Cape",augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10'}}
 	
 	gear.obi_cure_back = "Tempered Cape +1"
 	gear.obi_cure_waist = "Witful Belt"
@@ -61,7 +71,7 @@ function init_gear_sets()
 	  neck="Voltsurge Torque",        -- 4
 	  ear1="Malignance Earring",     -- "Enchntr. Earring +1",
 	  ear2="Loquacious Earring",      -- 2?
-	  body="Zendik Robe",             -- 13
+	  body="Pinga Tunic",  -- "Zendik Robe",             -- 13, more hp than zendik
 	  hands="Volte Gloves",      -- nothing good, I have merlinic gloves with +3 I can use      
 	  -- hands="Gende. Gages +1",
 	  ring1="Kishar Ring",            -- 4
@@ -129,17 +139,36 @@ function init_gear_sets()
 	  main="Akademos",
 	  sub="Enki Strap",
 	  ammo="Pemphredo Tathlum",
-	  head="Merlinic Hood",
-	  neck="Mizu. Kubikazari",
+	  head="Merlinic Hood",       -- 11 MBB
+	  neck="Mizu. Kubikazari",    -- 10 MBB
 	  ear1="Regal Earring",
 	  ear2="Malignance Earring", -- "Friomisi Earring", -- 2 more mab, less macc / int
 	  body="Amalric Doublet +1",
 	  hands="Amalric Gages +1",
 	  ring1="Mujin Band",
-	  ring2="Locus Ring",
-	  back="Bookworm's Cape",
+	  ring2="Locus Ring",         --  5 MBB
+	  back="Lugh's Cape",
 	  waist="Eschan Stone",
-	  legs="Merlinic Shalwar",
+	  legs="Merlinic Shalwar",    -- 11 MBB
+	  feet="Amalric Nails +1", -- "Jhakri Pigaches +2"
+	}
+	
+	-- Gear for Magic Burst mode.
+    sets.ResistantMagicBurst = {
+	  main="Akademos",
+	  sub="Kaja Grip",
+	  ammo="Pemphredo Tathlum",
+	  head="Merlinic Hood",       -- 11 MBB
+	  neck="Mizu. Kubikazari",    -- 10 MBB
+	  ear1="Regal Earring",
+	  ear2="Malignance Earring", -- "Friomisi Earring", -- 2 more mab, less macc / int
+	  body="Amalric Doublet +1",
+	  hands="Amalric Gages +1",
+	  ring1="Mujin Band",
+	  ring2="Locus Ring",         --  5 MBB
+	  back="Lugh's Cape",
+	  waist="Eschan Stone",
+	  legs="Merlinic Shalwar",    -- 11 MBB
 	  feet="Amalric Nails +1", -- "Jhakri Pigaches +2"
 	}
 	
@@ -148,12 +177,14 @@ function init_gear_sets()
 	sets.element.Ice = {main="Ngqoqwanb"}
 	sets.element.Earth = {neck="Quanpur Necklace"}
 	sets.element.Dark = {head="Pixie Hairpin +1",ring2="Archon Ring"}
+	sets.element.Light = {main="Daybreak", sub="Kaja Rod"}
 
     sets.midcast.FastRecast = set_combine(sets.precast.FC, {
 	  -- ring2="Prolix Ring",
 	})
 		
     -- looking for 1.5K cure iv on non-tank, 2k on tank
+	-- TODO: check this set
     sets.midcast.Cure = {
 	  main="Serenity",
 	  sub="Enki Strap",            -- "Curatio Grip",
@@ -162,7 +193,7 @@ function init_gear_sets()
 	  neck="Incanter's Torque",
 	  ear1="Mendi. Earring",       -- "Enchntr. Earring +1",
 	  ear2="Loquacious Earring",
-      body="Vanya Robe",           -- "Kaykaus Bliaut",
+      body="Vanya Robe",           -- "Kaykaus Bliaut", "pinga tunic"
 	  hands="Vanya Cuffs",         -- "Kaykaus Cuffs",
 	 --  ring1="Janniston Ring",
 	 --  ring2="Lebeche Ring",
@@ -339,17 +370,17 @@ function init_gear_sets()
     sets.midcast['Elemental Magic'] = {
 	  main="Akademos",
 	  sub="Alber Strap",
-	  ammo="Elis Tome",
-	  head="Merlinic Hood",
-	  neck="Mizu. Kubikazari",
+	  ammo="Pemphredo Tathlum",   -- "Elis Tome",
+	  head="Jhakri Coronal +2",   -- "Merlinic Hood",
+	  neck="Saevus Pendant +1",   -- "Mizu. Kubikazari",
 	  ear1="Regal Earring",
 	  ear2="Malignance Earring", -- "Friomisi Earring", -- 2 more mab, less macc / int
 	  body="Amalric Doublet +1",
 	  hands="Amalric Gages +1",
-	  ring1="Mujin Band",
-	  ring2="Locus Ring",
-	  back="Bookworm's Cape",
-	  waist="Eschan Stone",
+	  ring1="Mallquis Band",
+	  ring2="Jhakri Ring",
+	  back="Lugh's Cape",
+	  waist="Hachirin-no-Obi",   -- "Eschan Stone",  -- TODO: check weather
 	  legs="Amalric Slops +1",
 	  feet="Amalric Nails +1", -- "Jhakri Pigaches +2"
 	}
@@ -390,10 +421,41 @@ function init_gear_sets()
 	  hands="Amalric Gages +1"})
 	sets.midcast['Elemental Magic'].HighTierNuke.Fodder = set_combine(sets.midcast['Elemental Magic'].Fodder, {sub="Alber Strap",ammo="Pemphredo Tathlum",ear1="Regal Earring",ear2="Barkaro. Earring",hands="Amalric Gages +1"})
 
-	sets.midcast.Helix = {main="Akademos",sub="Zuuxowu Grip",ammo="Dosis Tathlum",
-        head=gear.merlinic_nuke_head,neck="Saevus Pendant +1",ear1="Malignance Earring",ear2="Friomisi Earring",
-        body=gear.merlinic_nuke_body,hands="Amalric Gages +1",ring1="Shiva Ring +1",ring2="Shiva Ring +1",
-        back=gear.nuke_jse_back,waist="Refoccilation Stone",legs="Merlinic Shalwar",feet=gear.merlinic_nuke_feet}
+    -- TODO: SCH helix set - note, helices don't need obi, always get weather/day
+	sets.midcast.Helix = {
+	  main="Daybreak",          -- "Akademos",
+	  sub="Ammurapi Shield",   
+	  -- sub="Kaja Rod",           -- "Zuuxowu Grip",
+	  ammo="Pemphredo Tathlum",      -- "Dosis Tathlum",
+      head="Mallquis Chapeau +1",    -- gear.merlinic_nuke_head,
+	  neck="Saevus Pendant +1",
+	  ear1="Malignance Earring",
+	  ear2="Friomisi Earring",
+      body="Mallquis Saio +1",       -- gear.merlinic_nuke_body,
+	  hands="Mallquis Cuffs +1",     -- "Amalric Gages +1",
+	  ring1="Shiva Ring +1",
+	  ring2="Mallquis Ring",
+      back=gear.nuke_jse_back,
+	  waist="Hachirin-no-Obi",       -- "Eschan Stone",  "Refoccilation Stone",
+	  legs="Mallquis Trews +1",      -- "Merlinic Shalwar",
+	  feet="Mallquis Clogs +1",      -- gear.merlinic_nuke_feet
+	  
+	  -- sub="Enki Strap",
+	  -- ammo="Pemphredo Tome",
+	  
+	  -- head="Merlinic Hood",
+	  -- neck="Mizu. Kubikazari",
+	  -- ear1="Regal Earring",
+	  -- ear2="Malignance Earring", -- "Friomisi Earring", -- 2 more mab, less macc / int
+	  -- body="Amalric Doublet +1",
+	  -- hands="Amalric Gages +1",
+	  -- ring1="Mujin Band",
+	  -- ring2="Locus Ring",
+	  -- back="Bookworm's Cape",
+	  -- waist="Hachirin-no-Obi",   -- "Eschan Stone",  -- TODO: check weather
+	  -- legs="Amalric Slops +1",
+	  -- feet="Amalric Nails +1", -- "Jhakri Pigaches +2"
+	}
 	
 	sets.midcast.Helix.Resistant = {main=gear.grioavolr_nuke_staff,sub="Niobid Strap",ammo="Pemphredo Tathlum",
         head=gear.merlinic_nuke_head,neck="Sanctity Necklace",

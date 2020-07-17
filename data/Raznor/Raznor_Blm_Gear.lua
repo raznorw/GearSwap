@@ -209,10 +209,23 @@ function init_gear_sets()
 	
 	sets.midcast.BarElement = set_combine(sets.precast.FC['Enhancing Magic'], {legs="Shedir Seraweels"})
 
-    sets.midcast['Enfeebling Magic'] = {main="Oranyan",sub="Enki Strap",ammo="Pemphredo Tathlum",
-        head="Befouled Crown",neck="Erra Pendant",ear1="Digni. Earring",ear2="Regal Earring",
-        body="Vanya Robe",hands="Regal Cuffs",ring1="Kishar Ring",ring2="Stikini Ring",
-        back=gear.nuke_jse_back,waist="Luminary Sash",legs="Psycloth Lappas",feet="Uk'uxkaj Boots"}
+    sets.midcast['Enfeebling Magic'] = {
+	  main="Grioavolr",              -- "Oranyan"
+	  sub="Kaja Grip",               -- "Enki Strap",
+	  ammo="Pemphredo Tathlum",
+      head="Jhakri Coronal +2",      -- Befouled Crown",
+	  neck="Erra Pendant",
+	  ear1="Malignance Earring",
+	  ear2="Regal Earring",
+      body="Spaekona's Coat +3",     -- "Vanya Robe",
+	  hands="Jhakri Cuffs +2",       -- "Regal Cuffs",
+	  ring1="Kishar Ring",
+	  ring2="Jhakri Ring",           -- "Stikini Ring",
+      back=gear.nuke_jse_back,
+	  waist="Eschan Stone",          -- "Luminary Sash",
+	  legs="Psycloth Lappas",
+	  feet="Jhakri Pigaches +1",     -- "Uk'uxkaj Boots"
+	}
 		
     sets.midcast['Enfeebling Magic'].Resistant = {main="Oranyan",sub="Enki Strap",ammo="Pemphredo Tathlum",
         head="Befouled Crown",neck="Erra Pendant",ear1="Digni. Earring",ear2="Regal Earring",
@@ -336,7 +349,7 @@ function init_gear_sets()
 		-- Minimal damage gear, maximum recast gear for procs.
     sets.midcast['Elemental Magic'].Proc = {main=empty,sub=empty,ammo="Impatiens",
         head="Nahtirah Hat",neck="Loricate Torque +1",ear1="Gifted Earring",ear2="Loquacious Earring",
-        body="spaekona's coat +2",hands="Hagondes Cuffs +1",ring1="Kishar Ring",ring2="Prolix Ring",
+        body="spaekona's coat +3",hands="Hagondes Cuffs +1",ring1="Kishar Ring",ring2="Prolix Ring",
         back="Swith Cape +1",waist="Witful Belt",legs="Assid. Pants +1",feet="Regal Pumps +1"}
 	
     -- Benefits from STP	
@@ -461,7 +474,7 @@ function init_gear_sets()
     sets.buff['Mana Wall'] = {back=gear.nuke_jse_back,feet="Wicce Sabots +1"}
 	
 	-- Gear that converts elemental damage done to recover MP.	
-	sets.RecoverMP = {body="spaekona's coat +2"}
+	sets.RecoverMP = {body="spaekona's coat +3"}
 	-- Gear for Magic Burst mode.
     sets.MagicBurst = set_combine(sets.midcast['Elemental Magic'], {
 	  -- Grioavolr -- 7 MBB
@@ -479,10 +492,10 @@ function init_gear_sets()
 	
 	sets.ResistantMagicBurst = set_combine(sets.MagicBurst, {})	
 	sets.RecoverBurst = set_combine(sets.MagicBurst, {
-	   body="spaekona's coat +2",
+	   body="spaekona's coat +3",
 	})
 	sets.ResistantRecoverBurst = set_combine(sets.MagicBurst, {
-	  body="spaekona's coat +2",
+	  body="spaekona's coat +3",
 	  feet="Jhakri Pigaches +2"
 	})
 	

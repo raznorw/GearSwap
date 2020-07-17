@@ -275,7 +275,8 @@ function init_gear_sets()
 		-- neck="Caro Necklace",
 		
 		-- waist="Grunfeld Rope",
-		-- legs=gear.herculean_wsd_legs,
+		legs=gear.herculean_wsd_legs,
+		feet=gear.herculean_wsd_feet,
 	})
 
     sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {	
@@ -511,12 +512,12 @@ function init_gear_sets()
 		neck="Sanctity Necklace", -- "Combatant's Torque",
 		ear1="Matanki Earring", -- "Cessance Earring",
 		ear2="Telos Earring",
-		body=gear.meg_body,
+		body="Malignance Tabard",
 		hands="Malignance Gloves", -- gear.meg_hands, -- "Adhemar Wrist. +1",
 		ring1="Ilabrat Ring", -- "Epona's Ring",
 		ring2="Mummu Ring",   -- "Petrov Ring",
 		-- back=gear.tp_jse_back,
-		-- waist="Olseni Belt",
+		waist="Reiki Yotai",       -- "Olseni Belt",
 		legs="Malignance Tights",  -- gear.meg_legs, 
 		feet="Malignance Boots"
 	}
