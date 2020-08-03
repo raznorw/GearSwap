@@ -19,6 +19,7 @@ version_history.txt
 # data/User-Globals.lua
 beta_examples_and_information/*
 data/instructions.txt
+data/export
 libs/Mote-*
 libs/rev1/*
 # *_Gear.lua

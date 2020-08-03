@@ -554,15 +554,17 @@ function init_gear_sets()
 	  legs="Carmine Cuisses +1",
 	})
 	  
+	-- DT: 29 DT, 16 PDT, 25 PDT II (epeo)
     sets.engaged.DTLite = set_combine(sets.engaged, {		  
-      head="Aya. Zucchetto +1",  -- \todo +2
-	  neck="futhark torque +2",	 -- \todo +2 (or at least +1)
-      body="Ayanmo Corazza +2",
+	  ammo="Yamarang",   -- meva/acc instead of DT
+      head="Aya. Zucchetto +1",  --  2 \todo +2, 3 DT at +2  
+	  neck="futhark torque +2",	 --  7 DT
+      body="Ayanmo Corazza +2",  --  6 DT
 	  hands="Turms Mittens +1",  -- "Meg. Gloves +2",
-	  ring1="Defending Ring",
-	  ring2="Moonbeam Ring", -- "Patricius Ring",
-      -- back="Moonlight Cape",
-	  legs="Meg. Chausses +2",
+	  ring1="Defending Ring",    -- 10 DT
+	  ring2="Moonbeam Ring",     --  4 DT "Patricius Ring",
+      -- back="Moonlight Cape",  -- 10 PDT
+	  legs="Meg. Chausses +2",   --  6 PDT
 	  feet="Turms Leggings +1",      -- "Ahosi Leggings"
 	})
 	
@@ -585,14 +587,14 @@ function init_gear_sets()
     })
 	
     sets.engaged.Tank = {          
-      -- sub="Refined Grip +1",       --  3/3 (refined +1)
-      ammo="staunch tathlum +1",      --  2/2     -- +1 for 3/3
+             -- sub="Refined Grip +1",       --  3/3 (refined +1)
+      ammo="staunch tathlum +1",   --  3/3
       head="Fu. Bandeau +3",       --  5/0     -- "Meghanada Visor +2",
-	  neck="futhark torque +2",       --  5/5     -- +1 for 6/6, +2 for 7/7
+	  neck="futhark torque +2",    --  7/7
 	  ear1="Odnowa Earring +1",    --  0/2
 	  ear2="Odnowa Earring",       --  0/1
 	  body="Runeist's Coat +3",    --    <higher meva/hp>
-      -- body="Futhark Coat +3",      --  7/7
+               -- body="Futhark Coat +3",   --  7/7
 	  hands="Turms Mittens +1",    --       4 haste, parry heal -- gear.herculean_dt_hands,
 	  ring1="Moonbeam Ring",       --  4/4   -- moonlight for 5/5
 	  ring2="Defending Ring",      -- 10/10

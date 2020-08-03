@@ -178,7 +178,7 @@ function init_gear_sets()
 	  ring1="Ilabrat Ring",        -- "Ifrit Ring +1",
 	  ring2="Rajas Ring",          -- "Rufescent Ring",
 	  back=gear.wsd_jse_back,
-	  waist="Grunfeld Rope",
+	  waist="Metalsinger belt",  -- "Grunfeld Rope",
 	  legs=gear.herculean_wsd_legs,
 	  feet=gear.herculean_wsd_feet
 	})

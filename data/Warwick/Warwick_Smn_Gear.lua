@@ -47,7 +47,7 @@ function init_gear_sets()
 	  -- neck="Incanter's Torque",
 	  -- ear1="Andoaa Earring",
 	  -- ear2="Evans Earring",
-      body="Con. Doublet +2",
+      body="Con. Doublet +3",
 	  hands="Baayami Cuffs",
 	  -- ring1="Evoker's Ring",
 	  -- ring2="Stikini Ring",
@@ -94,7 +94,7 @@ function init_gear_sets()
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     sets.precast.WS['Myrkr'] = {ammo="Sancus Sachet +1",
         head="Beckoner's Horn +1",neck="Sanctity Necklace",ear1="Etiolation Earring",ear2="Gifted Earring",
-        body="Con. Doublet +2",hands="Regal Cuffs",ring1="Mephitas's Ring +1",ring2="Mephitas's Ring",
+        body="Con. Doublet +3",hands="Regal Cuffs",ring1="Mephitas's Ring +1",ring2="Mephitas's Ring",
         back="Conveyance Cape",waist="Luminary Sash",legs="Psycloth Lappas",feet="Beck. Pigaches +1"}
 
     
@@ -217,11 +217,15 @@ function init_gear_sets()
       ammo="Sancus Sachet +1",
       head="Apogee Crown +1",
 	  neck="Smn. Collar +1",
-      body="Con. Doublet +2",
+	  ear2="Enmerkar Earring",  
+	  ear2="Lugalbanda Earring",
+      body="Con. Doublet +3",
       hands={ name="Merlinic Dastanas", augments={'Blood Pact Dmg.+9','Pet: Mag. Acc.+3','Pet: "Mag.Atk.Bns."+7',}},
-      legs={ name="Merlinic Shalwar", augments={'Pet: Accuracy+14 Pet: Rng. Acc.+14','Blood Pact Dmg.+6','Pet: DEX+2','Pet: Mag. Acc.+7','Pet: "Mag.Atk.Bns."+13',}},
-      feet={ name="Apogee Pumps +1", augments={'Pet: Attack+25','Pet: "Mag.Atk.Bns."+25','Blood Pact Dmg.+8',}},      
-      waist="Regal Belt", -- "Incarnation Sash",
+	  legs="Enticer's Pants",
+      -- legs={ name="Merlinic Shalwar", augments={'Pet: Accuracy+14 Pet: Rng. Acc.+14','Blood Pact Dmg.+6','Pet: DEX+2','Pet: Mag. Acc.+7','Pet: "Mag.Atk.Bns."+13',}},
+	  feet="Apogee Pumps +1",
+      -- feet={ name="Apogee Pumps +1", augments={'Pet: Attack+25','Pet: "Mag.Atk.Bns."+25','Blood Pact Dmg.+8',}},      
+      waist="Incarnation Sash",
       left_ring={name="Varar Ring", bag="wardrobe2"},      
 	  right_ring={name="Varar Ring", bag="wardrobe3"},      
       back=gear.phys_jse_back,
@@ -254,7 +258,7 @@ function init_gear_sets()
         -- hands=gear.merlinic_magpact_hands,	  
         -- back=gear.magic_jse_back,
 	    waist="Regal Belt",
-	    -- legs="Enticer's Pants"
+	    legs="Enticer's Pants",
 	    back=gear.magic_jse_back,
 	})
 
@@ -268,8 +272,10 @@ function init_gear_sets()
 
     sets.midcast.Pet['Elemental Magic'].Resistant = {}
     
-	sets.midcast.Pet['Flaming Crush'] = set_combine(sets.midcast.Pet.MagicalBloodPactRage, {	  
-        -- legs="Apogee Slacks +1"
+	sets.midcast.Pet['Flaming Crush'] = set_combine(sets.midcast.Pet.MagicalBloodPactRage, {
+	    -- Cath palug helm
+		-- cait sith ring
+        legs="Enticer's Pants"
 		})
 		
 	sets.midcast.Pet['Flaming Crush'].Acc = {feet="Convo. Pigaches +3"}
@@ -433,7 +439,7 @@ function init_gear_sets()
 	  neck="Shulmanu Collar",
 	  ear1="Heartseeker Earring", -- "Digni. Earring",
 	  -- ear2="Telos Earring",
-      body="Con. Doublet +2",
+      body="Con. Doublet +3",
 	  hands="Tali'ah gages +1",
 	  ring1="Petrov Ring",
 	  -- ring2="Ramuh Ring +1",

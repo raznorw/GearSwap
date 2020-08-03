@@ -232,10 +232,21 @@ function init_gear_sets()
     sets.midcast.Utsusemi = sets.midcast.FastRecast
 
     -- Ranged gear
-    sets.midcast.RA = {ammo=gear.RAbullet,
-        head="Meghanada Visor +2",neck="Iskur Gorget",ear1="Enervating Earring",ear2="Telos Earring",
-        body="Nisroch Jerkin",hands="Carmine Fin. Ga. +1",ring1="Rajas Ring",ring2="Ilabrat Ring",
-        back=gear.tp_ranger_jse_back,waist="Yemaya Belt",legs="Adhemar Kecks",feet="Meg. Jam. +2"}
+    sets.midcast.RA = {
+	    ammo=gear.RAbullet,
+        head="Malignance Chapeau",
+		neck="Sanctity Necklace",     -- "Iskur Gorget",
+		ear1="Enervating Earring",
+		ear2="Navarach's Earring",    -- "Telos Earring",
+        body="Mummu Jacket +1",       -- "Nisroch Jerkin",
+		hands="Malignance Gloves",    -- "Carmine Fin. Ga. +1",
+		ring1="Mummu Ring",           -- "Rajas Ring",
+		ring2="K'ayres Ring",         -- "Ilabrat Ring",
+        back=gear.tp_ranger_jse_back,
+		waist="Eschan Stone", -- or pontente belt "Yemaya Belt",
+		legs="Malignance Tights",      -- "Adhemar Kecks",
+		feet="Mummu Gamashes +1",      -- "Meg. Jam. +2"
+    }
 
     sets.midcast.RA.Acc = {ammo=gear.RAbullet,
         head="Meghanada Visor +2",neck="Iskur Gorget",ear1="Enervating Earring",ear2="Telos Earring",

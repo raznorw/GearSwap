@@ -7,7 +7,7 @@ function user_setup()
 	state.MagicalDefenseMode:options('MDT')
 	state.ResistDefenseMode:options('MEVA')
 	state.IdleMode:options('Normal', 'PDT')
-	state.Weapons:options('Karambit', 'Godhands','ProcStaff','ProcClub','Barehanded','ProcSword','ProcGreatSword','ProcScythe','ProcPolearm','ProcGreatKatana')
+	state.Weapons:options('Godhands','Karambit', 'ProcStaff','ProcClub','Barehanded','ProcSword','ProcGreatSword','ProcScythe','ProcPolearm','ProcGreatKatana')
 
     state.ExtraMeleeMode = M{['description']='Extra Melee Mode', 'None'}
 
@@ -32,7 +32,7 @@ function init_gear_sets()
 	
 	-- Precast sets to enhance JAs on use
 	sets.precast.JA['Hundred Fists'] = {legs="Hesychast's Hose +1"}
-	sets.precast.JA['Boost'] = {} --hands="Anchorite's Gloves +1"
+	sets.precast.JA['Boost'] = {waist="Ask Sash"} --hands="Anchorite's Gloves +1"
 	sets.precast.JA['Dodge'] = {feet="Anchorite's Gaiters +1"}
 	sets.precast.JA['Focus'] = {head="Anchorite's Crown +1"}
 	sets.precast.JA['Counterstance'] = {} --feet="Hesychast's Gaiters +1"
@@ -255,8 +255,7 @@ function init_gear_sets()
 	-- EG: sets.engaged.Dagger.Accuracy.Evasion
 
 	-- Normal melee sets
-	sets.engaged={
-		main="Karambit",
+	sets.engaged={		
 		ammo="Ginsen",
 		head="Ken. Jinpachi +1",
 		body="Ken. Samue +1",

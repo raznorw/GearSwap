@@ -56,6 +56,7 @@ send_command('bind f6 sellnpc powder')
 send_command('bind @f6 buypowder 3333')               -- win-f6
 send_command('bind !f6 sparks buyall acheron shield') -- alt-f6
 send_command('bind !f input /follow warwick') -- alt-f
+send_command('bind ^f6 gs c cycle Weapons')    -- ctrl-f6
 
 send_command('bind !@^f7 gs c toggle AutoWSMode') --Turns auto-ws mode on and off.
 send_command('bind !^f7 gs c toggle AutoFoodMode') --Turns auto-ws mode on and off.

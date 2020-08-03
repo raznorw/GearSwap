@@ -8,10 +8,11 @@ function user_setup()
 	state.MagicalDefenseMode:options('MDT','MDTReraise')
 	state.ResistDefenseMode:options('MEVA')
     state.IdleMode:options('Normal', 'Reraise')
-	state.Weapons:options('Dojikiri','ProcWeapon','Bow')
+	state.Weapons:options('Dojikiri','QuintSpear','ProcWeapon','Bow')
 
 	gear.ws_jse_back = {name="Smertrios's Mantle",augments={'STR+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}}
 	gear.stp_jse_back = {name="Smertrios's Mantle",augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10',}}
+	gear.da_jse_back = { name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
     -- Additional local binds
     send_command('bind ^` input /ja "Hasso" <me>')
     send_command('bind !` input /ja "Seigan" <me>')
@@ -42,7 +43,8 @@ function init_gear_sets()
     sets.precast.Step = {
         head="Flam. Zucchetto +2",neck="Moonbeam Nodowa",ear1="Zennaroi Earring",ear2="Telos Earring",
         body="Tartarus Platemail",hands="Flam. Manopolas +2",ring1="Ramuh Ring +1",ring2="Ramuh Ring +1",
-        back=gear.stp_jse_back,waist="Olseni Belt",legs="Wakido Haidate +3",feet="Founder's Greaves"}
+        back=gear.da_jse_back,  -- gear.stp_jse_back,
+		waist="Olseni Belt",legs="Wakido Haidate +3",feet="Founder's Greaves"}
     sets.precast.JA['Violent Flourish'] = {ammo="Pemphredo Tathlum",
         head="Flam. Zucchetto +2",neck="Sanctity Necklace",ear1="Digni. Earring",ear2="Moonshade Earring",
         body="Flamma Korazin +2",hands="Flam. Manopolas +2",ring1="Ramuh Ring +1",ring2="Ramuh Ring +1",
@@ -67,18 +69,18 @@ function init_gear_sets()
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
 	  ammo="Knobkierrie",
-      head="Flam. Zucchetto +2",            -- gear.valorous_wsd_head,
-	  neck="Fotia Gorget",
-	  ear1="Lugra Earring +1",
+      head=gear.valorous_wsd_head,       -- meh
+	  neck="Sam. Nodowa +1",
+	  ear1="Thrud Earring",              -- "Lugra Earring +1",
 	  ear2="Moonshade Earring",
       body="Sakonji Domaru +3",
-	  hands=gear.valorous_wsd_hands,
-	  ring1="Niqmaddu Ring",
-	  ring2="Regal Ring",
+	  hands=gear.valorous_wsd_hands,     -- meh
+	    ring1="Niqmaddu Ring",
+	    ring2="Regal Ring",
       back=gear.ws_jse_back,
-	  waist="Fotia Belt",
+	    waist="Fotia Belt", -- "Sailfi Belt +1" R15 is probably better
 	  legs="Wakido Haidate +3",
-	  feet=gear.valorous_wsd_feet
+	    feet=gear.valorous_wsd_feet
 	}
 		
 		
@@ -91,7 +93,8 @@ function init_gear_sets()
 	sets.precast.WS.Proc = {ammo="Hasty Pinion +1",
         head="Flam. Zucchetto +2",neck="Moonbeam Nodowa",ear1="Zennaroi Earring",ear2="Telos Earring",
         body="Tartarus Platemail",hands="Flam. Manopolas +2",ring1="Ramuh Ring +1",ring2="Ramuh Ring +1",
-        back=gear.stp_jse_back,waist="Olseni Belt",legs="Wakido Haidate +3",feet="Flam. Gambieras +2"}
+        back=gear.da_jse_back, gear.stp_jse_back,
+		waist="Olseni Belt",legs="Wakido Haidate +3",feet="Flam. Gambieras +2"}
 	
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     sets.precast.WS['Tachi: Fudo'] = set_combine(sets.precast.WS, {})
@@ -261,13 +264,13 @@ function init_gear_sets()
 	  -- hands="Flam. Manopolas +1",         -- gear.valorous_acc_hands,
 	  ring1="Flamma Ring",               -- "Niqmaddu Ring",
 	  ring2="Petrov Ring",
-      back=gear.stp_jse_back,
+      back=gear.da_jse_back, -- gear.stp_jse_back,
 	  waist="Ioskeha Belt",
 	  -- legs="Flamma Dirs +1",             -- "Wakido Haidate +3",
 	  -- feet="Flam. Gambieras +1"
 	}
 		
-		
+	sets.engaged.normal = sets.engaged	
 		
     sets.engaged.SomeAcc = set_combine(sets.engaged, {
         ear2="Telos Earring",
@@ -392,6 +395,7 @@ function init_gear_sets()
 
 	-- Weapons sets
 	sets.weapons.Dojikiri = {main="Dojikiri Yasutsuna",sub="Utu Grip"}
+	sets.weapons.QuintSpear = {main="Quint Spear",sub="Utu Grip"}
 	sets.weapons.ProcWeapon = {main="Norifusa +1",sub="Bloodrain Strap"}
 	sets.weapons.Bow = {main="Norifusa +1",sub="Utu Grip",range="Cibitshavore",ammo="Eminent Arrow"}
 	
