@@ -8,7 +8,7 @@ function user_setup()
 	state.MagicalDefenseMode:options('MDT','MDTReraise')
 	state.ResistDefenseMode:options('MEVA')
     state.IdleMode:options('Normal', 'Reraise')
-	state.Weapons:options('Dojikiri','QuintSpear','ProcWeapon','Bow')
+	state.Weapons:options('Dojikiri','QuintSpear','ShiningOne','ProcWeapon','Bow')
 
 	gear.ws_jse_back = {name="Smertrios's Mantle",augments={'STR+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}}
 	gear.stp_jse_back = {name="Smertrios's Mantle",augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10',}}
@@ -80,7 +80,7 @@ function init_gear_sets()
       back=gear.ws_jse_back,
 	    waist="Fotia Belt", -- "Sailfi Belt +1" R15 is probably better
 	  legs="Wakido Haidate +3",
-	    feet=gear.valorous_wsd_feet
+	  feet="Sak. Sune-Ate +3"           -- gear.valorous_wsd_feet
 	}
 		
 		
@@ -203,10 +203,21 @@ function init_gear_sets()
 	sets.TreasureHunter = set_combine(sets.TreasureHunter, {})
 	sets.Skillchain = {}
 	
-    sets.idle = {ammo="Staunch Tathlum",
-        head=gear.valorous_wsd_head,neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="Sanare Earring",
-        body="Hiza. Haramaki +2",hands="Sakonji Kote +1",ring1="Defending Ring",ring2="Dark Ring",
-        back="Moonlight Cape",waist="Flume Belt",legs="Flamma Dirs +2",feet="Danzo Sune-ate"}
+    sets.idle = {
+	  ammo="Staunch Tathlum",
+      head=gear.valorous_wsd_head,
+	  neck="Loricate Torque +1",
+	  ear1="Etiolation Earring",
+	  ear2="Sanare Earring",
+      body="Hiza. Haramaki +2",
+	  hands="Sakonji Kote +1",
+	  ring1="Defending Ring",
+	  ring2="Dark Ring",
+      back="Moonlight Cape",
+	  waist="Flume Belt",
+	  legs="Flamma Dirs +2",
+	  feet="Danzo Sune-ate"
+	}
 		
     sets.idle.Reraise = set_combine(sets.idle, sets.Reraise)
 
@@ -251,13 +262,12 @@ function init_gear_sets()
     -- Delay 450 GK, 25 Save TP => 65 Store TP for a 5-hit (25 Store TP in gear)
     sets.engaged = {
 	  ammo="Ginsen",
-      head="Flam. Zucchetto +2",
+      head="Flam. Zucchetto +2",      -- "Ken. Jinpachi +1",
 	  neck="Sam. Nodowa +1",          -- "Moonbeam Nodowa",
 	  ear1="Bladeborn Earring",          -- "Cessance Earring",
 	  ear2="Steelflash Earring",         -- "Brutal Earring",
-	  head="Ken. Jinpachi +1",
 	  body="Ken. Samue +1",
-	  hands="Ken. Tekko +1",
+	  hands="Ken. Tekko +1",         -- if hasso up, there's logic to swap to AF hands
 	  legs="Ken. Hakama +1",
 	  feet="Ken. Sune-Ate +1",
       -- body="Flamma Korazin +1",          -- "Kasuga Domaru +1",
@@ -396,10 +406,12 @@ function init_gear_sets()
 	-- Weapons sets
 	sets.weapons.Dojikiri = {main="Dojikiri Yasutsuna",sub="Utu Grip"}
 	sets.weapons.QuintSpear = {main="Quint Spear",sub="Utu Grip"}
+	sets.weapons.ShiningOne = {main="Shining One",sub="Utu Grip"}
 	sets.weapons.ProcWeapon = {main="Norifusa +1",sub="Bloodrain Strap"}
 	sets.weapons.Bow = {main="Norifusa +1",sub="Utu Grip",range="Cibitshavore",ammo="Eminent Arrow"}
 	
 	-- Buff sets
+	sets.Cure_Received = {hands="Buremte Gloves",waist="Gishdubar Sash",legs="Flamma Dirs +2"}
 	sets.Cure_Received = {hands="Buremte Gloves",waist="Gishdubar Sash",legs="Flamma Dirs +2"}
 	sets.buff.Doom = set_combine(sets.buff.Doom, {})
 	sets.buff.Sleep = {neck="Vim Torque +1"}
@@ -407,7 +419,7 @@ function init_gear_sets()
 	sets.buff['Third Eye'] = {} --legs="Sakonji Haidate +3"
     sets.buff.Sekkanoki = {hands="Kasuga Kote +1"}
     sets.buff.Sengikori = {feet="Kas. Sune-Ate +1"}
-    sets.buff['Meikyo Shisui'] = {feet="Sak. Sune-Ate +1"}
+    sets.buff['Meikyo Shisui'] = {feet="Sak. Sune-Ate +3"}
 end
 
 -- Select default macro book on initial load or subjob change.

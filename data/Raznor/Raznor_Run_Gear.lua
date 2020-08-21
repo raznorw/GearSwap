@@ -22,7 +22,7 @@ function user_setup()
 	state.MagicalDefenseMode:options('MDT','MDT_HP','BDT','BDT_HP')
 	state.ResistDefenseMode:options('MEVA','MEVA_HP','Death','Charm','DTCharm')
 	state.IdleMode:options('Normal','Tank','KiteTank','Sphere')
-	state.Weapons:options('Epeolatry', 'Aettir','Lionheart','DualWeapons')
+	state.Weapons:options('Epeolatry', 'Aettir','Lionheart','DualWeapons','DualNaegling')
 	
 	state.ExtraDefenseMode = M{['description']='Extra Defense Mode','None','MP'}
 
@@ -272,6 +272,10 @@ function init_gear_sets()
     sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS.Acc,{})
     sets.precast.WS['Resolution'].HighAcc = set_combine(sets.precast.WS.HighAcc,{})
 	sets.precast.WS['Resolution'].FullAcc = set_combine(sets.precast.WS.FullAcc,{})
+	
+	sets.precast.WS['Decimation'] = set_combine(sets.precast.WS['Resolution'], {
+	  
+	})
 
     sets.precast.WS['Dimidiation'] = set_combine(sets.precast.WS,{ 	  
 	  -- utu grip
@@ -422,7 +426,8 @@ function init_gear_sets()
 	sets.weapons.Aettir = {main="Aettir",sub="Refined Grip +1"}
 	sets.weapons.Epeolatry = {main="Epeolatry",sub="Utu Grip" } -- "Refined Grip +1"}
 	sets.weapons.Lionheart = {main="Lionheart",sub="Utu Grip"}
-	sets.weapons.DualWeapons = {main="Naegling"} -- {main="Firangi",sub="Reikiko"}
+	sets.weapons.DualWeapons = {main="Kaja Axe", sub="Naegling"} -- {main="Firangi",sub="Reikiko"}
+	sets.weapons.DualNaegling = {main="Naegling", sub="Kaja Axe"} -- {main="Firangi",sub="Reikiko"}
 	
 	-- Defense Sets
 	-- \todo - defense sets
@@ -524,6 +529,10 @@ function init_gear_sets()
 		legs="Samnuha Tights",
 		feet="Herculean Boots", -- "Turms leggings",       -- gear.herculean_ta_feet
 	}
+	
+	sets.engaged.DW = set_combine(sets.engaged, {
+	  waist="Reiki Yotai"
+	})
 	
     sets.engaged.SomeAcc = set_combine(sets.engaged, {	
 	  neck="Sanctity Necklace", -- "Combatant's Torque",

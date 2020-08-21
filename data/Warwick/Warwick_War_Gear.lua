@@ -1233,17 +1233,17 @@ function init_gear_sets()
 	sets.TreasureHunter = set_combine(sets.TreasureHunter, {})
 	
 	-- Weapons sets
-	sets.weapons.Chango = {main="Chango",sub="Utu Grip"}
+	sets.weapons.Chango = {main="Jokushuono",sub="Utu Grip"} -- Chango
 	sets.weapons.DualWeapons = {main="Firangi",sub="Reikiko"}
 	sets.weapons.Greatsword = {main="Montante +1",sub="Utu Grip"}
-	sets.weapons.ProcDagger = {main="Chicken Knife II",sub=empty}
-	sets.weapons.ProcSword = {main="Ark Sword",sub=empty}
-	sets.weapons.ProcGreatSword = {main="Lament",sub=empty}
-	sets.weapons.ProcScythe = {main="Ark Scythe",sub=empty}
-	sets.weapons.ProcPolearm = {main="Pitchfork +1",sub=empty}
+	sets.weapons.ProcDagger = {main="Qutrub Knife",sub=empty} -- Chicken Knife II
+	sets.weapons.ProcSword = {main="Joyeuse",sub=empty} -- Ark Sword
+	sets.weapons.ProcGreatSword = {main="Claymore",sub=empty}  -- Lament
+	sets.weapons.ProcScythe = {main="Bronze zaghnal",sub=empty}  -- Ark Scythe
+	sets.weapons.ProcPolearm = {main="Quint Spear",sub=empty}  -- Pitchfork +1
 	sets.weapons.ProcGreatKatana = {main="Hardwood Katana",sub=empty}
-	sets.weapons.ProcClub = {main="Dream Bell +1",sub=empty}
-	sets.weapons.ProcStaff = {main="Terra's Staff",sub=empty}
+	sets.weapons.ProcClub = {main="Warp Cudgel",sub=empty} -- dream bell +1
+	sets.weapons.ProcStaff = {main="Earth Staff",sub=empty} -- Terra's Staff
 
 end
 	

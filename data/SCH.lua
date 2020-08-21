@@ -499,11 +499,11 @@ function handle_elemental(cmdParams)
 				windower.chat.input:schedule(1.3,'/ma "Stone" <t>')
 				windower.chat.input:schedule(5.6,'/ja "Immanence" <me>')
 				windower.chat.input:schedule(6.9,'/p '..auto_translate('Liquefaction')..' -<t>- MB: '..auto_translate('Fire')..' CLOSE!')
-				if windower.ffxi.get_spell_recasts()[281] < (spell_latency + 6) then
-					windower.chat.input:schedule(6.9,'/ma "Pyrohelix" <t>')
-				else
+				-- if windower.ffxi.get_spell_recasts()[281] < (spell_latency + 6) then
+					--windower.chat.input:schedule(6.9,'/ma "Pyrohelix" <t>')
+				--else
 					windower.chat.input:schedule(6.9,'/ma "Fire" <t>')
-				end
+				--end
 			elseif state.ElementalMode.value == 'Wind' then
 				windower.chat.input('/p '..auto_translate('Detonation')..' -<t>- MB: '..auto_translate('wind')..' OPEN!')
 				windower.chat.input:schedule(1.3,'/ma "Stone" <t>')
@@ -556,15 +556,15 @@ function handle_elemental(cmdParams)
 					windower.chat.input:schedule(6.9,'/ma "Blizzard" <t>')
 				end
 			elseif state.ElementalMode.value == 'Water' then
-				windower.chat.input('/p '..auto_translate('Reverberation')..' -<t>- MB: '..auto_translate('Water')..' <scall21> OPEN!')
+				windower.chat.input('/p '..auto_translate('Reverberation')..' -<t>- MB: '..auto_translate('Water')..' OPEN!')
 				windower.chat.input:schedule(1.3,'/ma "Stone" <t>')
 				windower.chat.input:schedule(5.6,'/ja "Immanence" <me>')
-				windower.chat.input:schedule(6.9,'/p '..auto_translate('Reverberation')..' -<t>- MB: '..auto_translate('Water')..' <scall21> CLOSE!')
-				if windower.ffxi.get_spell_recasts()[279] < (spell_latency + 6) then
-					windower.chat.input:schedule(6.9,'/ma "Hydrohelix" <t>')
-				else
+				windower.chat.input:schedule(6.9,'/p '..auto_translate('Reverberation')..' -<t>- MB: '..auto_translate('Water')..' CLOSE!')
+				-- if windower.ffxi.get_spell_recasts()[279] < (spell_latency + 6) then
+				--	windower.chat.input:schedule(6.9,'/ma "Hydrohelix" <t>')
+				--else
 					windower.chat.input:schedule(6.9,'/ma "Water" <t>')
-				end
+			--	end
 			elseif state.ElementalMode.value == 'Dark' then
 				if windower.ffxi.get_spell_recasts()[284] > (spell_latency + 6) then
 					add_to_chat(123,'Abort: Noctohelix on cooldown.')
