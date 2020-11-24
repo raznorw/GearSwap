@@ -299,7 +299,7 @@ function init_gear_sets()
         back=gear.ranger_wsd_jse_back,
 		waist="Light Belt", -- "Fotia Belt",
 		legs=gear.herculean_wsd_legs,
-		feet="Herculean Boots", -- "Lanun Bottes +3"
+		feet=gear.herculean_wsd_feet, -- "Lanun Bottes +3"
 		}
 
     sets.precast.WS['Last Stand'].Acc = 
@@ -329,8 +329,8 @@ function init_gear_sets()
 		ring2="Dingir Ring",
         back=gear.magic_wsd_jse_back,
 		waist="Eschan Stone",
-		legs="Herculean Trousers", -- TODO: "Laksa. Trews +3",
-		feet="Herculean Boots", -- TODO: "Lanun Bottes +3"
+		legs=gear.herculean_wsd_legs, -- TODO: "Laksa. Trews +3",
+		feet=gear.herculean_wsd_feet, -- TODO: "Lanun Bottes +3"
 		}
 
     sets.precast.WS['Leaden Salute'].Acc = set_combine(sets.precast.WS['Leaden Salute'], {
@@ -339,14 +339,14 @@ function init_gear_sets()
 	})        
 
     sets.precast.WS['Wildfire'] = set_combine(sets.precast.WS['Leaden Salute'], {
-        head=gear.herculean_nuke_head,
-		ear1="Crematio Earring",
-        ring1="Regal Ring"        
+        head={ name="Herculean Helm", augments={'"Counter"+4','STR+3','Weapon skill damage +6%','Accuracy+19 Attack+19',}},  -- gear.herculean_nuke_head,
+		ear1="Ishvara Earring", -- "Crematio Earring",
+        ring1="Ilabrat Ring",   -- "Regal Ring"        
 	})
 
     sets.precast.WS['Wildfire'].Acc = set_combine(sets.precast.WS['Wildfire'], {
         neck="Comm. Charm +1",
-        hands="Leyline Gloves"
+        -- hands="Leyline Gloves"
     })
 		
     sets.precast.WS['Hot Shot'] = sets.precast.WS['Wildfire']

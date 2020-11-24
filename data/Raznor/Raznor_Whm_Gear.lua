@@ -440,7 +440,7 @@ function init_gear_sets()
 	  body="Zendik Robe",
 	  hands=gear.chironic_refresh_hands,
 	  ring1="Defending Ring",
-	  ring2="Dark Ring",
+	  ring2="Schneddick Ring",
 	  back="Moonbeam Cape",
 	  waist="Flax Sash",
 	  legs="Assid. Pants +1",

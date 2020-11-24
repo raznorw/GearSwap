@@ -133,6 +133,8 @@ function init_gear_sets()
 	sets.midcast['Honor March'] = set_combine(sets.midcast.March,{range="Marsyas"})
 	sets.midcast.Minuet = {body="Fili Hongreline +1"}
 	sets.midcast.Minne = {}
+	sets.midcast["Knight's Minne"] = {range="Blurred Harp"}
+	sets.midcast["Army's Paeon"] = {range="Blurred Harp"}
 	sets.midcast.Carol = {}
 	sets.midcast["Sentinel's Scherzo"] = {} --feet="Fili Cothurnes +1" Brioso Slippers still provides more Duration
 	sets.midcast['Magic Finale'] = {range="Blurred Harp"}

@@ -4,7 +4,7 @@ sets.Sheltered = {ring2="Sheltered Ring"}
 sets.Capacity = {back="Aptitude Mantle" } -- "Mecisto. Mantle"}
 
 sets.buff.Doom = {waist="Gishdubar Sash",ring1="Eshmun's Ring",ring2="Eshmun's Ring"}
-sets.TreasureHunter = {head="Wh. Rarab Cap +1",waist="Chaac Belt"}
+sets.TreasureHunter = {head="Wh. Rarab Cap +1", waist="Chaac Belt",feet="Volte Boots"}
 
 sets.precast.Item['Hallowed Water'] = {}
 sets.precast.Item['Holy Water'] = {}
@@ -22,7 +22,7 @@ sets.malignance = {
 -- Meg gear is included because i'm still upgrading it and that's
 -- a pain to manage across jobs
 gear.meg_head  = "Meghanada Visor +1"
-gear.meg_body  = "Meg. Cuirie +1"
+gear.meg_body  = "Meg. Cuirie +2"
 gear.meg_hands = "Meg. Gloves +2"
 gear.meg_legs  = "Meg. Chausses +2"
 gear.meg_feet  = "Meg. Jam. +1" -- TODO: +2
@@ -33,6 +33,12 @@ gear.jhakri_legs = "Jhakri Slops +1"
 gear.jhakri_feet = "Jhakri Pigaches +1"
 gear.jhakri_hands = "Jhakri cuffs +2"
 
+gear.mummu_head  = "Mummu Bonnet +1"
+gear.mummy_body  = "Mummu Jacket +1"
+gear.mummu_hands = "Mummu Wrists +2"
+gear.mummu_legs  = "Mummu Kecks +2"
+gear.mummu_feet  = "Mummu Gamash. +2"
+
 gear.Amalric_D_hands = { name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}}
 gear.Amalric_D_feet = { name="Amalric Nails +1", augments={'Mag. Acc.+20','"Mag.Atk.Bns."+20','"Conserve MP"+7',}}
 
@@ -41,6 +47,12 @@ gear.herculean_wsd_feet = { name="Herculean Boots", augments={'"Mag.Atk.Bns."+17
 gear.herculean_wsd_legs = { name="Herculean Trousers", augments={'Pet: "Dbl.Atk."+1 Pet: Crit.hit rate +1','Pet: STR+11','Weapon skill damage +9%','Accuracy+7 Attack+7',}}
   -- {name="Herculean Trousers",augments={'Weapon skill damage +5%','DEX+8','Accuracy+13','Attack+14',}}
 gear.herculean_wsd_head =  { name="Herculean Helm", augments={'Attack+24','Weapon skill damage +4%','STR+2','Accuracy+14',}}
+
+gear.herculean_th_legs = { name="Herculean Trousers", augments={'INT+5','Attack+19','"Treasure Hunter"+2','Accuracy+2 Attack+2','Mag. Acc.+16 "Mag.Atk.Bns."+16',}}
+
+gear.herculean_phalanx_body = { name="Herculean Vest", augments={'Pet: "Regen"+2','Pet: "Subtle Blow"+2','Phalanx +4','Accuracy+12 Attack+12',}}
+gear.herculean_phalanx_hands= { name="Herculean Gloves", augments={'"Mag.Atk.Bns."+25','Attack+7','Phalanx +5',}}
+gear.herculean_phalanx_feet = { name="Herculean Boots", augments={'Attack+19','Weapon skill damage +3%','Phalanx +5',}}
 --------------------------------------------------------------------
 --- Not Mine
 --------------------------------------------------------------------

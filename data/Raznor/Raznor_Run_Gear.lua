@@ -1,3 +1,6 @@
+-- https://www.ffxiah.com/forum/topic/54783/destinys-device-a-newupdated-rune-fencer-guide/#equipment
+-- https://github.com/Akirane/XIVHotbar
+
 -- Gear Options:
 --    Turms Harness +1 - 52 acc, 12 STP, 128 MEva as an alternative to ayanmo corazza, but DT deficient
 
@@ -66,22 +69,22 @@ function init_gear_sets()
 	  ammo="Sapience Orb",        --  2 Enmity -- "staunch tathlum +1",
 	  head="Fu. Bandeau +3",  -- Rabid Visor is +6 enmity
 	  neck="Futhark Torque +2",   -- 10 enmity, 60 hp -- "Unmoving Collar +1",
-	  ear1="Friomisi Earring",    --  2 enmity, 0 hp
-	  -- ear2="Trux Earring",
-	  -- body="Emet Harness +1",
+	  ear2="Friomisi Earring",    --  2 enmity, 0 hp
+	  -- ear2="Trux Earring",    -- has 5, cryptic earring has 4
+	  -- body="Emet Harness +1",  -- has 10 enmity
 	  -- hands="Kurys Gloves", -- TODO: upgrade futhark mitons
 	  ring1="Petrov Ring",        --  4 enmity
-	  -- ring2="Vengeful Ring",
+	  -- ring2="Vengeful Ring",   -- eihwaz ring - 70 hp, 5 enmity
 	  back=gear.enmity_pdt_back,  -- 10 enmity
-	  waist="Sulla Belt",         --  3 enmity
+	  waist="Sulla Belt",         --  3 enmity - trance belt has 4 and 14 hp
 	  legs="Eri. Leg Guards +1",  -- 11 enmity
 	  feet="Ahosi Leggings"       --  7 enmity
     }
 		 
     sets.Enmity.SIRD = set_combine(sets.Enmity, {	
-		head="Meghanada Visor +1",		
+		head=gear.meg_head,		--? this doesn't add SIRD, why are we using it?
 		-- ear1="Genmei Earring",
-		hands=gear.herculean_dt_hands,
+		hands=gear.herculean_dt_hands, --?  pretty sure this doens't exist, and has no native SIRD
 		-- back=gear.enmity_jse_back,
 		-- waist="Rumination Sash",
 		legs="Carmine Cuisses +1",
@@ -193,21 +196,22 @@ function init_gear_sets()
 		
 	sets.precast.JA['Violent Flourish'] = {}
 		
-	-- Fast cast sets for spells
+	-- Fast cast sets for spells  -- need to use priority settings here to fix HP loss
+	-- Also, set needs a huge upgrade/rework
     sets.precast.FC = {
 	  ammo="Impatiens",
-      head="Carmine Mask +1",        -- 14 FC
+      head="Carmine Mask +1",        -- 14 FC -- Ru. Bandeau +3 is also 14 FC, but 70 HP higher
       neck="Voltsurge Torque",
-	  -- ear1="Enchntr. Earring +1",
-	  ear2="Loquacious Earring",
-      -- body="Dread Jupon",
-	  hands="Leyline Gloves",
+	  -- ear1="Enchntr. Earring +1", -- need etioliation earring
+	  ear2="Loquacious Earring",     -- apparently, can use HP earring here instead with enough FC elsewhere
+      -- body="Dread Jupon",  -- Adhemar +1 Path D - is 10FC, 138ish HP
+	  hands="Leyline Gloves",  -- need better augment - currently at 6 of 8 possible FC
 	  -- ring1="Lebeche Ring",
-	  ring2="Kishar Ring", 
-      -- back="Moonbeam Cape",
-	  waist="Flume Belt +1",
-	  legs="Ayanmo cosciales", -- "Rawhide Trousers", - 5 FC
-	  feet="Chelona Boots", -- "Carmine Greaves +1"
+	  ring2="Kishar Ring",           -- gives 4 FC, no HP, can we change for Moonlight ring for HP?
+      -- back="Moonbeam Cape",       -- todo: fast cast cape -- I guess, sux
+	  waist={"Flume Belt +1", priority=1},
+	  legs="Ayanmo cosciales", -- "Rawhide Trousers", - 5 FC -- todo: +2 - from +3 to +6 FC
+	  feet="Chelona Boots", -- "Carmine Greaves +1" - carmine give 8 FC, 95 HP - chelona give 4 FC
 	}
 			
 	sets.precast.FC.DT = {ammo="staunch tathlum +1",
@@ -296,6 +300,9 @@ function init_gear_sets()
 	sets.precast.WS['Dimidiation'].FullAcc = set_combine(sets.precast.WS.FullAcc,{
 	  back=gear.dimi_jse_back})
 	
+	-- TODO - Tank Dimidiation Set -- andthen double check to make sure it's being used properly with Hybrid mode, not just Defense Mode
+	-- sets.precast.WS['Dimidiation'].Tank
+	
     sets.precast.WS['Ground Strike'] = set_combine(sets.precast.WS,{})
     sets.precast.WS['Ground Strike'].Acc = set_combine(sets.precast.WS.Acc,{})
 	sets.precast.WS['Ground Strike'].HighAcc = set_combine(sets.precast.WS.HighAcc,{})
@@ -333,11 +340,11 @@ function init_gear_sets()
     
 	sets.midcast['Phalanx'] = set_combine(sets.midcast['Enhancing Magic'],{
 	  head="Fu. Bandeau +3", -- 7 
-	  body="Herculean Vest", -- +4 "Taeon Tabard",
-	  hands={ name="Herculean Gloves", augments={'"Mag.Atk.Bns."+25','Attack+7','Phalanx +5',}},
+	  body=gear.herculean_phalanx_body, -- only +4
+	  hands=gear.herculean_phalanx_hands,
 	  legs="Taeon Tights",
-	  feet="Taeon Boots"}
-    )
+	  feet=gear.herculean_phalanx_feet
+	})
     sets.midcast['Regen'] = set_combine(sets.midcast['Enhancing Magic'],{head="Rune. Bandeau +1"}) 
 	sets.midcast['Refresh'] = set_combine(sets.midcast['Enhancing Magic'],{head="Erilaz Galea +1"}) 
     sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {ear2="Earthcry Earring",waist="Siegel Sash"})
@@ -595,13 +602,17 @@ function init_gear_sets()
       ear2="Zennaroi Earring",
     })
 	
+	-- options: Utu grip (70 hp, offensive stuffs) for Mensch Strap +1 (5 PDT) or Refined Grip +1 (3 dt, 15-35 hp)
+	-- options: Back: 10 pdt for 5 parry - with mensch strap +1 and Odnowa Upgrade, puts at 49% PDT with no other changes
+	-- options: Moonlight Ring upgrade - 1 dt, 10 hp, 2 stp, 3 acc/att-
+	-- options: Head - FU. Bandeau +3 for Turm Cap +1 - gains 36 meva, 38 hp, loses 6 pdt, 2 haste, lots of attack
     sets.engaged.Tank = {          
              -- sub="Refined Grip +1",       --  3/3 (refined +1)
       ammo="staunch tathlum +1",   --  3/3
-      head="Fu. Bandeau +3",       --  5/0     -- "Meghanada Visor +2",
+      head="Fu. Bandeau +3",       --  6/0     -- "Meghanada Visor +2",
 	  neck="futhark torque +2",    --  7/7
-	  ear1="Odnowa Earring +1",    --  0/2
-	  ear2="Odnowa Earring",       --  0/1
+	  ear1="Odnowa Earring +1",    --  0/2 -- todo: upgrade for 3 dt, 30 def
+	  ear2="Odnowa Earring",       --  0/1 -- todo: tuisto earring for 50 more HP, 7 more vit
 	  body="Runeist's Coat +3",    --    <higher meva/hp>
                -- body="Futhark Coat +3",   --  7/7
 	  hands="Turms Mittens +1",    --       4 haste, parry heal -- gear.herculean_dt_hands,
@@ -611,19 +622,14 @@ function init_gear_sets()
 	  waist="Flume Belt +1",       --  4/0
 	  legs="Eri. Leg Guards +1",   --  7/0 -- Meg. Chausses +2 -- 6 PDT, -2 inq, less meva/hp/etc
 	                                       -- +49 acc, 45 att, 5 TA, str, agi...
-	  feet="Turms Leggings +1",       --   <higehr meva/inquartata 4>
+	  feet="Turms Leggings +1",       --   <higher meva/inquartata 4>
 	  -- feet="Erilaz Greaves +1"     --  5/0	   -- 107 meva, 25 res. all ele. 26 dex, 0 acc, haste 4	  
 	} -- assuming refined grip (3/3), and swapping futhark coat for runeist coat (50 meva)
-	-- DT 24, PDT 21, coat 7, 3 MDT -- 45 total, need 5 to lose coat
+	-- DT 24, PDT 27, 3 MDT
 	-- ideally lose 15, cape 10 PDT -> 5 parry.  feet 5 pdt to 4(5) parry
 	-- Options: Khonsu grip 6/6 (lose 5 enmity), gain 25 acc/macc, 4% haste
 	--          Kaja grip   5/5 (lose 4 enmity), gain 25 acc/macc
 	--       PDT Back - gain 10 PDT, lose 5 parry
-	--       Turms leggings    - 137 meva, 4 parry, regen 4, 38 acc, 34 dex, haste 3
-	--       Turms leggings +1 - 147 meva, 5 parry, regen 5, 48 acc, 39 dex, haste 3
-    
-	-- swap back, feet, body -- +5 net PDT (capped), +4 inq. (-1 net), +74 net meva, +bunch acc, +HP 
-	--    -- numbers change for +3 relic body, which has 40 acc, 65 att, but still less meva/hp
     
 	sets.engaged.SomeAcc.Tank = sets.engaged.Tank
 	sets.engaged.Acc.Tank = sets.engaged.Tank

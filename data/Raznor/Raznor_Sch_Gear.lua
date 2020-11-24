@@ -7,6 +7,13 @@
 --   Do we have different low tier / high tier sets?
 -- How to: Lock Weapons?
 --   Will cycling weapons lock and prevent from swapping?
+-- Vagary Notes:  (2020-10-24)
+--    //gs c cycle CastingMode - Proc for skillchains
+--    using //gs c elemental skillchain6 sets CastingMode to Proc
+--    for the 5k burst - use off element?  take off gear?  isi did, my base fire burst did 9k and killed
+--    locked weapon to malignance pole - fire did under 3k, tryin fire2 (4500 w/o storm on earth mobs)
+--    probably would work with firestorm2 and fire2 
+
 
 ----- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
