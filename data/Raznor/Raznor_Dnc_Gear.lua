@@ -141,7 +141,7 @@ function init_gear_sets()
         body="Adhemar Jacket +1",
 		hands="Meg. Gloves +2",
 		ring1="Ilabrat Ring",
-		ring2="Petrov Ring",      -- "Regal Ring",
+		ring2="Regal Ring",
         back=gear.da_jse_back,    -- gear.stp_jse_back,
 		waist="Grunfeld Rope",
 		legs=gear.herculean_wsd_legs,

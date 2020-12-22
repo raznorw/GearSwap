@@ -178,7 +178,7 @@ function init_gear_sets()
 	  ring1="Ilabrat Ring",        -- "Ifrit Ring +1",
 	  ring2="Rajas Ring",          -- "Rufescent Ring",
 	  back=gear.wsd_jse_back,
-	  waist="Metalsinger belt",  -- "Grunfeld Rope",
+	  waist="Sailfi Belt +1",      -- "Metalsinger belt",  -- "Grunfeld Rope",
 	  legs=gear.herculean_wsd_legs,
 	  feet=gear.herculean_wsd_feet
 	})
@@ -302,7 +302,7 @@ function init_gear_sets()
 	  ear2="Friomisi Earring",
 	  body="Amalric Doublet +1",    -- "Jhakri Robe +2",
 	  hands="Amalric Gages +1",
-	  ring1="Kishar Ring",          -- "Shiva Ring +1",
+	  ring1="Metamor. Ring +1",     
 	  ring2="Jhakri Ring",          -- "Shiva Ring +1",
       back=gear.mab_jse_back,
 	  waist="Eschan Stone",         -- gear.ElementalObi,
@@ -496,7 +496,7 @@ function init_gear_sets()
       body="Jhakri Robe +2",
 	  -- hands=gear.herculean_refresh_hands,
 	  ring1="Defending Ring",
-	  ring2="Schneddick Ring",   -- could use Dark Ring or similar
+	  ring2="Shneddick Ring",   -- could use Dark Ring or similar
       back="Moonbeam Cape",  -- 250 HP
 	  waist="Flume Belt +1",
 	  -- legs="Lengo Pants",  -- can get refresh +1

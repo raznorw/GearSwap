@@ -1,6 +1,9 @@
 -- https://www.ffxiah.com/forum/topic/54783/destinys-device-a-newupdated-rune-fencer-guide/#equipment
 -- https://github.com/Akirane/XIVHotbar
 
+-- DT Dimidiation Set - 4/5 Meg+2, Herc Body
+-- 
+
 -- Gear Options:
 --    Turms Harness +1 - 52 acc, 12 STP, 128 MEva as an alternative to ayanmo corazza, but DT deficient
 
@@ -232,8 +235,8 @@ function init_gear_sets()
 	  ear2="Sherida Earring",
       body="Adhemar Jacket +1",
 	  hands="Meg. Gloves +2",  -- dimidation
-	  ring1="Niqmaddu Ring",
-	  ring2="Ilabrat Ring",       -- TODO: "Regal Ring",			
+	  ring1="Regal Ring",         -- "Niqmaddu Ring", - regal has +50 HP which is nice
+	  ring2="Ilabrat Ring",       
       back=gear.da_jse_back,
 	  waist="Fotia Belt",
 	  legs="Meg. Chausses +2",
@@ -270,7 +273,7 @@ function init_gear_sets()
 	  head="Adhemar Bonnet +1", 
 	  neck="Futhark Torque +2",   -- TODO: "Fotia Gorget"	  
 	  hands="Adhemar Wrist. +1",
-	  ring2="Petrov Ring",        -- for the str 3, or ilabat for the attack and higehr dex?
+	  ring2="Niqmaddu Ring",
 	   legs="Meg. Chausses +2",
 	})
     sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS.Acc,{})
@@ -418,7 +421,22 @@ function init_gear_sets()
 		body="Runeist's Coat +3",hands=gear.herculean_refresh_hands,ring1="Defending Ring",ring2="Dark Ring",
 		back="Moonlight Cape",waist="Flume Belt +1",legs="Rawhide Trousers",feet=gear.herculean_refresh_feet}
 
-	sets.Kiting = {legs="Carmine Cuisses +1"}
+	sets.Kiting = {
+	  ammo="staunch tathlum +1",       -- 'Homiliary',  -- refresh +1
+	  head="Fu. Bandeau +3",           -- "Rawhide Mask",
+	  neck="futhark torque +2",
+	  ear1="Odnowa Earring +1",        -- "Genmei Earring",
+	  ear2="Odnowa Earring",           -- "Ethereal Earring",
+	  body="Runeist's Coat +3",
+	  hands="Turms Mittens +1",        -- gear.herculean_refresh_hands,
+	  ring1="Shneddick Ring",
+	  ring2="Moonbeam Ring",
+	  back="Moonbeam Cape",            -- gear.enmity_pdt_back,
+	  waist="Flume Belt +1",
+	  legs="Eri. Leg Guards +1",      
+	  feet="Turms Leggings +1",        -- gear.herculean_refresh_feet
+	  -- legs="Carmine Cuisses +1"
+	}
 	
 	sets.latent_refresh = {waist="Fucho-no-obi"}
 	sets.DayIdle = {}

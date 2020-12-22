@@ -71,7 +71,7 @@ function init_gear_sets()
 	sets.precast.JA['Triple Shot'] = {body="Chasseur's Frac +1"}
     sets.precast.JA['Snake Eye'] = {legs="Lanun Trews +1"}
     sets.precast.JA['Wild Card'] = {feet="Lanun Bottes +3"}
-    sets.precast.JA['Random Deal'] = {body="Lanun Frac +1"}
+    sets.precast.JA['Random Deal'] = {body="Lanun Frac +3"}
     sets.precast.FoldDoubleBust = {hands="Lanun Gants +1"}
 
     sets.precast.CorsairRoll = {
@@ -80,7 +80,7 @@ function init_gear_sets()
 		neck="Regal Necklace",
 		-- TODO: ear1="Etiolation Earring",
 		-- TODO: ear2="Sanare Earring",
-        -- TODO: body="Lanun Frac +1",
+        body="Lanun Frac +3",
 		-- TODO: hands="Chasseur's Gants +1",
 		ring1="Defending Ring",
 		-- TODO: ring2="Dark Ring",
@@ -207,7 +207,7 @@ function init_gear_sets()
 		ear2="Ishvara Earring",
         body="Laksa. Frac +3",
 		hands=gear.meg_hands,
-		ring1="Petrov Ring",      -- "Regal Ring",
+		ring1="Regal Ring",      
 		ring2="Dingir Ring",      -- "Ifrit Ring +1",
         back=gear.str_wsd_jse_back,
 		waist="Grunfeld Rope",    -- "Fotia Belt",
@@ -294,7 +294,7 @@ function init_gear_sets()
 		ear2="Telos Earring",
         body="Laksa. Frac +3",
 		hands=gear.meg_hands,
-		ring1="Ilabrat Ring", -- "Regal Ring",
+		ring1="Regal Ring",
 		ring2="Dingir Ring",
         back=gear.ranger_wsd_jse_back,
 		waist="Light Belt", -- "Fotia Belt",
@@ -323,7 +323,7 @@ function init_gear_sets()
 		neck="Comm. Charm +1", -- TODO: "Baetyl Pendant",
 		ear1="Moonshade Earring",
 		ear2="Friomisi Earring",
-        body="Laksa. Frac +3",
+        body="Lanun Frac +3",
 		hands="Carmine Fin. Ga. +1",
 		ring1="Archon Ring",
 		ring2="Dingir Ring",
