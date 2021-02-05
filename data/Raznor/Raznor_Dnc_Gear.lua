@@ -135,7 +135,7 @@ function init_gear_sets()
     sets.precast.WS = {
 	    ammo="Falcon Eye",
         head="Adhemar Bonnet +1", -- "Dampening Tam",
-		neck="Anu Torque",
+		neck="etoile gorget +1",  -- "Anu Torque",
 		ear1="Telos Earring", -- "Brutal Earring",
 		ear2="Sherida Earring",
         body="Adhemar Jacket +1",
@@ -236,7 +236,7 @@ function init_gear_sets()
       ring1="Defending Ring",
 	  ring2="Shneddick Ring", -- "Sheltered Ring",
       back="Moonbeam Cape",
-	  waist="Flume Belt",	  
+	  waist="Flume Belt +1",	  
 	})
 		
     sets.idle.Sphere = set_combine(sets.idle, {body="Mekosu. Harness"})
@@ -272,8 +272,8 @@ function init_gear_sets()
     sets.engaged = {
 	    ammo="Ginsen",            -- "Yamarang",
         head="Adhemar Bonnet +1", -- "Dampening Tam",
-		neck="Anu Torque",
-		ear1="Telos Earring", -- "Brutal Earring",
+		neck="etoile gorget +1",  -- "Anu Torque",
+		ear1="Telos Earring",     -- "Brutal Earring",
 		ear2="Sherida Earring",
         body="Adhemar Jacket +1",
 		hands="Adhemar Wrist. +1",

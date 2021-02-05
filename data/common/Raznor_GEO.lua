@@ -202,6 +202,7 @@ function get_sets()
     -- This is the base for all perpetuation scenarios, as seen below
     sets.pan.idle.normal = {
       main="Idris",
+	  sub="Genmei Shield",
 	  -- missing offhand shield - Genmei/Genbu
       ammo="Staunch Tathlum +1",
       head="Azimuth Hood +1", 

@@ -1,4 +1,10 @@
 --[[
+Job Specific Gear in MH:
+  + Cleric's pantaloons +1    - storage slip 07
+  + Ebers pantaloos +1        - storage slip 21  
+  + Mending Cape              - safe 2
+  + Glorious Earring          - safe 2
+
 Sets:
   Idle (Meva/PDT/Refresh/Misery/...)
     -- Main/Sub - Malignance Pole + KajaGrip/Khonsu -- 25(26) DT, Enmity -4/5, Haste 3/4

@@ -103,8 +103,7 @@ function init_gear_sets()
 	  waist="Witful Belt",
 	  legs="Psycloth Lappas",         -- 7
 	  feet="Amalric Nails +1"         -- 6 -- "Regal Pumps +1"
-	} -- 54 current FC, 30% from elemtental Celerity for elemental spells
-	  -- +8 more celerity avail via gifts
+	} -- 54 current FC, 38% from elemental Celerity V + Gifts for elemental spells
 	  
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
 	
@@ -147,9 +146,9 @@ function init_gear_sets()
 	--   1956 - changed ring2 to sangoma, don't have either mephitas's
 	--   1974 - changed feet to telchine pigaches, no medium's sabots
 	--   2004 - changed waist to Fucho-no-Obi, don't have other options
-	-- ** 1000 TP should be work 500ish base, plus another 5% from moonshade, so 600 mp return
+	-- ** 1000 TP should be worth 500ish base, plus another 5% from moonshade, so 600 mp return
     sets.precast.WS['Myrkr'] = {
-	  ammo="Vanir Battery",
+	  ammo="Vanir Battery",    -- 20 mp, ghastly tathlum +1 35, psilomene 45
 	  head="Pixie Hairpin +1",
 	  neck="Sanctity Necklace",
 	  ear1="Moonshade Earring",
@@ -157,8 +156,8 @@ function init_gear_sets()
 	  body="Amalric Doublet +1",
 	  hands="Vanya Cuffs",     -- "Regal Cuffs",
 	  ring1="Mephitas's Ring +1",
-	  ring2="Sangoma Ring",      -- "Mephitas's Ring",
-	  back="Aurist's Cape +1",  -- "Bane Cape" -- 90 MP
+	  ring2="Sangoma Ring",      -- "Mephitas's Ring", sangoma is 70 mp, mephitas is convert 100hp to mp
+	  back="Aurist's Cape +1",  -- "Bane Cape" -- 90 MP, no aug needed, aurists is 45
 	  waist="Fucho-no-Obi",      -- "Yamabuki-no-Obi",  -- "Shinjutsu-no-obi +1" -- 85 MP vs 35 for yamabuki
 	  legs="Amalric Slops +1", 
 	  feet="Telchine Pigaches",  -- "Medium's Sabots"    -- Max Aug +50 MP, for 70 mp total, Amalric NAils +1 (A) is 106 mp total

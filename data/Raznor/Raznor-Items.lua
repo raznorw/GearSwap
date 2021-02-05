@@ -1,4 +1,17 @@
 --Gearsets your character will use among multiple jobs.
+-- Foods:
+--   Fried Popoto      - cheap def
+--   Tavnazian Taco    - cheap def
+--   Black Curreny Bun - less cheap Def
+--   Miso Ramen        - def + meva + more
+--   Egg Sandwich      - def + acc
+--   (B&R) Grape Daifuku     - 80 att + 50 acc + pet buffs and MAB
+--   (Swe) Tropical Crepe    - 90 macc
+--   Sublime Sushi     - 100 acc - overtaken by grape daifuku almost everywhere
+--   Marine Stewpot    - ranged, physical, magical att/acc
+--   Rabbit Pie        - 100 att/ 100 def
+--   Kitron Mac.       - crafting skillup
+--   Fishermans Feast  - Fish. Skillup
 
 sets.Sheltered = {ring2="Sheltered Ring"}
 sets.Capacity = {back="Aptitude Mantle" } -- "Mecisto. Mantle"}

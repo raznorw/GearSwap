@@ -1,3 +1,8 @@
+-- Soporific, Geist Wall, Sheep Song -- Blank Gaze, Jettatura 
+
+-- Taeon Tabard - 4 FC base - leafdim can add 1-5 more
+--    Cheaper than anothe adhemar jacket +1 probably, but way less HP 
+
 -- https://www.ffxiah.com/forum/topic/54783/destinys-device-a-newupdated-rune-fencer-guide/#equipment
 -- https://github.com/Akirane/XIVHotbar
 
@@ -21,14 +26,14 @@
 function user_setup()
 
 	state.OffenseMode:options('Normal','SomeAcc','Acc','HighAcc','FullAcc')
-	state.HybridMode:options('Normal','DTLite','Tank')
+	state.HybridMode:options('Normal','DTLite','Tank','TankDef')
 	state.WeaponskillMode:options('Match','Normal','SomeAcc','Acc','HighAcc','FullAcc')
 	state.CastingMode:options('Normal','SIRD','Resistant')
 	state.PhysicalDefenseMode:options('PDT', 'PDT_HP')
 	state.MagicalDefenseMode:options('MDT','MDT_HP','BDT','BDT_HP')
 	state.ResistDefenseMode:options('MEVA','MEVA_HP','Death','Charm','DTCharm')
 	state.IdleMode:options('Normal','Tank','KiteTank','Sphere')
-	state.Weapons:options('Epeolatry', 'Aettir','Lionheart','DualWeapons','DualNaegling')
+	state.Weapons:options('Epeolatry', 'Aettir','Lionheart','DualWeapons','DualNaegling', 'EpeoHP')
 	
 	state.ExtraDefenseMode = M{['description']='Extra Defense Mode','None','MP'}
 
@@ -165,7 +170,13 @@ function init_gear_sets()
 	sets.element.Earth = {neck="Quanpur Necklace"}
 
 	-- Pulse sets, different stats for different rune modes, stat aligned.
-    sets.precast.JA['Vivacious Pulse'] = {head="Erilaz Galea +1",neck="Incanter's Torque",ring1="Stikini Ring",ring2="Stikini Ring",legs="Rune. Trousers +3"}
+    sets.precast.JA['Vivacious Pulse'] = {
+	  head="Erilaz Galea +1",
+	  neck="Incanter's Torque",
+	  ring1="Stikini Ring",
+	  ring2="Stikini Ring",
+	  legs="Rune. Trousers +3"
+	}
     sets.precast.JA['Vivacious Pulse']['Ignis'] = set_combine(sets.precast.JA['Vivacious Pulse'], {})
 	sets.precast.JA['Vivacious Pulse']['Gelus'] = set_combine(sets.precast.JA['Vivacious Pulse'], {})
 	sets.precast.JA['Vivacious Pulse']['Flabra'] = set_combine(sets.precast.JA['Vivacious Pulse'], {})
@@ -202,20 +213,20 @@ function init_gear_sets()
 	-- Fast cast sets for spells  -- need to use priority settings here to fix HP loss
 	-- Also, set needs a huge upgrade/rework
     sets.precast.FC = {
-	  ammo="Impatiens",
+	  ammo="Sapience Orb",           --  2,   "Impatiens", -- 0, has QC
       head="Carmine Mask +1",        -- 14 FC -- Ru. Bandeau +3 is also 14 FC, but 70 HP higher
-      neck="Voltsurge Torque",
+      neck="Voltsurge Torque",       --  4
 	  -- ear1="Enchntr. Earring +1", -- need etioliation earring
 	  ear2="Loquacious Earring",     -- apparently, can use HP earring here instead with enough FC elsewhere
       -- body="Dread Jupon",  -- Adhemar +1 Path D - is 10FC, 138ish HP
-	  hands="Leyline Gloves",  -- need better augment - currently at 6 of 8 possible FC
+	  hands="Leyline Gloves",        --  6 - need better augment - currently at 6 of 8 possible FC
 	  -- ring1="Lebeche Ring",
-	  ring2="Kishar Ring",           -- gives 4 FC, no HP, can we change for Moonlight ring for HP?
+	  ring2="Kishar Ring",           --  4 - gives 4 FC, no HP, can we change for Moonlight ring for HP?
       -- back="Moonbeam Cape",       -- todo: fast cast cape -- I guess, sux
 	  waist={"Flume Belt +1", priority=1},
-	  legs="Ayanmo cosciales", -- "Rawhide Trousers", - 5 FC -- todo: +2 - from +3 to +6 FC
+	  legs="Ayanmo cosciales +2", -- 3 base, 6 for +2 -- "Rawhide Trousers", - 5 FC -- todo: +2 - from +3 to +6 FC
 	  feet="Chelona Boots", -- "Carmine Greaves +1" - carmine give 8 FC, 95 HP - chelona give 4 FC
-	}
+	}  -- 
 			
 	sets.precast.FC.DT = {ammo="staunch tathlum +1",
         head="Rune. Bandeau +1",neck="Loricate Torque",ear1="Odnowa Earring +1",ear2="Odnowa Earring",
@@ -410,6 +421,23 @@ function init_gear_sets()
 	  legs="Eri. Leg Guards +1",
 	  feet="Turm Leggings +1"
 	})
+	
+	-- Note: Switch to EpeoHP weapon set
+	sets.idle.TankDef = set_combine(sets.idle, {
+	  ammo="staunch tathlum +1",	  
+      head="Fu. Bandeau +3",
+	  neck="Futhark Torque +2",
+	  -- ear1="Genmei Earring",
+	  -- ear2="Tuisto Earring",
+      body="Futhark Coat +3",
+	  hands="Turms Mittens +1",
+	  ring1="Defending Ring",
+	  ring2="Moonbeam Ring", -- \todo:  Moonlight Ring
+      back="Moonbeam Cape",  -- \todo: Ogma's With Def/Vit
+	  waist="Flume Belt +1", -- \todo: engraved belt
+	  legs="Eri. Leg Guards +1",
+	  feet="Turm Leggings +1"
+	})
 		
 	sets.idle.KiteTank = {ammo="staunch tathlum +1",
         head="Fu. Bandeau +3",neck="Vim Torque +1",ear1="Genmei Earring",ear2="Ethereal Earring",
@@ -450,6 +478,7 @@ function init_gear_sets()
 	-- Weapons sets
 	sets.weapons.Aettir = {main="Aettir",sub="Refined Grip +1"}
 	sets.weapons.Epeolatry = {main="Epeolatry",sub="Utu Grip" } -- "Refined Grip +1"}
+	sets.weapons.EpeoHP = {main="Epeolatry",sub="Refined Grip +1" } 
 	sets.weapons.Lionheart = {main="Lionheart",sub="Utu Grip"}
 	sets.weapons.DualWeapons = {main="Kaja Axe", sub="Naegling"} -- {main="Firangi",sub="Reikiko"}
 	sets.weapons.DualNaegling = {main="Naegling", sub="Kaja Axe"} -- {main="Firangi",sub="Reikiko"}
