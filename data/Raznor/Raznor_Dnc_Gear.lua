@@ -14,7 +14,7 @@ function user_setup()
     state.PhysicalDefenseMode:options('PDT')
 	state.MagicalDefenseMode:options('MDT')
 	state.ResistDefenseMode:options('MEVA')
-	state.Weapons:options('Aeneas','LowBuff','None')
+	state.Weapons:options('Tauret', 'Aeneas','LowBuff','None')
     state.ExtraMeleeMode = M{['description']='Extra Melee Mode','None','Suppa','DWEarrings','DWMax'}
 
 	
@@ -54,7 +54,8 @@ function init_gear_sets()
 	sets.DWMax = {ear1="Dudgeon Earring",ear2="Heartseeker Earring",body="Adhemar Jacket +1",hands="Floral Gauntlets",waist="Shetal Stone"}
 	
 	-- Weapons sets
-	sets.weapons.Aeneas = {main="Tauret",sub="Taming Sari"}
+	sets.weapons.Aeneas = {main="Aeneas",sub="Taming Sari"}
+	sets.weapons.Tauret = {main="Tauret",sub="Taming Sari"}
 	sets.weapons.LowBuff = {main="Aeneas",sub="Blurred Knife +1"}
 	sets.weapons.None = {main="Fusetto",sub="Demersal Degen"}
 	

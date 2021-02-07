@@ -38,7 +38,7 @@ gear.meg_head  = "Meghanada Visor +1"
 gear.meg_body  = "Meg. Cuirie +2"
 gear.meg_hands = "Meg. Gloves +2"
 gear.meg_legs  = "Meg. Chausses +2"
-gear.meg_feet  = "Meg. Jam. +1" -- TODO: +2
+gear.meg_feet  = "Meg. Jam. +2"
 
 gear.jhakri_body = "jhakri robe +2"
 gear.jhakri_head = "Jhakri Coronal +2"

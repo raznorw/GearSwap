@@ -1,3 +1,6 @@
+-- Acc Goals:  1200 for w3, 1300-1350 for w3 thf/nin/mnk
+-- Sailfi Belt - 
+
 -- Soporific, Geist Wall, Sheep Song -- Blank Gaze, Jettatura 
 
 -- Taeon Tabard - 4 FC base - leafdim can add 1-5 more
@@ -568,6 +571,9 @@ function init_gear_sets()
 	-- Engaged sets
 	--------------------------------------
 
+    -- 1166 Accuracy -- super low -- Path A Adehmar set would add 60 acc
+	  -- Better herc boots would help too
+	  -- Using Str Cape, could have 30 dex version for 22 acc	
     sets.engaged = {
 	    ammo="Yamarang",
         head="Adhemar Bonnet +1", -- "Dampening Tam",
@@ -584,6 +590,10 @@ function init_gear_sets()
 		feet="Herculean Boots", -- "Turms leggings",       -- gear.herculean_ta_feet
 	}
 	
+	-- Ioskeha Belt +1   - 17 acc, 8 haste, 9 DA
+	-- Kentarch +1 aug'd - 3 da, 1-5 STP, 14 acc, 10 dex (so 21ish acc), also 10 str
+	-- Windbuffet +1     - 2 acc, 2 TA, 2 QA
+	
 	sets.engaged.DW = set_combine(sets.engaged, {
 	  waist="Reiki Yotai"
 	})
@@ -593,19 +603,22 @@ function init_gear_sets()
 	  body="Ayanmo Corazza +2",
 	}) 
 			
+    -- 1213 Acc
 	sets.engaged.Acc = set_combine(sets.engaged.SomeAcc, {	
 	  ammo="Falcon Eye", 
 	  ear1="Telos Earring", -- "Cessance Earring",
 	  legs="Meg. Chausses +2",
+	  feet=gear.meg_feet,
 	}) 
 	
+	-- 1313 acc
 	sets.engaged.HighAcc = set_combine(sets.engaged.Acc, {	
-      head="Aya. Zucchetto +1",
+      head="Aya. Zucchetto +2",
 	  ear1="Telos Earring",
 	  hands="Meg. Gloves +2",
-	  ring2="Ilabrat Ring",
-      waist="Grunfeld Rope",
-	  feet=gear.herculean_acc_feet
+	  ring2="Ilabrat Ring",  -- regal ring - 15 acc, some att vs 5 STP
+      waist="Ioskeha Belt +1",
+	  -- feet=gear.herculean_acc_feet
 	})
 	
 	sets.engaged.FullAcc = set_combine(sets.engaged.HighAcc, {	
@@ -617,10 +630,11 @@ function init_gear_sets()
 	  legs="Carmine Cuisses +1",
 	})
 	  
-	-- DT: 29 DT, 16 PDT, 25 PDT II (epeo)
+	-- DT: 29 DT, 16 PDT, 25 PDT II (epeo), 1286 acc
+	-- Some inquartata, 479 meva  (572 in tank engaged set) - dnc malig. idle has 674
     sets.engaged.DTLite = set_combine(sets.engaged, {		  
 	  ammo="Yamarang",   -- meva/acc instead of DT
-      head="Aya. Zucchetto +1",  --  2 \todo +2, 3 DT at +2  
+      head="Aya. Zucchetto +2",  --  3 DT  
 	  neck="futhark torque +2",	 --  7 DT
       body="Ayanmo Corazza +2",  --  6 DT
 	  hands="Turms Mittens +1",  -- "Meg. Gloves +2",
