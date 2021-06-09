@@ -143,9 +143,10 @@ function update_job_states()
     local orig = {}
     local spc = '    '
 
-    -- Define labels for each modal state
+    -- Define labels for each state
     local labels = {
 		Weapons = "Weapons",
+		UnlockWeapons = "Unlock Weapons",
         OffenseMode = "Offense",
 		RangedMode = "Ranged",
         DefenseMode = "Defense",
@@ -182,6 +183,7 @@ function update_job_states()
 		AutoShadowMode = "Auto Shadows",
 		AutoFoodMode = "Auto Food: "..autofood.."",
 		RngHelper = "RngHelper",
+		RngHelperQuickDraw = "RngHelperQuickDraw",
 		Capacity = "Capacity",
 		AutoTankMode = "Auto Tank",
 		CompensatorMode = "Compensator",
@@ -267,6 +269,11 @@ function update_job_states()
 				stateBox:append(string.format("%sAuto Buff: %s%s", clr.w, clr.h, state.AutoBuffMode.value))
 				stateBox:append(spc)
 			end
+		elseif n == 'RangedMode' then
+			stateBox:append(string.format("%s%s: ${%s}    ", clr.w, labels[n], n))
+				if statusammo then
+					stateBox:append('Ammo: '..statusammo..'    ')
+				end
 		elseif n == 'OffenseMode' then
 			if state.DefenseMode.value ~= 'None' then
 				stateBox:append(string.format("%sDefense Active: ", clr.w))

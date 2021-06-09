@@ -74,23 +74,25 @@ function job_precast(spell, spellMap, eventArgs)
 
 	if spell.type == 'WeaponSkill' and state.AutoBuffMode.value ~= 'Off' then
 		local abil_recasts = windower.ffxi.get_ability_recasts()
-		if player.sub_job == 'SAM' and player.tp > 1850 and abil_recasts[140] < latency then
-			eventArgs.cancel = true
-			windower.chat.input('/ja "Sekkanoki" <me>')
-			windower.chat.input:schedule(1,'/ws "'..spell.english..'" '..spell.target.raw..'')
-			tickdelay = os.clock() + 1.25
-			return
-		elseif player.sub_job == 'SAM' and abil_recasts[134] < latency then
-			eventArgs.cancel = true
-			windower.chat.input('/ja "Meditate" <me>')
-			windower.chat.input:schedule(1,'/ws "'..spell.english..'" '..spell.target.raw..'')
-			tickdelay = os.clock() + 1.25
-			return
+		if player.sub_job == 'SAM' and not state.Buff['SJ Restriction'] then
+			if player.tp > 1850 and abil_recasts[140] < latency then
+				eventArgs.cancel = true
+				windower.chat.input('/ja "Sekkanoki" <me>')
+				windower.chat.input:schedule(1,'/ws "'..spell.english..'" '..spell.target.raw..'')
+				tickdelay = os.clock() + 1.25
+				return
+			elseif abil_recasts[134] < latency then
+				eventArgs.cancel = true
+				windower.chat.input('/ja "Meditate" <me>')
+				windower.chat.input:schedule(1,'/ws "'..spell.english..'" '..spell.target.raw..'')
+				tickdelay = os.clock() + 1.25
+				return
+			end
 		end
 	elseif spell.action_type == 'Ability' then
 		if spell.english == 'Restoring Breath' and state.AutoBondMode.value then
 			local abil_recasts = windower.ffxi.get_ability_recasts()
-			if pet.isvalid and pet.hpp < 75 and abil_recasts[134] < latency and abil_recasts[149] < latency and spell.target.hpp > 44 then
+			if pet.isvalid and pet.hpp < 75 and abil_recasts[239] < latency and abil_recasts[149] < latency and spell.target.hpp > 44 then
 				eventArgs.cancel = true
 				windower.chat.input('/ja "Spirit Bond" <me>')
 				windower.chat.input:schedule(1,'/ja "Restoring Breath" '..spell.target.raw..'')
@@ -112,6 +114,14 @@ function job_post_precast(spell, spellMap, eventArgs)
 				elseif sets.MaxTP then
 					equip(sets.MaxTP[spell.english] or sets.MaxTP)
 				else
+				end
+			end
+		end
+	elseif spell.type == 'JobAbility' then
+		if spell.english:endswith('Jump') then
+			if sets.precast.JA[spell.english] then
+				if sets.precast.JA[spell.english][state.OffenseMode.value] then
+					equip(sets.precast.JA[spell.english][state.OffenseMode.value])
 				end
 			end
 		end
@@ -142,12 +152,13 @@ end
 
 function job_aftercast(spell, spellMap, eventArgs)
 	if pet.isvalid then
-		if (spell.action_type == 'Magic' and player.hpp < Breath_HPP) then
+		if (spell.action_type == 'Magic' and player.hpp < Breath_HPP) or spell.english == 'Steady Wing' or spell.english == 'Restoring Breath' then
 			petWillAct = os.clock()
 			equip(sets.HealingBreath)
 			eventArgs.handled = true
-		elseif (spell.english == 'Restoring Breath' or spell.english == 'Smiting Breath' or spell.english == 'Steady Wing') then
+		elseif spell.english == 'Smiting Breath' and sets.SmitingBreath then
 			petWillAct = os.clock()
+			equip(sets.SmitingBreath)
 			eventArgs.handled = true
 		end
 	end
@@ -205,7 +216,7 @@ function job_customize_melee_set(meleeSet)
 end
 
 function check_hasso()
-	if not (state.Stance.value == 'None' or state.Buff.Hasso or state.Buff.Seigan) and player.sub_job == 'SAM' and player.status == 'Engaged' then
+	if player.sub_job == 'SAM' and not state.Buff['SJ Restriction'] and not (state.Stance.value == 'None' or state.Buff.Hasso or state.Buff.Seigan) and player.status == 'Engaged' and not silent_check_amnesia() then
 		
 		local abil_recasts = windower.ffxi.get_ability_recasts()
 		
@@ -264,6 +275,8 @@ function check_buff()
 			windower.chat.input('/ja "Call Wyvern" <me>')
 			tickdelay = os.clock() + 1.1
 			return true
+		elseif state.Buff['SJ Restriction'] then
+			return false
 		elseif player.sub_job == 'DRK' and not buffactive['Last Resort'] and abil_recasts[87] < latency then
 			windower.chat.input('/ja "Last Resort" <me>')
 			tickdelay = os.clock() + 1.1

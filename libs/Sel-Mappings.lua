@@ -64,7 +64,7 @@ data.elements.enspell_of = {['Fire']='Fire', ['Ice']='Blizzard', ['Wind']='Aero'
 data.elements.runes_lookup = {['Lux']='Light', ['Tenebrae']='Dark', ['Ignis']='Fire', ['Gelus']='Ice', ['Flabra']='Wind',
      ['Tellus']='Earth', ['Sulpor']='Lightning', ['Unda']='Water'}
 
-data.elements.enspells_lookup = {['Enthunder']='Thunder', ['Enstone']='Earth', ['Enaero']='Wind', ['Enblizzard']='Ice',
+data.elements.enspells_lookup = {['Enthunder']='Lightning', ['Enstone']='Earth', ['Enaero']='Wind', ['Enblizzard']='Ice',
 		['Enfire']='Fire', ['Enwater']='Water', ['Enlight']='Light', ['Endark']='Dark',	
 		['Enthunder II']='Thunder', ['Enstone II']='Earth', ['Enaero II']='Wind', 
 		['Enblizzard II']='Ice', ['Enfire II']='Fire', ['Enwater II']='Water', ['Enlight II']='Light', 
@@ -106,8 +106,9 @@ data.elements.rune_of = {['Light']='Lux', ['Dark']='Tenebrae', ['Fire']='Ignis',
      ['Earth']='Tellus', ['Lightning']='Sulpor', ['Water']='Unda'}
  
 
---Cursna actions that one shouldn't replace when replacing actions for cursna.
+--Exceptions for specific actions, placed here to be easily modifiable.
 cursna_exceptions = S{'Cursna','Accession','Divine Caress','Hallowed Water','Holy Water','Light Arts','Addendum: White'}
+TH_WS_exceptions = S{'Corporal Tombstone','Lithicthrower Image','Incarnation Icon','Impish Statue'}
 
 -------------------------------------------------------------------------------------------------------------------
 -- Mappings for weaponskills
@@ -171,7 +172,7 @@ data.weaponskills.empyrean = {
     ["Hvergelmir"] = "Myrkr",
     ["Gandiva"] = "Jishnu's Radiance",
     ["Armageddon"] = "Wildfire"}
-	
+
 -- Weaponskills that can be used at range.
 data.weaponskills.ranged = S{"Flaming Arrow","Piercing Arrow","Dulling Arrow","Sidewinder","Arching Arrow",
     "Empyreal Arrow","Refulgent Arrow","Apex Arrow","Namas Arrow","Jishnu's Radiance",
@@ -179,6 +180,8 @@ data.weaponskills.ranged = S{"Flaming Arrow","Piercing Arrow","Dulling Arrow","S
     "Coronach","Trueflight","Leaden Salute","Wildfire","Myrkr"}
 
 data.weaponskills.elemental = S{'Wildfire','Leaden Salute','Sanguine Blade','Aeolian Edge','Cataclysm','Trueflight','Tachi: Jinpu','Flash Nova'}
+
+data.weaponskills.statue_ws = {['COR']='Leaden Salute',['RNG']='Trueflight',['RDM']='Sanguine Blade',['BLU']='Sanguine Blade'}
 
 -- Elements for skillchain names
 data.skillchains = {}
@@ -317,6 +320,7 @@ data.abilities.black_to_white_stratagems = {['Parsimony']='Penury',['Alacrity']=
 data.jobs = {}
 
 data.jobs.mage_jobs = S{'WHM','BLM','SCH','RDM','BRD','SMN','GEO'}
+data.jobs.nuke_jobs = S{'BLM','SCH','RDM','GEO'}
 data.jobs.melee_jobs = S{'WAR','MNK','THF','PLD','DRK','SAM','NIN','BLU','DNC','RUN','COR','PUP','PLD','DRK','BST'}
 data.jobs.dual_wield_jobs = S{'THF','BLU','NIN','DNC'}
 
@@ -693,6 +697,7 @@ data.npcs.trusts = S{'ArkEV','ArkGK','ArkHM','ArkMR','ArkTT','Abenzio','Abquhbah
 -------------------------------------------------------------------------------------------------------------------
 data.skills = {}
 data.skills.one_handed_combat = S{2,3,5,9,11} --Combat skills for one-handed-weapons.
+--data.skills.two_handed_combat = S{4,6,7,8,10,12} --Combat skills for two-handed-weapons.
 
 -------------------------------------------------------------------------------------------------------------------
 -- Stepdown Tables.
@@ -716,5 +721,16 @@ spell_stepdown = {
 item_stepdown = {
 	['Warp Ring'] = {'Treat Staff','main'},
 	['Treat Staff'] = {'Warp Cudgel','main'},
-	['Warp Cudgel'] = {'Instant Warp','item'}
+	['Warp Cudgel'] = {'Instant Warp','item'},
+	['Dusty Reraise'] = {'Instant Reraise','item'},
+	['Instant Reraise'] = {'Reraiser','item'},
+	['Reraiser'] = {'Hi-Reraiser','item'},
+	['Hi-Reraiser'] = {'Scapegoat','item'},
+	['Scapegoat'] = {'Super Reraiser','item'},
+	['Super Reraiser'] = {'Revive Feather','item'},
+	['Revive Feather'] = {'Rebirth Feather','item'},
+	['Rebirth Feather'] = {'Reraise Ring','ring2'},
+	['Reraise Ring'] = {'Reraise Earring','ear2'},
+	['Reraise Earring'] = {'Reraise Hairpin','head'},
+	['Reraise Hairpin'] = {'Wh. Rarab Cap +1','head'},
 }

@@ -118,8 +118,10 @@ function init_include()
 	state.Capacity 			  = M(false, 'Capacity Mode')
 	state.ReEquip 			  = M(false, 'ReEquip Mode')
 	state.AutoArts	 		  = M(false, 'AutoArts Mode')
+	state.AutoLockstyle	 	  = M(false, 'AutoLockstyle Mode')
 	state.AutoTrustMode 	  = M(false, 'Auto Trust Mode')
 	state.RngHelper		 	  = M(false, 'RngHelper')
+	state.RngHelperQuickDraw  = M(false, 'RngHelperQuickDraw')
 	state.AutoTankMode 		  = M(false, 'Auto Tank Mode')
 	state.AutoAcceptRaiseMode = M(false, 'Auto Accept Raise Mode')
 	state.AutoNukeMode 		  = M(false, 'Auto Nuke Mode')
@@ -143,6 +145,8 @@ function init_include()
 	state.MaintainDefense 	  = M(false, 'Maintain Defense')
 	state.SkipProcWeapons 	  = M(false, 'Skip Proc Weapons')
 	state.NotifyBuffs		  = M(false, 'Notify Buffs')
+	state.UnlockWeapons		  = M(false, 'Unlock Weapons')
+	state.SelfWarp2Block 	  = M(true, 'Block Warp2 on Self')
 
 	state.AutoBuffMode 		  = M{['description'] = 'Auto Buff Mode','Off','Auto'}
 	state.RuneElement 		  = M{['description'] = 'Rune Element','Ignis','Gelus','Flabra','Tellus','Sulpor','Unda','Lux','Tenebrae'}
@@ -176,6 +180,7 @@ function init_include()
 	state.Buff['Accession'] = buffactive['Accession'] or false
 	state.Buff['Manifestation'] = buffactive['Manifestation'] or false
 	state.Buff['Warcry'] = buffactive['Warcry'] or false
+	state.Buff['SJ Restriction'] = buffactive['SJ Restriction'] or false
 	
     -- Classes describe a 'type' of action.  They are similar to state, but
     -- may have any free-form value, or describe an entire table of mapped values.
@@ -223,6 +228,7 @@ function init_include()
 	petWillAct = 0
 	autonuke = 'Fire'
 	autows = ''
+	smartws = nil
 	rangedautows = ''
 	autowstp = 1000
 	rangedautowstp = 1000
@@ -240,6 +246,7 @@ function init_include()
 	selindrile_warned = false
 	utsusemi_cancel_delay = .5
 	conserveshadows = true
+	filtered_st_command = false
 	
 	-- Buff tracking that buffactive can't detect
 	lastshadow = "Utsusemi: San"
@@ -284,40 +291,39 @@ function init_include()
     gear.FastcastStaff = {name=""}
     gear.RecastStaff = {name=""}
 
+    -- Include general user globals, such as custom binds or gear tables.
+    -- Load Sel-Libs first, followed by User-Globals, followed by <character>-Globals.
+    -- Any functions re-defined in the later includes will overwrite the earlier versions.
     -- Load externally-defined information (info that we don't want to change every time this file is updated).
-
     -- Used to define misc utility functions that may be useful for this include or any job files.
     include('Sel-Utility')
 
     -- Used for all self-command handling.
     include('Sel-SelfCommands')
 	include('Sel-TreasureHunter')
-
-    -- Include general user globals, such as custom binds or gear tables.
-    -- Load Sel-Globals first, followed by User-Globals, followed by <character>-Globals.
-    -- Any functions re-defined in the later includes will overwrite the earlier versions.
+	
+	-- User based files.
     optional_include('user-globals.lua')
     optional_include(player.name..'-globals.lua')
     optional_include(player.name..'-items.lua')
 	optional_include(player.name..'_Crafting.lua')
+	include(player.name..'_'..player.main_job..'_gear.lua') -- Required Gear file.
 
 	-- New Display functions, needs to come after globals for user settings.
 	include('Sel-Display.lua')
 
-
-    -- Global default binds
-    global_on_load()
-
-    -- Load sidecar file
-	include(player.name..'_'..player.main_job..'_gear.lua')
-
 	-- Controls for handling our autmatic functions.
 	
 	tickdelay = os.clock() + 5
+	style_delay = os.clock() + 15
+	style_lock = true
 	
 	if spell_latency == nil then
 		spell_latency = (latency * 60) + 18
 	end
+
+	--Certain Checks
+    global_on_load()
 	
 	-- General var initialization and setup.
     if job_setup then
@@ -329,18 +335,21 @@ function init_include()
         user_setup()
     end
 	
+    if character_setup then
+        character_setup()
+    end
+	
+    -- Job-User-specific var initialization and setup.
+    if user_job_setup then
+        user_job_setup()
+    end
+	
 	if extra_user_setup then
         extra_user_setup()
     end
 
-	if state.Weapons.value == 'None' then
-		enable('main','sub','range','ammo')
-	else
-		send_command('@wait 3;gs c weapons Default')
-	end
-
 	if not selindrile_warned then
-		naughty_list = {'lua','gearswap','file','windower','plugin','addon','program','hack','bot ','bots ','botting','easyfarm'}
+		naughty_list = {'lua ','gearswap',' gs ','file','windower','plugin','addon','program','hack','bot ','bots ','botting','easyfarm'}
 		
 		windower.raw_register_event('outgoing chunk', function(id, data, modified, injected, blocked)
 			if id == 0x0B6 and res.servers[windower.ffxi.get_info().server].en == 'Asura' then
@@ -367,92 +376,30 @@ function init_include()
 			add_to_chat(217,"Revitalizer added to inventory, using, /heal to cancel.")
 		end
 	end)
-	
-	-- Event register to make time variables track.
-	windower.raw_register_event('time change', time_change)
 
-	-- Event register to perform actions on new targets.
-	function target_change(new)
-	
-		if state.RngHelper.value then
-			send_command('gs rh clear')
-		end
-	
-		local target = windower.ffxi.get_mob_by_target('t')
-		local sub= windower.ffxi.get_mob_by_target('st')
-		if (target ~= nil) and (sub == nil) then
-			if state.AutoCleanupMode.value and math.sqrt(target.distance) < 7 then
-				if target.name == "Runje Desaali" and bayld_items then 
-					for i in pairs(bayld_items) do
-						if player.inventory[bayld_items[i]] then
-							windower.chat.input('/item "'..bayld_items[i]..'" <t>')
-							windower.chat.input:schedule(2,'/targetnpc')
-							return
-						end
-					end
-				elseif target.name == "Sturdy Pyxis" and player.inventory['Forbidden Key'] then
-					windower.chat.input('/item "Forbidden Key" <t>')
+	-- Event register for <st> actions
+	windower.raw_register_event('outgoing chunk', function(id, data, modified, injected, blocked)
+		if id == 0x05d and st_command then
+			local p = packets.parse('outgoing',data)
+			if p['Emote'] == 31 and p['Type'] == 2 then
+				if p['Target ID'] == 0 then
+					windower.send_command('gs c '..st_command..' '..player.id..'')
+				else
+					windower.send_command('gs c '..st_command..' '..p['Target ID']..'')
 				end
+				st_command = false
+				return true
 			end
 		end
-		
-		if user_job_target_change then
-			if user_job_target_change(target) then return end
-		end
-		
-		if user_target_change then
-			if user_job_target_change(target) then return end
-		end
-	end
-	windower.raw_register_event('target change', target_change)
-
-	-- Event register to prevent auto-modes from spamming after zoning.
-	windower.register_event('zone change', function(new_id,old_id)
-		tickdelay = os.clock() + 10
-		state.AutoBuffMode:reset()
-		state.AutoSubMode:reset()
-		state.AutoTrustMode:reset()
-		state.AutoTankMode:reset()
-		state.AutoRuneMode:reset()
-		state.AutoFoodMode:reset()
-		state.AutoWSMode:reset()
-		state.AutoNukeMode:reset()
-		send_command('gs rh disable')
-		state.RngHelper:reset()
-		useItem = false
-		useItemName = ''
-		useItemSlot = ''
-		lastincombat = false
-		being_attacked = false
-		
-		if world.area:contains('Abyssea') or data.areas.proc:contains(world.area) then
-			state.SkipProcWeapons:set('False')
-		else
-			state.SkipProcWeapons:reset()
-		end
-		
-		if user_zone_change then
-			user_zone_change(new_id,old_id)
-		end
-		
-		if job_zone_change then
-			job_zone_change(new_id,old_id)
-		end
-		
-		if user_job_zone_change then
-			user_job_zone_change(new_id,old_id)
-		end
-		
-		if state.DisplayMode.value then update_job_states()	end
 	end)
-
+	
 	-- New implementation of tick.
 	windower.raw_register_event('prerender', function()
 		if not (os.clock() > tickdelay) then return end
 		
 		gearswap.refresh_globals(false)
 		
-		if (player ~= nil) and (player.status == 'Idle' or player.status == 'Engaged') and not (check_midaction() or moving or buffactive['Sneak'] or buffactive['Invisible'] or silent_check_disable()) then
+		if (player ~= nil) and (player.status == 'Idle' or player.status == 'Engaged') and not (delayed_cast ~= '' or check_midaction() or moving or buffactive['Sneak'] or buffactive['Invisible'] or silent_check_disable()) then
 			if pre_tick then
 				if pre_tick() then return end
 			end
@@ -505,6 +452,109 @@ function init_include()
 	include('Sel-GlobalItems')
 end
 
+-- Function to perform actions on new targets.
+function target_change(new)
+
+	if state.RngHelper.value then
+		send_command('gs rh clear')
+	end
+
+	local target = windower.ffxi.get_mob_by_target('t')
+	local sub= windower.ffxi.get_mob_by_target('st')
+	if (target ~= nil) and (sub == nil) then
+		if state.AutoCleanupMode.value and math.sqrt(target.distance) < 7 then
+			if target.name == "Runje Desaali" and bayld_items then 
+				for i in pairs(bayld_items) do
+					if player.inventory[bayld_items[i]] then
+						windower.chat.input('/item "'..bayld_items[i]..'" <t>')
+						windower.chat.input:schedule(2,'/targetnpc')
+						return
+					end
+				end
+			elseif target.name == "Sturdy Pyxis" and player.inventory['Forbidden Key'] then
+				windower.chat.input('/item "Forbidden Key" <t>') return
+			end
+		end
+	end
+	
+	if user_job_target_change then
+		if user_job_target_change(target) then return end
+	end
+	
+	if user_target_change then
+		if user_job_target_change(target) then return end
+	end
+end
+
+-- Function to reset things after zoning.
+function zone_change(new_id,old_id)
+	if user_zone_change then
+		user_zone_change(new_id,old_id)
+	end
+	
+	if job_zone_change then
+		job_zone_change(new_id,old_id)
+	end
+	
+	if user_job_zone_change then
+		user_job_zone_change(new_id,old_id)
+	end
+	
+	default_zone_change(new_id,old_id)
+end
+	
+function default_zone_change(new_id,old_id)
+	tickdelay = os.clock() + 10
+	state.AutoBuffMode:reset()
+	state.AutoSubMode:reset()
+	state.AutoTrustMode:reset()
+	state.AutoTankMode:reset()
+	state.AutoRuneMode:reset()
+	state.AutoFoodMode:reset()
+	state.AutoWSMode:reset()
+	state.AutoNukeMode:reset()
+	send_command('gs rh disable')
+	state.RngHelper:reset()
+	useItem = false
+	useItemName = ''
+	useItemSlot = ''
+	lastincombat = false
+	being_attacked = false
+	
+	if world.area:contains('Abyssea') or data.areas.proc:contains(world.area) then
+		state.SkipProcWeapons:set('False')
+	else
+		state.SkipProcWeapons:reset()
+	end
+	
+	if state.DisplayMode.value then update_job_states()	end
+end
+
+function time_change(new_time, old_time)
+    local was_daytime = classes.Daytime
+    local was_dusktime = classes.DuskToDawn
+    
+    if new_time and (new_time >= 6*60 and new_time < 18*60) then
+        classes.Daytime = true
+    else
+        classes.Daytime = false
+    end
+
+    if new_time and (new_time >= 17*60 or new_time < 7*60) then
+        classes.DuskToDawn = true
+    else
+        classes.DuskToDawn = false
+    end
+    
+    if was_daytime ~= classes.Daytime or was_dusktime ~= classes.DuskToDawn then
+        if job_time_change then
+            job_time_change(new_time, old_time)
+        end
+
+        handle_update({'auto'})
+    end
+end
+
 -- Called when this job file is unloaded (eg: job change)
 -- Conditional definition so that it doesn't overwrite explicit user
 -- versions of this function.
@@ -528,12 +578,19 @@ end
 
 -- Non item-based global settings to check on load.
 function global_on_load()
-	set_dual_wield()
 	if world.area then
+		set_dual_wield()
+		
 		if world.area:contains('Abyssea') or data.areas.proc:contains(world.area) then
 			state.SkipProcWeapons:set('False')
 		else
 			state.SkipProcWeapons:reset()
+		end
+		
+		if state.Weapons.value == 'None' then
+			enable('main','sub','range','ammo')
+		else
+			send_command('@wait 3;gs c weapons Default')
 		end
 	end
 end
@@ -807,7 +864,8 @@ function precast(spell)
 end
 
 function midcast(spell)
-    handle_actions(spell, 'midcast')
+	if spell.type == 'WeaponSkill' or spell.type == 'JobAbility' then return end
+	handle_actions(spell, 'midcast')
 end
 
 function aftercast(spell)
@@ -833,113 +891,76 @@ end
 
 function default_filtered_action(spell, eventArgs)
 	if spell.english == 'Warp' then
-		if (item_available('Warp Ring') or player.satchel['Warp Ring']) then
-			useItem = true
-			useItemName = 'Warp Ring'
-			useItemSlot = 'ring2'
-			add_to_chat(217,"You can't cast warp, attempting to use Warp Ring instead, /heal to cancel.")
-		elseif (item_available('Treat Staff') or player.satchel['Treat Staff']) then
-			useItem = true
-			useItemName = 'Treat Staff'
-			useItemSlot = 'main'
-		elseif (item_available('Warp Cudgel') or player.satchel['Warp Cudgel']) then
-			add_to_chat(217,"You can't cast warp, attempting to use Warp Cudgel instead, /heal to cancel.")
-			useItem = true
-			useItemName = 'Warp Cudgel'
-			useItemSlot = 'main'
-			add_to_chat(217,"You can't cast warp, attempting to use Warp Cudgel instead, /heal to cancel.")
-		elseif (item_available('Instant Warp') or player.satchel['Instant Warp']) then
-			useItem = true
-			useItemName = 'Instant Warp'
-			useItemSlot = 'item'
-			add_to_chat(217,"You can't cast warp, attempting to use a Warp Scroll instead, /heal to cancel.")
-		else
-			add_to_chat(122,'Warp unavailable and no warp items available.')
-		end
+		useItem = true
+		useItemName = 'Warp Ring'
+		useItemSlot = 'ring2'
+		add_to_chat(217,"You can't cast warp, attempting to use Warp Ring instead, /heal to cancel.")
 		cancel_spell()
 		eventArgs.cancel = true
 	elseif spell.english == 'Retrace' then
-		if spell.target.type == 'SELF' and (item_available('Instant Retrace') or player.satchel['Instant Retrace']) then
-			useItem = true
-			useItemName = 'Instant Retrace'
-			useItemSlot = 'item'
-			add_to_chat(217,"You can't cast Retrace, attempting to use a Retrace Scroll instead, /heal to cancel.")
-			cancel_spell()
-			eventArgs.cancel = true
-		end
+		useItem = true
+		useItemName = 'Instant Retrace'
+		useItemSlot = 'item'
+		add_to_chat(217,"You can't cast Retrace, attempting to use a Retrace Scroll instead, /heal to cancel.")
+		cancel_spell()
+		eventArgs.cancel = true
 	elseif spell.english == 'Teleport-Holla' then
-		if (item_available('Dim. Ring (Holla)') or player.satchel['Dim. Ring (Holla)']) then
-			useItem = true
-			useItemName = 'Dim. Ring (Holla)'
-			useItemSlot = 'ring2'
-			add_to_chat(217,"You can't cast Teleport-Holla, attempting to use Dimensional Ring instead, /heal to cancel.")
-			cancel_spell()
-			eventArgs.cancel = true
-		end
+		useItem = true
+		useItemName = 'Dim. Ring (Holla)'
+		useItemSlot = 'ring2'
+		add_to_chat(217,"You can't cast Teleport-Holla, attempting to use Dimensional Ring instead, /heal to cancel.")
+		cancel_spell()
+		eventArgs.cancel = true
+	elseif spell.english == 'Reraise' then
+		useItem = true
+		useItemName = 'Dusty Reraise'
+		useItemSlot = 'item'
+		add_to_chat(217,"You can't cast Reraise, attempting to use Instant Reraise instead, /heal to cancel.")
+		cancel_spell()
+		eventArgs.cancel = true
 	elseif spell.english == 'Teleport-Dem' then
-		if (item_available('Dim. Ring (Dem)') or player.satchel['Dim. Ring (Dem)']) then
-			useItem = true
-			useItemName = 'Dim. Ring (Dem)'
-			useItemSlot = 'ring2'
-			add_to_chat(217,"You can't cast Teleport-Dem, attempting to use Dimensional Ring instead, /heal to cancel.")
-			cancel_spell()
-			eventArgs.cancel = true
-		end
+		useItem = true
+		useItemName = 'Dim. Ring (Dem)'
+		useItemSlot = 'ring2'
+		add_to_chat(217,"You can't cast Teleport-Dem, attempting to use Dimensional Ring instead, /heal to cancel.")
+		cancel_spell()
+		eventArgs.cancel = true
 	elseif spell.english == 'Teleport-Mea' then
-		if (item_available('Dim. Ring (Mea)') or player.satchel['Dim. Ring (Mea)']) then
-			useItem = true
-			useItemName = 'Dim. Ring (Mea)'
-			useItemSlot = 'ring2'
-			add_to_chat(217,"You can't cast Teleport-Mea, attempting to use Dimensional Ring instead, /heal to cancel.")
-			cancel_spell()
-			eventArgs.cancel = true
-		end
+		useItem = true
+		useItemName = 'Dim. Ring (Mea)'
+		useItemSlot = 'ring2'
+		add_to_chat(217,"You can't cast Teleport-Mea, attempting to use Dimensional Ring instead, /heal to cancel.")
+		cancel_spell()
+		eventArgs.cancel = true
 	elseif spell.english == 'Invisible' then
 		if player.main_job == 'DNC' or player.sub_job == 'DNC' then
 			windower.chat.input('/ja "Spectral Jig" <me>')
 			add_to_chat(217,"You can't cast Invisible, attempting to use Spectral Jig instead.")
-			cancel_spell()
-			eventArgs.cancel = true
-			return
 		elseif player.main_job == 'NIN' or player.sub_job == 'NIN' then
 			windower.chat.input('/ma "Tonko: Ni" <me>')
 			add_to_chat(217,"You can't cast Invisible, attempting to use Tonko: Ni instead.")
-			cancel_spell()
-			eventArgs.cancel = true
-			return
 		elseif item_available('Prism Powder') then
 			windower.chat.input('/item "Prism Powder" <me>')
 			add_to_chat(217,"You can't cast Invisible, attempting to use Prism Powder instead.")
-			cancel_spell()
-			eventArgs.cancel = true
-			return
 		elseif item_available('Rainbow Powder') then
 			windower.chat.input('/item "Rainbow Powder" <me>')
 			add_to_chat(217,"You can't cast Invisible, attempting to use Prism Powder instead.")
-			cancel_spell()
-			eventArgs.cancel = true
-			return
 		end
+		cancel_spell()
+		eventArgs.cancel = true
 	elseif spell.english == 'Sneak' then
 		if player.main_job == 'DNC' or player.sub_job == 'DNC' then
 			windower.chat.input('/ja "Spectral Jig" <me>')
 			add_to_chat(217,"You can't cast Sneak, attempting to use Spectral Jig instead.")
-			cancel_spell()
-			eventArgs.cancel = true
-			return
 		elseif player.main_job == 'NIN' or player.sub_job == 'NIN' then
 			windower.chat.input('/ma "Monomi: Ichi" <me>')
 			add_to_chat(217,"You can't cast Sneak, attempting to use Monomi: Ichi instead.")
-			cancel_spell()
-			eventArgs.cancel = true
-			return
 		elseif item_available('Silent Oil') then
 			windower.chat.input('/item "Silent Oil" <me>')
 			add_to_chat(217,"You can't cast Sneak, attempting to use Silent Oil instead.")
-			cancel_spell()
-			eventArgs.cancel = true
-			return
 		end
+		cancel_spell()
+		eventArgs.cancel = true
 	end
 end
 
@@ -947,17 +968,20 @@ function extra_default_filtered_action(spell, eventArgs)
 	if spell.action_type == 'Item' and world.area == "Mog Garden" then
 		return
 	elseif spell.action_type == 'Magic' and not silent_can_use(spell.recast_id) and stepdown(spell, eventArgs) then
-		cancel_spell()
-		return
 	elseif not can_use(spell) then
-		cancel_spell()
-		eventArgs.cancel = true
-		return		
 	end
+	
+	cancel_spell()
+	eventArgs.cancel = true
 end
 
 function default_pretarget(spell, spellMap, eventArgs)
-    auto_change_target(spell, spellMap)
+	if spell.english == 'Warp II' and spell.target.name == player.name and state.SelfWarp2Block.value then
+		eventArgs.cancel = true
+		cancel_spell()
+		add_to_chat(123,'Blocking Warp2 on self, use Warp instead or disable the SelfWarp2Block state.')
+		return
+	end
 end
 
 function default_precast(spell, spellMap, eventArgs)
@@ -1000,7 +1024,7 @@ function default_post_precast(spell, spellMap, eventArgs)
 				local orpheus_avail = item_available("Orpheus's Sash")
 				local hachirin_avail = item_available('Hachirin-no-Obi')
 				
-				if hachirin_avail and spell.element and spell.element == world.weather_element and gearswap.res.weather[world.weather_id].intensity == 2 then
+				if hachirin_avail and spell.element and spell.element == world.weather_element and world.weather_intensity == 2 then
 					equip({waist="Hachirin-no-Obi"})
 				elseif orpheus_avail and spell.target.distance < 3 then
 					equip({waist="Orpheus's Sash"})
@@ -1029,7 +1053,7 @@ function default_post_precast(spell, spellMap, eventArgs)
 				equip(sets.Capacity)
 			end
 			
-			if state.TreasureMode.value ~= 'None' and not info.tagged_mobs[spell.target.id] then
+			if state.TreasureMode.value ~= 'None' and not info.tagged_mobs[spell.target.id] and not TH_WS_exceptions:contains(spell.target.name) then
 				equip(sets.TreasureHunter)
 			end
 			
@@ -1154,7 +1178,7 @@ function default_post_midcast(spell, spellMap, eventArgs)
 end
 
 function default_post_pet_midcast(spell, spellMap, eventArgs)
-	if state.Capacity.value == true then
+	if state.Capacity.value then
 		equip(sets.Capacity)
 	end
 
@@ -1241,9 +1265,11 @@ function default_aftercast(spell, spellMap, eventArgs)
 end
 
 function default_pet_midcast(spell, spellMap, eventArgs)
+	--[[Handling this in aftercast now, commenting out to prevent duplication.
 	if not (type(spell.type) == 'string' and (spell.type:startswith('BloodPact') or spell.type == 'Monster')) then
 		equip(get_pet_midcast_set(spell, spellMap))
 	end
+	]]
 end
 
 function default_pet_aftercast(spell, spellMap, eventArgs)
@@ -1350,19 +1376,20 @@ function cleanup_pet_aftercast(spell, spellMap, eventArgs)
 end
 
 function pre_tick()
+	if check_doomed() then return true end
 	if check_trust() then return true end
 	if check_rune() then return true end
+	if check_shadows() then return true end
+	if check_use_item() then return true end
 	return false
 end
 
 function default_tick()
-	if check_doomed() then return true end
-	if check_shadows() then return true end
-	if check_use_item() then return true end
+	check_lockstyle()
 	if check_sub() then return true end
 	if check_food() then return true end
-	if check_ws() then return true end
 	if check_samba() then return true end
+	if check_ws() then return true end
 	if check_cpring_buff() then return true end
 	if check_cleanup() then return true end
 	if check_nuke() then return true end
@@ -1399,13 +1426,13 @@ function handle_equipping_gear(playerStatus, petStatus)
         job_handle_equipping_gear(playerStatus, eventArgs)
     end
 
-	if state.ReEquip.value and state.Weapons.value ~= 'None' then
+	if state.ReEquip.value and state.Weapons.value ~= 'None' and not state.UnlockWeapons.value then
 		if player.equipment.main ~= sets.weapons[state.Weapons.value].main or (sets.weapons[state.Weapons.value].sub and player.equipment.sub ~= sets.weapons[state.Weapons.value].sub) or (sets.weapons[state.Weapons.value].range and player.equipment.range ~= sets.weapons[state.Weapons.value].range) then
 			handle_weapons()
 		end
 	end
 
-	if player.equipment.ammo == 'empty' and sets.weapons[state.Weapons.value] and sets.weapons[state.Weapons.value].ammo then
+	if player.equipment.ammo == 'empty' and sets.weapons[state.Weapons.value] and not state.UnlockWeapons.value and sets.weapons[state.Weapons.value].ammo then
 		enable('ammo')
 		equip({ammo=sets.weapons[state.Weapons.value].ammo})
 		disable('ammo')
@@ -1422,21 +1449,22 @@ end
 -- @param status : The current or new player status that determines what sort of gear to equip.
 function equip_gear_by_status(playerStatus, petStatus)
     if _global.debug_mode then add_to_chat(123,'Debug: Equip gear for status ['..tostring(status)..'], HP='..tostring(player.hp)) end
-
-    playerStatus = playerStatus or player.status or 'Idle'
-    -- If status not defined, treat as idle.
-    -- Be sure to check for positive HP to make sure they're not dead.
-    if (playerStatus == 'Idle' or playerStatus == '') and player.hp > 0 then
-        equip(get_idle_set(petStatus))
-    elseif playerStatus == 'Engaged' then
-		if player.target and player.target.model_size and player.target.distance < (3.2 + player.target.model_size) then
-			equip(get_melee_set(petStatus))
-		else
+	if player.hp > 0 then
+		playerStatus = playerStatus or player.status or 'Idle'
+		-- If status not defined, treat as idle.
+		-- Be sure to check for positive HP to make sure they're not dead.
+		if (playerStatus == 'Idle' or playerStatus == '') then
 			equip(get_idle_set(petStatus))
+		elseif playerStatus == 'Engaged' then
+			if player.target and player.target.model_size and player.target.distance < (5.2 + player.target.model_size) then
+				equip(get_melee_set(petStatus))
+			else
+				equip(get_idle_set(petStatus))
+			end
+		elseif playerStatus == 'Resting' then
+			equip(get_resting_set(petStatus))
 		end
-    elseif playerStatus == 'Resting' then
-        equip(get_resting_set(petStatus))
-    end
+	end
 end
 
 
@@ -1492,6 +1520,10 @@ function get_idle_set(petStatus)
             mote_vars.set_breadcrumbs:append(group)
         end
     end
+
+	if buffactive['Elvorseal'] and sets.buff.Elvorseal then
+		idleSet = set_combine(idleSet, sets.buff.Elvorseal)
+	end
 
 	--Apply time based gear.
     if (state.IdleMode.value == 'Normal' or state.IdleMode.value:contains('Sphere')) and not pet.isvalid then
@@ -1569,6 +1601,10 @@ function get_idle_set(petStatus)
 		end
 	end
 	
+	if state.UnlockWeapons.value and sets.weapons[state.Weapons.value] then
+		idleSet = set_combine(idleSet, sets.weapons[state.Weapons.value])
+	end
+	
 	if (buffactive.sleep or buffactive.Lullaby) and (player.main_job == 'SMN' and pet.isvalid) then
 		idleSet = set_combine(idleSet, sets.buff.Sleep)
 	end
@@ -1637,6 +1673,10 @@ function get_melee_set()
         meleeSet = user_job_customize_melee_set(meleeSet)
     end
 	
+	if buffactive['Elvorseal'] and sets.buff.Elvorseal then
+		meleeSet = set_combine(meleeSet, sets.buff.Elvorseal)
+	end
+	
     if state.ExtraMeleeMode and state.ExtraMeleeMode.value ~= 'None' then
         meleeSet = set_combine(meleeSet, sets[state.ExtraMeleeMode.value])
     end
@@ -1658,7 +1698,7 @@ function get_melee_set()
 		end
 	end
 	
-	if sets.Reive and buffactive['Reive Mark'] then
+	if buffactive['Reive Mark'] and sets.Reive then
         meleeSet = set_combine(meleeSet, sets.Reive)
     end
 	
@@ -1673,6 +1713,10 @@ function get_melee_set()
     if extra_user_customize_melee_set then
         meleeSet = extra_user_customize_melee_set(meleeSet)
     end
+	
+	if state.UnlockWeapons.value and sets.weapons[state.Weapons.value] then
+		meleeSet = set_combine(meleeSet, sets.weapons[state.Weapons.value])
+	end
 	
     return meleeSet
 end
@@ -1929,7 +1973,10 @@ function get_ranged_set(equipSet, spell, spellMap)
         mote_vars.set_breadcrumbs:append(state.CombatForm.value)
     end
 
-    if state.CombatWeapon.has_value and equipSet[state.CombatWeapon.value] then
+	if equipSet[state.Weapons.value] then
+        equipSet = equipSet[state.Weapons.value]
+        mote_vars.set_breadcrumbs:append(state.Weapons.value)
+    elseif state.CombatWeapon.has_value and equipSet[state.CombatWeapon.value] then
         equipSet = equipSet[state.CombatWeapon.value]
         mote_vars.set_breadcrumbs:append(state.CombatWeapon.value)
     end
@@ -2094,6 +2141,9 @@ function get_named_set(equipSet, spell, spellMap)
         elseif spellMap and equipSet[spellMap] then
             mote_vars.set_breadcrumbs:append(spellMap)
             return equipSet[spellMap]
+		elseif spellMap and (spellMap:contains('Cure') or spellMap:contains('Curaga')) and equipSet['Cure'] then
+			mote_vars.set_breadcrumbs:append('Cure')
+			return equipSet['Cure']
         else
             return equipSet
         end
@@ -2111,12 +2161,24 @@ function sub_job_change(newSubjob, oldSubjob)
         user_setup()
     end
 	
+    if user_job_setup then
+        user_job_setup()
+    end	
+	
     if extra_user_setup then
         extra_user_setup()
     end
     
     if job_sub_job_change then
         job_sub_job_change(newSubjob, oldSubjob)
+    end
+
+    if user_sub_job_change then
+        user_sub_job_change(newSubjob, oldSubjob)
+    end
+	
+    if user_job_sub_job_change then
+        user_job_sub_job_change(newSubjob, oldSubjob)
     end
     
     send_command('gs c update')
@@ -2195,25 +2257,41 @@ end
 -- Handle notifications of general state change.
 function state_change(stateField, newValue, oldValue)
     if stateField == 'Weapons' then
-		if ((newValue:contains('DW') or newValue:contains('Dual')) and not can_dual_wield) or (newValue:contains('Proc') and state.SkipProcWeapons.value) then
+		
+		if stateField == 'Weapons' and state.AutoLockstyle.value and newValue ~= oldValue then
+			style_lock = true
+		end
+	
+		if newValue == 'None' or state.UnlockWeapons.value then
+			enable('main','sub','range','ammo')
+		elseif ((newValue:contains('DW') or newValue:contains('Dual')) and not can_dual_wield) or (newValue:contains('Proc') and state.SkipProcWeapons.value) then
 			local startindex = state.Weapons.index
 			while ((state.Weapons.value:contains('DW') or state.Weapons.value:contains('Dual')) and not can_dual_wield) or (state.SkipProcWeapons.value and state.Weapons.value:contains('Proc')) do
 				state.Weapons:cycle()
 				if startindex == state.Weapons.index then break end
 			end
-			handle_weapons()
+			
+			if state.Weapons.value == 'None' then
+				enable('main','sub','range','ammo')
+			elseif not state.ReEquip.value then
+				handle_weapons()
+			end
 		elseif sets.weapons[newValue] then
-			equip_weaponset(newValue)
-		elseif newValue == 'None' then
-			enable('main','sub','range','ammo')
+			if not state.ReEquip.value then equip_weaponset(newValue) end
 		else
 			if not sets.weapons[newValue] then
 				add_to_chat(123,"sets.weapons."..newValue.." does not exist, resetting weapon state.")
 			end
 			state.Weapons:reset()
-			if sets.weapons[state.Weapons.value] then
+			if sets.weapons[state.Weapons.value] and not state.ReEquip.value then
 				equip_weaponset(state.Weapons.value)
 			end
+		end
+	elseif stateField == 'Unlock Weapons' then
+		if newValue == true then
+			enable('main','sub','range','ammo')
+		else
+			equip_weaponset(state.Weapons.value)
 		end
 	elseif stateField == 'RngHelper' then
 		if newValue == true then
@@ -2223,16 +2301,16 @@ function state_change(stateField, newValue, oldValue)
 		end
     end
 	
-	if user_job_state_change then
-		user_job_state_change(stateField, newValue, oldValue)
-	end
-	
 	if user_state_change then
 		user_state_change(stateField, newValue, oldValue)
 	end
 	
 	if job_state_change then
 		job_state_change(stateField, newValue, oldValue)
+	end
+	
+	if user_job_state_change then
+		user_job_state_change(stateField, newValue, oldValue)
 	end
 	
 	if stateField == 'Rune Element' then
@@ -2398,6 +2476,11 @@ function display_breadcrumbs(spell, spellMap, action)
         add_to_chat(123, msg)
     end
 end
+
+-- Event registers to trigger functions
+windower.raw_register_event('time change', time_change)
+windower.raw_register_event('zone change', zone_change)
+windower.raw_register_event('target change', target_change)
 
 -- Auto-initialize the include - Do this at the bottom so that other user-files can overwrite these functions.
 init_include()

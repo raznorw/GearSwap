@@ -1,8 +1,8 @@
 -- Setup vars that are user-dependent.  Can override this function in a sidecar.
-function user_setup()
+function user_job_setup()
     state.OffenseMode:options('Normal','Acc')
     state.CastingMode:options('Normal','Resistant','OccultAcumen')
-    state.IdleMode:options('Normal', 'PDT','TPEat')
+    state.IdleMode:options('Normal','PDT')
 	state.Weapons:options('None','Gridarvor','Khatvanga')
 
     gear.perp_staff = {name="Gridarvor"}
@@ -96,14 +96,19 @@ function init_gear_sets()
 		
 	sets.midcast.StatusRemoval = set_combine(sets.midcast.FastRecast, {main=gear.grioavolr_fc_staff,sub="Clemency Grip"})
 
+	sets.midcast['Summoning Magic'] = {main="Malignance Pole",sub="Umbra Strap",ammo="Sancus Sachet +1",
+        head="Convoker's Horn +3",neck="Incanter's Torque",ear1="Andoaa Earring",ear2="Lodurr Earring",
+        body="Baayami Robe",hands="Baayami Cuffs",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
+        back=gear.magic_jse_back,waist="Emphatikos Rope",legs="Assid. Pants +1",feet="Baayami Sabots"}
+		
 	sets.midcast['Elemental Magic'] = {main="Daybreak",sub="Ammurapi Shield",ammo="Dosis Tathlum",
         head=gear.merlinic_nuke_head,neck="Baetyl Pendant",ear1="Crematio Earring",ear2="Friomisi Earring",
-        body=gear.merlinic_nuke_body,hands="Amalric Gages +1",ring1="Shiva Ring +1",ring2="Shiva Ring +1",
+        body=gear.merlinic_nuke_body,hands="Amalric Gages +1",ring1="Shiva Ring +1",ring2="Freke Ring",
 		back="Toro Cape",waist="Sekhmet Corset",legs="Merlinic Shalwar",feet=gear.merlinic_nuke_feet}
 		
 	sets.midcast['Elemental Magic'].Resistant = {main="Daybreak",sub="Ammurapi Shield",ammo="Dosis Tathlum",
         head=gear.merlinic_nuke_head,neck="Baetyl Pendant",ear1="Crematio Earring",ear2="Friomisi Earring",
-        body=gear.merlinic_nuke_body,hands="Amalric Gages +1",ring1="Shiva Ring +1",ring2="Shiva Ring +1",
+        body=gear.merlinic_nuke_body,hands="Amalric Gages +1",ring1="Shiva Ring +1",ring2="Freke Ring",
 		back="Toro Cape",waist="Sekhmet Corset",legs="Merlinic Shalwar",feet=gear.merlinic_nuke_feet}
 		
     sets.midcast['Elemental Magic'].OccultAcumen = {main="Khatvanga",sub="Bloodrain Strap",ammo="Seraphic Ampulla",
@@ -113,19 +118,19 @@ function init_gear_sets()
 		
 	sets.midcast.Impact = {main="Daybreak",sub="Ammurapi Shield",ammo="Pemphredo Tathlum",
 		head=empty,neck="Erra Pendant",ear1="Enchntr. Earring +1",ear2="Gwati Earring",
-		body="Twilight Cloak",hands="Regal Cuffs",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
+		body="Twilight Cloak",hands="Regal Cuffs",ring1="Metamor. Ring +1",ring2="Stikini Ring +1",
 		back="Toro Cape",waist="Acuity Belt +1",legs="Merlinic Shalwar",feet=gear.merlinic_aspir_feet}
 		
 	sets.midcast.Impact.OccultAcumen = set_combine(sets.midcast['Elemental Magic'].OccultAcumen, {head=empty,body="Twilight Cloak"})
 
     sets.midcast['Divine Magic'] = {main="Daybreak",sub="Ammurapi Shield",ammo="Dosis Tathlum",
         head=gear.merlinic_nuke_head,neck="Baetyl Pendant",ear1="Crematio Earring",ear2="Friomisi Earring",
-        body=gear.merlinic_nuke_body,hands="Amalric Gages +1",ring1="Shiva Ring +1",ring2="Shiva Ring +1",
+        body=gear.merlinic_nuke_body,hands="Amalric Gages +1",ring1="Shiva Ring +1",ring2="Freke Ring",
 		back="Toro Cape",waist="Sekhmet Corset",legs="Merlinic Shalwar",feet=gear.merlinic_nuke_feet}
 		
     sets.midcast['Dark Magic'] = {main="Rubicundity",sub="Ammurapi Shield",ammo="Pemphredo Tathlum",
         head=gear.merlinic_nuke_head,neck="Incanter's Torque",ear1="Digni. Earring",ear2="Gwati Earring",
-        body=gear.merlinic_nuke_body,hands="Amalric Gages +1",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
+        body=gear.merlinic_nuke_body,hands="Amalric Gages +1",ring1="Metamor. Ring +1",ring2="Stikini Ring +1",
         back="Aurist's Cape +1",waist="Yamabuki-no-Obi",legs="Merlinic Shalwar",feet=gear.merlinic_aspir_feet}
 	
 	sets.midcast.Drain = {main="Rubicundity",sub="Ammurapi Shield",ammo="Pemphredo Tathlum",
@@ -152,7 +157,7 @@ function init_gear_sets()
 		
 	sets.midcast['Enfeebling Magic'].Resistant = {main="Daybreak",sub="Ammurapi Shield",ammo="Pemphredo Tathlum",
 		head="Befouled Crown",neck="Erra Pendant",ear1="Digni. Earring",ear2="Gwati Earring",
-		body=gear.merlinic_nuke_body,hands="Regal Cuffs",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
+		body=gear.merlinic_nuke_body,hands="Regal Cuffs",ring1="Metamor. Ring +1",ring2="Stikini Ring +1",
 		back=gear.nuke_jse_back,waist="Luminary Sash",legs="Psycloth Lappas",feet="Skaoi Boots"}
 		
 	sets.midcast.Dia = set_combine(sets.midcast['Enfeebling Magic'], sets.TreasureHunter)
@@ -174,30 +179,30 @@ function init_gear_sets()
     -- Avatar pact sets.  All pacts are Ability type.
     
     sets.midcast.Pet.BloodPactWard = {main="Espiritus",sub="Vox Grip",ammo="Sancus Sachet +1",
-        head="Beckoner's Horn +1",neck="Incanter's Torque",ear1="Andoaa Earring",ear2="Lodurr Earring",
-        body="Beck. Doublet +1",hands="Baayami Cuffs",ring1="Evoker's Ring",ring2="Stikini Ring +1",
+        head="Convoker's Horn +3",neck="Incanter's Torque",ear1="Andoaa Earring",ear2="Lodurr Earring",
+        body="Baayami Robe",hands="Baayami Cuffs",ring1="Evoker's Ring",ring2="Stikini Ring +1",
         back="Conveyance Cape",waist="Kobo Obi",legs="Baayami Slops",feet="Baayami Sabots"}
 
     sets.midcast.Pet.DebuffBloodPactWard = {main="Espiritus",sub="Vox Grip",ammo="Sancus Sachet +1",
-        head="Beckoner's Horn +1",neck="Adad Amulet",ear1="Andoaa Earring",ear2="Enmerkar Earring",
-        body="Beck. Doublet +1",hands=gear.merlinic_magpact_hands,ring1="Evoker's Ring",ring2="Stikini Ring +1",
-        back=gear.magic_jse_back,waist="Incarnation Sash",legs="Tali'ah Sera. +2",feet="Beck. Pigaches +1"}
+        head="C. Palug Crown",neck="Adad Amulet",ear1="Lugalbanda Earring",ear2="Enmerkar Earring",
+        body="Con. Doublet +3",hands=gear.merlinic_magpact_hands,ring1="Evoker's Ring",ring2="C. Palug Ring",
+        back=gear.magic_jse_back,waist="Incarnation Sash",legs="Tali'ah Sera. +2",feet="Convo. Pigaches +3"}
         
     sets.midcast.Pet.DebuffBloodPactWard.Acc = sets.midcast.Pet.DebuffBloodPactWard
     
     sets.midcast.Pet.PhysicalBloodPactRage = {main="Gridarvor",sub="Elan Strap +1",ammo="Sancus Sachet +1",
-        head="Helios Band",neck="Shulmanu Collar",ear1="Gelos Earring",ear2="Lugalbanda Earring",
-        body="Con. Doublet +3",hands=gear.merlinic_physpact_hands,ring1="Varar Ring +1",ring2="Varar Ring +1",
+        head="Helios Band",neck="Shulmanu Collar",ear1="Lugalbanda Earring",ear2="Gelos Earring",
+        body="Con. Doublet +3",hands=gear.merlinic_physpact_hands,ring1="Varar Ring +1",ring2="C. Palug Ring",
         back=gear.phys_jse_back,waist="Incarnation Sash",legs="Apogee Slacks +1",feet="Apogee Pumps +1"}
 		
     sets.midcast.Pet.PhysicalBloodPactRage.Acc = {feet="Convo. Pigaches +3"}
 
     sets.midcast.Pet.MagicalBloodPactRage = {main=gear.grioavolr_pet_staff,sub="Elan Strap +1",ammo="Sancus Sachet +1",
-        head="Apogee Crown +1",neck="Adad Amulet",ear1="Gelos Earring",ear2="Lugalbanda Earring",
+        head="Apogee Crown +1",neck="Adad Amulet",ear1="Lugalbanda Earring",ear2="Gelos Earring",
         body="Con. Doublet +3",hands=gear.merlinic_magpact_hands,ring1="Varar Ring +1",ring2="Varar Ring +1",
         back=gear.magic_jse_back,waist="Regal Belt",legs="Enticer's Pants",feet="Apogee Pumps +1"}
 
-    sets.midcast.Pet.MagicalBloodPactRage.Acc = {feet="Convo. Pigaches +3"}
+    sets.midcast.Pet.MagicalBloodPactRage.Acc = {head="C. Palug Crown",feet="Convo. Pigaches +3"}
 
     -- Spirits cast magic spells, which can be identified in standard ways.
     
@@ -207,11 +212,14 @@ function init_gear_sets()
 
     sets.midcast.Pet['Elemental Magic'].Resistant = {}
     
+	sets.midcast.Pet['Impact'] = sets.midcast.Pet.DebuffBloodPactWard
+
 	sets.midcast.Pet['Flaming Crush'] = {main=gear.grioavolr_pet_staff,sub="Elan Strap +1",ammo="Sancus Sachet +1",
-        head="Apogee Crown +1",neck="Adad Amulet",ear1="Gelos Earring",ear2="Lugalbanda Earring",
+        head="Apogee Crown +1",neck="Adad Amulet",ear1="Lugalbanda Earring",ear2="Gelos Earring",
         body="Con. Doublet +3",hands=gear.merlinic_magpact_hands,ring1="Varar Ring +1",ring2="Varar Ring +1",
         back=gear.phys_jse_back,waist="Regal Belt",legs="Apogee Slacks +1",feet="Apogee Pumps +1"}
-	sets.midcast.Pet['Flaming Crush'].Acc = {feet="Convo. Pigaches +3"}
+		
+	sets.midcast.Pet['Flaming Crush'].Acc = {head="C. Palug Crown",feet="Convo. Pigaches +3"}
 	
 	sets.midcast.Pet['Mountain Buster'] = set_combine(sets.midcast.Pet.PhysicalBloodPactRage, {legs="Enticer's Pants"})
 	sets.midcast.Pet['Mountain Buster'].Acc = set_combine(sets.midcast.Pet.PhysicalBloodPactRage.Acc, {legs="Enticer's Pants"})
@@ -230,23 +238,21 @@ function init_gear_sets()
     
     -- Resting sets
     sets.resting = {main="Chatoyant Staff",ammo="Staunch Tathlum +1",
-        head="Beckoner's Horn +1",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="Ethereal Earring",
+        head="Beckoner's Horn +1",neck="Loricate Torque +1",ear1="C. Palug Earring",ear2="Ethereal Earring",
         body="Shomonjijoe +1",hands=gear.merlinic_refresh_hands,ring1="Defending Ring",ring2="Sheltered Ring",
         back="Umbra Cape",waist="Fucho-no-obi",legs="Assid. Pants +1",feet="Baayami Sabots"}
     
     -- Idle sets
     sets.idle = {main="Bolelabunga",sub="Genmei Shield",ammo="Staunch Tathlum +1",
-        head="Beckoner's Horn +1",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="Ethereal Earring",
+        head="Convoker's Horn +3",neck="Loricate Torque +1",ear1="C. Palug Earring",ear2="Ethereal Earring",
         body="Shomonjijoe +1",hands=gear.merlinic_refresh_hands,ring1="Stikini Ring +1",ring2="Stikini Ring +1",
         back="Umbra Cape",waist="Regal Belt",legs="Assid. Pants +1",feet="Baayami Sabots"}
 
     sets.idle.PDT = {main="Malignance Pole",sub="Oneiros Grip",ammo="Staunch Tathlum +1",
-        head="Hagondes Hat +1",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="Ethereal Earring",
-        body="Vrikodara Jupon",hands="Hagondes Cuffs +1",ring1="Defending Ring",ring2="Dark Ring",
-        back="Umbra Cape",waist="Regal Belt",legs="Hagondes Pants +1",feet="Battlecast Gaiters"}
+        head="Convoker's Horn +3",neck="Loricate Torque +1",ear1="C. Palug Earring",ear2="Ethereal Earring",
+        body="Shomonjijoe +1",hands=gear.merlinic_refresh_hands,ring1="Defending Ring",ring2="Dark Ring",
+        back="Moonlight Cape",waist="Regal Belt",legs="Assid. Pants +1",feet="Baayami Sabots"}
 		
-	sets.idle.TPEat = set_combine(sets.idle, {neck="Chrys. Torque"})
-
     -- perp costs:
     -- spirits: 7
     -- carby: 11 (5 with mitts)
@@ -260,26 +266,24 @@ function init_gear_sets()
     -- Can make due without either the head or the body, and use +refresh items in those slots.
     
     sets.idle.Avatar = {main="Gridarvor",sub="Oneiros Grip",ammo="Sancus Sachet +1",
-        head="Beckoner's Horn +1",neck="Caller's Pendant",ear1="Etiolation Earring",ear2="Evans Earring",
+        head="Beckoner's Horn +1",neck="Caller's Pendant",ear1="C. Palug Earring",ear2="Evans Earring",
         body="Shomonjijoe +1",hands=gear.merlinic_refresh_hands,ring1="Evoker's Ring",ring2="Stikini Ring +1",
         back="Moonlight Cape",waist="Lucidity Sash",legs="Assid. Pants +1",feet="Convo. Pigaches +3"}
 		
     sets.idle.PDT.Avatar = {main="Malignance Pole",sub="Oneiros Grip",ammo="Sancus Sachet +1",
-        head="Beckoner's Horn +1",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="Evans Earring",
+        head="Beckoner's Horn +1",neck="Loricate Torque +1",ear1="C. Palug Earring",ear2="Evans Earring",
         body="Shomonjijoe +1",hands=gear.merlinic_refresh_hands,ring1="Defending Ring",ring2="Dark Ring",
-        back="Umbra Cape",waist="Regal Belt",legs="Assid. Pants +1",feet="Convo. Pigaches +3"}
+        back="Moonlight Cape",waist="Regal Belt",legs="Assid. Pants +1",feet="Convo. Pigaches +3"}
 
     sets.idle.Spirit = {main="Gridarvor",sub="Oneiros Grip",ammo="Sancus Sachet +1",
-        head="Beckoner's Horn +1",neck="Caller's Pendant",ear1="Etiolation Earring",ear2="Ethereal Earring",
+        head="Convoker's Horn +3",neck="Caller's Pendant",ear1="C. Palug Earring",ear2="Ethereal Earring",
         body="Shomonjijoe +1",hands=gear.merlinic_refresh_hands,ring1="Evoker's Ring",ring2="Stikini Ring +1",
         back="Conveyance Cape",waist="Lucidity Sash",legs="Assid. Pants +1",feet="Convo. Pigaches +3"}
 		
     sets.idle.PDT.Spirit = {main="Malignance Pole",sub="Oneiros Grip",ammo="Sancus Sachet +1",
-        head="Beckoner's Horn +1",neck="Loricate Torque +1",ear1="Etiolation Earring",ear2="Evans Earring",
+        head="Convoker's Horn +3",neck="Loricate Torque +1",ear1="C. Palug Earring",ear2="Evans Earring",
         body="Shomonjijoe +1",hands=gear.merlinic_refresh_hands,ring1="Defending Ring",ring2="Dark Ring",
         back="Umbra Cape",waist="Lucidity Sash",legs="Assid. Pants +1",feet="Battlecast Gaiters"}
-		
-	sets.idle.TPEat.Avatar = set_combine(sets.idle.Avatar, {neck="Chrys. Torque"})
 		
 	--Favor always up and head is best in slot idle so no specific items here at the moment.
     sets.idle.Avatar.Favor = {}
@@ -315,7 +319,7 @@ function init_gear_sets()
         back="Moonlight Cape",waist="Regal Belt",legs="Assid. Pants +1",feet="Baayami Sabots"}
 
     sets.defense.MEVA = {main="Malignance Pole",sub="Enki Strap",ammo="Sancus Sachet +1",
-        head="Amalric Coif +1",neck="Warder's Charm +1",ear1="Sanare Earring",ear2="Lugalbanda Earring",
+        head="Amalric Coif +1",neck="Warder's Charm +1",ear1="Lugalbanda Earring",ear2="Sanare Earring",
 		body="Inyanga Jubbah +2",hands="Telchine Gloves",ring1="Vengeful Ring",Ring2="Purity Ring",
         back="Aurist's Cape +1",waist="Luminary Sash",legs="Telchine Braconi",feet="Telchine Pigaches"}
 		

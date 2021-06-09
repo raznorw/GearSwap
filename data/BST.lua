@@ -65,23 +65,6 @@ function job_setup()
 	-- 'Out of Range' distance; WS will auto-cancel
 	target_distance = 6
 
-	-- Complete list of Ready moves to use with Sic & Ready Recast -5 Desultor Tassets.
-	ready_moves_to_check = S{'Sic','Whirl Claws','Dust Cloud','Foot Kick','Sheep Song','Sheep Charge','Lamb Chop',
-        'Rage','Head Butt','Scream','Dream Flower','Wild Oats','Leaf Dagger','Claw Cyclone','Razor Fang',
-        'Roar','Gloeosuccus','Palsy Pollen','Soporific','Cursed Sphere','Venom','Geist Wall','Toxic Spit',
-        'Numbing Noise','Nimble Snap','Cyclotail','Spoil','Rhino Guard','Rhino Attack','Power Attack',
-        'Hi-Freq Field','Sandpit','Sandblast','Venom Spray','Mandibular Bite','Metallic Body','Bubble Shower',
-        'Bubble Curtain','Scissor Guard','Big Scissors','Grapple','Spinning Top','Double Claw','Filamented Hold',
-        'Frog Kick','Queasyshroom','Silence Gas','Numbshroom','Spore','Dark Spore','Shakeshroom','Blockhead',
-        'Secretion','Fireball','Tail Blow','Plague Breath','Brain Crush','Infrasonics','??? Needles',
-        'Needleshot','Chaotic Eye','Blaster','Scythe Tail','Ripper Fang','Chomp Rush','Intimidate','Recoil Dive',
-        'Water Wall','Snow Cloud','Wild Carrot','Sudden Lunge','Spiral Spin','Noisome Powder','Wing Slap',
-        'Beak Lunge','Suction','Drainkiss','Acid Mist','TP Drainkiss','Back Heel','Jettatura','Choke Breath',
-        'Fantod','Charged Whisker','Purulent Ooze','Corrosive Ooze','Tortoise Stomp','Harden Shell','Aqua Breath',
-        'Sensilla Blades','Tegmina Buffet','Molting Plumage','Swooping Frenzy','Pentapeck','Sweeping Gouge',
-        'Zealous Snort','Somersault ','Tickling Tendrils','Stink Bomb','Nectarous Deluge','Nepenthic Plunge',
-        'Pecking Flurry','Pestilent Plume','Foul Waters','Spider Web','Sickle Slash'}
-
 	tp_based_ready_moves = S{'Sic','Somersault ','Dust Cloud','Foot Kick','Sheep Song','Sheep Charge','Lamb Chop',
         'Rage','Head Butt','Scream','Dream Flower','Wild Oats','Leaf Dagger','Claw Cyclone','Razor Fang','Roar',
         'Gloeosuccus','Palsy Pollen','Soporific','Cursed Sphere','Geist Wall','Numbing Noise','Frog Kick',
@@ -92,17 +75,28 @@ function job_setup()
         'Water Wall','Snow Cloud','Wild Carrot','Sudden Lunge','Noisome Powder','Wing Slap','Beak Lunge','Suction',
         'Drainkiss','Acid Mist','TP Drainkiss','Back Heel','Jettatura','Choke Breath','Fantod','Charged Whisker',
         'Purulent Ooze','Corrosive Ooze','Tortoise Stomp','Harden Shell','Aqua Breath','Sensilla Blades',
-        'Tegmina Buffet','Sweeping Gouge','Zealous Snort','Tickling Tendrils','Pecking Flurry',
-        'Pestilent Plume','Foul Waters','Spider Web'}
+        'Tegmina Buffet','Sweeping Gouge','Zealous Snort','Tickling Tendrils','Pecking Flurry','Pestilent Plume',
+		'Foul Waters','Spider Web','Crossthrash','Venom Shower','Mega Scissors','Fluid Toss',
+		'Fluid Spread','Digest','Rhinowrecker','Disembowel','Extirpating Salvo','Frenzied Rage'}
 
 	-- List of Magic-based Ready moves to use with Pet MAB or Pet M.Acc gearset.
 	magic_ready_moves = S{'Dust Cloud','Sheep Song','Scream','Dream Flower','Roar','Gloeosuccus','Palsy Pollen',
         'Soporific','Cursed Sphere','Venom','Geist Wall','Toxic Spit','Numbing Noise','Spoil','Hi-Freq Field',
-        'Sandpit','Sandblast','Venom Spray','Bubble Shower','Filamented Hold','Queasyshroom','Silence Gas',
-        'Numbshroom','Spore','Dark Spore','Shakeshroom','Fireball','Plague Breath','Infrasonics','Chaotic Eye',
-        'Blaster','Intimidate','Snow Cloud','Noisome Powder','TP Drainkiss','Jettatura','Charged Whisker',
-        'Purulent Ooze','Corrosive Ooze','Aqua Breath','Molting Plumage','Stink Bomb','Nectarous Deluge',
-        'Nepenthic Plunge','Pestilent Plume','Foul Waters','Spider Web'}
+        'Sandpit','Sandblast','Venom Spray','Bubble Shower','Filamented Hold','Silence Gas','Spore','Dark Spore',
+		'Fireball','Plague Breath','Infrasonics','Chaotic Eye','Blaster','Intimidate','Snow Cloud',
+		'Noisome Powder','TP Drainkiss','Jettatura','Charged Whisker','Purulent Ooze','Corrosive Ooze','Aqua Breath',
+		'Molting Plumage','Stink Bomb','Nectarous Deluge','Nepenthic Plunge','Pestilent Plume','Foul Waters',
+		'Spider Web','Nihility Song','Venom Shower','Digest'}
+		
+	debuff_ready_moves = S{'Dust Cloud','Sheep Song','Scream','Dream Flower','Roar','Gloeosuccus','Palsy Pollen',
+        'Soporific','Geist Wall','Numbing Noise','Spoil','Hi-Freq Field','Sandpit','Sandblast','Filamented Hold',
+		'Spore','Fireball','Infrasonics','Chaotic Eye','Blaster','Intimidate','Noisome Powder','TP Drainkiss',
+		'Jettatura','Purulent Ooze','Corrosive Ooze','Pestilent Plume','Spider Web','Nihility Song'}
+		
+	multi_hit_ready_moves = S{'Pentapeck','Tickling Tendrils','Sweeping Gouge','Chomp Rush','Wing Slap',
+		'Pecking Flurry'}
+
+	physical_debuff_ready_moves = S{'Sudden Lunge','Extirpating Salvo','Choke Breath'}
 
 	-- List of abilities to reference for applying Treasure Hunter +1 via Chaac Belt.
 	abilities_to_check = S{'Feral Howl','Quickstep','Box Step','Stutter Step','Desperate Flourish','Violent Flourish',
@@ -140,7 +134,13 @@ function job_setup()
 				['GussyHachirobe']="HQ Spider, Vermin, Warrior",['AcuexFamiliar']="Acuex, Amorph, Black Mage",
 				['ChoralLeera']="HQ Colibri, Bird, Red Mage",['SpiderFamiliar']="Spider, Vermin, Warrior",
 				['AmiableRoche']="Pugil, Aquan, Warrior",['HeraldHenry']="Crab, Aquan, Paladin",
-				['FluffyBredo']="HQ Acuex, Amorph, Black Mage",
+				['FluffyBredo']="HQ Acuex, Amorph, Black Mage",['WeevilFamiliar']="Weevil, Vermin, Thief",
+				['StalwartAngelina']="HQ Weevil, Vermin, Thief",['SweetCaroline']="Mandragora, Plantoid, Monk",
+				['P.CrabFamiliar']="Crab, Aquan, Paladin",['JovialEdwin']="HQ Crab, Aquan, Paladin",
+				['Y.BeetleFamiliar']="Beetle, Vermin, Warrior",['EnergizedSefina']="Beetle, Vermin, Warrior",
+				['LynxFamiliar']="Coeurl, Beast, Warrior",['VivaciousGaston']="HQ Coeurl, Beast, Warrior",
+				['Hip.Familiar']="Hippogryph, Bird, Thief/Black Mage",['DaringRoland']="HQ Hippogryph, Bird, Thief/Black Mage",
+				['SlimeFamiliar']="Slime, Amorph, Warrior",['SultryPatrice']="Slime, Amorph, Warrior",
 				}
 
 	ready_moves = {}
@@ -155,8 +155,13 @@ function job_setup()
 							['GussyHachirobe']='Sickle Slash',['ThreestarLynn']='Spiral Spin',['GenerousArthur']='Purulent Ooze',
 							['CursedAnnabelle']='Mandibular Bite',['SurgingStorm']='Beak Lunge',['SubmergedIyo']='Beak Lunge',
 							['SharpwitHermes']='Head Butt',['AcuexFamiliar']='Pestilent Plume',['FluffyBredo']='Pestilent Plume',
-							['MosquitoFamiliar']='Infected Leech',['Left-HandedYoko']='Infected Leech',}
-
+							['MosquitoFamiliar']='Infected Leech',['Left-HandedYoko']='Infected Leech',['WeevilFamiliar']='Disembowel',
+							['StalwartAngelina']='Disembowel',['SweetCaroline']='Head Butt',['P.CrabFamiliar']='Mega Scissors',
+							['JovialEdwin']='Mega Scissors',['Y.BeetleFamiliar']='Power Attack',['EnergizedSefina']='Power Attack',
+							['LynxFamiliar']='Charged Whisker',['VivaciousGaston']='Charged Whisker',['Hip.Familiar']='Back Heel',['DaringRoland']='Back Heel',
+							['SlimeFamiliar']='Fluid Toss',['SultryPatrice']='Fluid Toss',
+							}
+							
 	ready_moves.aoe = 	   {['DroopyDortwin']='Whirl Claws',['PonderingPeter']='Whirl Claws',['HeraldHenry']='Bubble Shower',['CourierCarrie']='Bubble Shower',
 							['AgedAngus']='Bubble Shower',['SunburstMalfik']='Bubble Shower',['WarlikePatrick']='Fireball',['ScissorlegXerin']='Tegmina Buffet',
 							['BouncingBertha']='Tegmina Buffet',['RhymingShizuna']='Sheep Song',['AttentiveIbuki']='Molting Plumage',
@@ -165,12 +170,17 @@ function job_setup()
 							['AnklebiterJedd']='Spinning Top',['HurlerPercival']='Hi-Freq Field',['BlackbeardRandy']='Claw Cyclone',
 							['SpiderFamiliar']='Spider Web',['GussyHachirobe']='Spider Web',['ThreestarLynn']='Spiral Spin',['GenerousArthur']='Purulent Ooze',
 							['CursedAnnabelle']='Sandblast',['SharpwitHermes']='Scream',['AcuexFamiliar']='Pestilent Plume',['FluffyBredo']='Pestilent Plume',
-							['MosquitoFamiliar']='Infected Leech',['Left-HandedYoko']='Infected Leech',}
+							['MosquitoFamiliar']='Infected Leech',['Left-HandedYoko']='Infected Leech',['SweetCaroline']='Scream',['P.CrabFamiliar']='Venom Shower',
+							['JovialEdwin']='Venom Shower',['Y.BeetleFamiliar']='Rhinowrecker',['EnergizedSefina']='Rhinowrecker',['LynxFamiliar']='Charged Whisker',
+							['VivaciousGaston']='Charged Whisker',['Hip.Familiar']='Choke Breath',['DaringRoland']='Choke Breath',
+							['SlimeFamiliar']='Fluid Spread',['SultryPatrice']='Fluid Spread',}
 
 	ready_moves.buff =     {['DroopyDortwin']='Wild Carrot',['PonderingPeter']='Wild Carrot',['HeraldHenry']='Scissor Guard',['CourierCarrie']='Scissor Guard',
 							['AgedAngus']='Scissor Guard',['SunburstMalfik']='Scissor Guard',['WarlikePatrick']='Secretion',
 							['RhymingShizuna']='Rage',['AmiableRoche']='Water Wall',['HurlerPercival']='Rhino Guard',
-							['CaringKiyomaro']='Zealous Snort',['VivaciousVickie']='Zealous Snort'}
+							['CaringKiyomaro']='Zealous Snort',['VivaciousVickie']='Zealous Snort',['P.CrabFamiliar']='Scissor Guard',
+							['JovialEdwin']='Scissor Guard',['Y.BeetleFamiliar']='Rhino Guard',['EnergizedSefina']='Rhino Guard',['LynxFamiliar']='Frenzied Rage',
+							['VivaciousGaston']='Frenzied Rage',['Hip.Familiar']='Fantod',['DaringRoland']='Fantod',}
 
 	ready_moves.debuff =   {['DroopyDortwin']='Dust Cloud',['PonderingPeter']='Dust Cloud',['HeraldHenry']='Bubble Shower',['CourierCarrie']='Bubble Shower',
 							['AgedAngus']='Bubble Shower',['SunburstMalfik']='Bubble Shower',['WarlikePatrick']='Infrasonics',['ScissorlegXerin']='Tegmina Buffet',
@@ -182,7 +192,10 @@ function job_setup()
 							['SpiderFamiliar']='Spider Web',['GussyHachirobe']='Spider Web',['ThreestarLynn']='Noisome Powder',
 							['GenerousArthur']='Corrosive Ooze',['CursedAnnabelle']='Sandpit',
 							['SharpwitHermes']='Wild Oats',['AcuexFamiliar']='Pestilent Plume',['FluffyBredo']='Pestilent Plume',
-							['MosquitoFamiliar']='Gloom Spray',['Left-HandedYoko']='Gloom Spray',}
+							['MosquitoFamiliar']='Gloom Spray',['Left-HandedYoko']='Gloom Spray',['WeevilFamiliar']='Extirpating Salvo',
+							['StalwartAngelina']='Extirpating Salvo',['SweetCaroline']='Wild Oats',['P.CrabFamiliar']='Venom Shower',
+							['JovialEdwin']='Venom Shower',['Y.BeetleFamiliar']='Hi-Freq Field',['EnergizedSefina']='Hi-Freq Field',
+							['LynxFamiliar']='Blaster',['VivaciousGaston']='Blaster',['Hip.Familiar']='Jettatura',['DaringRoland']='Jettatura',}
 
 	ready_moves.physical = {['DroopyDortwin']='Foot Kick',['PonderingPeter']='Foot Kick',['HeraldHenry']='Big Scissors',['CourierCarrie']='Big Scissors',
 							['AgedAngus']='Big Scissors',['SunburstMalfik']='Big Scissors',['WarlikePatrick']='Tail Blow',['ScissorlegXerin']='Sensilla Blades',
@@ -194,7 +207,9 @@ function job_setup()
 							['ColibriFamiliar']='Pecking Flurry',['ChoralLeera']='Pecking Flurry',['SpiderFamiliar']='Sickle Slash',
 							['GussyHachirobe']='Sickle Slash',['ThreestarLynn']='Spiral Spin',['GenerousArthur']='Purulent Ooze',
 							['CursedAnnabelle']='Mandibular Bite',['SurgingStorm']='Beak Lunge',['SubmergedIyo']='Beak Lunge',
-							['SharpwitHermes']='Head Butt'}
+							['SharpwitHermes']='Head Butt',['WeevilFamiliar']='Disembowel',['StalwartAngelina']='Disembowel',['SweetCaroline']='Head Butt',
+							['P.CrabFamiliar']='Mega Scissors',['JovialEdwin']='Mega Scissors',['Y.BeetleFamiliar']='Power Attack',['EnergizedSefina']='Power Attack',
+							['Hip.Familiar']='Back Heel',['DaringRoland']='Back Heel',['SlimeFamiliar']='Fluid Toss',['SultryPatrice']='Fluid Toss',}
 
 	ready_moves.magical =  {['DroopyDortwin']='Dust Cloud',['PonderingPeter']='Dust Cloud',['HeraldHenry']='Bubble Shower',['CourierCarrie']='Bubble Shower',
 							['AgedAngus']='Bubble Shower',['SunburstMalfik']='Bubble Shower',['WarlikePatrick']='Fireball',
@@ -202,8 +217,11 @@ function job_setup()
 							['BrainyWaluis']='Silence Gas',['HeadbreakerKen']='Cursed Sphere',['RedolentCandi']='Nepenthic Plunge',
 							['AlluringHoney']='Nepenthic Plunge',['SpiderFamiliar']='Acid Spray',
 							['GussyHachirobe']='Acid Spray',['GenerousArthur']='Purulent Ooze',
-							['SharpwitHermes']='Head Butt',['AcuexFamiliar']='Pestilent Plume',['FluffyBredo']='Pestilent Plume',
-							['MosquitoFamiliar']='Infected Leech',['Left-HandedYoko']='Infected Leech',}
+							['SharpwitHermes']='Scream',['AcuexFamiliar']='Pestilent Plume',['FluffyBredo']='Pestilent Plume',
+							['MosquitoFamiliar']='Infected Leech',['Left-HandedYoko']='Infected Leech',
+							['P.CrabFamiliar']='Venom Shower',['JovialEdwin']='Venom Shower',['LynxFamiliar']='Charged Whisker',
+							['VivaciousGaston']='Nihility Song',['Hip.Familiar']='Back Heel',['DaringRoland']='Nihility Song',
+							['SlimeFamiliar']='Digest',['SultryPatrice']='Digest',}
 
 	state.AutoFightMode = M(true, 'Auto Fight Mode')
 	state.AutoReadyMode = M(false, 'Auto Ready Mode')
@@ -218,6 +236,14 @@ function job_setup()
 
 	autows = 'Cloudsplitter'
 	autofood = 'Akamochi'
+
+	base_chargetimer = 30
+
+	if 	player.job_points[(res.jobs[player.main_job_id].ens):lower()].jp_spent > 100 then
+		base_chargetimer = base_chargetimer - 5
+	end
+	
+	base_chargetimer = base_chargetimer - (2 * windower.ffxi.get_player().merits.sic_recast)
 
 	update_pet_groups()
 	update_melee_groups()
@@ -292,6 +318,18 @@ function job_precast(spell, spellMap, eventArgs)
 					equip(sets.precast.JA['Bestial Loyalty'].FluffyBredo)
 				elseif state.JugMode.value == 'MosquitoFamiliar' and item_available('Heavenly Broth') then
 					equip(sets.precast.JA['Bestial Loyalty']['Left-HandedYoko'])
+				elseif state.JugMode.value == 'WeevilFamiliar' and item_available('T. Pristine Sap') then
+					equip(sets.precast.JA['Bestial Loyalty']['StalwartAngelina'])
+				elseif state.JugMode.value == 'P.CrabFamiliar' and item_available('Pungent Broth') then
+					equip(sets.precast.JA['Bestial Loyalty']['JovialEdwin'])
+				elseif state.JugMode.value == 'Y.BeetleFamiliar' and item_available('Gassy Sap') then
+					equip(sets.precast.JA['Bestial Loyalty']['EnergizedSefina'])
+				elseif state.JugMode.value == 'LynxFamiliar' and item_available('Spumante Broth') then
+					equip(sets.precast.JA['Bestial Loyalty']['VivaciousGaston'])
+				elseif state.JugMode.value == 'Hip.Familiar' and item_available('Feculent Broth') then
+					equip(sets.precast.JA['Bestial Loyalty']['DaringRoland'])
+				elseif state.JugMode.value == 'SlimeFamiliar' and item_available('Putrescent Broth') then
+					equip(sets.precast.JA['Bestial Loyalty']['SultryPatrice'])
 				else
 					equip(sets.precast.JA['Bestial Loyalty'][state.JugMode.value])
 				end
@@ -359,12 +397,43 @@ function job_post_precast(spell, spellMap, eventArgs)
 end
 
 function job_pet_midcast(spell, spellMap, eventArgs)
+
+end
+
+function job_post_pet_midcast(spell, spellMap, eventArgs)
+
+end
+
+function job_pet_aftercast(spell, action, spellMap, eventArgs)
+	windower.add_to_chat:schedule(.5,204,'~~~Current Ready Charges Available: ['..get_current_ready_count()..']~~~')
+end
+
+-- Return true if we handled the aftercast work.  Otherwise it will fall back
+-- to the general aftercast() code in Mote-Include.
+function job_midcast(spell, spellMap, eventArgs)
+
+end
+
+function job_aftercast(spell, spellMap, eventArgs)
+	if spell.type == 'Monster' then
+		equip(get_pet_midcast_set(spell, spellMap))
+		petWillAct = os.clock()
+		
+		
         if magic_ready_moves:contains(spell.english) then
-			if sets.midcast.Pet.MagicReady[state.OffenseMode.value] then
-				equip(sets.midcast.Pet.MagicReady[state.OffenseMode.value])
+			if debuff_ready_moves:contains(spell.english) and sets.midcast.Pet.DebuffReady then
+					equip(sets.midcast.Pet.DebuffReady)
 			else
-				equip(sets.midcast.Pet.MagicReady)
+				if sets.midcast.Pet.MagicReady[state.OffenseMode.value] then
+					equip(sets.midcast.Pet.MagicReady[state.OffenseMode.value])
+				else
+					equip(sets.midcast.Pet.MagicReady)
+				end
 			end
+		elseif physical_debuff_ready_moves:contains(spell.english) and sets.midcast.Pet.PhysicalDebuffReady then
+			equip(sets.midcast.Pet.PhysicalDebuffReady)
+		elseif multi_hit_ready_moves:contains(spell.english) and sets.midcast.Pet.MultiHitReady then
+			equip(sets.midcast.Pet.MultiHitReady)
         else
 			if sets.midcast.Pet[state.OffenseMode.value] then
 				equip(sets.midcast.Pet[state.OffenseMode.value])
@@ -372,35 +441,20 @@ function job_pet_midcast(spell, spellMap, eventArgs)
 				equip(sets.midcast.Pet.WS)
 			end
         end
-
         -- If Pet TP, before bonuses, is less than a certain value then equip Nukumi Manoplas +1
         if tp_based_ready_moves:contains(spell.english) then
 			if pet.tp < 1900 or (PetJob ~= 'Warrior' and pet.tp < 2400) then
 				equip(sets.midcast.Pet.TPBonus)
 			end
         end
-end
-
-function job_post_pet_midcast(spell, spellMap, eventArgs)
-	if state.Buff["Unleash"] and UnleashLock and not UnleashLocked then
-		UnleashLocked = true
-		disable('main','sub','range','ammo','head','neck','lear','rear','body','hands','lring','rring','back','waist','legs','feet')
-		add_to_chat(217, "Unleash is on, locking your current Ready set.")
-	end
-end
-
-function job_pet_aftercast(spell, action, spellMap, eventArgs)
-	send_command('@wait 1;gs c showcharge')
-end
-
--- Return true if we handled the aftercast work.  Otherwise it will fall back
--- to the general aftercast() code in Mote-Include.
-function job_aftercast(spell, spellMap, eventArgs)
-	if type(spell.type) == 'string' and spell.type == 'Monster' and state.DefenseMode.value == 'None' then
-		equip(get_pet_midcast_set(spell, spellMap))
-		petWillAct = os.clock()
+		
+		if state.Buff["Unleash"] and UnleashLock and not UnleashLocked then
+			UnleashLocked = true
+			disable('main','sub','range','ammo','head','neck','lear','rear','body','hands','lring','rring','back','waist','legs','feet')
+			add_to_chat(217, "Unleash is on, locking your current Ready set.")
+		end
 		eventArgs.handled = true
-	elseif pet_midaction() or spell.english == "Bestial Loyalty" or spell.english == 'Call Beast' then
+	elseif spell.english == "Bestial Loyalty" or spell.english == 'Call Beast' then
 		eventArgs.handled = true
 	end
 end
@@ -531,30 +585,29 @@ function update_melee_groups()
 end
 
 function job_self_command(commandArgs, eventArgs)
+	if commandArgs[1]:lower() == 'showcharge' then
+		add_to_chat(204, '~~~Current Ready Charges Available: ['..get_current_ready_count()..']~~~')
 
-		if commandArgs[1]:lower() == 'showcharge' then
-			add_to_chat(204, '~~~Current Ready Charges Available: ['..get_current_ready_count()..']~~~')
+	elseif commandArgs[1]:lower() == 'displaypetinfo' then
+		add_to_chat(8,''..state.JugMode.value..': '..pet_info[state.JugMode.value]..'')
+	elseif commandArgs[1]:lower() == 'unleashlock' then
+		if UnleashLock == true then
+			UnleashLock = false
+			add_to_chat(122, "Unleash no longer locks gear.")
+		elseif UnleashLock == false then
+			UnleashLock = true
+			add_to_chat(122, "Unleash now locks gear.")
+		end
 
-		elseif commandArgs[1]:lower() == 'displaypetinfo' then
-			add_to_chat(8,''..state.JugMode.value..': '..pet_info[state.JugMode.value]..'')
-		elseif commandArgs[1]:lower() == 'unleashlock' then
-			if UnleashLock == true then
-				UnleashLock = false
-				add_to_chat(122, "Unleash no longer locks gear.")
-			elseif UnleashLock == false then
-				UnleashLock = true
-				add_to_chat(122, "Unleash now locks gear.")
+	elseif commandArgs[1]:lower() == 'ready' and pet.isvalid then
+
+			if pet.status == "Idle" and player.target.type == "MONSTER" then
+				windower.chat.input('/pet Fight <t>')
+			else
+				handle_ready(commandArgs)
 			end
 
-		elseif commandArgs[1]:lower() == 'ready' and pet.isvalid then
-
-				if pet.status == "Idle" and player.target.type == "MONSTER" then
-					windower.chat.input('/pet Fight <t>')
-				else
-					handle_ready(commandArgs)
-				end
-
-		end
+	end
 end
 
 function job_tick()
@@ -622,8 +675,7 @@ function check_ready()
 end
 
 function get_current_ready_count()
-    local abil_recasts = windower.ffxi.get_ability_recasts()
-    local readyRecast = abil_recasts[102]
+    local readyRecast = windower.ffxi.get_ability_recasts()[102]
 
     local maxCharges = 3
 
@@ -632,7 +684,7 @@ function get_current_ready_count()
 	-- The *# is your current recharge timer.
     local fullRechargeTime = 3*ReadyChargeTimer
 
-    local currentCharges = math.floor((maxCharges - maxCharges * readyRecast / fullRechargeTime) + latency)
+    local currentCharges = math.floor(maxCharges - maxCharges * readyRecast / fullRechargeTime)
 
     return currentCharges
 end
@@ -683,32 +735,26 @@ function handle_ready(commandArgs)
 end
 
 function get_ready_charge_timer()
-	local chargetimer = 25
-
-	if 	player.job_points[(res.jobs[player.main_job_id].ens):lower()].jp_spent > 100 then
-		chargetimer = chargetimer - 5
-	end
-
+	local charge_timer = base_chargetimer
 	if state.Weapons.Value == 'None' then
-		if can_dual_wield then
-			if sets.midcast.Pet.ReadyRecastDW.sub and sets.midcast.Pet.ReadyRecastDW.sub == "Charmer's Merlin" then
-				chargetimer = chargetimer - 5
-			end
-
+		if can_dual_wield and sets.midcast.Pet.ReadyRecastDW.sub and sets.midcast.Pet.ReadyRecastDW.sub == "Charmer's Merlin" then
+				charge_timer = charge_timer - 5
 		elseif sets.midcast.Pet.ReadyRecast.main and sets.midcast.Pet.ReadyRecast.main == "Charmer's Merlin" then
-			chargetimer = chargetimer - 5
+			charge_timer = charge_timer - 5
 		end
+	elseif sets.weapons[state.Weapons.Value].main == "Charmer's Merlin" or sets.weapons[state.Weapons.Value].main == "Charmer's Merlin" then
+		charge_timer = charge_timer - 5
 	end
 	
-	if can_dual_wield then
-		if sets.midcast.Pet.ReadyRecastDW.legs and sets.midcast.Pet.ReadyRecastDW.legs == "Desultor Tassets" then
-			chargetimer = chargetimer - 5
-		end
-	else
-		if sets.midcast.Pet.ReadyRecast.legs and sets.midcast.Pet.ReadyRecast.legs == "Desultor Tassets" then
-			chargetimer = chargetimer - 5
-		end	
+	if can_dual_wield and sets.midcast.Pet.ReadyRecastDW.legs and sets.midcast.Pet.ReadyRecastDW.legs == "Desultor Tassets" then
+			charge_timer = charge_timer - 5
+	elseif sets.midcast.Pet.ReadyRecast.legs and sets.midcast.Pet.ReadyRecast.legs == "Desultor Tassets" then
+			charge_timer = charge_timer - 5
 	end
-
-	return chargetimer
+	
+	if charge_timer < 10 then
+		return 10
+	else
+		return charge_timer
+	end
 end

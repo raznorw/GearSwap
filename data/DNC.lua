@@ -63,9 +63,7 @@
         
     gs c toggle usealtstep
         Toggles whether or not to use an alternate step.
-        
-    gs c toggle selectsteptarget
-        Toggles whether or not to use <stnpc> (as opposed to <t>) when using a step.
+
 --]]
 
 
@@ -90,12 +88,11 @@ function job_setup()
     state.MainStep = M{['description']='Main Step', 'Box Step','Quickstep','Feather Step','Stutter Step'}
     state.AltStep = M{['description']='Alt Step', 'Feather Step','Quickstep','Stutter Step','Box Step'}
     state.UseAltStep = M(true, 'Use Alt Step')
+    state.CurrentStep = M{['description']='Current Step', 'Main', 'Alt'}
+
 	state.AutoPrestoMode = M(true, 'Auto Presto Mode')
-    state.SelectStepTarget = M(false, 'Select Step Target')
-    state.IgnoreTargetting = M(false, 'Ignore Targetting')
 	state.DanceStance = M{['description']='Dance Stance','None','Saber Dance','Fan Dance'}
 
-    state.CurrentStep = M{['description']='Current Step', 'Main', 'Alt'}
 
 	autows = "Rudra's Storm"
 	autofood = 'Soy Ramen'
@@ -152,13 +149,13 @@ function job_precast(spell, spellMap, eventArgs)
 			windower.chat.input:schedule(1,'/ws "'..spell.english..'" '..spell.target.raw..'')
 			tickdelay = os.clock() + 1.25
 			return
-		elseif player.sub_job == 'SAM' and player.tp > 1850 and abil_recasts[140] < latency then
+		elseif player.sub_job == 'SAM' and not state.Buff['SJ Restriction'] and player.tp > 1850 and abil_recasts[140] < latency then
 			eventArgs.cancel = true
 			windower.chat.input('/ja "Sekkanoki" <me>')
 			windower.chat.input:schedule(1,'/ws "'..spell.english..'" '..spell.target.raw..'')
 			tickdelay = os.clock() + 1.25
 			return
-		elseif player.sub_job == 'SAM' and abil_recasts[134] < latency then
+		elseif player.sub_job == 'SAM' and not state.Buff['SJ Restriction'] and abil_recasts[134] < latency then
 			eventArgs.cancel = true
 			windower.chat.input('/ja "Meditate" <me>')
 			windower.chat.input:schedule(1,'/ws "'..spell.english..'" '..spell.target.raw..'')
@@ -208,12 +205,10 @@ end
 function job_aftercast(spell, spellMap, eventArgs)
     -- Lock feet after using Mana Wall.
     if not spell.interrupted then
-	
 		if spell.type == 'WeaponSkill' and state.Buff['Climactic Flourish'] and not under3FMs() and player.tp < 999 then
 			local abil_recasts = windower.ffxi.get_ability_recasts()
 			if abil_recasts[222] < latency then
-				windower.chat.input:schedule(3,'/ja "Reverse Flourish" <me>')
-				windower.chat.input('/ja "Reverse Flourish" <me>')
+				windower.chat.input:schedule(1.5,'/ja "Reverse Flourish" <me>')
 			end
 		elseif state.UseAltStep.value and spell.english == state[state.CurrentStep.current..'Step'].current then
 			state.CurrentStep:cycle()
@@ -258,19 +253,6 @@ function job_customize_melee_set(meleeSet)
     
     return meleeSet
 end
-
--- Handle auto-targetting based on local setup.
-function job_auto_change_target(spell, action, spellMap, eventArgs)
-    if spell.type == 'Step' then
-        if state.IgnoreTargetting.value == true then
-            state.IgnoreTargetting:reset()
-            eventArgs.handled = true
-        end
-        
-        eventArgs.SelectNPCTargets = state.SelectStepTarget.value
-    end
-end
-
 
 -- Function to display the current relevant user state when doing an update.
 -- Set eventArgs.handled to true if display was handled, and you don't want the default info shown.
@@ -322,10 +304,6 @@ end
 -- Called for custom player commands.
 function job_self_command(commandArgs, eventArgs)
     if commandArgs[1] == 'step' then
-        if commandArgs[2] == 't' then
-            state.IgnoreTargetting:set()
-        end
-
         local doStep = ''
         if state.UseAltStep.value == true then
             doStep = state[state.CurrentStep.current..'Step'].current
@@ -378,7 +356,7 @@ function check_buff()
 			return true
 		end
 		
-		if player.in_combat then
+		if player.in_combat and not state.Buff['SJ Restriction'] then
 			if player.sub_job == 'WAR' and not buffactive.Berserk and abil_recasts[1] < latency then
 				windower.chat.input('/ja "Berserk" <me>')
 				tickdelay = os.clock() + 1.1

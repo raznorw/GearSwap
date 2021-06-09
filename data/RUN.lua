@@ -39,10 +39,6 @@
 --  |____|   |____/\___  (____  /____  >\___  > /_______  /\____/  |___|  /\____/|__|    \___  \____ ||__||__|    |__| |___|  |__/____  >  |__|  |__|____/\___  > /\ 
 --                     \/     \/     \/     \/          \/              \/                   \/     \/                      \/        \/                      \/  \/ 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
--- NOTE: I do not play run, so this will not be maintained for 'active' use. 
--- It is added to the repository to allow people to have a baseline to build from,
--- and make sure it is up-to-date with the library API.
-
 
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
@@ -55,7 +51,6 @@ function get_sets()
 	include('Sel-Include.lua')
 end
 
-
 -- Setup vars that are user-independent.
 function job_setup()
 
@@ -66,6 +61,7 @@ function job_setup()
     state.Buff.Hasso = buffactive.Hasso or false
     state.Buff.Seigan = buffactive.Seigan or false
 	state.Stance = M{['description']='Stance','Hasso','Seigan','None'}
+    state.Steps = M{['description']='Current Step', 'Quickstep','Box Step','Stutter Step'}
 	
 	autows = 'Resolution'
 	autofood = 'Miso Ramen'
@@ -99,7 +95,7 @@ function job_precast(spell, spellMap, eventArgs)
 		return
 	end
 
-	if spell.type == 'WeaponSkill' and state.AutoBuffMode.value ~= 'Off' then
+	if spell.type == 'WeaponSkill' and state.AutoBuffMode.value ~= 'Off' and not state.Buff['SJ Restriction'] then
 		local abil_recasts = windower.ffxi.get_ability_recasts()
 		if player.sub_job == 'SAM' and player.tp > 1850 and abil_recasts[140] < latency then
 			eventArgs.cancel = true
@@ -180,17 +176,12 @@ function job_customize_melee_set(meleeSet)
 
 end
 
-function job_customize_idle_set(idleSet)
-
-    return idleSet
-end
-
 function job_customize_defense_set(defenseSet)
     if state.ExtraDefenseMode.value ~= 'None' and state.DefenseMode.value ~= 'None' then
         defenseSet = set_combine(defenseSet, sets[state.ExtraDefenseMode.value])
     end
 
-	if buffactive['Battuta'] and sets.buff.Battuta and player.status == 'Engaged' and state.DefenseMode.value == 'Physical' and (not state.PhysicalDefenseMode.value:contains('NoParry')) and (player.target and player.target.distance < (3.2 + player.target.model_size)) then 
+	if buffactive['Battuta'] and sets.buff.Battuta and player.status == 'Engaged' and state.DefenseMode.value == 'Physical' then 
 		defenseSet = set_combine(defenseSet, sets.buff.Battuta)
 	end
 	
@@ -204,8 +195,12 @@ function job_customize_idle_set(idleSet)
 			idleSet = set_combine(idleSet, sets.latent_refresh)
 		end
 		
-		if not main_weapon_is_one_handed() and sets.latent_refresh_grip then
-			idleSet = set_combine(idleSet, sets.latent_refresh_grip)
+		if (state.Weapons.value == 'None' or state.UnlockWeapons.value) and idleSet.main then
+			local main_table = get_item_table(idleSet.main)
+
+			if  main_table and (main_table.skill == 12 or main_table.skill == 4) and sets.latent_refresh_grip then
+				idleSet = set_combine(idleSet, sets.latent_refresh_grip)
+			end
 		end
     end
 
@@ -254,6 +249,8 @@ function job_self_command(commandArgs, eventArgs)
 				windower.chat.input('/ma "Geist Wall" <t>')
 			elseif spell_recasts[575] < spell_latency then
 				windower.chat.input('/ma "Jettatura" <t>')
+			elseif spell_recasts[537] < spell_latency then
+				windower.chat.input('/ma "Stinking Gas" <t>')
 			elseif spell_recasts[592] < spell_latency then
 				windower.chat.input('/ma "Blank Gaze" <t>')
 			elseif not check_auto_tank_ws() then
@@ -285,7 +282,7 @@ function job_self_command(commandArgs, eventArgs)
 			elseif not check_auto_tank_ws() then
 				if not state.AutoTankMode.value then add_to_chat(123,'All Enmity Dark Knight abillities on cooldown.') end
 			end
-					
+
 		elseif player.sub_job == 'WAR' then
 			local abil_recasts = windower.ffxi.get_ability_recasts()
 			
@@ -313,16 +310,14 @@ function job_self_command(commandArgs, eventArgs)
         
 			if under3FMs then
 				if abil_recasts[220] < latency then
-				send_command('@input /ja "'..state.CurrentStep.value..'" <t>')
-				state.CurrentStep:cycle()
+				send_command('@input /ja "'..state.Steps.value..'" <t>')
 				return
 				end
 			elseif abil_recasts[221] < latency then
 				windower.chat.input('/ja "Animated Flourish" <t>')
 				return
 			elseif abil_recasts[220] < latency and not buffactive['Finishing Move 5'] then
-				send_command('@input /ja "'..state.CurrentStep.value..'" <t>')
-				state.CurrentStep:cycle()
+				send_command('@input /ja "'..state.Steps.value..'" <t>')
 				return
 			elseif not check_auto_tank_ws() then
 				if not state.AutoTankMode.value then add_to_chat(123,'Dancer job abilities not needed.') end
@@ -405,7 +400,7 @@ function update_melee_groups()
 end
 
 function check_hasso()
-	if not (state.Stance.value == 'None' or state.Buff.Hasso or state.Buff.Seigan) and player.sub_job == 'SAM' and player.in_combat then
+	if player.sub_job == 'SAM' and not state.Buff['SJ Restriction'] and not (state.Stance.value == 'None' or state.Buff.Hasso or state.Buff.Seigan) and player.status == 'Engaged' and not silent_check_amnesia() then
 		
 		local abil_recasts = windower.ffxi.get_ability_recasts()
 		
@@ -442,6 +437,8 @@ function check_buff()
 				windower.chat.input('/ja "Swordplay" <me>')
 				tickdelay = os.clock() + 1.1
 				return true
+			elseif state.Buff['SJ Restriction'] then
+				return false
 			elseif player.sub_job == 'DRK' and not buffactive['Last Resort'] and abil_recasts[87] < latency then
 				windower.chat.input('/ja "Last Resort" <me>')
 				tickdelay = os.clock() + 1.1
@@ -506,6 +503,14 @@ buff_spell_lists = {
 	Default = {
 		{Name='Crusade',	Buff='Enmity Boost',	SpellID=476,	Reapply=false},
 		{Name='Temper',		Buff='Multi Strikes',	SpellID=493,	Reapply=false},
+		{Name='Haste',		Buff='Haste',			SpellID=57,		Reapply=false},
+		{Name='Refresh',	Buff='Refresh',			SpellID=109,	Reapply=false},
+		{Name='Phalanx',	Buff='Phalanx',			SpellID=106,	Reapply=false},
+	},
+	
+	Tank = {
+		{Name='Crusade',	Buff='Enmity Boost',	SpellID=476,	Reapply=false},
+		{Name='Cocoon',		Buff='Defense Boost',	SpellID=547,	Reapply=false},
 		{Name='Haste',		Buff='Haste',			SpellID=57,		Reapply=false},
 		{Name='Refresh',	Buff='Refresh',			SpellID=109,	Reapply=false},
 		{Name='Phalanx',	Buff='Phalanx',			SpellID=106,	Reapply=false},

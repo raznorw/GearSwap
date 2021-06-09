@@ -61,15 +61,16 @@ end
 
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
-
 	-- Whether to use Compensator under a certain threshhold even when weapons are locked.
 	state.CompensatorMode = M{'Never','300','1000','Always'}
 	-- Whether to automatically generate bullets.
 	state.AutoAmmoMode = M(true,'Auto Ammo Mode')
+	state.UseDefaultAmmo = M(true,'Use Default Ammo')
+	state.Buff['Triple Shot'] = buffactive['Triple Shot'] or false
+
 	-- Whether to use Luzaf's Ring
 	state.LuzafRing = M(true, "Luzaf's Ring")
     -- Whether a warning has been given for low ammo
-    state.warned = M(false)
 	
 	autows = 'Leaden Salute'
 	rangedautows = 'Last Stand'
@@ -89,14 +90,25 @@ end
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
 
 function job_filtered_action(spell, eventArgs)
-
+	if spell.type == 'WeaponSkill' then
+		local available_ws = S(windower.ffxi.get_abilities().weapon_skills)
+		-- WS 112 is Double Thrust, meaning a Spear is equipped.
+		if available_ws:contains(16) then
+            if spell.english == "Savage Blade" then
+				windower.chat.input('/ws "Evisceration" '..spell.target.raw)
+                cancel_spell()
+				eventArgs.cancel = true
+            elseif spell.english == "Circle Blade" then
+                windower.chat.input('/ws "Aeolian Edge" '..spell.target.raw)
+                cancel_spell()
+				eventArgs.cancel = true
+			end
+        end
+	end
 end
 
 function job_pretarget(spell, spellMap, eventArgs)
-    if (spell.action_type == 'Ranged Attack' or spell.type == 'WeaponSkill') and player.equipment.ammo == 'Animikii Bullet' then
-		cancel_spell()
-		add_to_chat(123,'Abort: Don\'t shoot your good ammo!')
-    end
+
 end
 
 function job_precast(spell, spellMap, eventArgs)
@@ -112,14 +124,14 @@ function job_precast(spell, spellMap, eventArgs)
 		end
     end
 	
-    if spell.action_type == 'Ranged Attack' or spell.type == 'WeaponSkill' or spell.type == 'CorsairShot' then
+    if spell.action_type == 'Ranged Attack' or spell.type == 'CorsairShot' or spell.name == 'Shadowbind' or (spell.type == 'WeaponSkill' and spell.skill == 'Marksmanship') then
         do_bullet_checks(spell, spellMap, eventArgs)
     end
 end
 
 function job_post_midcast(spell, spellMap, eventArgs)
 	if spell.action_type == 'Ranged Attack' then
-		if buffactive['Triple Shot'] and sets.buff['Triple Shot'] then
+		if state.Buff['Triple Shot'] and sets.buff['Triple Shot'] then
 			if sets.buff['Triple Shot'][state.RangedMode.value] then
 				equip(sets.buff['Triple Shot'][state.RangedMode.value])
 			else
@@ -134,10 +146,22 @@ function job_post_midcast(spell, spellMap, eventArgs)
 end
 
 function job_self_command(commandArgs, eventArgs)
-		if commandArgs[1]:lower() == 'elemental' and commandArgs[2]:lower() == 'quickdraw' then
-			windower.chat.input('/ja "'..data.elements.quickdraw_of[state.ElementalMode.Value]..' Shot" <t>')
-			eventArgs.handled = true			
+	if commandArgs[1]:lower() == 'elemental' and commandArgs[2]:lower() == 'quickdraw' then
+		windower.chat.input('/ja "'..data.elements.quickdraw_of[state.ElementalMode.Value]..' Shot" <t>')
+		eventArgs.handled = true			
+	end
+end
+
+function job_midcast(spell, action, spellMap, eventArgs)
+	--Probably overkill but better safe than sorry.
+	if spell.action_type == 'Ranged Attack' then
+		if player.equipment.ammo:startswith('Hauksbok') or player.equipment.ammo == "Animikii Bullet" then
+			enable('ammo')
+			equip({ammo=empty})
+			add_to_chat(123,"Abort Ranged Attack: Don't shoot your good ammo!")
+			return
 		end
+	end
 end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
@@ -154,27 +178,21 @@ function job_aftercast(spell, spellMap, eventArgs)
 			end
 		end
         display_roll_info(spell)
-	elseif spell.type == 'CorsairShot' then
+	end
+	
+	if state.UseDefaultAmmo.value then
 		equip({ammo=gear.RAbullet})
-    end
+	end
 end
 
 -------------------------------------------------------------------------------------------------------------------
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
 
--- Return a customized weaponskill mode to use for weaponskill sets.
--- Don't return anything if you're not overriding the default value.
-function get_custom_wsmode(spell, spellMap, default_wsmode)
-    if buffactive['Transcendancy'] then
-        return 'Brew'
-    end
-end
-
 function job_buff_change(buff, gain)
 	if player.equipment.Ranged and buff:contains('Aftermath') then
 		classes.CustomRangedGroups:clear()
-		if (player.equipment.Ranged == 'Death Penalty' and buffactive['Aftermath: Lv.3']) or (player.equipment.Ranged == 'Armageddon' and (buffactive['Aftermath: Lv.1'] or buffactive['Aftermath: Lv.2'] or buffactive['Aftermath: Lv.3'])) then
+		if (player.equipment.Ranged == 'Death Penalty' and buffactive['Aftermath: Lv.3']) then
 			classes.CustomRangedGroups:append('AM')
 		end
 	end
@@ -223,16 +241,18 @@ function job_post_precast(spell, spellMap, eventArgs)
 			end
 		end
 	elseif spell.type == 'CorsairShot' and not (spell.english == 'Light Shot' or spell.english == 'Dark Shot') then
-		if state.WeaponskillMode.value == "Proc" and sets.precast.CorsairShot.Proc then
+		if (state.WeaponskillMode.value == "Proc" or state.CastingMode.value == "Proc") and sets.precast.CorsairShot.Proc then
 			equip(sets.precast.CorsairShot.Proc)
 		elseif state.CastingMode.value == 'Fodder' and sets.precast.CorsairShot.Damage then
 			equip(sets.precast.CorsairShot.Damage)
 		end
-	elseif spell.action_type == 'Ranged Attack' and sets.precast.RA and buffactive.Flurry then
-		if sets.precast.RA.Flurry and lastflurry == 1 then
-			equip(sets.precast.RA.Flurry)
-		elseif sets.precast.RA.Flurry2 and lastflurry == 2 then
-			equip(sets.precast.RA.Flurry2)
+	elseif spell.action_type == 'Ranged Attack' then
+		if buffactive.Flurry then
+			if sets.precast.RA.Flurry and lastflurry == 1 then
+				equip(sets.precast.RA.Flurry)
+			elseif sets.precast.RA.Flurry2 and lastflurry == 2 then
+				equip(sets.precast.RA.Flurry2)
+			end
 		end
 	elseif spell.type == 'CorsairRoll' or spell.english == "Double-Up" then
 		if state.LuzafRing.value and item_available("Luzaf's Ring") then
@@ -306,6 +326,25 @@ end
 
 -- Determine whether we have sufficient ammo for the action being attempted.
 function do_bullet_checks(spell, spellMap, eventArgs)
+
+    if (player.equipment.ammo == 'Animikii Bullet' or player.equipment.ammo == 'Hauksbok Bullet') then
+		cancel_spell()
+		eventArgs.cancel = true
+		enable('ammo')
+
+		if sets.weapons[state.Weapons.value].ammo and item_available(sets.weapons[state.Weapons.value].ammo) then
+			equip({ammo=sets.weapons[state.Weapons.value].ammo})
+			disable('ammo')
+		elseif item_available(gear.RAbullet) then
+			equip({ammo=gear.RAbullet})
+		else
+			equip({ammo=empty})
+		end
+
+		add_to_chat(123,"Abort: Don't shoot your good ammo!")
+		return
+    end
+
     local bullet_name
     local bullet_min_count = 1
     
@@ -326,7 +365,7 @@ function do_bullet_checks(spell, spellMap, eventArgs)
         bullet_name = gear.QDbullet
     elseif spell.action_type == 'Ranged Attack' then
         bullet_name = gear.RAbullet
-        if buffactive['Triple Shot'] then
+        if state.Buff['Triple Shot'] then
             bullet_min_count = 3
         end
     end

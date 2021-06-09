@@ -95,7 +95,7 @@ function job_precast(spell, spellMap, eventArgs)
 		elseif state.AutoBoost.value and abil_recasts[16] < latency then
 			eventArgs.cancel = true
 			windower.chat.input('/ja "Boost" <me>')
-			windower.chat.input:schedule(1,'/ws "'..spell.english..'" '..spell.target.raw..'')
+			windower.chat.input:schedule(2.5,'/ws "'..spell.english..'" '..spell.target.raw..'')
 			tickdelay = os.clock() + 1.25
 			return
 		end
@@ -121,10 +121,16 @@ function job_post_precast(spell, spellMap, eventArgs)
 		end
 		
         if state.Buff['Impetus'] and (spell.english == "Ascetic's Fury" or spell.english == "Victory Smite") then
-			equip(sets.buff.Impetus)
+			if sets.buff.ImpetusWS then
+				equip(sets.buff.ImpetusWS)
+			else
+				equip(sets.buff.Impetus)
+			end
 		elseif buffactive.Footwork and (spell.english == "Dragon Kick" or spell.english	 == "Tornado Kick") then
 			equip(sets.FootworkWS)
 		end
+	elseif spell.english == 'Boost' and not (player.in_combat or being_attacked or player.status == 'Engaged') and sets.precast.JA['Boost'].OutOfCombat then
+		equip(sets.precast.JA['Boost'].OutOfCombat)
 	end
 end
 
@@ -149,13 +155,19 @@ end
 
 -- Modify the default melee set after it was constructed.
 function job_customize_melee_set(meleeSet)
-    if state.Buff['Impetus'] and state.DefenseMode.value == 'None' and state.OffenseMode.value ~= 'FullAcc' then
-		meleeSet = set_combine(meleeSet, sets.buff.Impetus)
-    end
 	
-    if buffactive.Footwork and state.DefenseMode.value == 'None' and state.OffenseMode.value ~= 'FullAcc' then
-		meleeSet = set_combine(meleeSet, sets.buff.Footwork)
-    end
+	if state.OffenseMode.value ~= 'FullAcc' then
+		if state.Buff['Impetus'] then
+			meleeSet = set_combine(meleeSet, sets.buff.Impetus)
+		end
+		if buffactive.Footwork then
+			meleeSet = set_combine(meleeSet, sets.buff.Footwork)
+		end
+	end
+	
+	if state.Buff['Boost'] then
+		meleeSet = set_combine(meleeSet, sets.buff.Boost)
+	end
 	
     return meleeSet
 end
@@ -277,7 +289,7 @@ function check_buff()
 			windower.chat.input('/ja "Focus" <me>')
 			tickdelay = os.clock() + 1.1
 			return true
-		elseif player.sub_job == 'WAR' then
+		elseif player.sub_job == 'WAR' and not state.Buff['SJ Restriction'] then
 			if not buffactive.Berserk and abil_recasts[1] < latency then
 				windower.chat.input('/ja "Berserk" <me>')
 				tickdelay = os.clock() + 1.1

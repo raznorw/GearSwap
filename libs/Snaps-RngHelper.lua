@@ -206,7 +206,7 @@ local function save_profile(name)
 end
 
 local function able_to_use_action()
-    if pending.action_type == 'Ability' then
+    if pending.action_type == 'Ability' and not pending.english == 'Quick Draw' then
         return windower.ffxi.get_ability_recasts()[res.job_abilities[pending.id].recast_id] < latency
     elseif pending.action_type == 'Magic' then
         return windower.ffxi.get_spell_recasts()[res.spells[pending.id].recast_id] < spell_latency
@@ -279,6 +279,13 @@ function process_queue()
 				pending = {
 					['prefix'] = '/weaponskill',
 					['english'] = data.weaponskills.mythic[player.equipment.range],
+					['target'] = target,
+					['action_type'] = 'Ability',
+				}
+			elseif state.RngHelperQuickDraw.value and windower.ffxi.get_ability_recasts()[195] == 0 then
+				pending = {
+					['prefix'] = '/ja',
+					['english'] = ''..data.elements.quickdraw_of[state.ElementalMode.Value]..' Shot',
 					['target'] = target,
 					['action_type'] = 'Ability',
 				}

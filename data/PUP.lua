@@ -132,6 +132,9 @@ end
 
 -- Called when pet is about to perform an action
 function job_pet_midcast(spell, spellMap, eventArgs)
+	if spell.action_type == 'Magic' then --Limiting getting midcast to magic.
+		equip(get_pet_midcast_set(spell, spellMap))
+	end
 --[[ Not working due to delay, preserving in case it does in the future.
     if petWeaponskills:contains(spell.english) then
         classes.CustomClass = "Weaponskill"
@@ -221,9 +224,9 @@ function job_get_spell_map(spell, default_spell_map)
 end
 
 function job_customize_idle_set(idleSet)
-	if pet.isvalid and pet.status == 'Engaged' and sets.midcast.Pet then
+	if pet.isvalid and pet.status == 'Engaged' then
 		local now = os.clock()
-		if state.PetWSGear.value and pet.tp and pet.tp > 999 then
+		if state.PetWSGear.value and sets.midcast.Pet and pet.tp and pet.tp > 999 then
 			if sets.midcast.Pet.PetWSGear and sets.midcast.Pet.PetWSGear[state.PetMode.value] then
 				idleSet = set_combine(idleSet, sets.midcast.Pet.PetWSGear[state.PetMode.value])
 			elseif sets.midcast.Pet.PetWSGear then
@@ -235,6 +238,10 @@ function job_customize_idle_set(idleSet)
 			idleSet = set_combine(idleSet, sets.idle.Pet.Engaged[state.PetMode.value])
 		else
 			idleSet = set_combine(idleSet, sets.idle.Pet.Engaged)
+		end
+
+		if buffactive['Overdrive'] and sets.buff.Overdrive then
+			idleSet = set_combine(idleSet, sets.buff.Overdrive)
 		end
 	elseif  data.jobs.mage_jobs:contains(player.sub_job) then
 		if player.mpp < 51 and (state.IdleMode.value == 'Normal' or state.IdleMode.value:contains('Sphere')) then
@@ -466,7 +473,7 @@ function check_maneuver()
 end
 
 function job_aftercast(spell, spellMap, eventArgs)
-	if pet_midaction() or spell.english == 'Activate' or spell.english == 'Deus Ex Automata' then
+	if not spell.interrupted and (spell.english == 'Activate' or spell.english == 'Deus Ex Automata') then
 		eventArgs.handled = true
 	end
 end

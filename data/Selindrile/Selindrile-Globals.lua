@@ -25,6 +25,7 @@ state.DisplayMode = M(true, 'Display Mode') --Set this to false if you don't wan
 --Options for automation.
 state.ReEquip 		  		= M(true, 'ReEquip Mode')		 --Set this to false if you don't want to equip your current Weapon set when you aren't wearing any weapons.
 state.AutoArts 		  		= M(true, 'AutoArts') 		 --Set this to false if you don't want to automatically try to keep up Solace/Arts.
+state.AutoLockstyle	 	    = M(true, 'AutoLockstyle Mode') --Set this to false if you don't want gearswap to automatically lockstyle on load and weapon change.
 state.CancelStoneskin 		= M(true, 'Cancel Stone Skin') --Set this to false if you don't want to automatically cancel stoneskin when you're slept.
 state.SkipProcWeapons 		= M(true, 'Skip Proc Weapons') --Set this to false if you want to display weapon sets fulltime rather than just Aby/Voidwatch.
 state.NotifyBuffs	  		= M(false, 'Notify Buffs') 	 --Set this to true if you want to notify your party when you recieve a specific buff/debuff. (List Below)
@@ -52,7 +53,7 @@ send_command('bind @scrolllock gs c cycle Passive') --Changes offense settings s
 send_command('bind f9 gs c cycle OffenseMode') --Changes offense settings such as accuracy.
 send_command('bind ^f9 gs c cycle HybridMode') --Changes defense settings for melee such as PDT.
 send_command('bind @f9 gs c cycle RangedMode') --Changes ranged offense settings such as accuracy.
-send_command('bind !f9 gs c cycle WeaponskillMode') --Allows automatic weaponskilling if the job is setup to handle it.
+send_command('bind !f9 gs c cycle WeaponskillMode') --Changes weaponskill offense settings such as accuracy.
 send_command('bind f10 gs c set DefenseMode Physical') --Turns your physical defense set on.
 send_command('bind ^f10 gs c cycle PhysicalDefenseMode') --Changes your physical defense set.
 send_command('bind !f10 gs c toggle Kiting') --Keeps your kiting gear on..

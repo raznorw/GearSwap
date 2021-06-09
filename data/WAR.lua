@@ -54,7 +54,7 @@ function job_setup()
 
 	state.Buff['Brazen Rush'] = buffactive['Brazen Rush'] or false
 	state.Buff["Warrior's Charge"] = buffactive["Warrior's Charge"] or false
-	state.Buff.Mighty = buffactive['Mighty Strikes']  or false
+	state.Buff['Mighty Strikes'] = buffactive['Mighty Strikes']  or false
 	state.Buff.Retaliation = buffactive['Retaliation'] or false
 	state.Buff.Restraint = buffactive['Restraint'] or false
     state.Buff['Aftermath'] = buffactive['Aftermath'] or false
@@ -101,6 +101,8 @@ function job_precast(spell, spellMap, eventArgs)
 			windower.chat.input('/ja "Warcry" <me>')
 			windower.chat.input:schedule(1,'/ws "'..spell.english..'" '..spell.target.raw..'')
 			tickdelay = os.clock() + 1.25
+			return
+		elseif state.Buff['SJ Restriction'] then
 			return
 		elseif player.sub_job == 'SAM' and player.tp > 1850 and abil_recasts[140] < latency then
 			eventArgs.cancel = true
@@ -175,19 +177,19 @@ function job_post_precast(spell, spellMap, eventArgs)
 		end
 		
 		if wsacc:contains('Acc') and not buffactive['Sneak Attack'] then
-			if state.Buff.Charge and state.Buff.Mighty and sets.ACCWSMightyCharge then
+			if state.Buff.Charge and state.Buff['Mighty Strikes'] and sets.ACCWSMightyCharge then
 				equip(sets.ACCWSMightyCharge)
 			elseif state.Buff.Charge and sets.ACCWSCharge then
 				equip(sets.ACCWSCharge)
-			elseif state.Buff.Mighty and sets.ACCWSMighty then
+			elseif state.Buff['Mighty Strikes'] and sets.ACCWSMighty then
 				equip(sets.AccWSMighty)
 			end
 		else
-			if state.Buff.Charge and state.Buff.Mighty and sets.WSMightyCharge then
+			if state.Buff.Charge and state.Buff['Mighty Strikes'] and sets.WSMightyCharge then
 				equip(sets.WSMightyCharge)
 			elseif state.Buff.Charge and sets.WSCharge then
 				equip(sets.WSCharge)
-			elseif state.Buff.Mighty and sets.WSMighty then
+			elseif state.Buff['Mighty Strikes'] and sets.WSMighty then
 				equip(sets.WSMighty)
 			end
 		end
@@ -242,7 +244,7 @@ function update_melee_groups()
 			classes.CustomMeleeGroups:append('Charge')
 		end
 		
-		if state.Buff.Mighty then
+		if state.Buff['Mighty Strikes'] then
 			classes.CustomMeleeGroups:append('Mighty')
 		end
 		
@@ -253,7 +255,7 @@ function update_melee_groups()
 end
 
 function check_hasso()
-	if not (state.Stance.value == 'None' or state.Buff.Hasso or state.Buff.Seigan) and player.sub_job == 'SAM' and player.in_combat then
+	if player.sub_job == 'SAM' and not state.Buff['SJ Restriction'] and not (state.Stance.value == 'None' or state.Buff.Hasso or state.Buff.Seigan) and player.status == 'Engaged' and not silent_check_amnesia() then
 		
 		local abil_recasts = windower.ffxi.get_ability_recasts()
 		
