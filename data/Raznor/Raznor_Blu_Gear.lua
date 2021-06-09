@@ -8,7 +8,8 @@ function user_setup()
 	state.PhysicalDefenseMode:options('PDT')
 	state.MagicalDefenseMode:options('MDT')
 	state.ResistDefenseMode:options('MEVA')
-	state.Weapons:options('Savage', 'SavageAcc', 'MagicWeapons', 'Tizalmace','Sequence','None','Almace','MeleeClubs')
+	state.Weapons:options('Savage', 'SavageAcc', 'MagicWeapons','MeleeClubs','None')
+-- state.Weapons:options('Savage', 'SavageAcc', 'MagicWeapons', 'Tizalmace','Sequence','None','Almace','MeleeClubs')
 
     state.ExtraMeleeMode = M{['description']='Extra Melee Mode','None','MP','SuppaBrutal','DWEarrings','DWMax'}
 
@@ -182,6 +183,8 @@ function init_gear_sets()
 	  legs=gear.herculean_wsd_legs,
 	  feet=gear.herculean_wsd_feet
 	})
+	
+	sets.precast.WS['Black Halo'] = sets.precast.WS['Savage Blade']
 	
 	sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS.Acc, {
 	  -- legs="Carmine Cuisses +1"
@@ -554,10 +557,10 @@ function init_gear_sets()
 	sets.weapons.Savage = {main="Naegling",sub="Machaera +2"}
 	sets.weapons.SavageAcc = {main="Naegling",sub="Kaja Rod"}
 	sets.weapons.Tizalmace = {main="Tizona",sub="Almace"}
-	sets.weapons.MeleeClubs = {main="Nehushtan",sub="Nehushtan"}
+	sets.weapons.MeleeClubs = {main="Kaja Rod",sub="Machaera +2"}
 	sets.weapons.Almace = {main="Almace",sub="Sequence"}
 	sets.weapons.Sequence = {main="Sequence",sub="Almace"}
-	sets.weapons.MagicWeapons = {main="Naegling",sub="Kaja Rod"}
+	sets.weapons.MagicWeapons = {main="Kaja Rod",sub="Naegling"}
 	
 	-- Engaged sets
 

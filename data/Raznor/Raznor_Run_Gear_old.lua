@@ -1,23 +1,9 @@
--- Casting Mode Cycle - Win-F11
--- Idle Mode Cycle    - Win-F12
-
--- TODO:
---   Add macros for mode swapping which updates ALL relevant modes 
---   e.g.  SuperTank - sets IdleMode, CastingMode, OffenseMode, etc
--- IdleMode(s) with Tank in the name are only used in combat/being attacked, other the mode is ignored and the <Base> set is used
--- CastingMode(s) with DT or SIRD in the name are only used in combat/being attacked <Base> set is used
---    This check happens AFTER the spell specific check
-
--- Futhark Trousers - still +1?
-
 -- NOTE: Hybrid Mode appears to be used in get_melee_set but NOT in weaponskill sets
 --    Might want to define a Tank weaponskill mode
 --    Or define a "get_custom_wsmode" function in run gear lua
 --  Alternatively, Add 'Hybrid' and 'Tank' to Offense Modes instead
 --    and then just use appropriate Idle Mode to correspond
 
-
--- NOTE: Idle Set is completely separate from OffenseMode
 
 -- From Sel-Include (set layering) (get_melee_set)
 --   sets.engaged
@@ -65,7 +51,7 @@
 -- 
 
 -- Gear Options:
---    Turms Harness +1 - 52 acc, 12 STP, 128 MEva as an alternative to engaged.t corazza, but DT deficient
+--    Turms Harness +1 - 52 acc, 12 STP, 128 MEva as an alternative to ayanmo corazza, but DT deficient
 
 -- TODO: Midcast - want 3k hpaw
 
@@ -79,35 +65,15 @@
 --   futhark torque +2: 60
 
 function user_setup()
-    -- Offense Modes
-    --   Remove SomeAcc, Acc, FullAcc
-	--   Add    Hybrid, Tank   -- do we want HyridAcc also?  pre/post AM3?
-    -- Hybrid 
-	--   Removed hybrid modes.  Unnecessarily complex layering
-    -- CastingMode
-	--   Add IdleTank - for idle Tank casting
-	-- WeaponskillMode
-	--   Match only - but that might break?  do we need Normal?
-	-- IdleMode
-	--   Renamed Tank to SuperTank
-	-- >> related to sets.engaged.<OffenseMode>
-	state.OffenseMode:options('Normal','HighAcc','Hybrid','Tank','EvasionTank')
-	  -- States:  idle, engaged, precast (and ws), midcast, JA
-	state.HybridMode:options('Normal')
-	state.WeaponskillMode:options('Match')
-	-- >> sets.precast.FC.[SpellName.]CastingMode
-	-- >> sets.midcast.[SpellName.]CastingMode
-	-- >> CastingModes with DT and SIRD have special checks 
-	state.CastingMode:options('Normal','SIRD','IdleTank', 'TankDT')
-	   -- IdleTank - for idle tanking, will always override base precast
-	   -- TankDT - for engaged tanking,  override only in combat
-	   -- For midcast, both work the same.  Can probably ignore precast
-	   --    variants unless HP drops too much
+
+	state.OffenseMode:options('Normal','SomeAcc','Acc','HighAcc','FullAcc')
+	state.HybridMode:options('Normal','DTLite','Tank','TankDef')
+	state.WeaponskillMode:options('Match','Normal','SomeAcc','Acc','HighAcc','FullAcc')
+	state.CastingMode:options('Normal','SIRD','Resistant')
 	state.PhysicalDefenseMode:options('PDT', 'PDT_HP')
 	state.MagicalDefenseMode:options('MDT','MDT_HP','BDT','BDT_HP')
 	state.ResistDefenseMode:options('MEVA','MEVA_HP','Death','Charm','DTCharm')
-	-- sets.idle.[IdleMode] -- will ignore <Tank> idle when not in combat
-	state.IdleMode:options('Normal','SuperTank','SuperEvasionTank','KiteTank','Sphere')
+	state.IdleMode:options('Normal','Tank','KiteTank','Sphere')
 	state.Weapons:options('Epeolatry', 'Aettir','Lionheart','DualWeapons','DualNaegling', 'EpeoHP')
 	
 	state.ExtraDefenseMode = M{['description']='Extra Defense Mode','None','MP'}
@@ -147,9 +113,6 @@ end
 
 function init_gear_sets()
 
-    -- todo: engaged Enmity and IdleTank Enmity sets
-	--   only different might be the turms mittens
-
     sets.Enmity = {  -- currently 2885 HP
 	  -- Epeolotry:               -- 23 Enmity
 	  ammo="Sapience Orb",        --  2 Enmity -- "staunch tathlum +1",
@@ -157,8 +120,8 @@ function init_gear_sets()
 	  neck="Futhark Torque +2",   -- 10 enmity, 60 hp -- "Unmoving Collar +1",
 	  ear2="Friomisi Earring",    --  2 enmity, 0 hp
 	  -- ear2="Trux Earring",    -- has 5, cryptic earring has 4
-	  body=gear.nyame_body,      -- "Emet Harness +1",  -- has 10 enmity
-	  hands="Turms Mittens +1",  -- hands="Kurys Gloves", -- TODO: upgrade futhark mitons
+	  -- body="Emet Harness +1",  -- has 10 enmity
+	  -- hands="Kurys Gloves", -- TODO: upgrade futhark mitons
 	  ring1="Petrov Ring",        --  4 enmity
 	  -- ring2="Vengeful Ring",   -- eihwaz ring - 70 hp, 5 enmity
 	  back=gear.enmity_pdt_back,  -- 10 enmity
@@ -187,7 +150,6 @@ function init_gear_sets()
 	  feet="Erilaz Greaves +1"
 	})
 
-	
 	--------------------------------------
 	-- Precast sets
 	--------------------------------------
@@ -303,11 +265,9 @@ function init_gear_sets()
 	  ring2="Kishar Ring",           --  4 - gives 4 FC, no HP, can we change for Moonlight ring for HP?
       -- back="Moonbeam Cape",       -- todo: fast cast cape -- I guess, sux
 	  waist={"Flume Belt +1", priority=1},
-	  legs="Ayanmo cosciales +2",    --  6 for +2
+	  legs="Ayanmo cosciales +2", -- 3 base, 6 for +2 -- "Rawhide Trousers", - 5 FC -- todo: +2 - from +3 to +6 FC
 	  feet="Chelona Boots", -- "Carmine Greaves +1" - carmine give 8 FC, 95 HP - chelona give 4 FC
 	}  -- 
-	
-	-- sets.precast.FC			
 			
 	sets.precast.FC.DT = {ammo="staunch tathlum +1",
         head="Rune. Bandeau +1",neck="Loricate Torque",ear1="Odnowa Earring +1",ear2="Odnowa Earring",
@@ -318,7 +278,6 @@ function init_gear_sets()
     sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {neck='Magoraga beads', back="Mujin Mantle"})
 	sets.precast.FC.Cure = set_combine(sets.precast.FC, {})
 
-    -- HighAcc / Hybrid / Tank
 	-- Weaponskill sets -- sub="Utu Grip",
 	sets.precast.WS = {	  -- setup for dimidation 
 	  ammo="Knobkierrie",
@@ -340,35 +299,37 @@ function init_gear_sets()
 	-- TODO: Verify this works with all Acc substances - not sure if we need them also
     sets.precast.WS.Tank =  {
       ammo="staunch tathlum +1",   --  3/3
-      head=gear.nyame_head,        --   7/7
+      head="Fu. Bandeau +3",       --  6/0     -- "Meghanada Visor +2",
 	  neck="futhark torque +2",    --  7/7
 	  ear1="Odnowa Earring +1",    --  0/2 -- todo: upgrade for 3 dt, 30 def
 	  ear2="Odnowa Earring",       --  0/1 -- todo: tuisto earring for 50 more HP, 7 more vit
-	  body=gear.nyame_body,        --  9/9
+	  body="Runeist's Coat +3",    --    <higher meva/hp>
+               -- body="Futhark Coat +3",   --  7/7
 	  hands="Turms Mittens +1",    --       4 haste, parry heal -- gear.herculean_dt_hands,
 	  ring1="Moonbeam Ring",       --  4/4   -- moonlight for 5/5
 	  ring2="Defending Ring",      -- 10/10
       back=gear.enmity_pdt_back,   -- 10/0  -- (5 parry) "Shadow Mantle",
 	  waist="Flume Belt +1",       --  4/0
-	  legs=gear.nyame_legs,        --  8/8 -- Meg. Chausses +2 -- 6 PDT, -2 inq, less meva/hp/etc
-	                                       -- +9 acc, 5 att, 5 TA, str, agi...
-	  feet="Turms Leggings +1",       --   <higher meva/inquartata 4>	  
+	  legs="Eri. Leg Guards +1",   --  7/0 -- Meg. Chausses +2 -- 6 PDT, -2 inq, less meva/hp/etc
+	                                       -- +49 acc, 45 att, 5 TA, str, agi...
+	  feet="Turms Leggings +1",       --   <higher meva/inquartata 4>
+	  -- feet="Erilaz Greaves +1"     --  5/0	   -- 107 meva, 25 res. all ele. 26 dex, 0 acc, haste 4	  
 	}
 	
-	
+	sets.precast.WS.SomeAcc = set_combine(sets.precast.WS, {
+	        -- ammo="Seeth. Bomblet +1",
+            -- head="Adhemar Bonnet +1",									
+            body="Ayanmo Corazza +2",            
+		})
+	sets.precast.WS.Acc = set_combine(sets.precast.WS.SomeAcc, {
+            -- head="Dampening Tam",
+        })
 	sets.precast.WS.HighAcc = set_combine(sets.precast.WS.Acc, {
             head="Meghanada Visor +2",
 			ear1="Telos Earring",
             hands="Meg. Gloves +2",
-			body="Ayanmo Corazza +2",          
             -- feet=gear.herculean_acc_feet
 		})
-	
-    -- \todo EvasionTank WS Set	
-	sets.precast.WS.EvasionTank = set_combine(sets.precast.WS.Tank, {})	
-	-- \todo Hybrid WS Set
-	sets.precast.WS.Hybrid = set_combine(sets.precast.WS.Tank, {})	
-		
 	sets.precast.WS.FullAcc = set_combine(sets.precast.WS.HighAcc, {
 	        -- ammo="Seeth. Bomblet +1",
             -- head="Carmine Mask +1",
@@ -388,13 +349,12 @@ function init_gear_sets()
 	  ring2="Niqmaddu Ring",
 	   legs="Meg. Chausses +2",
 	})
+    sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS.Acc,{})
     sets.precast.WS['Resolution'].HighAcc = set_combine(sets.precast.WS.HighAcc,{})
-	sets.precast.WS['Resolution'].Tank = sets.precast.WS.Tank
-	sets.precast.WS['Resolution'].EvasionTank = sets.precast.WS.EvasionTank
-	sets.precast.WS['Resolution'].Hybrid = sets.precast.WS.Hybrid
+	sets.precast.WS['Resolution'].FullAcc = set_combine(sets.precast.WS.FullAcc,{})
 	
 	sets.precast.WS['Decimation'] = set_combine(sets.precast.WS['Resolution'], {
-	 
+	  
 	})
 
     sets.precast.WS['Dimidiation'] = set_combine(sets.precast.WS,{ 	  
@@ -415,11 +375,6 @@ function init_gear_sets()
 	  back=gear.dimi_jse_back})
 	sets.precast.WS['Dimidiation'].FullAcc = set_combine(sets.precast.WS.FullAcc,{
 	  back=gear.dimi_jse_back})
-	sets.precast.WS['Dimidiation'].Tank = sets.precast.WS.Tank
-	sets.precast.WS['Dimidiation'].EvasionTank = sets.precast.WS.EvasionTank
-	sets.precast.WS['Dimidiation'].Hybrid = sets.precast.WS.Hybrid
-
-
 	
 	-- TODO - Tank Dimidiation Set -- andthen double check to make sure it's being used properly with Hybrid mode, not just Defense Mode
 	-- sets.precast.WS['Dimidiation'].Tank
@@ -428,21 +383,7 @@ function init_gear_sets()
     sets.precast.WS['Ground Strike'].Acc = set_combine(sets.precast.WS.Acc,{})
 	sets.precast.WS['Ground Strike'].HighAcc = set_combine(sets.precast.WS.HighAcc,{})
 	sets.precast.WS['Ground Strike'].FullAcc = set_combine(sets.precast.WS.FullAcc,{})
-    sets.precast.WS['Ground Strike'].Tank = sets.precast.WS.Tank
-	sets.precast.WS['Ground Strike'].EvasionTank = sets.precast.WS.EvasionTank
-	sets.precast.WS['Ground Strike'].Hybrid = sets.precast.WS.Hybrid
-	
-	-- \todo High Macc Set for Shockwave -- str/mnd mods, no FTP Transfer, 1.0 ftp
-	sets.precast.WS['Shockwave'] = set_combine(sets.precast.WS.EvasionTank, {
-	  head="Aya. Zucchetto +2",  --  3 DT  	  
-      body="Ayanmo Corazza +2",  --  6 DT
-	  hands=gear.nyame_hands,   
-	  legs="Ayanmo cosciales +2", 
-	  feet=gear.nyame_feet  -- ayanmo has more, but one less thing to carry
-	})
-	-- \todo Ayanmo has more macc
-	sets.precast.WS['Shockwave'].EvasionTank = sets.precast.WS.EvasionTank
-	
+		
     sets.precast.WS['Herculean Slash'] = set_combine(sets.precast['Lunge'], {})
 	sets.precast.WS['Sanguine Blade'] = set_combine(sets.precast['Lunge'], {})
 
@@ -480,8 +421,7 @@ function init_gear_sets()
 	  legs="Taeon Tights",
 	  feet=gear.herculean_phalanx_feet
 	})
-	})
-    sets.midcast['Regen'] = set_combine(sets.midcast['Enhancing Magic'],{head="Rune. Bandeau +2"}) 
+    sets.midcast['Regen'] = set_combine(sets.midcast['Enhancing Magic'],{head="Rune. Bandeau +1"}) 
 	sets.midcast['Refresh'] = set_combine(sets.midcast['Enhancing Magic'],{head="Erilaz Galea +1"}) 
     sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {ear2="Earthcry Earring",waist="Siegel Sash"})
 	sets.midcast.Flash = set_combine(sets.Enmity, {})
@@ -508,7 +448,6 @@ function init_gear_sets()
 	--------------------------------------
 	-- Idle/resting/defense/etc sets
 	--------------------------------------
-    -- 'Normal','SuperTank','SuperEvasionTank','KiteTank','Sphere
 
 	sets.resting = {}
 
@@ -530,56 +469,43 @@ function init_gear_sets()
 		
     sets.idle.Sphere = set_combine(sets.idle,{body="Mekosu. Harness"})
 			
-	-- Notengaged.e: Switch to EpeoHP weapon set
-	-- Note: Switch to EpeoHP weapon set
-	sets.idle.SuperTank = set_combine(sets.idle, {
-	  -- grip - Refined Grip +1 aug'd with Def +20, parry skill +10
-	  ammo="staunch tathlum +1",	  
-      head=gear.nyame_head,
-	  neck="Futhark Torque +2",    -- loricate torque +1, aug'd with 45 def
-	  -- ear1="Genmei Earring",  -- \todo 
-	  -- ear2="Tuisto Earring",  -- \todo  Get Tuisto Earring
-      body=gear.nyame_body,
-	  hands=gear.nyame_hands,
-	  ring1="Defending Ring",  -- \todo Gelatinous Ring +1 aug'd wit vit +15, hp +100
-	  ring2="Moonbeam Ring", -- \todo:  Moonlight Ring
-      back="Moonbeam Cape",  -- \todo: Ogma's With Def/Vit or hp +60, meva, enmity +, 
-	  waist="Flume Belt +1", -- \todo: Option:  engraved belt
-	  legs=gear.nyame_legs,
-	  feet=gear.nyame_feet
+	sets.idle.Tank = set_combine(sets.idle, {
+	  ammo="staunch tathlum +1",
+      head="Fu. Bandeau +3",
+	  neck="Futhark Torque +2",
+	  -- ear1="Genmei Earring",ear2="Ethereal Earring",
+      body="Runeist's Coat +3",
+	  hands="Turms Mittens +1",
+	  ring1="Defending Ring",
+	  ring2="Moonbeam Ring",
+      back="Moonbeam Cape",
+	  waist="Flume Belt +1",
+	  legs="Eri. Leg Guards +1",
+	  feet="Turm Leggings +1"
 	})
 	
-	sets.idle.SuperEvasionTank = set_combine(sets.idle, {
-	  -- main="Soulcleaver",  -- evasion greatsword
-	  -- sub="Kupayopi",     -- evasion grip
-	  ammo="Yamarang",	  
-      head=gear.nyame_head,
-	  neck="Futhark Torque +2",    -- \todo Bathy Choker +1 - augmented
-	  -- ear1="Eabani Earring",
-	  -- ear2="Infused Earring",
-      body=gear.nyame_body,
-	  hands=gear.nyame_hands,
-	  ring1="Vengeful Ring",
-	  ring2="Ilabrat Ring",  -- \todo not regal?  I guess regal has less HP
-      back="Moonbeam Cape",  -- \todo: Ogma's 20 agil, 45 eva, 20 meva, 10 enmity
-	  waist="Kasiri Belt",
-	  legs=gear.nyame_legs,
-	  feet=gear.nyame_feet
+	-- Note: Switch to EpeoHP weapon set
+	sets.idle.TankDef = set_combine(sets.idle, {
+	  ammo="staunch tathlum +1",	  
+      head="Fu. Bandeau +3",
+	  neck="Futhark Torque +2",
+	  -- ear1="Genmei Earring",
+	  -- ear2="Tuisto Earring",
+      body="Futhark Coat +3",
+	  hands="Turms Mittens +1",
+	  ring1="Defending Ring",
+	  ring2="Moonbeam Ring", -- \todo:  Moonlight Ring
+      back="Moonbeam Cape",  -- \todo: Ogma's With Def/Vit
+	  waist="Flume Belt +1", -- \todo: engraved belt
+	  legs="Eri. Leg Guards +1",
+	  feet="Turm Leggings +1"
 	})
 		
-    -- Basically SuperTank with Movement Speed
-	sets.idle.KiteTank = set_combine(sets.idle.SuperTank, {
-        head="Fu. Bandeau +3",		
-        body="Futhark Coat +3",
-		hands="Nyame Gauntlets",  -- gear.herculean_dt_hands,
-		ring1="Defending Ring",   -- Or Schneddick
-		ring2="Moonbeam Ring",
-        back="Moonlight Cape",waist="Flume Belt +1",
-		legs="Carmine Cuisses +1",
-		feet="Hippo. Socks +1"
-    })
+	sets.idle.KiteTank = {ammo="staunch tathlum +1",
+        head="Fu. Bandeau +3",neck="Vim Torque +1",ear1="Genmei Earring",ear2="Ethereal Earring",
+        body="Futhark Coat +3",hands=gear.herculean_dt_hands,ring1="Defending Ring",ring2="Moonbeam Ring",
+        back="Moonlight Cape",waist="Flume Belt +1",legs="Carmine Cuisses +1",feet="Hippo. Socks +1"}
 
-    -- automatic set used when dead
 	sets.idle.Weak = {ammo='Homiliary',
 		head="Rawhide Mask",neck="Loricate Torque",ear1="Genmei Earring",ear2="Ethereal Earring",
 		body="Runeist's Coat +3",hands=gear.herculean_refresh_hands,ring1="Defending Ring",ring2="Dark Ring",
@@ -703,8 +629,6 @@ function init_gear_sets()
 	--------------------------------------
 	-- Engaged sets
 	--------------------------------------
-    -- <normal>, <DW>, HighAcc, Tank, EvasionTank, Hybrid
-    
 
     -- 1166 Accuracy -- super low -- Path A Adehmar set would add 60 acc
 	  -- Better herc boots would help too
@@ -728,20 +652,26 @@ function init_gear_sets()
 	-- Ioskeha Belt +1   - 17 acc, 8 haste, 9 DA
 	-- Kentarch +1 aug'd - 3 da, 1-5 STP, 14 acc, 10 dex (so 21ish acc), also 10 str
 	-- Windbuffet +1     - 2 acc, 2 TA, 2 QA
-	-- Sailfi Belt +1  -- 
 	
 	sets.engaged.DW = set_combine(sets.engaged, {
 	  waist="Reiki Yotai"
 	})
-		
-	-- 1313 acc
-	sets.engaged.HighAcc = set_combine(sets.engaged, {	
-			  neck="Sanctity Necklace", -- "Combatant's Torque",
+	
+    sets.engaged.SomeAcc = set_combine(sets.engaged, {	
+	  neck="Sanctity Necklace", -- "Combatant's Torque",
 	  body="Ayanmo Corazza +2",
+	}) 
+			
+    -- 1213 Acc
+	sets.engaged.Acc = set_combine(sets.engaged.SomeAcc, {	
 	  ammo="Falcon Eye", 
 	  ear1="Telos Earring", -- "Cessance Earring",
 	  legs="Meg. Chausses +2",
 	  feet=gear.meg_feet,
+	}) 
+	
+	-- 1313 acc
+	sets.engaged.HighAcc = set_combine(sets.engaged.Acc, {	
       head="Aya. Zucchetto +2",
 	  ear1="Telos Earring",
 	  hands="Meg. Gloves +2",
@@ -750,18 +680,18 @@ function init_gear_sets()
 	  -- feet=gear.herculean_acc_feet
 	})
 	
-	-- sets.engaged.FullAcc = set_combine(sets.engaged.HighAcc, {	
-      -- -- head="Carmine Mask +1",
-	  -- ear2="Zennaroi Earring",
-      -- ring1="Ramuh Ring +1",
-	  -- ring2="Ramuh Ring +1",
-      -- waist="Olseni Belt",
-	  -- legs="Carmine Cuisses +1",
-	-- })
+	sets.engaged.FullAcc = set_combine(sets.engaged.HighAcc, {	
+      -- head="Carmine Mask +1",
+	  ear2="Zennaroi Earring",
+      ring1="Ramuh Ring +1",
+	  ring2="Ramuh Ring +1",
+      waist="Olseni Belt",
+	  legs="Carmine Cuisses +1",
+	})
 	  
 	-- DT: 29 DT, 16 PDT, 25 PDT II (epeo), 1286 acc
 	-- Some inquartata, 479 meva  (572 in tank engaged set) - dnc malig. idle has 674
-    sets.engaged.Hybrid = set_combine(sets.engaged, {		  
+    sets.engaged.DTLite = set_combine(sets.engaged, {		  
 	  ammo="Yamarang",   -- meva/acc instead of DT
       head="Aya. Zucchetto +2",  --  3 DT  
 	  neck="futhark torque +2",	 --  7 DT
@@ -774,6 +704,24 @@ function init_gear_sets()
 	  feet="Turms Leggings +1",      -- "Ahosi Leggings"
 	})
 	
+    sets.engaged.SomeAcc.DTLite = set_combine(sets.engaged.DTLite, {
+	  ammo="Falcon Eye",
+      ear1="Cessance Earring",            
+    })
+	
+	sets.engaged.Acc.DTLite = set_combine(sets.engaged.SomeAcc.DTLite, {	
+      ear1="Telos Earring",
+      waist="Grunfeld Rope",
+	})
+	
+	sets.engaged.HighAcc.DTLite = set_combine(sets.engaged.Acc.DTLite, {	      	  
+	  waist="Olseni Belt",
+    })
+			
+	sets.engaged.FullAcc.DTLite = set_combine(sets.engaged.Acc.DTLite, {
+      ear2="Zennaroi Earring",
+    })
+	
 	-- options: Utu grip (70 hp, offensive stuffs) for Mensch Strap +1 (5 PDT) or Refined Grip +1 (3 dt, 15-35 hp)
 	-- options: Back: 10 pdt for 5 parry - with mensch strap +1 and Odnowa Upgrade, puts at 49% PDT with no other changes
 	-- options: Moonlight Ring upgrade - 1 dt, 10 hp, 2 stp, 3 acc/att-
@@ -781,11 +729,12 @@ function init_gear_sets()
     sets.engaged.Tank = {          
              -- sub="Refined Grip +1",       --  3/3 (refined +1)
       ammo="staunch tathlum +1",   --  3/3
-      head=gear.nyame_head,        --  7/7     -- "Meghanada Visor +2",
+      head="Fu. Bandeau +3",       --  6/0     -- "Meghanada Visor +2",
 	  neck="futhark torque +2",    --  7/7
 	  ear1="Odnowa Earring +1",    --  0/2 -- todo: upgrade for 3 dt, 30 def
 	  ear2="Odnowa Earring",       --  0/1 -- todo: tuisto earring for 50 more HP, 7 more vit
-	  body=gear.nyame_body,        --  9/9
+	  body="Runeist's Coat +3",    --    <higher meva/hp>
+               -- body="Futhark Coat +3",   --  7/7
 	  hands="Turms Mittens +1",    --       4 haste, parry heal -- gear.herculean_dt_hands,
 	  ring1="Moonbeam Ring",       --  4/4   -- moonlight for 5/5
 	  ring2="Defending Ring",      -- 10/10
@@ -795,28 +744,17 @@ function init_gear_sets()
 	                                       -- +49 acc, 45 att, 5 TA, str, agi...
 	  feet="Turms Leggings +1",       --   <higher meva/inquartata 4>
 	  -- feet="Erilaz Greaves +1"     --  5/0	   -- 107 meva, 25 res. all ele. 26 dex, 0 acc, haste 4	  
-	} -- With Nyame, can swap Defending Ring to Gelaninous for HP/VIT, or Back to 
-	  -- Def or more evasion instead of PDT
-	  -- Consider swapping Utu to Refined Grip for better tanking stats
-	
-     sets.engaged.EvasionTank = set_combine(sets.engaged, {
-	  -- main="Soulcleaver",  -- evasion greatsword
-	  -- sub="Kupayopi",     -- evasion grip
-	  ammo="Yamarang",	  
-      head=gear.nyame_head,
-	  neck="Futhark Torque +2",    -- \todo Bathy Choker +1 - augmented
-	  -- ear1="Eabani Earring",
-	  -- ear2="Infused Earring",
-      body=gear.nyame_body,
-	  hands=gear.nyame_hands,
-	  ring1="Vengeful Ring",
-	  ring2="Ilabrat Ring",  -- \todo not regal?  I guess regal has less HP
-      back="Moonbeam Cape",  -- \todo: Ogma's 20 agil, 45 eva, 20 meva, 10 enmity
-	  waist="Kasiri Belt",
-	  legs=gear.nyame_legs,
-	  feet=gear.nyame_feet
-	})
-		
+	} -- assuming refined grip (3/3), and swapping futhark coat for runeist coat (50 meva)
+	-- DT 24, PDT 27, 3 MDT
+	-- ideally lose 15, cape 10 PDT -> 5 parry.  feet 5 pdt to 4(5) parry
+	-- Options: Khonsu grip 6/6 (lose 5 enmity), gain 25 acc/macc, 4% haste
+	--          Kaja grip   5/5 (lose 4 enmity), gain 25 acc/macc
+	--       PDT Back - gain 10 PDT, lose 5 parry
+    
+	sets.engaged.SomeAcc.Tank = sets.engaged.Tank
+	sets.engaged.Acc.Tank = sets.engaged.Tank
+	sets.engaged.HighAcc.Tank = sets.engaged.Tank
+	sets.engaged.FullAcc.Tank = sets.engaged.Tank
 	
 	--------------------------------------
 	-- Custom buff sets

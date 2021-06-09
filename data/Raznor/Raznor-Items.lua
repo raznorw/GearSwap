@@ -52,6 +52,12 @@ gear.mummu_hands = "Mummu Wrists +2"
 gear.mummu_legs  = "Mummu Kecks +2"
 gear.mummu_feet  = "Mummu Gamash. +2"
 
+gear.nyame_head = "Nyame Helm"
+gear.nyame_body = "Nyame Mail"
+gear.nyame_hands = "Nyame Gauntlets"
+gear.nyame_legs = "Nyame Flanchard"
+gear.nyame_feet = "Nyame Sollerets"
+
 gear.Amalric_D_hands = { name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}}
 gear.Amalric_D_feet = { name="Amalric Nails +1", augments={'Mag. Acc.+20','"Mag.Atk.Bns."+20','"Conserve MP"+7',}}
 

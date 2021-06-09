@@ -167,9 +167,10 @@ function get_sets()
 	  body="jhakri robe +2",    -- Telchine w/+3 pet regen (leaf orb), Meva (snow not orb), duskdim (enhancing magic duration)
 	  left_ring="Defending Ring", -- 10 DT
 	  right_ring="Shneddick Ring",
-	  
-      -- hands="Geo. Mitaines +2", -- +3 these eventually
-      -- legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+6 "Mag.Atk.Bns."+6','Magic burst dmg.+11%','INT+6','Mag. Acc.+15',}},
+	  legs="Nyame Flanchard",
+	  feet="Nyame Sollerets",
+	  hands="Nyame Gauntlets"	  	  
+      -- hands="Geo. Mitaines +2", -- +3 these eventually      
 	   -- Legs - Telchine
       -- feet={ name="Bagua Sandals +1", augments={'Enhances "Radial Arcana" effect',}}, -- 3 regen, can +3 for 5.. ~10M for +2, more for +3
       -- waist="Fucho-no-Obi",    -- Isa Belt      
@@ -418,8 +419,9 @@ function get_sets()
 	
 	-- Nuking
     sets.midcast.nuking.normal = set_combine(sets.midcast.casting,{
-
+      main="Daybreak",
     })
+	
 	sets.midcast.MB.normal = set_combine(sets.midcast.nuking.normal, {
 	  -- main="Grioavolr",           --  7
 	  -- sub="Enki Strap",
