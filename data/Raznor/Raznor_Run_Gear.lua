@@ -1,5 +1,6 @@
 -- Casting Mode Cycle - Win-F11
 -- Idle Mode Cycle    - Win-F12
+-- Engaged Mode       - F9
 
 -- TODO:
 --   Add macros for mode swapping which updates ALL relevant modes 
@@ -94,7 +95,8 @@ function user_setup()
 	state.OffenseMode:options('Normal','HighAcc','Hybrid','Tank','EvasionTank')
 	  -- States:  idle, engaged, precast (and ws), midcast, JA
 	state.HybridMode:options('Normal')
-	state.WeaponskillMode:options('Match')
+	-- 'Match' for WS mode requires to have WS mode with SAME name as OffenseMode
+	state.WeaponskillMode:options('Match', 'Normal', 'HighAcc', 'Hybrid', 'Tank', 'EvasionTank')
 	-- >> sets.precast.FC.[SpellName.]CastingMode
 	-- >> sets.midcast.[SpellName.]CastingMode
 	-- >> CastingModes with DT and SIRD have special checks 
@@ -108,7 +110,7 @@ function user_setup()
 	state.ResistDefenseMode:options('MEVA','MEVA_HP','Death','Charm','DTCharm')
 	-- sets.idle.[IdleMode] -- will ignore <Tank> idle when not in combat
 	state.IdleMode:options('Normal','SuperTank','SuperEvasionTank','KiteTank','Sphere')
-	state.Weapons:options('Epeolatry', 'Aettir','Lionheart','DualWeapons','DualNaegling', 'EpeoHP')
+	state.Weapons:options('Epeolatry', 'Aettir','Lionheart','DualWeapons','DualNaegling', 'EpeoHP', 'EpeoEvasion')
 	
 	state.ExtraDefenseMode = M{['description']='Extra Defense Mode','None','MP'}
 
@@ -120,6 +122,7 @@ function user_setup()
 	   -- {name="Ogma's cape",augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10',}}
 	gear.da_jse_back = { name="Ogma's cape", augments={'STR+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
 	gear.dimi_jse_back = { name="Ogma's cape", augments={'DEX+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}}
+	gear.ogma_evasion = { name="Ogma's Cape", augments={'AGI+20','Eva.+20 /Mag. Eva.+20','Evasion+10','Enmity+10','Evasion+15',}}
 
 	-- Additional local binds
 	send_command('bind !` gs c SubJobEnmity')   --- alt
@@ -140,6 +143,9 @@ function user_setup()
 	send_command('bind ^@!` gs c cycle SkillchainMode')
 	-- send_command('bind !r gs c weapons Lionheart;gs c update')
 	
+	-- send_command('bind ^q state.CastingMode:set("IdleTank")')
+	send_command('bind ^q gs c set CastingMode IdleTank')
+	
 	send_command('wait 6;input /lockstyle on;wait 6;input /lockstyle 1')
 	select_default_macro_book()
 	-- lockstyleset = 1
@@ -149,6 +155,24 @@ function init_gear_sets()
 
     -- todo: engaged Enmity and IdleTank Enmity sets
 	--   only different might be the turms mittens
+
+    sets.EvasionTank = {
+	  -- main="Soulcleaver",  -- evasion greatsword - Vagary, will probably stick to Epeo	  
+	    -- cycle weapons to EpeoEvasion for now
+	  ammo="Yamarang",	  
+      head=gear.nyame_head,
+	  neck="Futhark Torque +2",    -- \todo Bathy Choker +1 - augmented
+	  ear1="Odnowa Earring +1",    -- \todo ear2="Infused Earring", - Zi'Tah - Gulltop
+	  ear2="Eabani Earring",
+      body=gear.nyame_body,
+	  hands=gear.nyame_hands,
+	  ring1="Vengeful Ring",
+	  ring2="Ilabrat Ring",  -- \note regal has less HP
+      back=gear.ogma_evasion,
+	  waist="Kasiri Belt",
+	  legs=gear.nyame_legs,
+	  feet=gear.nyame_feet
+	}
 
     sets.Enmity = {  -- currently 2885 HP
 	  -- Epeolotry:               -- 23 Enmity
@@ -394,8 +418,8 @@ function init_gear_sets()
 	sets.precast.WS['Resolution'].Hybrid = sets.precast.WS.Hybrid
 	
 	sets.precast.WS['Decimation'] = set_combine(sets.precast.WS['Resolution'], {
-	 
 	})
+	sets.precast.WS['Decimation'].Hybrid = sets.precast.WS['Resolution'].Hybrid
 
     sets.precast.WS['Dimidiation'] = set_combine(sets.precast.WS,{ 	  
 	  -- utu grip
@@ -409,14 +433,18 @@ function init_gear_sets()
 	  waist="Grunfeld Rope",
 	  back=gear.dimi_jse_back
 	})
-    sets.precast.WS['Dimidiation'].Acc = set_combine(sets.precast.WS.Acc,{head="Lilitu Headpiece",legs=gear.herculean_wsd_legs,feet=gear.herculean_wsd_feet,
-	  back=gear.dimi_jse_back})
-	sets.precast.WS['Dimidiation'].HighAcc = set_combine(sets.precast.WS.HighAcc,{legs=gear.herculean_wsd_legs,feet=gear.herculean_wsd_feet,
-	  back=gear.dimi_jse_back})
-	sets.precast.WS['Dimidiation'].FullAcc = set_combine(sets.precast.WS.FullAcc,{
-	  back=gear.dimi_jse_back})
+--    sets.precast.WS['Dimidiation'].Acc = set_combine(sets.precast.WS.Acc,{head="Lilitu Headpiece",legs=gear.herculean_wsd_legs,feet=gear.herculean_wsd_feet,
+--	  back=gear.dimi_jse_back})
+	sets.precast.WS['Dimidiation'].HighAcc = set_combine(sets.precast.WS.HighAcc,{
+	   legs=gear.herculean_wsd_legs,
+	   feet=gear.herculean_wsd_feet,
+	   back=gear.dimi_jse_back})
+	--sets.precast.WS['Dimidiation'].FullAcc = set_combine(sets.precast.WS.FullAcc,{
+	--  back=gear.dimi_jse_back})
 	sets.precast.WS['Dimidiation'].Tank = sets.precast.WS.Tank
 	sets.precast.WS['Dimidiation'].EvasionTank = sets.precast.WS.EvasionTank
+	-- \todo: Might want to use some WSD get in hybrid set, or maybe even full regular
+	--        Dimidiation set here
 	sets.precast.WS['Dimidiation'].Hybrid = sets.precast.WS.Hybrid
 
 
@@ -472,6 +500,8 @@ function init_gear_sets()
 	  waist="Olympus Sash",
 	  legs="Futhark Trousers +1"
 	})
+	
+	sets.midcast['Enhancing Magic'].IdleTank = sets.EvasionTank
     
 	sets.midcast['Phalanx'] = set_combine(sets.midcast['Enhancing Magic'],{
 	  head="Fu. Bandeau +3", -- 7 
@@ -480,16 +510,23 @@ function init_gear_sets()
 	  legs="Taeon Tights",
 	  feet=gear.herculean_phalanx_feet
 	})
-	})
+	sets.midcast['Phalanx'].IdleTank = sets.EvasionTank
+	
     sets.midcast['Regen'] = set_combine(sets.midcast['Enhancing Magic'],{head="Rune. Bandeau +2"}) 
 	sets.midcast['Refresh'] = set_combine(sets.midcast['Enhancing Magic'],{head="Erilaz Galea +1"}) 
     sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {ear2="Earthcry Earring",waist="Siegel Sash"})
 	sets.midcast.Flash = set_combine(sets.Enmity, {})
+	sets.midcast.Flash.IdleTank = sets.EvasionTank
 	sets.midcast.Foil = set_combine(sets.Enmity, {})
+	sets.midcast.Foil.IdleTank = sets.EvasionTank
     sets.midcast.Stun = set_combine(sets.Enmity, {})
+	sets.midcast.Stun.IdleTank = sets.EvasionTank
 	sets.midcast['Blue Magic'] = set_combine(sets.Enmity, {})
 	sets.midcast['Blue Magic'].SIRD = set_combine(sets.Enmity.SIRD, {})
 	sets.midcast.Cocoon = set_combine(sets.Enmity.SIRD, {})
+	
+    sets.midcast['Blue Magic'].IdleTank = sets.EvasionTank
+
 
     sets.midcast.Cure = {ammo="staunch tathlum +1",
         head="Carmine Mask +1",neck="Phalaina Locket",ear1="Mendi. Earring",ear2="Roundel Earring",
@@ -497,6 +534,7 @@ function init_gear_sets()
         back="Tempered Cape +1",waist="Luminary Sash",legs="Carmine Cuisses +1",feet="Skaoi Boots"}
 		
 	sets.midcast['Wild Carrot'] = set_combine(sets.midcast.Cure, {})
+	sets.midcast['Wild Carrot'].IdleTank = sets.EvasionTank
 		
 	sets.Self_Healing = {neck="Phalaina Locket",hands="Buremte Gloves",ring2="Kunaji Ring",waist="Gishdubar Sash"}
 	sets.Cure_Received = {neck="Phalaina Locket",hands="Buremte Gloves",ring2="Kunaji Ring",waist="Gishdubar Sash"}
@@ -550,18 +588,18 @@ function init_gear_sets()
 	})
 	
 	sets.idle.SuperEvasionTank = set_combine(sets.idle, {
-	  -- main="Soulcleaver",  -- evasion greatsword
-	  -- sub="Kupayopi",     -- evasion grip
+	  -- main="Soulcleaver",  -- evasion greatsword - Vagary, will probably stick to Epeo	  
+	    -- cycle weapons to EpeoEvasion for now
 	  ammo="Yamarang",	  
       head=gear.nyame_head,
 	  neck="Futhark Torque +2",    -- \todo Bathy Choker +1 - augmented
-	  -- ear1="Eabani Earring",
-	  -- ear2="Infused Earring",
+	  ear1="Odnowa Earring +1",    -- \todo ear2="Infused Earring", - Zi'Tah - Gulltop
+	  ear2="Eabani Earring",
       body=gear.nyame_body,
 	  hands=gear.nyame_hands,
 	  ring1="Vengeful Ring",
-	  ring2="Ilabrat Ring",  -- \todo not regal?  I guess regal has less HP
-      back="Moonbeam Cape",  -- \todo: Ogma's 20 agil, 45 eva, 20 meva, 10 enmity
+	  ring2="Ilabrat Ring",  -- \note regal has less HP
+      back=gear.ogma_evasion,
 	  waist="Kasiri Belt",
 	  legs=gear.nyame_legs,
 	  feet=gear.nyame_feet
@@ -615,6 +653,7 @@ function init_gear_sets()
 	sets.weapons.Aettir = {main="Aettir",sub="Refined Grip +1"}
 	sets.weapons.Epeolatry = {main="Epeolatry",sub="Utu Grip" } -- "Refined Grip +1"}
 	sets.weapons.EpeoHP = {main="Epeolatry",sub="Refined Grip +1" } 
+	sets.weapons.EpeoEvasion = {main="Epeolatry",sub="Kupayopl" } 
 	sets.weapons.Lionheart = {main="Lionheart",sub="Utu Grip"}
 	sets.weapons.DualWeapons = {main="Kaja Axe", sub="Naegling"} -- {main="Firangi",sub="Reikiko"}
 	sets.weapons.DualNaegling = {main="Naegling", sub="Kaja Axe"} -- {main="Firangi",sub="Reikiko"}
@@ -801,12 +840,12 @@ function init_gear_sets()
 	
      sets.engaged.EvasionTank = set_combine(sets.engaged, {
 	  -- main="Soulcleaver",  -- evasion greatsword
-	  -- sub="Kupayopi",     -- evasion grip
+	  -- sub="Kupayopl",     -- evasion grip
 	  ammo="Yamarang",	  
       head=gear.nyame_head,
 	  neck="Futhark Torque +2",    -- \todo Bathy Choker +1 - augmented
-	  -- ear1="Eabani Earring",
-	  -- ear2="Infused Earring",
+	  ear1="Eabani Earring",
+	  ear2="Odnowa Earring +1",    -- \todo "Infused Earring",
       body=gear.nyame_body,
 	  hands=gear.nyame_hands,
 	  ring1="Vengeful Ring",

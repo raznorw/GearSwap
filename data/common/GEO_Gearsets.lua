@@ -308,7 +308,7 @@ function get_sets()
     	hands = "Bagua Mitaines",
     }  
     sets.precast["Mending Halation"] = {
-    	legs = "Bagua Pants",
+    	legs = "Bagua Pants +1",
     }
     sets.precast["Radial Arcana"] = {
     	feet = "Bagua Sandals",
@@ -339,13 +339,16 @@ function get_sets()
     sets.midcast.geo = set_combine(sets.midcast.casting,{
 	  head="Azimuth Hood +1",  -- 15
 	  neck="Bagua Charm +1",   --  
-	  body="Bagua Tunic",      -- 10 skill
+	  body="Bagua Tunic +1",      -- 10 skill
 	  hands="Geo. Mitaines +1",-- 15 skill
       back="Lifestream Cape",  -- 14 skill, 20 indi duration
     })
+	
 	-- For Indi Spells
     sets.midcast.indi = set_combine(sets.midcast.geo,{
-
+	  legs="Bagua Pants +1",
+      feet="Azimuth Gaiters +1",
+	  back="Lifestream Cape",  -- 14 skill, 20 indi duration
     })
 
 	sets.midcast.Obi = {
@@ -367,7 +370,7 @@ function get_sets()
 	})
 	-- Enfeebling
 	sets.midcast.IntEnfeebling = set_combine(sets.midcast.casting,{
-	  head="Jhakri Coronal +1", 
+	  head="Jhakri Coronal +2", 
       hands="Jhakri cuffs +2", --macc
 	  feet="Jhakri Pigaches +1", --macc
     })

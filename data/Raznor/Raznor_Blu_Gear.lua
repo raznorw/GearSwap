@@ -8,7 +8,7 @@ function user_setup()
 	state.PhysicalDefenseMode:options('PDT')
 	state.MagicalDefenseMode:options('MDT')
 	state.ResistDefenseMode:options('MEVA')
-	state.Weapons:options('Savage', 'SavageAcc', 'MagicWeapons','MeleeClubs','None')
+	state.Weapons:options('Savage', 'MagicWeapons','MeleeClubs','SavageAcc', 'None')
 -- state.Weapons:options('Savage', 'SavageAcc', 'MagicWeapons', 'Tizalmace','Sequence','None','Almace','MeleeClubs')
 
     state.ExtraMeleeMode = M{['description']='Extra Melee Mode','None','MP','SuppaBrutal','DWEarrings','DWMax'}
@@ -471,6 +471,24 @@ function init_gear_sets()
 
 	sets.midcast['Blue Magic']['Carcharian Verve'] = set_combine(sets.midcast['Blue Magic'].Buff, {head="Amalric Coif +1",hands="Regal Cuffs",waist="Emphatikos Rope",legs="Shedir Seraweels"})
 
+    -- todo: Cruel Joke high MAcc set
+ 	sets.midcast['Blue Magic']['Cruel Joke'] = {
+	  ammo="Pemphredo Tathlum",
+	  head="Jhakri Coronal +2",   -- 6 less macc, 11 more int than malignance
+	  neck="Mirage Stole +1",     -- "Baetyl Pendant",
+	  ear1="Gwati Earring",       --  "Regal Earring", if using AF, switch to regal
+	  ear2="Digni. Earring",
+	  body="Jhakri Robe +2",
+	  hands=gear.jhakri_hands,
+	  ring1="Metamor. Ring +1",     
+	  ring2="Jhakri Ring",          -- "Shiva Ring +1",
+      back=gear.mab_jse_back,
+	  waist="Eschan Stone",         -- gear.ElementalObi,
+	  legs=gear.jhakri_legs,
+	  feet=gear.jhakri_feet
+	}
+ 
+ 
 	-- Sets to return to when not performing an action.
 
 	sets.latent_refresh = {waist="Fucho-no-obi"}

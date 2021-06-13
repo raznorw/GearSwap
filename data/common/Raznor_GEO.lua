@@ -113,7 +113,6 @@ keybinds_on['key_bind_indi_cycle'] = '(End + PgDOWN)'
 keybinds_on['key_bind_lock_weapon'] = '(F12)'
 keybinds_on['key_bind_movespeed_lock'] = '(ALT-F9)'
 
-
 -- Remember to unbind your keybinds on job change.
 function user_unload()
     send_command('unbind insert')
