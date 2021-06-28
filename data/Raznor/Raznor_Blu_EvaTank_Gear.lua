@@ -1,10 +1,13 @@
+-- \todo Conditionally include EvaTank lua instead of base lua
+-- include(player.name..'_'..player.main_job..'_gear.lua') -- Required Gear file.
+
 function user_setup()
 	-- Options: Override default values
-    state.OffenseMode:options('Fodder','Normal','Acc','FullAcc')
-	state.HybridMode:options('Normal','DTLite')
-    state.WeaponskillMode:options('Match','Normal','Acc','FullAcc','Fodder')
-    state.CastingMode:options('Normal','Resistant','Fodder','Proc')
-    state.IdleMode:options('Normal','Sphere','PDT','DTHippo')
+    state.OffenseMode:options('Normal') -- Normal here is really EvasionTank
+	state.HybridMode:options('Normal')
+    state.WeaponskillMode:options('Match','Normal')
+    state.CastingMode:options('Normal')
+    state.IdleMode:options('Normal')
 	state.PhysicalDefenseMode:options('PDT')
 	state.MagicalDefenseMode:options('MDT')
 	state.ResistDefenseMode:options('MEVA')
@@ -199,7 +202,7 @@ function init_gear_sets()
 	  ring2="Rajas Ring",          -- "Rufescent Ring",
 	  back=gear.wsd_jse_back,
 	  waist="Sailfi Belt +1",      -- "Metalsinger belt",  -- "Grunfeld Rope",
-	  legs="Luhlaza Shalwar +3",   -- gear.herculean_wsd_legs,
+	  legs=gear.herculean_wsd_legs,
 	  feet=gear.herculean_wsd_feet
 	})
 	
@@ -216,8 +219,7 @@ function init_gear_sets()
 	sets.precast.WS['Vorpal Blade'].FullAcc = set_combine(sets.precast.WS.FullAcc, {})
 	sets.precast.WS['Vorpal Blade'].Fodder = set_combine(sets.precast.WS['Vorpal Blade'], {})
 
-	sets.precast.WS['Expiacion'] = sets.precast.WS['Savage Blade']
-	-- set_combine(sets.precast.WS, {head="Lilitu Headpiece",neck="Caro Necklace",ear1="Moonshade Earring",ear2="Ishvara Earring",body="Assim. Jubbah +3",hands="Jhakri Cuffs +2",ring1="Ifrit Ring +1",ring2="Rufescent Ring",back=gear.wsd_jse_back,waist="Grunfeld Rope",legs=gear.herculean_wsd_legs,feet=gear.herculean_wsd_feet})
+	sets.precast.WS['Expiacion'] = set_combine(sets.precast.WS, {head="Lilitu Headpiece",neck="Caro Necklace",ear1="Moonshade Earring",ear2="Ishvara Earring",body="Assim. Jubbah +3",hands="Jhakri Cuffs +2",ring1="Ifrit Ring +1",ring2="Rufescent Ring",back=gear.wsd_jse_back,waist="Grunfeld Rope",legs=gear.herculean_wsd_legs,feet=gear.herculean_wsd_feet})
 	sets.precast.WS['Expiacion'].Acc = set_combine(sets.precast.WS.Acc, {ear2="Moonshade Earring",body="Assim. Jubbah +3",hands="Jhakri Cuffs +2",back=gear.wsd_jse_back,legs="Carmine Cuisses +1",feet=gear.herculean_wsd_feet})
 	sets.precast.WS['Expiacion'].FullAcc = set_combine(sets.precast.WS.FullAcc, {body="Assim. Jubbah +3",hands="Jhakri Cuffs +2"})
 	sets.precast.WS['Expiacion'].Fodder = set_combine(sets.precast.WS['Expiacion'], {})
@@ -235,7 +237,7 @@ function init_gear_sets()
 	  -- ring2 = "Rufescent Ring", -- "Shiva Ring +1"
 	  back = gear.mab_jse_back,
 	  waist = "Eschan Stone",       -- "Yamabuki-no-Obi"
-	  legs = "Luhlaza Shalwar +3",  -- "Amalric Slops +1",    -- "Jhakri Slops +1",
+	  legs = "Amalric Slops +1",    -- "Jhakri Slops +1",
 	  feet = "Amalric Nails +1",    -- gear.Amalric_D_feet  -- gear.jhakri_feet ?  for macc?
 	}
 	
@@ -329,7 +331,7 @@ function init_gear_sets()
 	  ring2="Jhakri Ring",          -- "Shiva Ring +1",
       back=gear.mab_jse_back,
 	  waist="Eschan Stone",         -- gear.ElementalObi,
-	  legs="Luhlaza Shalwar +3",    -- "Amalric Slops +1",      -- "Jhakri Slops +2",
+	  legs="Amalric Slops +1",      -- "Jhakri Slops +2",
 	  feet="Amalric Nails +1",      -- "Jhakri Pigaches +2"
 	}
 					 
@@ -557,8 +559,6 @@ function init_gear_sets()
 	  waist="Flume Belt +1",      -- 4 PDT        other options here?
     })
 
-	sets.idle.DTHippo = set_combine(sets.idle.PDT, {legs="Carmine Cuisses +1",feet="Hippo. Socks +1"})
-
 	-- Defense sets
 	sets.defense.PDT = {main="Terra's Staff",sub="Umbra Strap",ammo="staunch tathlum +1",
 				head="Dampening Tam",neck="Loricate Torque +1",ear1="Suppanomimi", ear2="Brutal Earring",
@@ -694,20 +694,10 @@ function init_gear_sets()
 
 	sets.engaged.PDT = sets.engaged.DTLite
 
-	sets.engaged.Acc.DTLite = {main="Tizona",sub="Almace",ammo="Falcon Eye",
-			    head="Dampening Tam",neck="Loricate Torque +1",ear1="Digni. Earring",ear2="Telos Earring",
-			    body="Ayanmo Corazza +2",hands="Assim. Bazu. +3",ring1="Defending Ring",ring2="Patricius Ring",
-			    back=gear.da_jse_back,waist="Reiki Yotai",legs="Aya. Cosciales +2",feet="Ahosi Leggings"}
-
 	sets.engaged.Acc.PDT = {main="Tizona",sub="Almace",ammo="Falcon Eye",
 				head="Dampening Tam",neck="Loricate Torque +1",ear1="Suppanomimi",ear2="Telos Earring",
 				body="Ayanmo Corazza +2",hands="Assim. Bazu. +3",ring1="Defending Ring",ring2="Patricius Ring",
 				back="Moonlight Cape",waist="Flume Belt",legs="Aya. Cosciales +2",feet="Ahosi Leggings"}
-
-	sets.engaged.HighAcc.DTLite = {main="Tizona",sub="Almace",ammo="Falcon Eye",
-			    head="Carmine Mask +1",neck="Loricate Torque +1",ear1="Digni. Earring",ear2="Telos Earring",
-			    body="Ayanmo Corazza +2",hands="Assim. Bazu. +3",ring1="Defending Ring",ring2="Patricius Ring",
-			    back=gear.da_jse_back,waist="Reiki Yotai",legs="Aya. Cosciales +2",feet="Ahosi Leggings"}
 
 	sets.engaged.HighAcc.PDT = {main="Tizona",sub="Almace",ammo="Falcon Eye",
 				head="Carmine Mask +1",neck="Loricate Torque +1",ear1="Suppanomimi",ear2="Telos Earring",
@@ -723,16 +713,6 @@ function init_gear_sets()
 				head="Carmine Mask +1",neck="Loricate Torque +1",ear1="Regal Earring",ear2="Telos Earring",
 		        body="Ayanmo Corazza +2",hands="Assim. Bazu. +3",ring1="Defending Ring",ring2="Patricius Ring",
 				back=gear.da_jse_back,waist="Olseni Belt",legs="Carmine Cuisses +1",feet=gear.herculean_acc_feet}
-
-	sets.engaged.Fodder.DTLite = {main="Tizona",sub="Almace",ammo="Ginsen",
-			    head="Dampening Tam",neck="Loricate Torque +1",ear1="Suppanomimi",ear2="Brutal Earring",
-			    body="Ayanmo Corazza +2",hands="Assim. Bazu. +3",ring1="Defending Ring",ring2="Patricius Ring",
-			    back=gear.da_jse_back,waist="Windbuffet Belt +1",legs="Aya. Cosciales +2",feet="Ahosi Leggings"}
-
-	sets.engaged.Fodder.DTLite.AM = {main="Tizona",sub="Almace",ammo="Ginsen",
-			    head="Dampening Tam",neck="Loricate Torque +1",ear1="Suppanomimi",ear2="Telos Earring",
-			    body="Ayanmo Corazza +2",hands="Assim. Bazu. +3",ring1="Defending Ring",ring2="Patricius Ring",
-			    back=gear.da_jse_back,waist="Windbuffet Belt +1",legs="Aya. Cosciales +2",feet="Ahosi Leggings"}
 
 	sets.engaged.Fodder.PDT = {main="Tizona",sub="Almace",ammo="staunch tathlum +1",
 				head="Dampening Tam",neck="Loricate Torque +1",ear1="Suppanomimi",ear2="Brutal Earring",

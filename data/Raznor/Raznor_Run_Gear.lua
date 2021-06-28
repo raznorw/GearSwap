@@ -510,7 +510,7 @@ function init_gear_sets()
 	  legs="Taeon Tights",
 	  feet=gear.herculean_phalanx_feet
 	})
-	sets.midcast['Phalanx'].IdleTank = sets.EvasionTank
+	-- sets.midcast['Phalanx'].IdleTank = sets.EvasionTank
 	
     sets.midcast['Regen'] = set_combine(sets.midcast['Enhancing Magic'],{head="Rune. Bandeau +2"}) 
 	sets.midcast['Refresh'] = set_combine(sets.midcast['Enhancing Magic'],{head="Erilaz Galea +1"}) 
@@ -551,19 +551,34 @@ function init_gear_sets()
 	sets.resting = {}
 
     sets.idle = {
-	  ammo="staunch tathlum +1",       -- 'Homiliary',  -- refresh +1
-	  head="Fu. Bandeau +3",           -- "Rawhide Mask",
-	  neck="futhark torque +2",
-	  ear1="Odnowa Earring +1",        -- "Genmei Earring",
-	  ear2="Odnowa Earring",           -- "Ethereal Earring",
-	  body="Runeist's Coat +3",
-	  hands="Turms Mittens +1",        -- gear.herculean_refresh_hands,
-	  ring1="Shneddick Ring",
-	  ring2="Moonbeam Ring",
-	  back="Moonbeam Cape",            -- gear.enmity_pdt_back,
-	  waist="Flume Belt +1",
-	  legs="Eri. Leg Guards +1",       -- "Rawhide Trousers", -- refresh +1
-	  feet="Turms Leggings +1",        -- gear.herculean_refresh_feet
+	  	  -- grip - Refined Grip +1 aug'd with Def +20, parry skill +10
+	  ammo="Yamarang",	  
+      head=gear.nyame_head,
+	  neck="Futhark Torque +2",    -- \todo Bathy Choker +1 - augmented
+	  ear1="Odnowa Earring +1",    -- \todo ear2="Infused Earring", - Zi'Tah - Gulltop
+	  ear2="Eabani Earring",
+      body=gear.nyame_body,
+	  hands=gear.nyame_hands,
+	  ring1="Vengeful Ring",
+	  ring2="Ilabrat Ring",  -- \note regal has less HP
+      back=gear.ogma_evasion,
+	  waist="Kasiri Belt",
+	  legs=gear.nyame_legs,
+	  feet=gear.nyame_feet
+	  
+	  -- ammo="staunch tathlum +1",       -- 'Homiliary',  -- refresh +1
+	  -- head="Fu. Bandeau +3",           -- "Rawhide Mask",
+	  -- neck="futhark torque +2",
+	  -- ear1="Odnowa Earring +1",        -- "Genmei Earring",
+	  -- ear2="Odnowa Earring",           -- "Ethereal Earring",
+	  -- body="Runeist's Coat +3",
+	  -- hands="Turms Mittens +1",        -- gear.herculean_refresh_hands,
+	  -- ring1="Shneddick Ring",
+	  -- ring2="Moonbeam Ring",
+	  -- back="Moonbeam Cape",            -- gear.enmity_pdt_back,
+	  -- waist="Flume Belt +1",
+	  -- legs="Eri. Leg Guards +1",       -- "Rawhide Trousers", -- refresh +1
+	  -- feet="Turms Leggings +1",        -- gear.herculean_refresh_feet
 	}
 		
     sets.idle.Sphere = set_combine(sets.idle,{body="Mekosu. Harness"})
@@ -748,20 +763,38 @@ function init_gear_sets()
     -- 1166 Accuracy -- super low -- Path A Adehmar set would add 60 acc
 	  -- Better herc boots would help too
 	  -- Using Str Cape, could have 30 dex version for 22 acc	
-    sets.engaged = {
-	    ammo="Yamarang",
-        head="Adhemar Bonnet +1", -- "Dampening Tam",
-		neck="Anu Torque",
-		ear1="Telos Earring", -- "Brutal Earring",
-		ear2="Sherida Earring",
-        body="Adhemar Jacket +1",
-		hands="Adhemar Wrist. +1",
-		ring1="Niqmaddu Ring",    
-		ring2="Moonbeam Ring",    -- "Petrov Ring",   -- "Epona's Ring",
-        back=gear.stp_jse_back,
-		waist="Windbuffet belt +1",
-		legs="Samnuha Tights",
-		feet="Herculean Boots", -- "Turms leggings",       -- gear.herculean_ta_feet
+    -- sets.engaged = {
+	    -- ammo="Yamarang",
+        -- head="Adhemar Bonnet +1", -- "Dampening Tam",
+		-- neck="Anu Torque",
+		-- ear1="Telos Earring", -- "Brutal Earring",
+		-- ear2="Sherida Earring",
+        -- body="Adhemar Jacket +1",
+		-- hands="Adhemar Wrist. +1",
+		-- ring1="Niqmaddu Ring",    
+		-- ring2="Moonbeam Ring",    -- "Petrov Ring",   -- "Epona's Ring",
+        -- back=gear.stp_jse_back,
+		-- waist="Windbuffet belt +1",
+		-- legs="Samnuha Tights",
+		-- feet="Herculean Boots", -- "Turms leggings",       -- gear.herculean_ta_feet
+	-- }
+	
+	sets.engaged = {
+	  -- main="Soulcleaver",  -- evasion greatsword
+	  -- sub="Kupayopl",     -- evasion grip
+	  ammo="Yamarang",	  
+      head=gear.nyame_head,
+	  neck="Futhark Torque +2",    -- \todo Bathy Choker +1 - augmented
+	  ear1="Eabani Earring",
+	  ear2="Odnowa Earring +1",    -- \todo "Infused Earring",
+      body=gear.nyame_body,
+	  hands=gear.nyame_hands,
+	  ring1="Vengeful Ring",
+	  ring2="Ilabrat Ring",  -- \todo not regal?  I guess regal has less HP
+      back="Moonbeam Cape",  -- \todo: Ogma's 20 agil, 45 eva, 20 meva, 10 enmity
+	  waist="Kasiri Belt",
+	  legs=gear.nyame_legs,
+	  feet=gear.nyame_feet
 	}
 	
 	-- Ioskeha Belt +1   - 17 acc, 8 haste, 9 DA
@@ -850,7 +883,7 @@ function init_gear_sets()
 	  hands=gear.nyame_hands,
 	  ring1="Vengeful Ring",
 	  ring2="Ilabrat Ring",  -- \todo not regal?  I guess regal has less HP
-      back="Moonbeam Cape",  -- \todo: Ogma's 20 agil, 45 eva, 20 meva, 10 enmity
+      back=gear.ogma_evasion,
 	  waist="Kasiri Belt",
 	  legs=gear.nyame_legs,
 	  feet=gear.nyame_feet

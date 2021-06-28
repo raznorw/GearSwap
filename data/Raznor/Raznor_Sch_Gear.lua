@@ -409,10 +409,22 @@ function init_gear_sets()
         body=gear.merlinic_nuke_body,hands="Mallquis Cuffs +2",ring1="Shiva Ring +1",ring2="Shiva Ring +1",
         back=gear.nuke_jse_back,waist=gear.ElementalObi,legs="Merlinic Shalwar",feet=gear.merlinic_nuke_feet}
 		
-    sets.midcast['Elemental Magic'].Proc = {main=empty, sub=empty,ammo="Impatiens",
-        head="Nahtirah Hat",neck="Voltsurge Torque",ear1="Enchntr. Earring +1",ear2="Loquacious Earring",
-        body="Helios Jacket",hands="Gende. Gages +1",ring1="Kishar Ring",ring2="Prolix Ring",
-        back="Swith Cape +1",waist="Witful Belt",legs="Psycloth Lappas",feet="Regal Pumps +1"}
+    sets.midcast['Elemental Magic'].Proc = {
+	  main=empty, 
+	  sub=empty,ammo="Impatiens",
+      head="Nahtirah Hat",
+	  neck="Voltsurge Torque",
+	  ear1="Enchntr. Earring +1",
+	  ear2="Loquacious Earring",
+      body="Helios Jacket",
+	  hands="Gende. Gages +1",
+	  ring1="Kishar Ring",
+	  ring2="Prolix Ring",
+      back="Swith Cape +1",
+	  waist="Witful Belt",
+	  legs="Psycloth Lappas",
+	  feet="Regal Pumps +1"
+	}
 		
     sets.midcast['Elemental Magic'].OccultAcumen = {main="Khatvanga",sub="Bloodrain Strap",ammo="Seraphic Ampulla",
         head="Mall. Chapeau +2",neck="Combatant's Torque",ear1="Dedition Earring",ear2="Telos Earring",
@@ -500,35 +512,35 @@ function init_gear_sets()
 	  ammo="staunch tathlum +1",  -- "Homiliary",
       head="Volte Beret",      -- "Befouled Crown",
 	  neck="Loricate Torque",
-	  ear1="Etiolation Earring",
-	  ear2="Ethereal Earring",
+	  ear1="Eabani Earring",         -- "Etiolation Earring",
+	  ear2="Lugalbanda Earring",     -- "Ethereal Earring",
       body="Jhakri Robe +2",
-	  hands=gear.merlinic_refresh_hands,
+	  hands=gear.nyame_hands,        -- gear.merlinic_refresh_hands,
 	  ring1="Defending Ring",
 	  ring2="Dark Ring",
-      back="Umbra Cape",
+      back="Moonbeam Cape",          -- "Umbra Cape",
 	  waist="Flax Sash",
-	  legs="Assid. Pants +1",
-	  feet=gear.chironic_refresh_feet
+	  legs=gear.nyame_legs,          -- "Assid. Pants +1",
+	  feet=gear.nyame_feet,          -- gear.chironic_refresh_feet
 	}
 
-    sets.idle.PDT = {
-	  main="Malignance Pole",
-	  sub="Oneiros Grip",
-	  ammo="staunch tathlum +1",
-        head="Gende. Caubeen +1",
-	  neck="Loricate Torque",
-	    ear1="Etiolation Earring",
-	    ear2="Ethereal Earring",
-        body="Vrikodara Jupon",
-	    hands="Gende. Gages +1",
-	  ring1="Defending Ring",
-	    ring2="Dark Ring",
-        back="Umbra Cape",
-	    waist="Flax Sash",
-	    legs="Hagondes Pants +1",
-	    feet=gear.chironic_refresh_feet
-	}
+    sets.idle.PDT = set_combine(sets.idle, {
+	  -- main="Malignance Pole",
+	  -- sub="Oneiros Grip",
+	  -- ammo="staunch tathlum +1",
+      -- head="Gende. Caubeen +1",
+	  -- neck="Loricate Torque",
+	  --  ear1="Etiolation Earring",
+	  --  ear2="Ethereal Earring",
+      --  body="Vrikodara Jupon",
+	  --  hands="Gende. Gages +1",
+	  --ring1="Defending Ring",
+	  --  ring2="Dark Ring",
+       -- back="Umbra Cape",
+	   -- waist="Flax Sash",
+	   -- legs="Hagondes Pants +1",
+	   -- feet=gear.chironic_refresh_feet
+	})
 		
 	sets.idle.Hippo = set_combine(sets.idle.PDT, {feet="Hippo. Socks +1"})
 
